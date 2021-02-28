@@ -3,7 +3,7 @@ title = "João Maia"
 enableRobotsTXT = true
 enableEmoji = true
 theme = "mainroad"
-publishDir = "docs"
+publishDir = "public"
 languageCode = "pt-br"
 
 hasCJKLanguage = false
