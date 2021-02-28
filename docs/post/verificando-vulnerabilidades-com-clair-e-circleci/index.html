@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Verificando vulnerabilidades com Clair e Circle CI - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Verificando vulnerabilidades com Clair e Circle CI" />
+<meta property="og:description" content="Olá,
+nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando Clair e Circle CI. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/" />
+<meta property="article:published_time" content="2020-03-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-07T00:00:00+00:00" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Verificando vulnerabilidades com Clair e Circle CI"/>
+<meta name="twitter:description" content="Olá,
+nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando Clair e Circle CI. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Verificando vulnerabilidades com Clair e Circle CI</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-07T00:00:00Z">2020-03-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>, <a class="meta__link" href="/categories/devsecops/" rel="category">devsecops</a>, <a class="meta__link" href="/categories/seguran%C3%A7a/" rel="category">segurança</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/verificando-vulnerabilidades-com-clair-e-circleci/clair.png" alt="Verificando vulnerabilidades com Clair e Circle CI">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando <a href="https://github.com/quay/clair">Clair</a> e <a href="http://circleci.com/">Circle CI</a>. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps.</p>
+<h1 id="clair">Clair</h1>
+<p>O Clair é um dos projetos no escopo na <a href="https://www.cncf.io/">Cloud Native Computing Foundation</a> (CNCF) e se encontra no área <a href="https://landscape.cncf.io/selected=clair">Security &amp; Compliance</a>.</p>
+<p>Descrição do projeto:</p>
+<blockquote>
+<p>Clair is an open source project for the static analysis of vulnerabilities in application containers (currently including appc and docker).</p>
+</blockquote>
+<p>Objetivos do projeto e origem do nome:</p>
+<blockquote>
+<p>Our goal is to enable a more transparent view of the security of container-based infrastructure. Thus, the project was named Clair after the French term which translates to clear, bright, transparent.</p>
+</blockquote>
+<h1 id="circle-ci">Circle CI</h1>
+<p><img src="/img/verificando-vulnerabilidades-com-clair-e-circleci/circleci.png" alt="Circle CI"></p>
+<p>O Circle CI é uma empresa para criação de fluxos de projetos para integração, entrega e deploy contínuos. <a href="https://circleci.com/docs/2.0/about-circleci/#section=welcome">Aqui</a> você pode ler mais sobre o que o Circle Ci faz, segue uma citação do site deles:</p>
+<blockquote>
+<p>CircleCI allows teams to rapidly build quality projects, at scale. Our mission is to give people everywhere the power to build and deliver software at the speed of imagination.</p>
+</blockquote>
+<h1 id="o-projeto">O projeto</h1>
+<p>Quando esbarro em dúvidas em alguma entrega no trabalho e preciso explorar alguns recursos com mais agilidade ou buscar apoio na comunidade tenho por hábito por fazer algum projeto aberto no meu Github para isso. Então, para testar o Clair e Circle CI peguei um projeto antigo meu que usei para ajudar uma pessoa a como rodar <a href="https://github.com/jvrmaia/flask-docker-example">Flask em Docker</a>. O código não tem nada de complexo, apenas executa uma aplicação Flask que tem apenas um recurso que informa o nome da máquina e versão do projeto.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">decouple</span> <span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">VERSION</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;VERSION&#39;</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34; - &#34;</span> <span class="o">+</span> <span class="n">VERSION</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">)</span>
+</code></pre></div><p>A criação do Docker dele é bem simples também:</p>
+<div class="highlight"><pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> python:3.8</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">LABEL</span> maintainer <span class="s2">&#34;Joao Maia &lt;joao@joaovrmaia.com&gt;&#34;</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">COPY</span> . /app<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pip install -r requirements.txt<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">ENV</span> <span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.0.1<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 5000</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;python&#34;</span><span class="p">]</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;app.py&#34;</span><span class="p">]</span><span class="err">
+</span></code></pre></div><p>Como podemos ver, é bem simples e sem grandes riscos de segurança já que usamos uma imagem Docker oficial do Docker Hub, né?</p>
+<h1 id="configurando-o-circle-ci">Configurando o Circle CI</h1>
+<p>O Circle CI é bem simples de configurar, você primeiro precisa conectar seu Github no Circle CI para ele conseguir criar as chaves no seu repositório para se conectar. Feito isso, você ainda nele precisa ativar o repositório para ser executado pelo Circle CI, por fim criar o arquivo no seu projeto <code>.circleci/config.yml</code>. No meu caso, o arquivo ficou assim:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2.1</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">orbs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">clair-scanner</span><span class="p">:</span><span class="w"> </span><span class="l">ovotech/clair-scanner@1.6.0</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">machine</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="l">checkout</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build flask-docker-example image</span><span class="w">
+</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">docker build -t jvrmaia/flask-docker-example:latest .</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Login Docker Hub</span><span class="w">
+</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS</span><span class="w">
+</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push image to Docker Hub</span><span class="w">
+</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">docker push jvrmaia/flask-docker-example:latest</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="nt">scan_images</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">executor</span><span class="p">:</span><span class="w"> </span><span class="l">clair-scanner/default</span><span class="w">
+</span><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="nt">clair-scanner/scan</span><span class="p">:</span><span class="w">
+</span><span class="w">                </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">jvrmaia/flask-docker-example:latest</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">workflows</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">    </span><span class="nt">build_and_scan</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- <span class="l">build</span><span class="w">
+</span><span class="w">            </span>- <span class="l">scan_images</span><span class="w">
+</span></code></pre></div><p>Nesse caso estou usando 2 variáveis de ambientes no Circle CI que você deve configurar no seu também: <code>$DOCKER_HUB_USER</code> e <code>$DOCKER_HUB_PASS</code>. Além disso, é preciso ir nas configurações da sua organização e habilitar a opção de segurança de executar <code>orbs</code> de terceiros pois o <code>ovotech/clair-scanner@1.6.0</code> não é um <code>orb</code> oficial do Circle CI.</p>
+<h1 id="resultados">Resultados</h1>
+<p><img src="/img/verificando-vulnerabilidades-com-clair-e-circleci/circleci-fail.png" alt="Build falhando"></p>
+<p>Pois é, falhou! Pelo visto mesmo a imagem sendo oficial não podemos confiar nela para evitar problemas de segurança em nossas aplicações. Sobre os problemas encontrados:</p>
+<pre><code>Status: Downloaded newer image for *******/flask-docker-example:latest
+docker.io/*******/flask-docker-example:latest
+2020/03/07 10:19:57 [INFO] ▶ Start clair-scanner
+2020/03/07 10:20:12 [INFO] ▶ Server listening on port 9279
+2020/03/07 10:20:12 [INFO] ▶ Analyzing 833c6daa5e441f05bf0861abf69385f4336a84579e106a4e10df96c16345238c
+2020/03/07 10:20:13 [INFO] ▶ Analyzing 4841da9e53306739896736018799725127bf022debe92a6fba5849e462df6d7c
+2020/03/07 10:20:14 [INFO] ▶ Analyzing 74a44e872bf076416afabf8c6ad9a44267469fcf7406ca59efd971b9f36ec2e0
+2020/03/07 10:20:14 [INFO] ▶ Analyzing 08956d8cfb4a5c3911c05bbcccdee8ea6c5ee78e2a557705b186d093e10e3c8d
+2020/03/07 10:20:14 [INFO] ▶ Analyzing 2418f849fdd6aa84613bf622029f9c13f8af63369b1bfb9fe37d1c91c5f8014b
+2020/03/07 10:20:15 [INFO] ▶ Analyzing 665107ae66eecfa7a5ad25f3a3fea690a7b39d947435aefafb73d2276f6b1e1a
+2020/03/07 10:20:15 [INFO] ▶ Analyzing 81fbbe995a7a6c8de2069875be5441038ec5d6f7b79048a2ffc6ab48e2ac5c61
+2020/03/07 10:20:15 [INFO] ▶ Analyzing ce041cd84cdf830252387144de7b13594132831baf70deb81b9db077e2394b16
+2020/03/07 10:20:15 [INFO] ▶ Analyzing c3bc4598a93d965a92519a886c6ec7e8ad05a73bb59da5e12dc091fe6de90e05
+2020/03/07 10:20:15 [INFO] ▶ Analyzing 57ef9d9cfc8a93dfa86b31274c6327f2d297eef8402742324c6f4e96bceffcba
+2020/03/07 10:20:15 [INFO] ▶ Analyzing 8dc77558fa31b6eaf473e1e89ae568041b232a95a31d53d41d66e25fce4f357d
+2020/03/07 10:20:15 [WARN] ▶ Image [*******/flask-docker-example:latest] contains 354 total vulnerabilities
+2020/03/07 10:20:15 [ERRO] ▶ Image [*******/flask-docker-example:latest] contains 8 unapproved vulnerabilities
+</code></pre><p>Um exemplo de parte da lista detalhada:</p>
+<pre><code>+------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+| STATUS     | CVE SEVERITY                | PACKAGE NAME    | PACKAGE VERSION           | CVE DESCRIPTION                                                  |
++------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+| Unapproved | Critical CVE-2019-19816     | linux           | 4.19.98-1                 | In the Linux kernel 5.0.21, mounting a crafted btrfs             |
+|            |                             |                 |                           | filesystem image and performing some operations                  |
+|            |                             |                 |                           | can cause slab-out-of-bounds write access in                     |
+|            |                             |                 |                           | __btrfs_map_block in fs/btrfs/volumes.c, because a value         |
+|            |                             |                 |                           | of 1 for the number of data stripes is mishandled.               |
+|            |                             |                 |                           | https://security-tracker.debian.org/tracker/CVE-2019-19816       |
++------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+| Unapproved | Critical CVE-2019-19814     | linux           | 4.19.98-1                 | In the Linux kernel 5.0.21, mounting a crafted f2fs              |
+|            |                             |                 |                           | filesystem image can cause __remove_dirty_segment                |
+|            |                             |                 |                           | slab-out-of-bounds write access because an                       |
+|            |                             |                 |                           | array is bounded by the number of dirty types                    |
+|            |                             |                 |                           | (8) but the array index can exceed this.                         |
+|            |                             |                 |                           | https://security-tracker.debian.org/tracker/CVE-2019-19814       |
++------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+| Unapproved | Critical CVE-2019-19813     | linux           | 4.19.98-1                 | In the Linux kernel 5.0.21, mounting a crafted btrfs             |
+|            |                             |                 |                           | filesystem image, performing some operations, and then           |
+|            |                             |                 |                           | making a syncfs system call can lead to a use-after-free         |
+|            |                             |                 |                           | in __mutex_lock in kernel/locking/mutex.c. This is related       |
+|            |                             |                 |                           | to mutex_can_spin_on_owner in kernel/locking/mutex.c,            |
+|            |                             |                 |                           | __btrfs_qgroup_free_meta in fs/btrfs/qgroup.c, and               |
+|            |                             |                 |                           | btrfs_insert_delayed_items in fs/btrfs/delayed-inode.c.          |
+|            |                             |                 |                           | https://security-tracker.debian.org/tracker/CVE-2019-19813       |
++------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+| Unapproved | High CVE-2020-8492          | python3.7       | 3.7.3-2+deb10u1           | Python 2.7 through 2.7.17, 3.5 through 3.5.9, 3.6                |
+|            |                             |                 |                           | through 3.6.10, 3.7 through 3.7.6, and 3.8 through 3.8.1         |
+|            |                             |                 |                           | allows an HTTP server to conduct Regular Expression              |
+|            |                             |                 |                           | Denial of Service (ReDoS) attacks against a client               |
+|            |                             |                 |                           | because of urllib.request.AbstractBasicAuthHandler               |
+|            |                             |                 |                           | catastrophic backtracking.                                       |
+|            |                             |                 |                           | https://security-tracker.debian.org/tracker/CVE-2020-8492        |
++------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+</code></pre><p>O restante do relatório pode ser visto <a href="https://gist.github.com/jvrmaia/6dbe0dfa1c193ff3371e2860fd230e5f">aqui</a>. Agora, você pega esse relatório e procura o seu time de segurança e pede ajuda! =)</p>
+<h1 id="conclusão">Conclusão</h1>
+<p>É muito importante hoje pensar em segurança na entrega de nossas aplicações e não devemos negligenciar isso! Por isso, é muito importante que não se tenham barreiras e exista um bom relacionamento com o time de segurança para que juntos vocês consigam entregar melhores aplicações e seguras.</p>
+<p>E nunca confie que você está seguro mesmo seguindo as recomendações de projeto! ;)</p>
+<h1 id="atualizações">Atualizações</h1>
+<ul>
+<li>07/03/2019: Contribuições do Flávio do Telegram Devops BR</li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/docker/" rel="tag">docker</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/clair/" rel="tag">clair</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/circleci/" rel="tag">circleci</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/devops/" rel="tag">devops</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/devsecops/" rel="tag">devsecops</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/seguran%C3%A7a/" rel="tag">segurança</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de software
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

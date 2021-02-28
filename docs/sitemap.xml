@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/about/</loc>
+    <lastmod>2019-01-25T16:38:52-03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/bgp/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/infraestrutura/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/rede-de-computadores/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/</loc>
+    <lastmod>2020-12-02T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/bitbucket/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/desenvolvimento/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/dns/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/git/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/github/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/gitlab/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</loc>
+    <lastmod>2020-08-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/ansible/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/devops/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/aws/</loc>
+    <lastmod>2020-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/aws/</loc>
+    <lastmod>2020-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/</loc>
+    <lastmod>2020-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/iam/</loc>
+    <lastmod>2020-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/security/</loc>
+    <lastmod>2020-06-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</loc>
+    <lastmod>2020-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/packer/</loc>
+    <lastmod>2020-05-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</loc>
+    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/dicas/</loc>
+    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/produtividade/</loc>
+    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/terminal/</loc>
+    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</loc>
+    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/linguagens-de-programa%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/python/</loc>
+    <lastmod>2020-04-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/devops/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/diagrama/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/documenta%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/documenta%C3%A7%C3%A3o/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/nginx/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/node/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/supertest/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/teste/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/testes/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/circleci/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/clair/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/devsecops/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/devsecops/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/docker/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/seguran%C3%A7a/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/seguran%C3%A7a/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</loc>
+    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/categories/algoritmos/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/criptografia/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/hashing/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/iniciante/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/tags/golang/</loc>
+    <lastmod>2020-01-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</loc>
+    <lastmod>2020-01-22T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</loc>
+    <lastmod>2020-01-17T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/instalacao-do-go/</loc>
+    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.joaovrmaia.com/post/go-primeiros-passos/</loc>
+    <lastmod>2020-01-03T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

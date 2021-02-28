@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>devops on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/devops/</link>
+    <description>Recent content in devops on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Thu, 23 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Desenhando infraestrutura com código</title>
+      <link>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</guid>
+      <description>Olá,
+Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw.</description>
+    </item>
+    
+    <item>
+      <title>Testando o NGINX com SuperTest e Mocha</title>
+      <link>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</guid>
+      <description>Olá,
+testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda não faz nada a respeito saiba que já está atrasado. Com a transformação da infraestrutura em código acabando com os processos manuais e nem sempre documentados é preciso também trazer as boas práticas do mundo de desenvolvimento de software para a infraestrutura. Graças ao Docker subir uma representação da sua infraestrutura ficou mais fácil realizar esse processo apesar de ainda não ser 100% fiel ao ambiente de produção.</description>
+    </item>
+    
+    <item>
+      <title>Verificando vulnerabilidades com Clair e Circle CI</title>
+      <link>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</guid>
+      <description>Olá,
+nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando Clair e Circle CI. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps.</description>
+    </item>
+    
+  </channel>
+</rss>

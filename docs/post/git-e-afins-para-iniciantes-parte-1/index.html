@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Git e afins para iniciantes - parte 1 - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Git e afins para iniciantes - parte 1" />
+<meta property="og:description" content="Olá,
+acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu trabalho-história-mediaval." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/" />
+<meta property="article:published_time" content="2020-08-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-13T00:00:00+00:00" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git e afins para iniciantes - parte 1"/>
+<meta name="twitter:description" content="Olá,
+acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu trabalho-história-mediaval."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Git e afins para iniciantes - parte 1</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-13T00:00:00Z">2020-08-13</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/desenvolvimento/" rel="category">desenvolvimento</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/git-e-afins-para-iniciantes-parte-1/git.png" alt="Git e afins para iniciantes - parte 1">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu <code>trabalho-história-mediaval.doc</code> e tudo virou um caos depois da primeira vez que você começou ele, né? Vamos tentar narrar a possível história desse <code>trabalho-história-mediaval.doc</code>.</p>
+<p>Vamos lá, primeiro dia do trabalho e você escreveu a estrutura do documento e uma introdução do seu trabalho. O normal é que você salve o arquido e vá fazer outra coisa na sua rotina. Algumas pessoas vão além de salvar enviar para o seu próprio email aquela versão do trabalho para ter salva em algum lugar, outros vão criar uma versão compactada com o mesmo nome ou adicionar algo extra tipo, <code>trabalho-história-mediaval-primeira-versao.zip</code>, ou simplesmente não faz nada. Outra coisa que pode acontecer é o trabalho não ser individual e você ter ficado de escrever a introdução e o próximo capítulo ser de responsabilidade de outra pessoa. Então, você pega a sua versão <code>trabalho-história-medieval-joão.zip</code> ou <code>trabalho-história-medieval-introdução.zip</code> e manda para os colegas do seu grupo. E quando você deleta parte do texto, salva e fecha o Word e se arrepende e não tem como mais dar CTRL+Z? Nesse ciclo vamos até o fim do trabalho onde cada vez mais próximo do fim a quantidade de versões &ldquo;finais&rdquo; aumentam de forma exponencial, certo?</p>
+<p>No fim disso tudo a sua pasta do trabalho já consta com diversas versões de arquivo no formato .doc ou .zip e você não tem noção nenhuma mais do que elas são e já chegando a hora de enviar para avaliação e você não sabe mais se a versão correta é <code>trabalho-história-medieval-final.zip</code>, <code>trabalho-história-medieval-agora-vai.zip</code> ou <code>trabalho-história-medieval-final-real.zip</code>. Um verdadeiro caos, né? O Git é uma das ferramentas que vieram para resolver esse problema e acredito que a que foi a mais bem aceita pela comunidade. Eventualmente na sua carreira vai encontrar pessoas que falaram que usaram SVN, Mercurial ou outros sistemas de controle de versão. Vamos deixar claro que o fato de usar Git não resolve o problema de fato pois o uso errado da ferramenta pode causar os mesmos resultados ruins do não uso.</p>
+<p>Chega de história de trabalhos do ensino médio e vamos ao Git! =)</p>
+<h1 id="git">Git</h1>
+<h2 id="história-do-git">História do Git</h2>
+<p>Curiosamente o Git é mais uma das ferramentas criadas na história da computação pois o criador precisa resolver outro problema que ele considerava maior e não tinha ferramental suficiente. Nesse caso, estamos falando o Linux Torvalds e o time do Linux Kernel. Outro caso semelhante é o LaTeX criado pelo Donald Knuth para poder escrever os clássicos livros &ldquo;The Art of Programming&rdquo;. O Linux Kernel começou a ser desenvolvido de forma colaborativa usando o BitKeeper porém a empresa dona do software resolveu cancelar a gratuidade da ferramenta. O processo de criação começou no começo do ano de 2005 e sua primeira versão foi lançada ainda no mesmo ano ao fim dele. A história com mais detalhes pode ser lida de forma breva na <a href="https://pt.wikipedia.org/wiki/Git#Hist%C3%B3ria_Inicial_do_git">Wikipédia</a>.</p>
+<h2 id="obtendo-o-git">Obtendo o Git</h2>
+<p>O Git é muito fácil de ser instalado pois vem em todas as distribuições comuns Linux, possui instalador para Windows e OSX e você pode compilar o fonte original. Na <a href="https://git-scm.com/downloads">página de downloads</a> você consegue obter o instalador para o seu sistema operacional e no Linux é facilmente instalado, por exemplo, via <code>apt</code> em distribuições Debian-like. <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Aqui</a> tem mais detalhes sobre o processo de instalação.</p>
+<h2 id="iniciando-o-uso-do-git-no-projeto">Iniciando o uso do Git no projeto</h2>
+<p>Vamos criar uma pasta no seu computador chamada de <code>comecando-com-git</code> e entrar nela. Para eventuais problemas nos passos seguintes vamos validar a versão de Git que estamos usando, no meu caso:</p>
+<pre><code>$ git version
+git version 2.17.1
+</code></pre><p>É normal em projetos de tecnologia existir na raíz do projeto um arquivo chamado de README com ou sem extensão de arquivo, vai depender muito do contexto de comunidade e idade do projeto. Hoje, o mais tradicional é o padrão Markdown que é o mesmo utilizado nesse <a href="https://blog.joaovrmaia.com">blog</a> com o auxílio do <a href="https://gohugo.io">Hugo</a>. Então, vamos criar o nosso README.md escrito apenas:</p>
+<blockquote>
+<p>Tutorial de uso do Git</p>
+</blockquote>
+<p>Agora, com o nosso primeiro arquivo no projeto vamos dar ínicio ao versionamento dele. Um projeto Git para ser inicializado basta apenas um simples comando que vai fazer a instalação e configuração base do seu projeto:</p>
+<pre><code>$ git init
+Initialized empty Git repository in /home/jvrmaia/Workspace/temp/comecando-com-git/.git/
+$ tree -a .
+.
+├── .git
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── HEAD
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   └── update.sample
+│   ├── info
+│   │   └── exclude
+│   ├── objects
+│   │   ├── info
+│   │   └── pack
+│   └── refs
+│       ├── heads
+│       └── tags
+└── README.md
+
+10 directories, 16 files
+</code></pre><p>Esse é o básico do que o Git precisa para funcionar no seu projeto mas ainda não começamos de fato a versionar pois como podemos ver na mensagem de incialização ele disse estar vazio. Vamos verificar esse estado:</p>
+<pre><code>$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+	README.md
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre><p>Como podemos ver na mensagem <code>No commits yet</code>, ainda não temos <code>commits</code> no projeto e isso diz que nada foi adicionado, removido ou modificado no histórico do projeto confirmando com a mensagem de inicialização que o projeto começou vazio. Porém, <code>Untracked files</code> nos mostra que ele detectou algo no contexto do projeto que não foi adicionado a ele e por fim ele da uma dica de como colocar o nosso README.md no projeto. Vamos seguir com a dica:</p>
+<pre><code>$ git add 
+Nothing specified, nothing added.
+Maybe you wanted to say 'git add .'?
+</code></pre><p>Errei de forma proposital para mostrar como o Git é nosso amigo, veja que ele além de me informar que fiz a ação de forma incorreta ainda me deu outra sugestão. Seguindo a nova sugestão:</p>
+<pre><code>$ git add .
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+
+	new file:   README.md
+</code></pre><p>O nosso arquivo README.md agora foi adicionado ao versionamento do projeto no estado de novo arquivo mas ainda não foi adicionado de fato pois não foi feito o commit. Vamos fazer o commit então dessa mudança no histórico do projeto:</p>
+<pre><code>$ git commit
+&lt;VIM&gt;
+adicionando o README
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#       new file:   README.md
+#
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+~                                                                                                                                      
+                                                                                                                     1,13          All
+&lt;/VIM&gt;
+[master (root-commit) 0595db5] adicionando o README
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+$ git status
+On branch master
+nothing to commit, working tree clean
+</code></pre><p>Finalmente, temos o nosso README.md adicionado no versionamento e aqui vemos algumas informações interessantes:</p>
+<ul>
+<li><code>&lt;VIM&gt;...&lt;/VIM&gt;</code>: é o momento de edição do nosso commit e no meu caso como uso o <code>vim</code> como editor padrão ele abriu nele;</li>
+<li><code>[master (root-commit) 0595db5] adicionando o README</code>:
+<ul>
+<li>o <code>master</code> é referente a branch que vou fazer o commit;</li>
+<li>o <code>root-commit</code> é por ser o primeiro do projeto;</li>
+<li>o <code>0595db5</code> é a versão curta do hash do commit;</li>
+<li><code>adicionando o README</code> é a mensagem do nosso commit.</li>
+</ul>
+</li>
+</ul>
+<p>Uma observação muito importante aqui, muitos devem ter acompanhado o movimento #BlackLivesMatter recentemente em todas as redes sociais e sites de notícia por conta do caso do Floyd nos EUA. Por conta de todo esse movimento na área de tecnologia surgiu um movimento de tirar nomes dos projetos que fazem referência ao racismo e como a escravidão é fortemente ligada ao racismo o termo <code>master</code> não é adequado de se usar. O Git lançou uma nova versão que agora o novo padrão de branch principal é a <code>main</code>. Então, se o seu Git não é atualizado ou o projeto que você está trabalhando ainda usa branch <code>master</code>, seguem os passos para modificar isso:</p>
+<pre><code>$ git branch -m master main
+</code></pre><p>Esse comando vai renomear a branch <code>master</code> por <code>main</code>.</p>
+<h3 id="evoluindo-o-projeto">Evoluindo o projeto</h3>
+<p>Vamos agora introduzir melhorias no nosso README.md e salvar essas alterações no nosso controle de versão, novo README.md:</p>
+<div class="highlight"><pre class="chroma"><code class="language-markdown" data-lang="markdown">Tutorial de uso do Git
+----
+
+Esse repositório faz parte de um tutorial para instrodução ao uso do Git.
+
+</code></pre></div><p>Agora, vamos ver o novo estado do nosso projeto:</p>
+<pre><code>$ git status
+On branch main
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+	modified:   README.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>Podemos ver que o Git mais uma vez vem nos ajudar com dicas de como dar continuidade com o nosso projeto. Ele nos mostra duas opções: 1) adicionar as modificações; e 2) remover as modificações. Caso você tenha dúvidas de quais são essas modificações, o Git pode nos ajudar nisso vendo o que foi modificado, vamos conferir:</p>
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff">$ git diff
+<span class="gh">diff --git a/README.md b/README.md
+</span><span class="gh">index 4f207b2..ed36177 100644
+</span><span class="gh"></span><span class="gd">--- a/README.md
+</span><span class="gd"></span><span class="gi">+++ b/README.md
+</span><span class="gi"></span><span class="gu">@@ -1 +1,5 @@
+</span><span class="gu"></span> Tutorial de uso do Git
+<span class="gi">+----
+</span><span class="gi">+
+</span><span class="gi">+Esse repositório faz parte de um tutorial para instrodução ao uso do Git.
+</span><span class="gi">+
+</span></code></pre></div><p>Veja que interessante, como estamos apenas adicionando informação nova no README.md ele só tem essas linhas verdes com o <code>+</code> na frente indicando a adição de coisas novas, se tivesse algo sendo removido ou alterado teriamos <code>-</code> em vermelho também. Agora, vamos adicionar as modificações e comitar elas de uma única vez:</p>
+<pre><code>$ git commit -am &quot;melhoria no README&quot;
+[main fb30dec] melhoria no README
+ 1 file changed, 4 insertions(+)
+</code></pre><p>Vamos agora fazer duas modificação no projeto para ver variações no comando do <code>diff</code> e <code>status</code>, vou introduzir um <code>.gitignore</code> para evitar arquivos do VSCode no projeto e alterar o README.md, veja como ficou:</p>
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff">$ git diff
+<span class="gh">diff --git a/README.md b/README.md
+</span><span class="gh">index ed36177..e1abf02 100644
+</span><span class="gh"></span><span class="gd">--- a/README.md
+</span><span class="gd"></span><span class="gi">+++ b/README.md
+</span><span class="gi"></span><span class="gu">@@ -1,5 +1,4 @@
+</span><span class="gu"></span><span class="gd">-Tutorial de uso do Git
+</span><span class="gd"></span><span class="gi">+Começando com o Git
+</span><span class="gi"></span> ----
+ 
+ Esse repositório faz parte de um tutorial para instrodução ao uso do Git.
+<span class="gd">-
+</span></code></pre></div><p>Como podemos ver, mudei o título do README e removi a linha em branco no final. Agora, cadê o arquivo que falei que iria adicionar?</p>
+<pre><code>$ git status
+On branch main
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+	modified:   README.md
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+	.gitignore
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>Como o arquivo não existia, ele não era observado pelo Git logo não tem alterações. Então, vamos adicionar todas essas mudanças primeiro adicionando elas:</p>
+<pre><code>$ git add .
+$ git status
+On branch main
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+	new file:   .gitignore
+	modified:   README.md
+</code></pre><p>Agora sim, estamos com as modificações prontas a serem comitadas no projeto:</p>
+<pre><code>$ git commit -m &quot;adicionando .gitignore e melhoria no README&quot;
+[main e0d67bb] adicionando .gitignore e melhoria no README
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ create mode 100644 .gitignore
+</code></pre><p>Vamos agora convesar sobre boas práticas no Git! Repare que essa mensagem de commit ficou longa e a ação feita no projeto são totalmente independentes, correto? Então, teria sido de melhor prática ter feito o commit de cada uma das alterações de forma separada.</p>
+<h3 id="dividir-para-conquistar">Dividir para conquistar</h3>
+<p>É bem provável que você venha a compartilhar um projeto com mais pessoas e não seria saudável todos ficarem adicionando suas modificações no linha principal do projeto, imagina que você e mais quartro pessoas tem apenas uma folha A4 e uma caneta cada e vocês devem ao mesmo tempo copiar um parágrafo diferente um dos outros de um texto qualquer. Seria uma loucura certo? Vamos imaginar agora que cada um pode copiar o texto no seu computador no seu editor preferido e depois todos sincronizarem de organizar em um arquivo só tudo. É mais ou menos isso que conseguimos fazer com o Git. Vamos criar uma nova linha no tempo no nosso projeto para adicionar um código simples em C para imprimir &ldquo;Olá mundo!&rdquo; no terminal.</p>
+<pre><code>$ git checkout -b ola-mundo-c
+Switched to a new branch 'ola-mundo-c'
+</code></pre><p>O arquivo <code>ola-mundo.c</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Olá mundo!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>Vamos copilar e executar ele agora:</p>
+<pre><code>$ gcc ola-mundo.c 
+$ ./a.out 
+Olá mundo!
+</code></pre><p>Perfeito, tudo funcionando! Vamos agora ver no que isso refletiu no nosso projeto:</p>
+<pre><code>$ git status
+On branch ola-mundo-c
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+	a.out
+	ola-mundo.c
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+
+$ git diff
+&lt;VAZIO&gt;
+</code></pre><p>Esse arquivo <code>a.out</code> não faz sentido existir no nosso projeto pois é um binário e dado o fonte pode ser gerado por outra pessoa sem problemas. Então, vamos primeiro adicionar a mudança para ele não ser observado pelo nosso projeto:</p>
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff">$ git diff
+<span class="gh">diff --git a/.gitignore b/.gitignore
+</span><span class="gh">index 35215c6..9005441 100644
+</span><span class="gh"></span><span class="gd">--- a/.gitignore
+</span><span class="gd"></span><span class="gi">+++ b/.gitignore
+</span><span class="gi"></span><span class="gu">@@ -1 +1,2 @@
+</span><span class="gu"></span> .code/
+<span class="gi">+a.out
+</span><span class="gi"></span>$ git add .gitignore 
+$ git commit -m &#34;ignora binários do C&#34;
+[ola-mundo-c 092f671] ignora binários do C
+ 1 file changed, 1 insertion(+)
+$ git status
+On branch ola-mundo-c
+Untracked files:
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
+
+	ola-mundo.c
+
+nothing added to commit but untracked files present (use &#34;git add&#34; to track)
+</code></pre></div><p>Perfeito, agora podemos adicionar o nosso projeto em C:</p>
+<pre><code>$ git add . 
+$ git commit -m &quot;adiciona projeto em C&quot;
+[ola-mundo-c e7acbfd] adiciona projeto em C
+ 1 file changed, 7 insertions(+)
+ create mode 100644 ola-mundo.c
+$ git status
+On branch ola-mundo-c
+nothing to commit, working tree clean
+</code></pre><p>Agora, queremos voltar para linha principal do projeto com nossas mudanças e primeiro vamos conferir o quanto ela mudou desde a última vez que usamos ela. Agora podemos uma usar um recurso que de uma das utilidades do Git que já vimos aqui, o <code>diff</code>, veja:</p>
+<div class="highlight"><pre class="chroma"><code class="language-diff" data-lang="diff">$ git diff main
+<span class="gh">diff --git a/.gitignore b/.gitignore
+</span><span class="gh">index 35215c6..9005441 100644
+</span><span class="gh"></span><span class="gd">--- a/.gitignore
+</span><span class="gd"></span><span class="gi">+++ b/.gitignore
+</span><span class="gi"></span><span class="gu">@@ -1 +1,2 @@
+</span><span class="gu"></span> .code/
+<span class="gi">+a.out
+</span><span class="gi"></span><span class="gh">diff --git a/ola-mundo.c b/ola-mundo.c
+</span><span class="gh"></span>new file mode 100644
+<span class="gh">index 0000000..f3ecd97
+</span><span class="gh"></span><span class="gd">--- /dev/null
+</span><span class="gd"></span><span class="gi">+++ b/ola-mundo.c
+</span><span class="gi"></span><span class="gu">@@ -0,0 +1,7 @@
+</span><span class="gu"></span><span class="gi">+#include &lt;stdio.h&gt;
+</span><span class="gi">+
+</span><span class="gi">+int main(int argc, char **argv) {
+</span><span class="gi">+  printf(&#34;Olá mundo!\n&#34;);
+</span><span class="gi">+
+</span><span class="gi">+  return 0;
+</span><span class="gi">+}
+</span></code></pre></div><p>Como podemos ver a diferença entre a nossa linha e a principal são apenas as modificações que fizemos. Com isso podemos voltar para a linha principal e aplicar nossas alterações nela, vamos fazer isso:</p>
+<pre><code>$ git checkout main
+Switched to branch 'main'
+$ git merge ola-mundo-c 
+Updating e0d67bb..e7acbfd
+Fast-forward
+ .gitignore  | 1 +
+ ola-mundo.c | 7 +++++++
+ 2 files changed, 8 insertions(+)
+ create mode 100644 ola-mundo.c
+$ git branch -D ola-mundo-c 
+Deleted branch ola-mundo-c (was e7acbfd).
+</code></pre><p>O que fiz aqui? Primeiro, voltei meu estado atual para o da linha principal e depois fiz a união das minhas alterações nela. Por fim, deletei a branch que desenvolvi meu código para manter mais limpo o meu projeto. No começo tinha falado sobre trabalho em equipe mas da forma que demonstrei não tive a partiçapação de outras pessoas no processo. Como funcionaria isso?</p>
+<h3 id="git-como-serviço">Git como serviço</h3>
+<p>Você já deve ter escutado falar sobre Github, Gitlab, Bitbucket e afins se fez algumas pesquisas sobre a área de tecnologia. Todos esses são serviços de hospedagem de projetos Git. Esses serviços são muito importantes para o trabalho coletivo mas a solução no se limita a eles e acho que esse papo não cabe nesse momento. Então, minha sugestão é que você faça uma conta em qualquer um desses serviços e comece a navegar nele para aprender um pouco mas fique tranquilo que pretendo abordar eles aqui pois eles tem recursos e semânticas diferentes interessantes. Sem dúvidas hoje o mais popular é o Github mas existem polêmicas a respeito por conta de ser da Microsoft hoje e por conta do ICE. Não vou entrar nessa discussão agora pois não é o momento. O Gitlab é um projeto aberto e empresa, ou seja, você pode ter um Gitlab seu rodando por sua própria administração ou usar eles pagando ou não. O Bitbucket é da empresa Atlassian que tem diversas outras soluções para times de tecnologia. Uma coisa que você pode ficar tranquilo que em todos os três você vai poder criar projetos públicos e privados sem custos e acho que isso é o suficiente para o momento. Esse blog, por exemplo, eu uso o Github para salvar o código, texto e imagens dele usando um gerador de sites estáticos chamado Hugo e um recurso bem legal do Github que é o Github Pages.</p>
+<p>O próximo artigo aqui vamos começar desse ponto, colaborando via Git!</p>
+<h2 id="considerações-finais">Considerações finais</h2>
+<p>Nesse primeiro artigo meu objetivo era aprensentar o Git e aprender a dar os primeiros passos com ele e já criar familiaridade com alguns termos comuns em projetos que usam ele. Espero que agora você sempre ao iniciar um projeto já criar seu projeto em qualquer um dos serviços de Git que comentei e manter tudo de forma organizada e com histórico. Sofri bastante com a falta desse conhecimento na graduação e perdi muita coisa que fiz por conta disso. Esse foi apenas o primeiro de uma sequência sem tamanho definido ainda que espero escrever que vão ter guiar a saber tudo que você precisa saber de Git para lidar com a maiorida dos seus problemas que se tornarão cotidianos trabalhando com tecnologia.</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/git/" rel="tag">git</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/github/" rel="tag">github</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/gitlab/" rel="tag">gitlab</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/bitbucket/" rel="tag">bitbucket</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de software
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

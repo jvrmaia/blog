@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Conhecendo o Packer - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Conhecendo o Packer" />
+<meta property="og:description" content="Olá,
+eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/conhecendo-o-packer/" />
+<meta property="article:published_time" content="2020-05-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-23T00:00:00+00:00" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Conhecendo o Packer"/>
+<meta name="twitter:description" content="Olá,
+eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Conhecendo o Packer</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-05-23T00:00:00Z">2020-05-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/conhecendo-o-packer/packer.png" alt="Conhecendo o Packer">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AMIs.html">AWS</a>, <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/">Azure</a> e <a href="https://cloud.google.com/compute/docs/images">Google Cloud</a>.</p>
+<p>E o que o Packer tem a ver com isso? Vamos a descrição oficial:</p>
+<blockquote>
+<p>Packer is an open source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image.</p>
+</blockquote>
+<p>Como podemos ver, o Packer vem justamente para você poder criar ou extender essas imagens de sistemas operacionais e como bem dito, isso não é para substituir o Chef, Puppet e Ansible, o Packer e essas ferramentas trabalham juntas para automatizar ainda mais a criação da sua infraestrutura. Não se assuste com Chef, Puppet e Ansible caso não tenha conhecimento ainda, o bom e velho Shell Script também é uma opção.</p>
+<h1 id="instalando-o-packer">Instalando o Packer</h1>
+<p>O processo de instalação é bem simples, caso prefira seguir a documentação oficial basta ver <a href="https://www.packer.io/intro/getting-started/">aqui</a>. Não vou dar todos os passos mas apenas o direcionamento das formas que podem ser feitas, segue:</p>
+<ul>
+<li><em>Instalador do sistema operacional</em>: se você usa Ubuntu 18.04+ pode instalar via <code>apt</code>, acredito que o mesmo seja possível no ambientes <code>rpm</code> e <code>pacman</code> seja por repositórios oficiais ou alternativos;</li>
+<li><em>Homebrew</em>: caso use essa <a href="https://brew.sh/index_pt-br">ferramenta</a> pode instalar da mesma forma no Linux ou OSX com o <code>brew</code>;</li>
+<li><em>Manualmente</em>: como o Packer é feito em Go, ele se torna um binário simples que pode ser rodado em qualquer ambiente dado uma arquitetura que se tenha o binário. Então, basta fazer o <a href="https://www.packer.io/downloads/">download desse binário</a> e certificar que ele esteja localizado em algum lugar que seja coberto pelo seu <code>$PATH</code>;</li>
+<li><em>Docker</em>: caso você tenha Docker e não tenha interesse de instalar no seu sistema pode usar uma imagem pronta, ver <a href="https://hub.docker.com/r/hashicorp/packer">aqui</a>; e</li>
+<li><em>Compilando o fonte</em>: essa é a forma mais complexa, você pode ir no <a href="https://github.com/hashicorp/packer">repositório oficial</a> e fazer um clone local para compilar e colocar o binário no seu <code>$PATH</code>.</li>
+</ul>
+<p>De forma a garantir a reprodutibilidade do artigos vamos usar Docker aqui.</p>
+<pre><code>$ docker pull hashicorp/packer:1.5.6
+1.5.6: Pulling from hashicorp/packer
+cbdbe7a5bc2a: Already exists
+05cf1cc5a546: Pull complete
+1cb511b2b0d4: Pull complete
+26885a5064ff: Pull complete
+b2e3e25f1b68: Pull complete
+d7512d83be57: Pull complete
+ad12109a8809: Pull complete
+Digest: sha256:013754a8f5f8916dbf225192a8c0f2a55bb7b8851e45138c9f00a4bfaaa955b5
+Status: Downloaded newer image for hashicorp/packer:1.5.6
+docker.io/hashicorp/packer:1.5.6
+$ docker run --rm hashicorp/packer:1.5.6
+Usage: packer [--version] [--help] &lt;command&gt; [&lt;args&gt;]
+
+Available commands are:
+    build       build image(s) from template
+    console     creates a console for testing variable interpolation
+    fix         fixes templates from old versions of packer
+    inspect     see components of a template
+    validate    check that a template is valid
+    version     Prints the Packer version
+</code></pre><h1 id="primeiros-passos">Primeiros passos</h1>
+<p>Com o Packer você pode criar images estáticas para uma diversidade de destinos que na documentação oficial vai encontrar com o nome de <a href="https://www.packer.io/docs/builders/">Builders</a>. Nesse artigo vou me restringir ao ecossistema que já tenho conhecimento que é o uso na <a href="https://aws.amazon.com/">AWS</a>. Então, caso você tenha interesse em reproduzir o que estou abordando nesse artigo faça uma pausa agora para criar a sua conta na AWS agora. Com a conta na AWS criada, vamos agora precisar que você entre no recurso <a href="https://aws.amazon.com/pt/iam/">IAM</a> da AWS para criar um usuário de preferência sem acesso ao painel online e apenas com credenciais de acesso via API, para facilitar coloque ele como administrador mas lembre-se de destruir o usuário depois dos testes e não salve essas credencias em lugar nenhum que seja inseguro, você pode acabar tendo surpresas desagradáveis na sua fatura da AWS.</p>
+<p>Com a credenciais crie um arquivo <code>credentials</code> com o seguinte formato:</p>
+<div class="highlight"><pre class="chroma"><code class="language-env" data-lang="env"><span class="nv">AWS_REGION</span><span class="o">=</span>us-east-1
+<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>...
+<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>...
+</code></pre></div><p>Os arquivos fontes de tudo que será mostrado a seguir se encontra no meu <a href="https://github.com/jvrmaia/packer-playground">Github</a>. Segue o <code>Makefile</code> que usarei para melhor entendimento dos prṕximos passos:</p>
+<div class="highlight"><pre class="chroma"><code class="language-make" data-lang="make"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span> <span class="n">validate</span>
+
+<span class="nv">PCKCMD</span><span class="o">=</span>docker run -it --rm --env-file credentials -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/opt -w /opt hashicorp/packer:1.5.6
+
+<span class="nf">build</span><span class="o">:</span>
+	<span class="si">${</span><span class="nv">PCKCMD</span><span class="si">}</span> build <span class="si">${</span><span class="nv">TPLPATH</span><span class="si">}</span>
+
+<span class="nf">validate</span><span class="o">:</span>
+	<span class="si">${</span><span class="nv">PCKCMD</span><span class="si">}</span> validate <span class="si">${</span><span class="nv">TPLPATH</span><span class="si">}</span>
+</code></pre></div><h2 id="criando-o-primeiro-manifesto">Criando o primeiro manifesto</h2>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_ACCESS_KEY`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_SECRET_KEY`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;aws_region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_REGION`}}&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_access_key`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_secret_key`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_region`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;source_ami&#34;</span><span class="p">:</span> <span class="s2">&#34;ami-085925f297f89fce1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;instance_type&#34;</span><span class="p">:</span> <span class="s2">&#34;t2.micro&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;ami_name&#34;</span><span class="p">:</span> <span class="s2">&#34;hello-world-packer&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;subnet_id&#34;</span><span class="p">:</span> <span class="s2">&#34;subnet-025e117e9c9cd0f91&#34;</span>
+    <span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div><p>Nosso arquivo de manifesto consiste nesse exemplo em duas partes, na primeira declaramos variáveis a serem usadas no manifesto e informo que ela vão ser informadas através de variáveis de ambiente no meu sistema. Na segunda parte, temos uma lista de <code>Builders</code>, no caso, vamos fazer apenas com o da AWS como dito anteriormente. Entrando em detalhes de cada item:</p>
+<ul>
+<li><code>type</code>: aqui informo o tipo de <code>Builder</code>, no caso, AWS;</li>
+<li><code>access_key</code> e <code>secret_key</code>: são as credenciais de acesso que o Packer precisa para executar a operação na AWS;</li>
+<li><code>region</code>: a AWS possui várias regiões e cada região tem suas próprias imagens, logo é preciso especificar qual vamos usar;</li>
+<li><code>source_ami</code>: qual imagem de base vamos usar, aqui fui simples e direto na imagem que queria do Ubuntu;</li>
+<li><code>instance_type</code>: para provisionar a imagem é preciso executar uma instância na AWS e com isso vocÊ precisa dizer qual tipo de imagem pretende usar, no nosso caso podemos usar essa bem simples já que não tem grandes mudanças, talvez seja interessante você variar esse tipo caso tenha instalações mais complexas;</li>
+<li><code>ssh_username</code>: para executar o provisionamento o Packer faz uso do SSH para entrar na instância e executar suas atividades;</li>
+<li><code>ami_name</code>: o nome final que será dado a sua nova imagem; e</li>
+<li><code>subnet_id</code>: tive que adicionar essa informação pois estava dando erro aqui sem ela e não vi nenhuma explicação clara na documentação do Packer a respeito, experimente sem ela e caso tenha problemas também é preciso ir no recurso <a href="https://aws.amazon.com/pt/vpc/">VPC</a> da sua conta e pegar alguma subnet pública para adicionar nessa configuração, lembrando que isso é individual por conta.</li>
+</ul>
+<h3 id="validando-o-arquivo-de-manifesto-do-packer">Validando o arquivo de manifesto do Packer</h3>
+<pre><code>$ make validate TPLPATH=./hello-world-packer/template.json
+docker run -it --rm --env-file credentials -v /home/jvrmaia/Workspace/jvrmaia/packer-playground:/opt -w /opt hashicorp/packer:1.5.6 validate ./hello-world-packer/template.json
+Template validated successfully.
+</code></pre><p>Sem problemas com nosso arquivo de configuração. Podemos agora aplicar ele para execução.</p>
+<h3 id="executando-a-criação-da-imagem">Executando a criação da imagem</h3>
+<pre><code>$ make build TPLPATH=./hello-world-packer/template.json
+docker run -it --rm --env-file credentials -v /home/jvrmaia/Workspace/jvrmaia/packer-playground:/opt -w /opt hashicorp/packer:1.5.6 build ./hello-world-packer/template.json
+amazon-ebs: output will be in this color.
+
+==&gt; amazon-ebs: Prevalidating any provided VPC information
+==&gt; amazon-ebs: Prevalidating AMI Name: hello-world-packer
+    amazon-ebs: Found Image ID: ami-085925f297f89fce1
+==&gt; amazon-ebs: Creating temporary keypair: packer_5ec90c3b-1c5a-0b0d-c703-5679a8d818d7
+==&gt; amazon-ebs: Creating temporary security group for this instance: packer_5ec90c44-555e-9721-0b32-0ae7906fa326
+==&gt; amazon-ebs: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
+==&gt; amazon-ebs: Launching a source AWS instance...
+==&gt; amazon-ebs: Adding tags to source instance
+    amazon-ebs: Adding tag: &quot;Name&quot;: &quot;Packer Builder&quot;
+    amazon-ebs: Instance ID: i-0a76f2665b8c6632a
+==&gt; amazon-ebs: Waiting for instance (i-0a76f2665b8c6632a) to become ready...
+==&gt; amazon-ebs: Using ssh communicator to connect: 54.160.68.147
+==&gt; amazon-ebs: Waiting for SSH to become available...
+==&gt; amazon-ebs: Connected to SSH!
+==&gt; amazon-ebs: Stopping the source instance...
+    amazon-ebs: Stopping instance
+==&gt; amazon-ebs: Waiting for the instance to stop...
+==&gt; amazon-ebs: Creating AMI hello-world-packer from instance i-0a76f2665b8c6632a
+    amazon-ebs: AMI: ami-0d054dd9d276b95f7
+==&gt; amazon-ebs: Waiting for AMI to become ready...
+==&gt; amazon-ebs: Terminating the source AWS instance...
+==&gt; amazon-ebs: Cleaning up any extra volumes...
+==&gt; amazon-ebs: No volumes to clean up, skipping
+==&gt; amazon-ebs: Deleting temporary security group...
+==&gt; amazon-ebs: Deleting temporary keypair...
+Build 'amazon-ebs' finished.
+
+==&gt; Builds finished. The artifacts of successful builds are:
+--&gt; amazon-ebs: AMIs were created:
+us-east-1: ami-0d054dd9d276b95f7
+</code></pre><p>É interessante observar a saída do Packer para entender como o processo todo ocorre:</p>
+<ul>
+<li>Validação das informações dadas do provedor (AWS) e nome da imagem;</li>
+<li>Procura a imagem que vai usar de base;</li>
+<li>Criar temporarimente uma chave de acesso para a instância e uma política se segurança para acessar a mesma;</li>
+<li>Cria a instância e coloca o nome de &ldquo;Packer Builder&rdquo;;</li>
+<li>Aguarda ela ficar disponível para acesso;</li>
+<li>Executa o que precisa, nesse caso nada;</li>
+<li>Desliga a instância e gera a imagem dela;</li>
+<li>Apaga a imamgem e disco usado para executar ela;</li>
+<li>Apaga as credenciais e políticas de acesso; e</li>
+<li>Por fim, mostra o ID da nova AMI gerada.</li>
+</ul>
+<p>Caso queira conferir no painel da AWS:</p>
+<p><img src="/img/conhecendo-o-packer/hello-world-packer-ami.png" alt="painel da aws com a imagem criada"></p>
+<h1 id="provisionando-com-o-packer">Provisionando com o Packer</h1>
+<p>Agora, além de criar nossa instância vamos querer fazer algo mais, vamos fazer modificações na imagem e validar elas. Então, no nosso arquivod de manifesto vamos criar uma nova entrada de informações para isso, no Packer são chamados de <a href="https://www.packer.io/docs/provisioners/">Provisioners</a>. Assim como no <code>Builders</code> é possível passar uma lista de <code>Provisioners</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_ACCESS_KEY`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_SECRET_KEY`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;aws_region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_REGION`}}&#34;</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_access_key`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_secret_key`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_region`}}&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;source_ami&#34;</span><span class="p">:</span> <span class="s2">&#34;ami-085925f297f89fce1&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;instance_type&#34;</span><span class="p">:</span> <span class="s2">&#34;t2.micro&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;ami_name&#34;</span><span class="p">:</span> <span class="s2">&#34;nginx-with-packer&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;subnet_id&#34;</span><span class="p">:</span> <span class="s2">&#34;subnet-025e117e9c9cd0f91&#34;</span>
+    <span class="p">}],</span>
+    <span class="nt">&#34;provisioners&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo apt install -y nginx&#34;</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;file&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;/opt/nginx/index.html&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;destination&#34;</span><span class="p">:</span> <span class="s2">&#34;/tmp/index.html&#34;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo cp /tmp/index.html /var/www/html/index.html&#34;</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo rm /var/www/html/index.nginx-debian.html&#34;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p>Vamos entender aqui o que foi feito de novo:</p>
+<ul>
+<li><code>provisioners</code>: lista de operações a serem feitas de provisionamento;</li>
+<li>provisionamento do tipo <code>shell</code>: o que fizemos foi passar uma linha de comando simples, nota, nos dois últimos comandos poderia ter feito os dois juntos separando por <code>,</code> dentro do <code>array</code> de <code>inline</code>; e</li>
+<li>provisionamento do tipo <code>file</code>: que faz uma simples cópia do arquivo local para a instância remota.</li>
+</ul>
+<h2 id="validando-o-manifesto">Validando o manifesto</h2>
+<pre><code>$ make validate TPLPATH=./nginx/template.json
+docker run -it --rm --env-file credentials -v /home/jvrmaia/Workspace/jvrmaia/packer-playground:/opt -w /opt hashicorp/packer:1.5.6 validate ./nginx/template.json
+Template validated successfully.
+</code></pre><h2 id="executando-o-manifesto">Executando o manifesto</h2>
+<pre><code>$ make build TPLPATH=./nginx/template.json [A
+docker run -it --rm --env-file credentials -v /home/jvrmaia/Workspace/jvrmaia/packer-playground:/opt -w /opt hashicorp/packer:1.5.6 build ./nginx/template.json
+amazon-ebs: output will be in this color.
+
+==&gt; amazon-ebs: Prevalidating any provided VPC information
+==&gt; amazon-ebs: Prevalidating AMI Name: nginx-with-packer
+    amazon-ebs: Found Image ID: ami-085925f297f89fce1
+==&gt; amazon-ebs: Creating temporary keypair: packer_5ec93625-91b9-eb54-e0eb-563019fdffa0
+==&gt; amazon-ebs: Creating temporary security group for this instance: packer_5ec9362e-e6f6-4aab-ec29-58d0e5b9120e
+==&gt; amazon-ebs: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
+==&gt; amazon-ebs: Launching a source AWS instance...
+==&gt; amazon-ebs: Adding tags to source instance
+    amazon-ebs: Adding tag: &quot;Name&quot;: &quot;Packer Builder&quot;
+    amazon-ebs: Instance ID: i-0d5b35d6607c22bda
+==&gt; amazon-ebs: Waiting for instance (i-0d5b35d6607c22bda) to become ready...
+==&gt; amazon-ebs: Using ssh communicator to connect: 100.25.111.123
+==&gt; amazon-ebs: Waiting for SSH to become available...
+==&gt; amazon-ebs: Connected to SSH!
+==&gt; amazon-ebs: Provisioning with shell script: /tmp/packer-shell961822417
+==&gt; amazon-ebs:
+==&gt; amazon-ebs: WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+==&gt; amazon-ebs:
+    amazon-ebs: Reading package lists...
+    amazon-ebs: Building dependency tree...
+    amazon-ebs: Reading state information...
+    amazon-ebs: The following additional packages will be installed:
+    amazon-ebs:   fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+    amazon-ebs:   libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip
+    amazon-ebs:   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+    amazon-ebs:   libnginx-mod-mail libnginx-mod-stream libtiff5 libwebp6 libxpm4 nginx-common
+    amazon-ebs:   nginx-core
+    amazon-ebs: Suggested packages:
+    amazon-ebs:   libgd-tools fcgiwrap nginx-doc ssl-cert
+    amazon-ebs: The following NEW packages will be installed:
+    amazon-ebs:   fontconfig-config fonts-dejavu-core libfontconfig1 libgd3 libjbig0
+    amazon-ebs:   libjpeg-turbo8 libjpeg8 libnginx-mod-http-geoip
+    amazon-ebs:   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+    amazon-ebs:   libnginx-mod-mail libnginx-mod-stream libtiff5 libwebp6 libxpm4 nginx
+    amazon-ebs:   nginx-common nginx-core
+    amazon-ebs: 0 upgraded, 18 newly installed, 0 to remove and 0 not upgraded.
+    amazon-ebs: Need to get 2462 kB of archives.
+    amazon-ebs: After this operation, 8210 kB of additional disk space will be used.
+    amazon-ebs: Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libjpeg-turbo8 amd64 1.5.2-0ubuntu5.18.04.3 [110 kB]
+    amazon-ebs: Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 fonts-dejavu-core all 2.37-1 [1041 kB]
+    amazon-ebs: Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 fontconfig-config all 2.12.6-0ubuntu2 [55.8 kB]
+    amazon-ebs: Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libfontconfig1 amd64 2.12.6-0ubuntu2 [137 kB]
+    amazon-ebs: Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libjpeg8 amd64 8c-2ubuntu8 [2194 B]
+    amazon-ebs: Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libjbig0 amd64 2.1-3.1build1 [26.7 kB]
+    amazon-ebs: Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libtiff5 amd64 4.0.9-5ubuntu0.3 [153 kB]
+    amazon-ebs: Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libwebp6 amd64 0.6.1-2 [185 kB]
+    amazon-ebs: Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libxpm4 amd64 1:3.5.12-1 [34.0 kB]
+==&gt; amazon-ebs: debconf: unable to initialize frontend: Dialog
+==&gt; amazon-ebs: debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+==&gt; amazon-ebs: debconf: falling back to frontend: Readline
+    amazon-ebs: Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libgd3 amd64 2.2.5-4ubuntu0.4 [119 kB]
+    amazon-ebs: Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 nginx-common all 1.14.0-0ubuntu1.7 [37.4 kB]
+==&gt; amazon-ebs: debconf: unable to initialize frontend: Readline
+    amazon-ebs: Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libnginx-mod-http-geoip amd64 1.14.0-0ubuntu1.7 [11.2 kB]
+==&gt; amazon-ebs: debconf: (This frontend requires a controlling tty.)
+==&gt; amazon-ebs: debconf: falling back to frontend: Teletype
+==&gt; amazon-ebs: dpkg-preconfigure: unable to re-open stdin:
+    amazon-ebs: Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libnginx-mod-http-image-filter amd64 1.14.0-0ubuntu1.7 [14.6 kB]
+    amazon-ebs: Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.14.0-0ubuntu1.7 [13.0 kB]
+    amazon-ebs: Get:15 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libnginx-mod-mail amd64 1.14.0-0ubuntu1.7 [41.8 kB]
+    amazon-ebs: Get:16 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libnginx-mod-stream amd64 1.14.0-0ubuntu1.7 [63.7 kB]
+    amazon-ebs: Get:17 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 nginx-core amd64 1.14.0-0ubuntu1.7 [413 kB]
+    amazon-ebs: Get:18 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 nginx all 1.14.0-0ubuntu1.7 [3596 B]
+    amazon-ebs: Fetched 2462 kB in 0s (9432 kB/s)
+    amazon-ebs: Selecting previously unselected package libjpeg-turbo8:amd64.
+    amazon-ebs: (Reading database ... 56588 files and directories currently installed.)
+    amazon-ebs: Preparing to unpack .../00-libjpeg-turbo8_1.5.2-0ubuntu5.18.04.3_amd64.deb ...
+    amazon-ebs: Unpacking libjpeg-turbo8:amd64 (1.5.2-0ubuntu5.18.04.3) ...
+    amazon-ebs: Selecting previously unselected package fonts-dejavu-core.
+    amazon-ebs: Preparing to unpack .../01-fonts-dejavu-core_2.37-1_all.deb ...
+    amazon-ebs: Unpacking fonts-dejavu-core (2.37-1) ...
+    amazon-ebs: Selecting previously unselected package fontconfig-config.
+    amazon-ebs: Preparing to unpack .../02-fontconfig-config_2.12.6-0ubuntu2_all.deb ...
+    amazon-ebs: Unpacking fontconfig-config (2.12.6-0ubuntu2) ...
+    amazon-ebs: Selecting previously unselected package libfontconfig1:amd64.
+    amazon-ebs: Preparing to unpack .../03-libfontconfig1_2.12.6-0ubuntu2_amd64.deb ...
+    amazon-ebs: Unpacking libfontconfig1:amd64 (2.12.6-0ubuntu2) ...
+    amazon-ebs: Selecting previously unselected package libjpeg8:amd64.
+    amazon-ebs: Preparing to unpack .../04-libjpeg8_8c-2ubuntu8_amd64.deb ...
+    amazon-ebs: Unpacking libjpeg8:amd64 (8c-2ubuntu8) ...
+    amazon-ebs: Selecting previously unselected package libjbig0:amd64.
+    amazon-ebs: Preparing to unpack .../05-libjbig0_2.1-3.1build1_amd64.deb ...
+    amazon-ebs: Unpacking libjbig0:amd64 (2.1-3.1build1) ...
+    amazon-ebs: Selecting previously unselected package libtiff5:amd64.
+    amazon-ebs: Preparing to unpack .../06-libtiff5_4.0.9-5ubuntu0.3_amd64.deb ...
+    amazon-ebs: Unpacking libtiff5:amd64 (4.0.9-5ubuntu0.3) ...
+    amazon-ebs: Selecting previously unselected package libwebp6:amd64.
+    amazon-ebs: Preparing to unpack .../07-libwebp6_0.6.1-2_amd64.deb ...
+    amazon-ebs: Unpacking libwebp6:amd64 (0.6.1-2) ...
+    amazon-ebs: Selecting previously unselected package libxpm4:amd64.
+    amazon-ebs: Preparing to unpack .../08-libxpm4_1%3a3.5.12-1_amd64.deb ...
+    amazon-ebs: Unpacking libxpm4:amd64 (1:3.5.12-1) ...
+    amazon-ebs: Selecting previously unselected package libgd3:amd64.
+    amazon-ebs: Preparing to unpack .../09-libgd3_2.2.5-4ubuntu0.4_amd64.deb ...
+    amazon-ebs: Unpacking libgd3:amd64 (2.2.5-4ubuntu0.4) ...
+    amazon-ebs: Selecting previously unselected package nginx-common.
+    amazon-ebs: Preparing to unpack .../10-nginx-common_1.14.0-0ubuntu1.7_all.deb ...
+    amazon-ebs: Unpacking nginx-common (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package libnginx-mod-http-geoip.
+    amazon-ebs: Preparing to unpack .../11-libnginx-mod-http-geoip_1.14.0-0ubuntu1.7_amd64.deb ...
+    amazon-ebs: Unpacking libnginx-mod-http-geoip (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package libnginx-mod-http-image-filter.
+    amazon-ebs: Preparing to unpack .../12-libnginx-mod-http-image-filter_1.14.0-0ubuntu1.7_amd64.deb ...
+    amazon-ebs: Unpacking libnginx-mod-http-image-filter (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package libnginx-mod-http-xslt-filter.
+    amazon-ebs: Preparing to unpack .../13-libnginx-mod-http-xslt-filter_1.14.0-0ubuntu1.7_amd64.deb ...
+    amazon-ebs: Unpacking libnginx-mod-http-xslt-filter (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package libnginx-mod-mail.
+    amazon-ebs: Preparing to unpack .../14-libnginx-mod-mail_1.14.0-0ubuntu1.7_amd64.deb ...
+    amazon-ebs: Unpacking libnginx-mod-mail (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package libnginx-mod-stream.
+    amazon-ebs: Preparing to unpack .../15-libnginx-mod-stream_1.14.0-0ubuntu1.7_amd64.deb ...
+    amazon-ebs: Unpacking libnginx-mod-stream (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package nginx-core.
+    amazon-ebs: Preparing to unpack .../16-nginx-core_1.14.0-0ubuntu1.7_amd64.deb ...
+    amazon-ebs: Unpacking nginx-core (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Selecting previously unselected package nginx.
+    amazon-ebs: Preparing to unpack .../17-nginx_1.14.0-0ubuntu1.7_all.deb ...
+    amazon-ebs: Unpacking nginx (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up libjbig0:amd64 (2.1-3.1build1) ...
+    amazon-ebs: Setting up fonts-dejavu-core (2.37-1) ...
+    amazon-ebs: Setting up nginx-common (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: debconf: unable to initialize frontend: Dialog
+    amazon-ebs: debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+    amazon-ebs: debconf: falling back to frontend: Readline
+    amazon-ebs: Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /lib/systemd/system/nginx.service.
+    amazon-ebs: Setting up libjpeg-turbo8:amd64 (1.5.2-0ubuntu5.18.04.3) ...
+    amazon-ebs: Setting up libnginx-mod-mail (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up libxpm4:amd64 (1:3.5.12-1) ...
+    amazon-ebs: Setting up libnginx-mod-http-xslt-filter (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up libnginx-mod-http-geoip (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up libwebp6:amd64 (0.6.1-2) ...
+    amazon-ebs: Setting up libjpeg8:amd64 (8c-2ubuntu8) ...
+    amazon-ebs: Setting up fontconfig-config (2.12.6-0ubuntu2) ...
+    amazon-ebs: Setting up libnginx-mod-stream (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up libtiff5:amd64 (4.0.9-5ubuntu0.3) ...
+    amazon-ebs: Setting up libfontconfig1:amd64 (2.12.6-0ubuntu2) ...
+    amazon-ebs: Setting up libgd3:amd64 (2.2.5-4ubuntu0.4) ...
+    amazon-ebs: Setting up libnginx-mod-http-image-filter (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up nginx-core (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Setting up nginx (1.14.0-0ubuntu1.7) ...
+    amazon-ebs: Processing triggers for systemd (237-3ubuntu10.39) ...
+    amazon-ebs: Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+    amazon-ebs: Processing triggers for ufw (0.36-0ubuntu0.18.04.1) ...
+    amazon-ebs: Processing triggers for ureadahead (0.100.0-21) ...
+    amazon-ebs: Processing triggers for libc-bin (2.27-3ubuntu1) ...
+==&gt; amazon-ebs: Uploading /opt/nginx/index.html =&gt; /tmp/index.html
+index.html 18 B / 18 B [=======================================================================================================] 100.00% 9s
+==&gt; amazon-ebs: Provisioning with shell script: /tmp/packer-shell936662298
+==&gt; amazon-ebs: Provisioning with shell script: /tmp/packer-shell378584502
+==&gt; amazon-ebs: Stopping the source instance...
+    amazon-ebs: Stopping instance
+==&gt; amazon-ebs: Waiting for the instance to stop...
+==&gt; amazon-ebs: Creating AMI nginx-with-packer from instance i-0d5b35d6607c22bda
+    amazon-ebs: AMI: ami-01915a10c5eebc69e
+==&gt; amazon-ebs: Waiting for AMI to become ready...
+==&gt; amazon-ebs: Terminating the source AWS instance...
+==&gt; amazon-ebs: Cleaning up any extra volumes...
+==&gt; amazon-ebs: No volumes to clean up, skipping
+==&gt; amazon-ebs: Deleting temporary security group...
+==&gt; amazon-ebs: Deleting temporary keypair...
+Build 'amazon-ebs' finished.
+
+==&gt; Builds finished. The artifacts of successful builds are:
+--&gt; amazon-ebs: AMIs were created:
+us-east-1: ami-01915a10c5eebc69e
+</code></pre><p>Sucesso ao criar a imagem! =)</p>
+<p><img src="/img/conhecendo-o-packer/imagem-nginx-criada.png" alt="ami do nginx"></p>
+<p>O que vale mostrar aqui de diferente nos outros passos são os momentos que nosso provisionamento é feito:</p>
+<pre><code>...
+==&gt; amazon-ebs: Provisioning with shell script: /tmp/packer-shell961822417
+...
+==&gt; amazon-ebs: Uploading /opt/nginx/index.html =&gt; /tmp/index.html
+index.html 18 B / 18 B [=======================================================================================================] 100.00% 9s
+==&gt; amazon-ebs: Provisioning with shell script: /tmp/packer-shell936662298
+==&gt; amazon-ebs: Provisioning with shell script: /tmp/packer-shell378584502
+...
+</code></pre><p>Repare que o Packer transforma nossos comandos do Shell em scripts e executa eles.</p>
+<h2 id="validando-a-imagem-criada">Validando a imagem criada</h2>
+<p>Na imagem criada sobreescri o HTML padrão do NGINX por:</p>
+<pre><code>$ cat nginx/index.html
+hello from packer
+</code></pre><p>Vamos conferir se funcionou executando a imagem e acessando ela via navegador.</p>
+<h3 id="executando-a-instância">Executando a instância</h3>
+<p><img src="/img/conhecendo-o-packer/instancia-nginx-rodando.png" alt="painel da aws com instância rodando"></p>
+<h3 id="acessando-a-página-do-nginx">Acessando a página do NGINX</h3>
+<p><img src="/img/conhecendo-o-packer/nginx-funcionando.png" alt="acessando página do nginx"></p>
+<h1 id="conclusão">Conclusão</h1>
+<p>Vimos que o Packer é uma execelente e simples solução para criação de imagens estáticas na AWS ou outro provedor que você use e tenha suporte. Com o que foi visto aqui já podemos aplicar para diversos casos por ai em situações reais. Melhorias que podem ser feitas ainda e fica como sugestão de investigação sua e para próximos artigos:</p>
+<ul>
+<li>provisionar via <code>bastion host</code> em subnet privada para não criar superfície de ataque na sua infra durante a execução;</li>
+<li>usar algum provisionador de instância ao invés do shell como ansible, por exemplo;</li>
+<li>provisionar em múltiplos lugares ao mesmo tempo;</li>
+<li>melhores práticas nos arquivos de manifesto;</li>
+<li>criando testes para seus manifestos; e</li>
+<li>criando um ciclo de entrega contínua de imagens.</li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/packer/" rel="tag">packer</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de software
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

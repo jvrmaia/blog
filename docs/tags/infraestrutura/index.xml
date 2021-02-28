@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>infraestrutura on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/infraestrutura/</link>
+    <description>Recent content in infraestrutura on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/infraestrutura/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>E esse tal de BGP?</title>
+      <link>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</guid>
+      <description>Olá,
+nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
+Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.</description>
+    </item>
+    
+    <item>
+      <title>Vamos falar de DNS?</title>
+      <link>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</guid>
+      <description>Olá,
+você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
+Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</description>
+    </item>
+    
+  </channel>
+</rss>

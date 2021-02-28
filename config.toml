@@ -1,0 +1,102 @@
+baseURL = "http://blog.joaovrmaia.com"
+title = "João Maia"
+enableRobotsTXT = true
+enableEmoji = true
+theme = "mainroad"
+publishDir = "docs"
+languageCode = "pt-br"
+
+hasCJKLanguage = false
+paginate = 10
+rssLimit = 20
+disqusShortname = "blog-hugo"
+googleAnalytics = "UA-61280444-1"
+copyright = "João Maia"
+
+pygmentsUseClasses=true
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+
+[author]
+  name = "João Maia"
+  bio = "Pessoa que resolve problemas com o uso de software"
+  avatar = "img/avatar.jpg"
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[[menu.main]]
+  name = "Posts"
+  weight = 20
+  identifier = "archives"
+  url = "/post/"
+[[menu.main]]
+  name = "Tags"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+[[menu.main]]
+  name = "Categoria"
+  weight = 40
+  identifier = "categories"
+  url = "/categories/"
+[[menu.main]]
+  name = "Site pessoal"
+  weight = 50
+  url = "http://www.joaovrmaia.com"
+
+[Params]
+  subtitle = "Compartilhando conhecimento sobre tecnologia e outras coisas mais"
+  description = "Blog pessoal de João Maia, opiniões apenas minha aqui"
+  copyright = "João Maia"
+  opengraph = true # Enable OpenGraph if true
+  twitter_cards = true # Enable Twitter Cards if true
+  readmore = false # Show "Read more" button in list if true
+  authorbox = true # Show authorbox at bottom of pages if true
+  toc = false # Enable Table of Contents
+  post_navigation = true # Show post navigation at bottom of pages if true
+  post_meta = ["date", "categories", "translations"] # Order of post meta information
+  mainSections = ["post", "blog", "news"] # Specify section pages to show on home page and the "Recent articles" widget
+  dateformat = "2006-01-02" # Change the format of dates
+  mathjax = true # Enable MathJax
+  mathjaxPath = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js" # Specify MathJax path
+  mathjaxConfig = "TeX-AMS-MML_HTMLorMML" # Specify MathJax config
+  highlightColor = "#e22d30" # Override highlight color
+  customCSS = ["css/custom.css"] # Include custom CSS files
+  #customJS = ["js/custom.js"] # Include custom JS files
+  languageCode = "pt-br"
+
+[Params.sidebar]
+  home = "right" # Configure layout for home page
+  list = "left"  # Configure layout for list pages
+  single = false # Configure layout for single pages
+  # Enable widgets in given order
+  widgets = ["search", "recent", "categories", "taglist", "social", "languages"]
+
+[Params.widgets]
+  recent_num = 5 # Set the number of articles in the "Recent articles" widget
+  tags_counter = false # Enable counter for each tag in "Tags" widget
+
+[Params.widgets.social]
+  twitter = "jvrmaia"
+  linkedin = "jvrmaia"
+  telegram = "jvrmaia"
+  github = "jvrmaia"
+  gitlab = "jvrmaia"
+  bitbucket = "jvrmaia"
+  email = "joao@joaovrmaia.com"
+
+[[Params.widgets.social.custom]]
+  title = "Site pessoal"
+  url = "http://www.joaovrmaia.com"

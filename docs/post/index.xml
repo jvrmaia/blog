@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on João Maia</title>
+    <link>http://blog.joaovrmaia.com/post/</link>
+    <description>Recent content in Posts on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.joaovrmaia.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>E esse tal de BGP?</title>
+      <link>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</guid>
+      <description>Olá,
+nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
+Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.</description>
+    </item>
+    
+    <item>
+      <title>Git e afins para iniciantes - parte 2</title>
+      <link>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</guid>
+      <description>Olá,
+no último artigo encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.</description>
+    </item>
+    
+    <item>
+      <title>Vamos falar de DNS?</title>
+      <link>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</guid>
+      <description>Olá,
+você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
+Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</description>
+    </item>
+    
+    <item>
+      <title>Git e afins para iniciantes - parte 1</title>
+      <link>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</guid>
+      <description>Olá,
+acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu trabalho-história-mediaval.</description>
+    </item>
+    
+    <item>
+      <title>Conhecendo o Ansible</title>
+      <link>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</guid>
+      <description>Olá,
+dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet.</description>
+    </item>
+    
+    <item>
+      <title>AWS IAM direto ao ponto</title>
+      <link>http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/</guid>
+      <description>Olá,
+sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo.</description>
+    </item>
+    
+    <item>
+      <title>Conhecendo o Packer</title>
+      <link>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</link>
+      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</guid>
+      <description>Olá,
+eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud.</description>
+    </item>
+    
+    <item>
+      <title>Analisando dados no terminal</title>
+      <link>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</guid>
+      <description>Olá,
+recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no Twitter surgiram comentários interessantes.</description>
+    </item>
+    
+    <item>
+      <title>Da instalação a configuração do meu ambiente Python</title>
+      <link>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</guid>
+      <description>Olá,
+Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.
+Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações.</description>
+    </item>
+    
+    <item>
+      <title>Desenhando infraestrutura com código</title>
+      <link>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</guid>
+      <description>Olá,
+Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw.</description>
+    </item>
+    
+    <item>
+      <title>Testando o NGINX com SuperTest e Mocha</title>
+      <link>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</guid>
+      <description>Olá,
+testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda não faz nada a respeito saiba que já está atrasado. Com a transformação da infraestrutura em código acabando com os processos manuais e nem sempre documentados é preciso também trazer as boas práticas do mundo de desenvolvimento de software para a infraestrutura. Graças ao Docker subir uma representação da sua infraestrutura ficou mais fácil realizar esse processo apesar de ainda não ser 100% fiel ao ambiente de produção.</description>
+    </item>
+    
+    <item>
+      <title>Verificando vulnerabilidades com Clair e Circle CI</title>
+      <link>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</guid>
+      <description>Olá,
+nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando Clair e Circle CI. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps.</description>
+    </item>
+    
+    <item>
+      <title>Hashing e criptografia</title>
+      <link>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</guid>
+      <description>Olá,
+A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?
+Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos.</description>
+    </item>
+    
+    <item>
+      <title>Trabalhando com dependências em Go</title>
+      <link>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</link>
+      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</guid>
+      <description>Olá,
+Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho.</description>
+    </item>
+    
+    <item>
+      <title>Organização de projetos e GOPATH</title>
+      <link>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</link>
+      <pubDate>Fri, 17 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</guid>
+      <description>Olá,
+Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não.</description>
+    </item>
+    
+    <item>
+      <title>Instalação do Go</title>
+      <link>http://blog.joaovrmaia.com/post/instalacao-do-go/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/instalacao-do-go/</guid>
+      <description>Olá,
+esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua jornada inicial na linguagem seja uma experiência muito positiva e proveitosa. Nesse artigo vou abordar em especial a questão de como instalar o Go na sua máquina. Como sou usuário de Linux vou dar foco nesse sistema, usuários do OSX provavelmente vão conseguir usar os mesmos passos mas infelizmente não vou conseguir cobrir o caso do Windows por não seu um usuário do sistema.</description>
+    </item>
+    
+    <item>
+      <title>Go: primeiros passos</title>
+      <link>http://blog.joaovrmaia.com/post/go-primeiros-passos/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/go-primeiros-passos/</guid>
+      <description>Olá,
+esse primeiro post sobre Go é para mostrar a quem não sabe nada sobre a linguagem algumas características e minhas opiniões a respeito dela. Caso discorde de algo e/ou tenha alguma correção a ser feita no texto pode me apontar nos comentários ou no meu e-mail que darei toda atenção desde que faça de forma educada.
+Senta que lá vem a História Do Wikipedia:
+ Go é uma linguagem de programação criada pela Google e lançada em código livre em novembro de 2009.</description>
+    </item>
+    
+  </channel>
+</rss>

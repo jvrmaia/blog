@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linguagens on João Maia</title>
+    <link>http://blog.joaovrmaia.com/categories/linguagens/</link>
+    <description>Recent content in linguagens on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.joaovrmaia.com/categories/linguagens/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Da instalação a configuração do meu ambiente Python</title>
+      <link>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</guid>
+      <description>Olá,
+Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.
+Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações.</description>
+    </item>
+    
+  </channel>
+</rss>

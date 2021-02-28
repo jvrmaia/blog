@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on João Maia</title>
+    <link>http://blog.joaovrmaia.com/categories/</link>
+    <description>Recent content in Categories on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.joaovrmaia.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>rede de computadores</title>
+      <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/rede-de-computadores/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>desenvolvimento</title>
+      <link>http://blog.joaovrmaia.com/categories/desenvolvimento/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/desenvolvimento/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>http://blog.joaovrmaia.com/categories/devops/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>http://blog.joaovrmaia.com/categories/aws/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>produtividade</title>
+      <link>http://blog.joaovrmaia.com/categories/produtividade/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/produtividade/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linguagens de programação</title>
+      <link>http://blog.joaovrmaia.com/categories/linguagens-de-programa%C3%A7%C3%A3o/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/linguagens-de-programa%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>documentação</title>
+      <link>http://blog.joaovrmaia.com/categories/documenta%C3%A7%C3%A3o/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/documenta%C3%A7%C3%A3o/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testes</title>
+      <link>http://blog.joaovrmaia.com/categories/testes/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/testes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devsecops</title>
+      <link>http://blog.joaovrmaia.com/categories/devsecops/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/devsecops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>segurança</title>
+      <link>http://blog.joaovrmaia.com/categories/seguran%C3%A7a/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/seguran%C3%A7a/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algoritmos</title>
+      <link>http://blog.joaovrmaia.com/categories/algoritmos/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/algoritmos/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

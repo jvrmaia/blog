@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Desenhando infraestrutura com código - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Desenhando infraestrutura com código" />
+<meta property="og:description" content="Olá,
+Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/" />
+<meta property="article:published_time" content="2020-04-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-23T00:00:00+00:00" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Desenhando infraestrutura com código"/>
+<meta name="twitter:description" content="Olá,
+Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Desenhando infraestrutura com código</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-04-23T00:00:00Z">2020-04-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>, <a class="meta__link" href="/categories/documenta%C3%A7%C3%A3o/" rel="category">documentação</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/desenhando-infraestrutura-com-codigo/advanced_web_service_with_on-premise.png" alt="Desenhando infraestrutura com código">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o <a href="https://www.lucidchart.com/">Lucidchart</a>, <a href="https://cloudcraft.co/">Cloudcraft</a> e <a href="https://app.diagrams.net/">draw.io</a>.</p>
+<p>Como desenvolvedores gostam de programar, por que não desenhar a infraestrutura programando? Pensando nessa possibilidade procurei ferramentas para isso e acabei encontrando o <a href="https://diagrams.mingrammer.com/">Diagrams</a>, um projeto feito em Python que possibilita desenhar sua infraestrutura para as principais clouds do mercado (<a href="https://diagrams.mingrammer.com/docs/nodes/aws">AWS</a>, <a href="https://diagrams.mingrammer.com/docs/nodes/gcp">GCP</a>, <a href="https://diagrams.mingrammer.com/docs/nodes/azure">Azure</a> e <a href="https://diagrams.mingrammer.com/docs/nodes/alibabacloud">AlibabaCloud</a>) e outras coisas mais (<a href="https://diagrams.mingrammer.com/docs/nodes/k8s">k8s</a> e <a href="https://diagrams.mingrammer.com/docs/nodes/onprem">OnPremise</a>).</p>
+<p><img src="/img/desenhando-infraestrutura-com-codigo/diagrams.png" alt="Diagrams"></p>
+<h1 id="objetos">Objetos</h1>
+<p>O <code>Diagrams</code> possui quatro objetos principais para desenhar diagramas: <code>Diagram</code>, <code>Node</code>, <code>Cluster</code> e <code>Edge</code>.</p>
+<h2 id="diagram">Diagram</h2>
+<p>Esse é o seu desenho final que vai ser exportado em imagem. Ele pode ser modificado para exportar o diagrama nos seguintes formatos: png, jpg, svg, e pdf.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Diagram</span>
+<span class="o">...</span>
+
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Minha infra&#34;</span><span class="p">,</span> <span class="n">outformat</span><span class="o">=</span><span class="s2">&#34;jpg&#34;</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div><h2 id="node">Node</h2>
+<p>São os componentes do seu diagrama, por exemplo, EC2, RDS, Docker e outros.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Diagram</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.compute</span> <span class="kn">import</span> <span class="n">EC2</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.database</span> <span class="kn">import</span> <span class="n">RDS</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">ELB</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.storage</span> <span class="kn">import</span> <span class="n">S3</span>
+
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Web Services&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">ELB</span><span class="p">(</span><span class="s2">&#34;lb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;userdb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">S3</span><span class="p">(</span><span class="s2">&#34;store&#34;</span><span class="p">)</span>
+    <span class="n">ELB</span><span class="p">(</span><span class="s2">&#34;lb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;userdb&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;stat&#34;</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">ELB</span><span class="p">(</span><span class="s2">&#34;lb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">))</span> <span class="o">-</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;userdb&#34;</span><span class="p">)</span>
+</code></pre></div><p>Os objetos do tipo <code>Node</code> possuem operadores especiais: <code>&gt;&gt;</code>, <code>&lt;&lt;</code> e <code>-</code>. Eles são usados para mostrar a direção da conexão dos componentes, no caso do <code>-</code> a direção é nos 2 sentidos.</p>
+<h2 id="cluster">Cluster</h2>
+<p>É a forma que agrupamos os componentes da nossa infraestrutura.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.compute</span> <span class="kn">import</span> <span class="n">ECS</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.database</span> <span class="kn">import</span> <span class="n">RDS</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">Route53</span>
+
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Simple Web Service with DB Cluster&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">dns</span> <span class="o">=</span> <span class="n">Route53</span><span class="p">(</span><span class="s2">&#34;dns&#34;</span><span class="p">)</span>
+    <span class="n">web</span> <span class="o">=</span> <span class="n">ECS</span><span class="p">(</span><span class="s2">&#34;service&#34;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;DB Cluster&#34;</span><span class="p">):</span>
+        <span class="n">db_master</span> <span class="o">=</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;master&#34;</span><span class="p">)</span>
+        <span class="n">db_master</span> <span class="o">-</span> <span class="p">[</span><span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;slave1&#34;</span><span class="p">),</span>
+                     <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;slave2&#34;</span><span class="p">)]</span>
+
+    <span class="n">dns</span> <span class="o">&gt;&gt;</span> <span class="n">web</span> <span class="o">&gt;&gt;</span> <span class="n">db_master</span>
+</code></pre></div><h2 id="edge">Edge</h2>
+<p>São as operações especiais de conexões entre os componentes que vimos em <code>Node</code>. Aqui tornamos ela explícita para customizações.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span><span class="p">,</span> <span class="n">Edge</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.analytics</span> <span class="kn">import</span> <span class="n">Spark</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.compute</span> <span class="kn">import</span> <span class="n">Server</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.database</span> <span class="kn">import</span> <span class="n">PostgreSQL</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.inmemory</span> <span class="kn">import</span> <span class="n">Redis</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.logging</span> <span class="kn">import</span> <span class="n">Fluentd</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.monitoring</span> <span class="kn">import</span> <span class="n">Grafana</span><span class="p">,</span> <span class="n">Prometheus</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.network</span> <span class="kn">import</span> <span class="n">Nginx</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.queue</span> <span class="kn">import</span> <span class="n">Kafka</span>
+
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Advanced Web Service with On-Premise (colored)&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">ingress</span> <span class="o">=</span> <span class="n">Nginx</span><span class="p">(</span><span class="s2">&#34;ingress&#34;</span><span class="p">)</span>
+
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">Prometheus</span><span class="p">(</span><span class="s2">&#34;metric&#34;</span><span class="p">)</span>
+    <span class="n">metrics</span> <span class="o">&lt;&lt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;firebrick&#34;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&#34;dashed&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">Grafana</span><span class="p">(</span><span class="s2">&#34;monitoring&#34;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;Service Cluster&#34;</span><span class="p">):</span>
+        <span class="n">grpcsvc</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Server</span><span class="p">(</span><span class="s2">&#34;grpc1&#34;</span><span class="p">),</span>
+            <span class="n">Server</span><span class="p">(</span><span class="s2">&#34;grpc2&#34;</span><span class="p">),</span>
+            <span class="n">Server</span><span class="p">(</span><span class="s2">&#34;grpc3&#34;</span><span class="p">)]</span>
+
+    <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;Sessions HA&#34;</span><span class="p">):</span>
+        <span class="n">master</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="s2">&#34;session&#34;</span><span class="p">)</span>
+        <span class="n">master</span> <span class="o">-</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;brown&#34;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&#34;dashed&#34;</span><span class="p">)</span> <span class="o">-</span> <span class="n">Redis</span><span class="p">(</span><span class="s2">&#34;replica&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;collect&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">metrics</span>
+        <span class="n">grpcsvc</span> <span class="o">&gt;&gt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;brown&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">master</span>
+
+    <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;Database HA&#34;</span><span class="p">):</span>
+        <span class="n">master</span> <span class="o">=</span> <span class="n">PostgreSQL</span><span class="p">(</span><span class="s2">&#34;users&#34;</span><span class="p">)</span>
+        <span class="n">master</span> <span class="o">-</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;brown&#34;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&#34;dotted&#34;</span><span class="p">)</span> <span class="o">-</span> <span class="n">PostgreSQL</span><span class="p">(</span><span class="s2">&#34;slave&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;collect&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">metrics</span>
+        <span class="n">grpcsvc</span> <span class="o">&gt;&gt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">master</span>
+
+    <span class="n">aggregator</span> <span class="o">=</span> <span class="n">Fluentd</span><span class="p">(</span><span class="s2">&#34;logging&#34;</span><span class="p">)</span>
+    <span class="n">aggregator</span> <span class="o">&gt;&gt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&#34;parse&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">Kafka</span><span class="p">(</span><span class="s2">&#34;stream&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;black&#34;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&#34;bold&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">Spark</span><span class="p">(</span><span class="s2">&#34;analytics&#34;</span><span class="p">)</span>
+
+    <span class="n">ingress</span> <span class="o">&gt;&gt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;darkgreen&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">grpcsvc</span> <span class="o">&gt;&gt;</span> <span class="n">Edge</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&#34;darkorange&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">aggregator</span>
+</code></pre></div><h1 id="exemplos">Exemplos</h1>
+<p>O fonte dos exemplos estão <a href="https://github.com/jvrmaia/diagram-as-code">aqui</a>.</p>
+<h2 id="blog">Blog</h2>
+<h3 id="código">Código</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">VPC</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.database</span> <span class="kn">import</span> <span class="n">RDS</span>
+<span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">Route53</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.network</span> <span class="kn">import</span> <span class="n">Nginx</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.container</span> <span class="kn">import</span> <span class="n">Docker</span>
+
+
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Blog stack&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;AWS&#34;</span><span class="p">):</span>
+        <span class="n">dns</span> <span class="o">=</span> <span class="n">Route53</span><span class="p">(</span><span class="s2">&#34;meu.blog.br&#34;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;us-east-1&#34;</span><span class="p">):</span>
+            <span class="n">blog_vpc</span> <span class="o">=</span> <span class="n">VPC</span><span class="p">(</span><span class="s2">&#34;blog_vpc&#34;</span><span class="p">)</span>
+
+            <span class="n">dns</span> <span class="o">&gt;&gt;</span> <span class="n">blog_vpc</span>
+
+            <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;blog_vpc&#34;</span><span class="p">):</span>
+                <span class="n">nginx</span> <span class="o">=</span> <span class="n">Nginx</span><span class="p">(</span><span class="s2">&#34;proxy&#34;</span><span class="p">)</span>
+                <span class="n">docker</span> <span class="o">=</span> <span class="n">Docker</span><span class="p">(</span><span class="s2">&#34;blog&#34;</span><span class="p">)</span>
+                <span class="n">postgres</span> <span class="o">=</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;postgres&#34;</span><span class="p">)</span>
+
+                <span class="n">blog_vpc</span> <span class="o">&gt;&gt;</span> <span class="n">nginx</span> <span class="o">&gt;&gt;</span> <span class="n">docker</span> <span class="o">&gt;&gt;</span> <span class="n">postgres</span>
+</code></pre></div><h3 id="desenho">Desenho</h3>
+<p><img src="/img/desenhando-infraestrutura-com-codigo/blog_stack.png" alt="blog stack"></p>
+<h2 id="elastic-stack">Elastic Stack</h2>
+<h3 id="código-1">Código</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.database</span> <span class="kn">import</span> <span class="n">Cassandra</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.monitoring</span> <span class="kn">import</span> <span class="n">Kibana</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.search</span> <span class="kn">import</span> <span class="n">Elasticsearch</span>
+<span class="kn">from</span> <span class="nn">diagrams.onprem.logging</span> <span class="kn">import</span> <span class="n">Logstash</span>
+
+
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;ELK&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;cassandra&#34;</span><span class="p">):</span>
+        <span class="n">cassandra_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cassandra</span><span class="p">(</span><span class="s2">&#34;c01&#34;</span><span class="p">),</span>
+                             <span class="n">Cassandra</span><span class="p">(</span><span class="s2">&#34;c02&#34;</span><span class="p">),</span>
+                             <span class="n">Cassandra</span><span class="p">(</span><span class="s2">&#34;c03&#34;</span><span class="p">)]</span>
+
+    <span class="n">logstash</span> <span class="o">=</span> <span class="n">Logstash</span><span class="p">(</span><span class="s2">&#34;logstash&#34;</span><span class="p">)</span>
+    <span class="n">elasticsearch</span> <span class="o">=</span> <span class="n">Elasticsearch</span><span class="p">(</span><span class="s2">&#34;elasticsearch&#34;</span><span class="p">)</span>
+    <span class="n">kibana</span> <span class="o">=</span> <span class="n">Kibana</span><span class="p">(</span><span class="s2">&#34;kibana&#34;</span><span class="p">)</span>
+
+    <span class="n">cassandra_cluster</span> <span class="o">&gt;&gt;</span> <span class="n">logstash</span> <span class="o">&gt;&gt;</span> <span class="n">elasticsearch</span> <span class="o">&gt;&gt;</span> <span class="n">kibana</span>
+</code></pre></div><h3 id="desenho-1">Desenho</h3>
+<p><img src="/img/desenhando-infraestrutura-com-codigo/elk.png" alt="elk"></p>
+<h1 id="conclusão">Conclusão</h1>
+<p>Como vimos podemos organizar nossos diagramas no git e com isso manter um versionamento da nossa infraestrutura a medida que ela for evoluindo. Ainda estou explorando a ferramenta e estou gostando bastante da experiência. Uma dica é sempre que tiver os objetos já instânciados para serem conectados faça isso, meu primeiro diagrama fui fazer tudo no final e ficou um completo caos o desenho final. Agora, preciso ver se tem como escrever testes para o nosso desenho já que ele virou código.</p>
+<p>O que você achou?</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/devops/" rel="tag">devops</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/diagrama/" rel="tag">diagrama</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/python/" rel="tag">python</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/documenta%C3%A7%C3%A3o/" rel="tag">documentação</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de software
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

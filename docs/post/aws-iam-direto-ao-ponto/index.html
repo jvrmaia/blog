@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AWS IAM direto ao ponto - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="AWS IAM direto ao ponto" />
+<meta property="og:description" content="Olá,
+sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/" />
+<meta property="article:published_time" content="2020-06-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-15T00:00:00+00:00" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AWS IAM direto ao ponto"/>
+<meta name="twitter:description" content="Olá,
+sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">AWS IAM direto ao ponto</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-15T00:00:00Z">2020-06-15</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/aws/" rel="category">aws</a>, <a class="meta__link" href="/categories/devops/" rel="category">devops</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/aws-iam-direto-ao-ponto/aws-iam.png" alt="AWS IAM direto ao ponto">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo.</p>
+<h1 id="modelo-de-segurança-da-aws">Modelo de segurança da AWS</h1>
+<p>Ao usar a AWS e não ter sua própria infraestrutura desde ambiente físico até o de aplicações entramos um modelo de responsabilidade compartilhada. A AWS no caso vai entrar com a responsabilidade física total para você da sua infraestrutura e de forma compartilhada na parte de software. O IAM é um dos principais recursos para gerenciar essa responsabilidade compartilhada. Podemos resumir todo o modelo de segurança da AWS em uma frase mas se tiver interesse em saber mais veja <a href="https://aws.amazon.com/pt/compliance/shared-responsibility-model/">aqui</a>.</p>
+<blockquote>
+<p>Por padrão tudo não é permitido, é sua responsabilidade liberar as permissões.</p>
+</blockquote>
+<p>E assim começa esse modelo de responsabilidade compartilhada.</p>
+<h1 id="começando-com-segurança-na-aws">Começando com segurança na AWS</h1>
+<p>Considerando que você está começando agora ou nunca tenha olhado com mais carinho para a segurança da sua conta na AWS, vamos conferir essa lista antes de dar continuidade no artigo:</p>
+<ol>
+<li>Conta <code>root</code> sem credenciais de API: a conta <code>root</code> é a conta que criou a conta na AWS e é importante não ativar credenciais de acesso nela, use outra conta para isso com responsabilidades mais bem definidas;</li>
+<li>Use e abuse de criação de regras, grupos e usuários para ter acessos a sua conta da AWS de forma bem espcializada para fazer apenas o que for preciso ser feito;</li>
+<li>Política de senhas: é possível cofigurar uma política de senha para todos que tiverem uma conta na sua organização da AWS, por exemplo, tamanho mínimo, variedade de elementos e rotação da senha;</li>
+<li>CloudTrail habilitado pois ele faz log que tudo que acontece na sua conta e é muito importante para auditoria ou criação de monitorias e alertas; e</li>
+<li>Autenticação de dois fatores, é importante pedir que todos os usuários façam a configuração ou simplesmente impor via AWS Config.</li>
+</ol>
+<h1 id="amazon-resource-names-arn">Amazon Resource Names (arn)</h1>
+<p>Trabalhando via interface web na AWS esse recurso as vezes passa despercebido apesar de preciso em alguns momentos para integrar alguns serviços. Quem lida com AWS através de código seja via API direto ou Terraform já deve estar mais familiarizado com o termo. O <code>arn</code> é o identificador universal de objetos na AWS, ou seja, seu <code>bucket</code> no s3, sua instância no EC2 e por ai vai tudo possui um <code>arn</code>. Saber esse valor é muito importante para o momento de criar <code>Policy</code> conseguir ser o mais granular possível e menos genéricas as suas regras.</p>
+<h1 id="visão-geral-do-iam">Visão geral do IAM</h1>
+<p><img src="/img/aws-iam-direto-ao-ponto/iam-visao-geral.jpg" alt="Visão geral do IAM"></p>
+<p>Na imagem acima podemos ver de forma simples como é a estrutura do IAM. O IAM como já foi dito é um recurso dentro da sua conta da AWS que dentro dele temos <code>Group</code>, <code>User</code>, <code>Role</code> e <code>Policy</code>, apesar de não estar associada de forma direta ao IAM na imagem ela faz parte do recurso mas ela tem apenas valor quando associada a <code>Group</code>, <code>User</code> ou <code>Role</code>.</p>
+<p><img src="/img/aws-iam-direto-ao-ponto/aws-iam-web.png" alt="AWS IAM visão web"></p>
+<h2 id="policy">Policy</h2>
+<p><code>Policy</code> é a forma mais granular de criar permissões na AWS, basicamente você vai dizer se algo pode ou não, o que é essa ação e ao que dentro da AWS ela será aplicada. Vamos exemplificar, uma <code>Policy</code> poder ser a permissão de fazer um <code>GetObject</code> em um <code>bucket</code> específico do <code>s3</code>, se essa <code>Policy</code> for dada a um usuário ele terá o poder de pegar qualquer arquivo desse <code>bucket</code> e fazer um cópia local em sua máquina dado que ele saiba da existência do mesmo pois a permissão dada não permite ele listar os itens do <code>bucket</code>.</p>
+<h3 id="exemplo">Exemplo</h3>
+<p>A <code>Policy</code> é descrita em formato <code>JSON</code>, segue um exemplo:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;s3:*&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;*&#34;</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;s3:*&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Deny&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;arn:aws:s3:::db-backups&#34;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p>No exemplo acima estou permitindo tudo no <code>s3</code> no primeiro momento mas depois me certifico que no <code>bucket</code> de backups de um banco de dados nada é permitido.</p>
+<p>Políticas dinâmicas:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+   <span class="nt">&#34;Statement&#34;</span><span class="p">:[{</span>
+      <span class="nt">&#34;Effect&#34;</span><span class="p">:</span><span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;Action&#34;</span><span class="p">:</span><span class="s2">&#34;s3:*&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;Resource&#34;</span><span class="p">:</span><span class="s2">&#34;arn:aws:s3:::db-backups&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;Condition&#34;</span><span class="p">:{</span>
+         <span class="nt">&#34;Bool&#34;</span><span class="p">:{</span>
+            <span class="nt">&#34;aws:SecureTransport&#34;</span><span class="p">:</span><span class="s2">&#34;true&#34;</span>
+            <span class="p">}</span>
+         <span class="p">}</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div><p>Você pode aprender mais sobre isso <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html">aqui</a>.</p>
+<h3 id="como-funciona">Como funciona</h3>
+<p>Como o IAM executa a <code>Policy</code>:</p>
+<ul>
+<li>todas as policies de usuário e grupo são combinadas na hora da requisição</li>
+<li>se tiver alguma regra de negação explicita a requisição é negada</li>
+<li>se tiver alguma regra de aceite explicita a requisição é aprovada</li>
+<li>se não tiver alguma regra não explicita permitindo é negada</li>
+</ul>
+<h3 id="limitações">Limitações</h3>
+<ul>
+<li>Nem tudo na AWS tem <code>arn</code>, por exemplo, EC2 ativas;
+<ul>
+<li>O pessoal do Nubank deu uma <a href="https://www.infoq.com/br/presentations/como-nubank-automatiza-seguranca-aws/">palestra interessante na QConSP 2019</a> sobre segurança e acredito que a criação de função Lambdas seja uma das soluções deles para contornar isso.</li>
+</ul>
+</li>
+<li>Representar a sua estrutura organizacional na AWS pode trazer diversas dúvidas, <a href="https://en.wikipedia.org/wiki/Conway%27s_law">Conway&rsquo;s law</a> diz mais a respeito disso. Vamos ver alguns desses modelos de organização:
+<ul>
+<li>Conta única da AWS: Gerenciamento centralizado com sobrecarga mínima. Proteger com usuários personalizados limitados no acesso a ações e recursos;</li>
+<li>Contas separadas de produção, desenvolvimento e teste da AWS: Contempla os recursos de uma conta única com separação entre várias contas da AWS. Esforço adicional necessário para disponibilizar recursos entre contas;</li>
+<li>Várias contas da AWS, uma por departamento: O acesso a ações e recursos pode seguir procedimentos radicalmente diferentes para cada organização. A cooperação em recursos compartilhados privados é marginalmente mais complexa; e</li>
+<li>Várias contas da AWS, uma por função: Gerenciamento funcionalmente centralizado com contas diferentes para DNS, DBMS, CDN, CMS ou qualquer outro serviço.</li>
+</ul>
+</li>
+</ul>
+<h2 id="role">Role</h2>
+<p><code>Role</code> é uma composição de uma ou mais <code>Policy</code>, o ideal é manter <code>Policy</code> de maneira exuta para facilitar a gestão. Para entender melhor o a <code>Role</code> vamos exemplificar. Supondo que você trabalhe em um local que tenha passar por auditorias constantes e o auditor precise de acesso a AWS para realizar seu trabalho. Um forma de resolver isso é criar <code>Policy</code> de leituras a tudo que está dentro do escopo da audiotira por recursos da AWS, por exemplo, uma para <code>s3</code>, uma para <code>VPC</code> e outra para <code>EC2</code>. Com isso, pode ser agrupar todas em uma <code>Role</code> e atribuir ela ao auditor. Outro exemplo, como pode ver na figura que é através de <code>Role</code> que conseguimos fazer acessos cruzados entre contas da AWS.</p>
+<p>Além disso, se parecem com o IAM User mas sem ter um acesso direto pois não possuem senha ou credenciais de acesso. Um exemplo disso é o uso em EC2 com o ec2-profile, com ele você pode dar permissões a uma instância em execução como se fosse um usuário com isso qualquer pessoa ou software executando dentro da instância pode performar regras de uma <code>Policy</code> sem possuir ela diretamente.</p>
+<p><a href="https://docs.aws.amazon.com/pt_br/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html">Exemplo da AWS</a> de como fazer acesso cruzado entre contas usando Role.</p>
+<h2 id="iam-user-e-group">IAM User e Group</h2>
+<p><code>User</code> e <code>Group</code> não tem grandes mistérios, eles funcionam de maneira normal como é em todo sistema de gestão de usuários e assumem <code>Policy</code> e/ou <code>Role</code>. Se vovê entende como funcionam usuários e grupos no Unix ou Windows você já entende o conceito básico do IAM User e Group.</p>
+<p>Usuários podem ser pessoas que fazem acesso ao console web e API ou apenas automações que usam apenas a API sem acesso a parte web. Para quem vem de gestão de usuários como LDAP e AD o IAM possui o recurso de criar pastas para segregar usuários igual esses sistemas possuem.</p>
+<h1 id="conclusão">Conclusão</h1>
+<p>O AWS IAM é um grande universo mas não complexo, talvez a sua maior dificuldade vai ser na hora de criar as <code>Policy</code> de maneira granular pois como são muitas as ações disponíveis é complicado as vezes saber quais são as que você precisa exatamente.</p>
+<p>O mais importante aqui é ficar com a mensagem de não negligenciar o uso do IAM e dar acessos deliberados em sua organização pois isso pode custar caro no futuro e se possível crie automações para configurar isso e não se tornar uma dor de cabeça no futuro. A falta de automação as vezes pode ser a porta de entrada para falhas de segurança quando ela encontra a <del>agilidade</del> pressa em entregar.</p>
+<p>Existem outros pontos do AWS IAM que não foram abordados como podem ver na imagem da interface web deles nesse artigo mas acho que o material aqui já tem um grande valor para começar, podemos pensar em novos artigos para abordar o que ficou faltando. Fico no aguardo de melhorias e opiniões a respeito do que escrevi aqui. =)</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/aws/" rel="tag">aws</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/iam/" rel="tag">iam</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/security/" rel="tag">security</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de software
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
