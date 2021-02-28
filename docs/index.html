@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.79.1" />
+	<meta name="generator" content="Hugo 0.75.0-DEV" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,21 +12,18 @@
 <meta property="og:description" content="Blog pessoal de João Maia, opiniões apenas minha aqui" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/" />
-<meta property="og:updated_time" content="2020-12-02T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-10-10T00:00:00+00:00" />
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="João Maia"/>
 <meta name="twitter:description" content="Blog pessoal de João Maia, opiniões apenas minha aqui"/>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="João Maia">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="João Maia">
-
 	<link rel="shortcut icon" href="/favicon.ico">
 		
 <script type="application/javascript">
@@ -106,26 +103,25 @@ if (!doNotTrack) {
 <main class="main list" role="main">
 	<article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/">
-			<img src="/img/e-esse-tal-de-bgp/bgp.png" alt="E esse tal de BGP?" />
+		<a href="http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/">
+			<img src="/img/o-basico-do-http-em-go/golang-http.png" alt="O básico do HTTP em Go" />
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/e-esse-tal-de-bgp/" rel="bookmark">
-			E esse tal de BGP?
+		<h3 class="list__title post__title ">
+			<a href="/post/o-basico-do-http-em-go/" rel="bookmark">
+			O básico do HTTP em Go
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-12-02T00:00:00Z">2020-12-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rede-de-computadores/" rel="category">rede de computadores</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-10-10T00:00:00Z">2020-10-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/http/" rel="category">http</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		Olá,
-nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
-Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.
+nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts.
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
@@ -134,11 +130,11 @@ Contextualizando O primeiro passo é entender em qual nível estamos falando den
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/git-e-afins-para-iniciantes-parte-2/" rel="bookmark">
 			Git e afins para iniciantes - parte 2
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-28T00:00:00Z">2020-08-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/desenvolvimento/" rel="category">desenvolvimento</a>
@@ -156,11 +152,11 @@ no último artigo encerramos na parte do Git como serviço que é onde começamo
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/vamos-falar-de-dns/" rel="bookmark">
 			Vamos falar de DNS?
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-28T00:00:00Z">2020-08-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rede-de-computadores/" rel="category">rede de computadores</a>
@@ -179,11 +175,11 @@ Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só come
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/git-e-afins-para-iniciantes-parte-1/" rel="bookmark">
 			Git e afins para iniciantes - parte 1
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-13T00:00:00Z">2020-08-13</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/desenvolvimento/" rel="category">desenvolvimento</a>
@@ -201,11 +197,11 @@ acredito que você que está chegando no mercado de tecnologia independente de t
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/conhecendo-o-ansible/" rel="bookmark">
 			Conhecendo o Ansible
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-24T00:00:00Z">2020-07-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
@@ -223,11 +219,11 @@ dando continuidade nos artigos de infraestrutura como código chegou a hora de e
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/aws-iam-direto-ao-ponto/" rel="bookmark">
 			AWS IAM direto ao ponto
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-15T00:00:00Z">2020-06-15</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/aws/" rel="category">aws</a>, <a class="meta__link" href="/categories/devops/" rel="category">devops</a>
@@ -245,11 +241,11 @@ sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/conhecendo-o-packer/" rel="bookmark">
 			Conhecendo o Packer
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-05-23T00:00:00Z">2020-05-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
@@ -267,11 +263,11 @@ eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instân
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/analisando-dados-no-terminal/" rel="bookmark">
 			Analisando dados no terminal
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-05-01T00:00:00Z">2020-05-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/produtividade/" rel="category">produtividade</a>, <a class="meta__link" href="/categories/devops/" rel="category">devops</a>
@@ -289,11 +285,11 @@ recentemente fazendo uma inspeção na aplicação precisei ver seu logs para en
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/da-instalacao-a-configuracao-do-meu-ambiente-python/" rel="bookmark">
 			Da instalação a configuração do meu ambiente Python
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-04-28T00:00:00Z">2020-04-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linguagens-de-programa%C3%A7%C3%A3o/" rel="category">linguagens de programação</a>
@@ -312,11 +308,11 @@ Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois d
 		</a>
 	</figure>
 	<header class="list__header">
-		<h2 class="list__title post__title">
+		<h3 class="list__title post__title ">
 			<a href="/post/desenhando-infraestrutura-com-codigo/" rel="bookmark">
 			Desenhando infraestrutura com código
 			</a>
-		</h2>
+		</h3>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-04-23T00:00:00Z">2020-04-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>, <a class="meta__link" href="/categories/documenta%C3%A7%C3%A3o/" rel="category">documentação</a>
@@ -339,7 +335,7 @@ Documentar é um processo importante no processo de criação da sua infraestrut
 			<aside class="sidebar"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
-			<input class="widget-search__field" type="search" placeholder="BUSCAR…" value="" name="q" aria-label="BUSCAR…">
+			<input class="widget-search__field" type="search" placeholder="BUSCAR..." value="" name="q" aria-label="BUSCAR...">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="http://blog.joaovrmaia.com" />
@@ -349,7 +345,7 @@ Documentar é um processo importante no processo de criação da sua infraestrut
 	<h4 class="widget__title">Postagens recentes</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/post/e-esse-tal-de-bgp/">E esse tal de BGP?</a></li>
+			<li class="widget__item"><a class="widget__link" href="/post/o-basico-do-http-em-go/">O básico do HTTP em Go</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/git-e-afins-para-iniciantes-parte-2/">Git e afins para iniciantes - parte 2</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/vamos-falar-de-dns/">Vamos falar de DNS?</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/git-e-afins-para-iniciantes-parte-1/">Git e afins para iniciantes - parte 1</a></li>
@@ -380,6 +376,9 @@ Documentar é um processo importante no processo de criação da sua infraestrut
 				<a class="widget__link" href="/categories/documenta%C3%A7%C3%A3o/">documentação</a>
 			</li>
 			<li class="widget__item">
+				<a class="widget__link" href="/categories/http/">http</a>
+			</li>
+			<li class="widget__item">
 				<a class="widget__link" href="/categories/linguagens-de-programa%C3%A7%C3%A3o/">linguagens de programação</a>
 			</li>
 			<li class="widget__item">
@@ -402,7 +401,6 @@ Documentar é um processo importante no processo de criação da sua infraestrut
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/ansible/" title="ansible">ansible</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/aws/" title="aws">aws</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/bgp/" title="bgp">bgp</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bitbucket/" title="bitbucket">bitbucket</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/circleci/" title="circleci">circleci</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clair/" title="clair">clair</a>
@@ -419,6 +417,7 @@ Documentar é um processo importante no processo de criação da sua infraestrut
 		<a class="widget-taglist__link widget__link btn" href="/tags/gitlab/" title="gitlab">gitlab</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hashing/" title="hashing">hashing</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/iam/" title="iam">iam</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/infraestrutura/" title="infraestrutura">infraestrutura</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/iniciante/" title="iniciante">iniciante</a>
@@ -494,7 +493,7 @@ Documentar é um processo importante no processo de criação da sua infraestrut
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2021 João Maia.
+			&copy; 2020 João Maia.
 			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
 		</div>
 	</div>

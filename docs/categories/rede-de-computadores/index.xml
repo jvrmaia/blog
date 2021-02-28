@@ -7,21 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.joaovrmaia.com/categories/rede-de-computadores/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>E esse tal de BGP?</title>
-      <link>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</link>
-      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</guid>
-      <description>Olá,
-nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
-Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.</description>
-    </item>
     
     <item>
       <title>Vamos falar de DNS?</title>

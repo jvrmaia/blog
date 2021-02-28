@@ -7,22 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>bgp</title>
-      <link>http://blog.joaovrmaia.com/tags/bgp/</link>
-      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      <title>golang</title>
+      <link>http://blog.joaovrmaia.com/tags/golang/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/tags/bgp/</guid>
+      <guid>http://blog.joaovrmaia.com/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>infraestrutura</title>
-      <link>http://blog.joaovrmaia.com/tags/infraestrutura/</link>
-      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      <title>http</title>
+      <link>http://blog.joaovrmaia.com/tags/http/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/tags/infraestrutura/</guid>
+      <guid>http://blog.joaovrmaia.com/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iniciante</title>
+      <link>http://blog.joaovrmaia.com/tags/iniciante/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/iniciante/</guid>
       <description></description>
     </item>
     
@@ -68,6 +77,15 @@
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/tags/gitlab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>infraestrutura</title>
+      <link>http://blog.joaovrmaia.com/tags/infraestrutura/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/infraestrutura/</guid>
       <description></description>
     </item>
     
@@ -167,24 +185,6 @@
       <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/tags/documenta%C3%A7%C3%A3o/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>nginx</title>
-      <link>http://blog.joaovrmaia.com/tags/nginx/</link>
-      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/nginx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>node</title>
-      <link>http://blog.joaovrmaia.com/tags/node/</link>
-      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/node/</guid>
       <description></description>
     </item>
     

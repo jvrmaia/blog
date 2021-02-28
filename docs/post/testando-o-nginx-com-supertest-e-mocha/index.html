@@ -20,14 +20,11 @@ testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda n
 <meta name="twitter:description" content="Olá,
 testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda não faz nada a respeito saiba que já está atrasado. Com a transformação da infraestrutura em código acabando com os processos manuais e nem sempre documentados é preciso também trazer as boas práticas do mundo de desenvolvimento de software para a infraestrutura. Graças ao Docker subir uma representação da sua infraestrutura ficou mais fácil realizar esse processo apesar de ainda não ser 100% fiel ao ambiente de produção."/>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-
 	<link rel="shortcut icon" href="/favicon.ico">
 		
 <script type="application/javascript">
@@ -311,9 +308,9 @@ if (!doNotTrack) {
 </span><span class="w">
 </span><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
 </span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Test &#39;gateway&#39; image</span><span class="w">
-</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="sd">|
 </span><span class="sd">                    docker-compose up -d echo gateway
-</span><span class="sd">                    docker-compose up test-runner</span><span class="w">                    
+</span><span class="sd">                    docker-compose up test-runner
 </span></code></pre></div><p>Será que funcionou? Veja a imagem do CI:</p>
 <p><img src="/img/testando-o-nginx-com-supertest-e-mocha/circleci.png" alt="Circle CI"></p>
 <p>Acho que era isso que queria passar nesse artigo, até o próximo.</p>
@@ -353,7 +350,7 @@ if (!doNotTrack) {
 		<span class="authorbox__name">Sobre João Maia</span>
 	</div>
 	<div class="authorbox__description">
-		Pessoa que resolve problemas com o uso de software
+		Pessoa que resolve problemas com o uso de softwares
 	</div>
 </div>
 
@@ -389,7 +386,7 @@ if (!doNotTrack) {
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2021 João Maia.
+			&copy; 2020 João Maia.
 			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
 		</div>
 	</div>

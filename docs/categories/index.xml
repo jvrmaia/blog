@@ -7,17 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.joaovrmaia.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>rede de computadores</title>
-      <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
-      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      <title>http</title>
+      <link>http://blog.joaovrmaia.com/categories/http/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/rede-de-computadores/</guid>
+      <guid>http://blog.joaovrmaia.com/categories/http/</guid>
       <description></description>
     </item>
     
@@ -27,6 +27,15 @@
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/categories/desenvolvimento/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rede de computadores</title>
+      <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/rede-de-computadores/</guid>
       <description></description>
     </item>
     

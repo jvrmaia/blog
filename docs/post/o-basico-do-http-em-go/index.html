@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>O básico do HTTP em Go - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="O básico do HTTP em Go" />
+<meta property="og:description" content="Olá,
+nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/" />
+<meta property="article:published_time" content="2020-10-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-10T00:00:00+00:00" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="O básico do HTTP em Go"/>
+<meta name="twitter:description" content="Olá,
+nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts."/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">O básico do HTTP em Go</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-10-10T00:00:00Z">2020-10-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/http/" rel="category">http</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/o-basico-do-http-em-go/golang-http.png" alt="O básico do HTTP em Go">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for <a href="https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: <a href="https://blog.cloudflare.com/exposing-go-on-the-internet/">So you want to expose Go on the Internet</a> e <a href="https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/">The complete guide to Go net/http timeouts</a>.</p>
+<h1 id="http">HTTP</h1>
+<p>Se você já trabalha com desenvolvimento Web acredito que já tenha domínio no assunto mas de forma bem simplificada podemos dizer que é uma padronização no formato da comunicação na Web que podemos dividir em dois contextos, quando você emite uma comunicação e quando você responde. Simplificando, quando você emite uma comunicação você define um verbo no qual vai se comunicar e o mais comum que vemos são GET, POST, PUT e DELETE, um cabeçalho mais conhecido pelo termo em inglês, Header, e por fim, o corpo da mensagem mais conhecido pelo termo em inglês, Body. Na parte da resposta temos basicamente os mesmos campos só trocando o verbo pelo código de retorno nas conhecido pelo termo em inglês, Status Code, que é um valor numérico que para um conjunto de valores tem um significado associado.</p>
+<h1 id="go">Go</h1>
+<p>Já escrevi alguns outros artigos sobre Go no blog, para listar todos veja <a href="https://blog.joaovrmaia.com/tags/golang/">aqui</a>. Aqui só quero contextualizar algumas curiosidades sobre Go que são importantes para não só para trabalhar com HTTP mas vão te ajudar em outros momentos mais quando usar Go.</p>
+<p>Vamos testar o seguinte código que você conferir online <a href="https://play.golang.org/p/F3st816reYz">aqui</a>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">exemplo</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">a</span> <span class="kt">int</span>
+	<span class="nx">b</span> <span class="kt">string</span>
+	<span class="nx">c</span> <span class="kt">bool</span>
+	<span class="nx">d</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
+	<span class="nx">e</span> <span class="kd">interface</span><span class="p">{}</span>
+	<span class="nx">f</span> <span class="kt">float32</span>
+	<span class="nx">g</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+	<span class="nx">h</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+	<span class="nx">i</span> <span class="o">*</span><span class="kt">int</span>
+	<span class="nx">j</span> <span class="o">*</span><span class="kt">string</span>
+	<span class="nx">k</span> <span class="o">*</span><span class="kt">bool</span>
+	<span class="nx">l</span> <span class="o">*</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
+	<span class="nx">m</span> <span class="o">*</span><span class="kd">interface</span><span class="p">{}</span>
+	<span class="nx">n</span> <span class="o">*</span><span class="kt">float32</span>
+	<span class="nx">o</span> <span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+	<span class="nx">p</span> <span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">exemplo</span><span class="p">{})</span>
+<span class="p">}</span>
+</code></pre></div><p>Tente imaginar o que é esperado de retorno dessa função e compare com a resposta abaixo:</p>
+<pre><code>{0  false map[] &lt;nil&gt; 0 0 {0 0 &lt;nil&gt;} &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt;}
+</code></pre><p>Repare que para todos os tipos ele retornou o valor padrão, no caso nulo, do tipo e no caso quando era um ponteiro do valor retornou <code>nil</code> e detalhes entre um espaço maior no começo entre <code>0</code> e <code>false</code> que é por conta da <code>string</code> vazia. <a href="https://golang.org/ref/spec#The_zero_value">Aqui</a> tem mais sobre como é isso em Go.</p>
+<p>Vamos faze mais um teste que é na parte de lidar com a informação das requisições no seu formato mais comum hoje na Web que é o <a href="https://www.json.org/json-pt.html">JSON</a>. No caso para simplificar vou escrever o JSON direto na string ao invés de emular a requisição (<a href="https://play.golang.org/p/LrWFLeDBWUY">código</a>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;encoding/json&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Usuario</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UUID</span>    <span class="kt">string</span> <span class="s">`json:&#34;uuid&#34;`</span>
+	<span class="nx">Name</span>    <span class="kt">string</span> <span class="s">`json:&#34;name&#34;`</span>
+	<span class="nx">Email</span>   <span class="kt">string</span> <span class="s">`json:&#34;email&#34;`</span>
+	<span class="nx">Twitter</span> <span class="kt">string</span> <span class="s">`json:&#34;twitter,omitempty&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">rawPayload</span> <span class="o">:=</span> <span class="s">&#34;{}&#34;</span>
+	<span class="kd">var</span> <span class="nx">u</span> <span class="nx">Usuario</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+
+	<span class="nx">rawPayload</span> <span class="p">=</span> <span class="s">&#34;{\&#34;uuid\&#34;:\&#34;3954567d-67c2-4a1c-85b9-764a73bf3d5c\&#34;}&#34;</span>
+	<span class="nx">err</span> <span class="p">=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+
+	<span class="nx">u</span> <span class="p">=</span> <span class="nx">Usuario</span><span class="p">{</span>
+		<span class="nx">UUID</span><span class="p">:</span> <span class="s">&#34;3954567d-67c2-4a1c-85b9-764a73bf3d5c&#34;</span><span class="p">,</span>
+		<span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;João&#34;</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">body</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">body</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div><p>Resultado:</p>
+<pre><code>{}
+{   }
+
+{&quot;uuid&quot;:&quot;3954567d-67c2-4a1c-85b9-764a73bf3d5c&quot;}
+{3954567d-67c2-4a1c-85b9-764a73bf3d5c   }
+
+{3954567d-67c2-4a1c-85b9-764a73bf3d5c João  }
+{&quot;uuid&quot;:&quot;3954567d-67c2-4a1c-85b9-764a73bf3d5c&quot;,&quot;name&quot;:&quot;João&quot;,&quot;email&quot;:&quot;&quot;}
+</code></pre><p>Como podemos ver no primeiro resultado como o corpo da mensagem veio vazio só foi gerado espaços em branco. No segundo como passamos o valor do UUID de acordo com o esperado ele foi impresso sem problemas. Por fim, invertemos, agora vamos montar o objeto e imprimir o corpo da mensagem e como podemos ver todos os campos informados foram impressos com um detalhes curioso entre <code>email</code> e <code>twitter</code>, o <code>email</code> foi impresso vazio e o <code>twitter</code> nem apareceu, isso foi por conta do <code>omitempty</code> declarado na definição da estrutura do objeto.</p>
+<h1 id="go-e-http">Go e HTTP</h1>
+<p>Agora que já tivemos essa pré-conversa sobre HTTP e Go podemos juntar as duas coisas para conversar sobre como Go implementa o <code>package net/http</code> onde a documentação se encontra <a href="https://golang.org/pkg/net/http/">aqui</a>. Como já adiantamos a conversa vai ser em torno do lado <a href="https://golang.org/pkg/net/http/#Client">Client</a> e do <a href="https://golang.org/pkg/net/http/#Server">Server</a>.</p>
+<h2 id="client">Client</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Client</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="c1">// Transport specifies the mechanism by which individual
+</span><span class="c1"></span>    <span class="c1">// HTTP requests are made.
+</span><span class="c1"></span>    <span class="c1">// If nil, DefaultTransport is used.
+</span><span class="c1"></span>    <span class="nx">Transport</span> <span class="nx">RoundTripper</span>
+
+    <span class="c1">// CheckRedirect specifies the policy for handling redirects.
+</span><span class="c1"></span>    <span class="c1">// If CheckRedirect is not nil, the client calls it before
+</span><span class="c1"></span>    <span class="c1">// following an HTTP redirect. The arguments req and via are
+</span><span class="c1"></span>    <span class="c1">// the upcoming request and the requests made already, oldest
+</span><span class="c1"></span>    <span class="c1">// first. If CheckRedirect returns an error, the Client&#39;s Get
+</span><span class="c1"></span>    <span class="c1">// method returns both the previous Response (with its Body
+</span><span class="c1"></span>    <span class="c1">// closed) and CheckRedirect&#39;s error (wrapped in a url.Error)
+</span><span class="c1"></span>    <span class="c1">// instead of issuing the Request req.
+</span><span class="c1"></span>    <span class="c1">// As a special case, if CheckRedirect returns ErrUseLastResponse,
+</span><span class="c1"></span>    <span class="c1">// then the most recent response is returned with its body
+</span><span class="c1"></span>    <span class="c1">// unclosed, along with a nil error.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// If CheckRedirect is nil, the Client uses its default policy,
+</span><span class="c1"></span>    <span class="c1">// which is to stop after 10 consecutive requests.
+</span><span class="c1"></span>    <span class="nx">CheckRedirect</span> <span class="kd">func</span><span class="p">(</span><span class="nx">req</span> <span class="o">*</span><span class="nx">Request</span><span class="p">,</span> <span class="nx">via</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Request</span><span class="p">)</span> <span class="kt">error</span>
+
+    <span class="c1">// Jar specifies the cookie jar.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// The Jar is used to insert relevant cookies into every
+</span><span class="c1"></span>    <span class="c1">// outbound Request and is updated with the cookie values
+</span><span class="c1"></span>    <span class="c1">// of every inbound Response. The Jar is consulted for every
+</span><span class="c1"></span>    <span class="c1">// redirect that the Client follows.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// If Jar is nil, cookies are only sent if they are explicitly
+</span><span class="c1"></span>    <span class="c1">// set on the Request.
+</span><span class="c1"></span>    <span class="nx">Jar</span> <span class="nx">CookieJar</span>
+
+    <span class="c1">// Timeout specifies a time limit for requests made by this
+</span><span class="c1"></span>    <span class="c1">// Client. The timeout includes connection time, any
+</span><span class="c1"></span>    <span class="c1">// redirects, and reading the response body. The timer remains
+</span><span class="c1"></span>    <span class="c1">// running after Get, Head, Post, or Do return and will
+</span><span class="c1"></span>    <span class="c1">// interrupt reading of the Response.Body.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// A Timeout of zero means no timeout.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// The Client cancels requests to the underlying Transport
+</span><span class="c1"></span>    <span class="c1">// as if the Request&#39;s Context ended.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// For compatibility, the Client will also use the deprecated
+</span><span class="c1"></span>    <span class="c1">// CancelRequest method on Transport if found. New
+</span><span class="c1"></span>    <span class="c1">// RoundTripper implementations should use the Request&#39;s Context
+</span><span class="c1"></span>    <span class="c1">// for cancellation instead of implementing CancelRequest.
+</span><span class="c1"></span>    <span class="nx">Timeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.3
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><p>Podemos ver que temos algumas configurações interessantes na estrutura do <code>Client</code> mas hoje vamos falar apenas do <code>Timeout</code> que é onde um erro pode custar caro.</p>
+<blockquote>
+<p>A Timeout of zero means no timeout.</p>
+</blockquote>
+<p>Como vimos na parte anterior o Go trabalha com valores nulos por padrão e na configuração de <code>Timeout</code> como podemos ver no trecho em destaque se o valor for nulo significa que não tem expiração da requisição, segue uma imagem na prática de quando isso acontece:</p>
+<p><img src="/img/o-basico-do-http-em-go/google-chrome-timeout.png" alt="Google Chrome Timeout"></p>
+<p>Se ainda não ficou claro o conceito de tempo de expiração vamos aproveitar o nosso momento atual de pandemia que estamos fazendo reuniões de forma virtual e eventos online, é bem provável que você já tenha participado de alguma que não tinha membros suficientes ainda para começar e alguém dito: &ldquo;Vamos esperar 5 minutos e então começamos&rdquo;, esse é o tempo de expiração.</p>
+<p>Lembra que na parte de HTTP falamos que a resposta do servidor de forma simples é o estado de retorno, cabeçalho e corpo da mensagem? Então, esse configuração de expiração é para até o momento que o corpo da mensagem tenha sido completamente lido senão temos esse erro igual na imagem do Google Chrome acima.</p>
+<h2 id="server">Server</h2>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Server</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="c1">// Addr optionally specifies the TCP address for the server to listen on,
+</span><span class="c1"></span>    <span class="c1">// in the form &#34;host:port&#34;. If empty, &#34;:http&#34; (port 80) is used.
+</span><span class="c1"></span>    <span class="c1">// The service names are defined in RFC 6335 and assigned by IANA.
+</span><span class="c1"></span>    <span class="c1">// See net.Dial for details of the address format.
+</span><span class="c1"></span>    <span class="nx">Addr</span> <span class="kt">string</span>
+
+    <span class="nx">Handler</span> <span class="nx">Handler</span> <span class="c1">// handler to invoke, http.DefaultServeMux if nil
+</span><span class="c1"></span>
+    <span class="c1">// TLSConfig optionally provides a TLS configuration for use
+</span><span class="c1"></span>    <span class="c1">// by ServeTLS and ListenAndServeTLS. Note that this value is
+</span><span class="c1"></span>    <span class="c1">// cloned by ServeTLS and ListenAndServeTLS, so it&#39;s not
+</span><span class="c1"></span>    <span class="c1">// possible to modify the configuration with methods like
+</span><span class="c1"></span>    <span class="c1">// tls.Config.SetSessionTicketKeys. To use
+</span><span class="c1"></span>    <span class="c1">// SetSessionTicketKeys, use Server.Serve with a TLS Listener
+</span><span class="c1"></span>    <span class="c1">// instead.
+</span><span class="c1"></span>    <span class="nx">TLSConfig</span> <span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span>
+
+    <span class="c1">// ReadTimeout is the maximum duration for reading the entire
+</span><span class="c1"></span>    <span class="c1">// request, including the body.
+</span><span class="c1"></span>    <span class="c1">//
+</span><span class="c1"></span>    <span class="c1">// Because ReadTimeout does not let Handlers make per-request
+</span><span class="c1"></span>    <span class="c1">// decisions on each request body&#39;s acceptable deadline or
+</span><span class="c1"></span>    <span class="c1">// upload rate, most users will prefer to use
+</span><span class="c1"></span>    <span class="c1">// ReadHeaderTimeout. It is valid to use them both.
+</span><span class="c1"></span>    <span class="nx">ReadTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+
+    <span class="c1">// ReadHeaderTimeout is the amount of time allowed to read
+</span><span class="c1"></span>    <span class="c1">// request headers. The connection&#39;s read deadline is reset
+</span><span class="c1"></span>    <span class="c1">// after reading the headers and the Handler can decide what
+</span><span class="c1"></span>    <span class="c1">// is considered too slow for the body. If ReadHeaderTimeout
+</span><span class="c1"></span>    <span class="c1">// is zero, the value of ReadTimeout is used. If both are
+</span><span class="c1"></span>    <span class="c1">// zero, there is no timeout.
+</span><span class="c1"></span>    <span class="nx">ReadHeaderTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.8
+</span><span class="c1"></span>
+    <span class="c1">// WriteTimeout is the maximum duration before timing out
+</span><span class="c1"></span>    <span class="c1">// writes of the response. It is reset whenever a new
+</span><span class="c1"></span>    <span class="c1">// request&#39;s header is read. Like ReadTimeout, it does not
+</span><span class="c1"></span>    <span class="c1">// let Handlers make decisions on a per-request basis.
+</span><span class="c1"></span>    <span class="nx">WriteTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+
+    <span class="c1">// IdleTimeout is the maximum amount of time to wait for the
+</span><span class="c1"></span>    <span class="c1">// next request when keep-alives are enabled. If IdleTimeout
+</span><span class="c1"></span>    <span class="c1">// is zero, the value of ReadTimeout is used. If both are
+</span><span class="c1"></span>    <span class="c1">// zero, there is no timeout.
+</span><span class="c1"></span>    <span class="nx">IdleTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.8
+</span><span class="c1"></span>
+    <span class="c1">// MaxHeaderBytes controls the maximum number of bytes the
+</span><span class="c1"></span>    <span class="c1">// server will read parsing the request header&#39;s keys and
+</span><span class="c1"></span>    <span class="c1">// values, including the request line. It does not limit the
+</span><span class="c1"></span>    <span class="c1">// size of the request body.
+</span><span class="c1"></span>    <span class="c1">// If zero, DefaultMaxHeaderBytes is used.
+</span><span class="c1"></span>    <span class="nx">MaxHeaderBytes</span> <span class="kt">int</span>
+
+    <span class="c1">// TLSNextProto optionally specifies a function to take over
+</span><span class="c1"></span>    <span class="c1">// ownership of the provided TLS connection when an ALPN
+</span><span class="c1"></span>    <span class="c1">// protocol upgrade has occurred. The map key is the protocol
+</span><span class="c1"></span>    <span class="c1">// name negotiated. The Handler argument should be used to
+</span><span class="c1"></span>    <span class="c1">// handle HTTP requests and will initialize the Request&#39;s TLS
+</span><span class="c1"></span>    <span class="c1">// and RemoteAddr if not already set. The connection is
+</span><span class="c1"></span>    <span class="c1">// automatically closed when the function returns.
+</span><span class="c1"></span>    <span class="c1">// If TLSNextProto is not nil, HTTP/2 support is not enabled
+</span><span class="c1"></span>    <span class="c1">// automatically.
+</span><span class="c1"></span>    <span class="nx">TLSNextProto</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Server</span><span class="p">,</span> <span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="nx">Handler</span><span class="p">)</span> <span class="c1">// Go 1.1
+</span><span class="c1"></span>
+    <span class="c1">// ConnState specifies an optional callback function that is
+</span><span class="c1"></span>    <span class="c1">// called when a client connection changes state. See the
+</span><span class="c1"></span>    <span class="c1">// ConnState type and associated constants for details.
+</span><span class="c1"></span>    <span class="nx">ConnState</span> <span class="kd">func</span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="nx">ConnState</span><span class="p">)</span> <span class="c1">// Go 1.3
+</span><span class="c1"></span>
+    <span class="c1">// ErrorLog specifies an optional logger for errors accepting
+</span><span class="c1"></span>    <span class="c1">// connections, unexpected behavior from handlers, and
+</span><span class="c1"></span>    <span class="c1">// underlying FileSystem errors.
+</span><span class="c1"></span>    <span class="c1">// If nil, logging is done via the log package&#39;s standard logger.
+</span><span class="c1"></span>    <span class="nx">ErrorLog</span> <span class="o">*</span><span class="nx">log</span><span class="p">.</span><span class="nx">Logger</span> <span class="c1">// Go 1.3
+</span><span class="c1"></span>
+    <span class="c1">// BaseContext optionally specifies a function that returns
+</span><span class="c1"></span>    <span class="c1">// the base context for incoming requests on this server.
+</span><span class="c1"></span>    <span class="c1">// The provided Listener is the specific Listener that&#39;s
+</span><span class="c1"></span>    <span class="c1">// about to start accepting requests.
+</span><span class="c1"></span>    <span class="c1">// If BaseContext is nil, the default is context.Background().
+</span><span class="c1"></span>    <span class="c1">// If non-nil, it must return a non-nil context.
+</span><span class="c1"></span>    <span class="nx">BaseContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="p">)</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span> <span class="c1">// Go 1.13
+</span><span class="c1"></span>
+    <span class="c1">// ConnContext optionally specifies a function that modifies
+</span><span class="c1"></span>    <span class="c1">// the context used for a new connection c. The provided ctx
+</span><span class="c1"></span>    <span class="c1">// is derived from the base context and has a ServerContextKey
+</span><span class="c1"></span>    <span class="c1">// value.
+</span><span class="c1"></span>    <span class="nx">ConnContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">c</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span> <span class="c1">// Go 1.13
+</span><span class="c1"></span>    <span class="c1">// contains filtered or unexported fields
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div><h1 id="referências">Referências</h1>
+<ul>
+<li>HTTP: <a href="https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol</a></li>
+<li>So you want to expose Go on the Internet: <a href="https://blog.cloudflare.com/exposing-go-on-the-internet/">https://blog.cloudflare.com/exposing-go-on-the-internet/</a></li>
+<li>The complete guide to Go net/http timeouts: <a href="https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/">https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/</a></li>
+<li>Artigos antigos de Go no Blog: <a href="https://blog.joaovrmaia.com/tags/golang/">https://blog.joaovrmaia.com/tags/golang/</a></li>
+<li>Primeiro código de exemplo: <a href="https://play.golang.org/p/F3st816reYz">https://play.golang.org/p/F3st816reYz</a></li>
+<li>Zero Value me Go: <a href="https://golang.org/ref/spec#The_zero_value">https://golang.org/ref/spec#The_zero_value</a></li>
+<li>JSON: <a href="https://www.json.org/json-pt.html">https://www.json.org/json-pt.html</a></li>
+<li>Código do exemplo de JSON: <a href="https://play.golang.org/p/LrWFLeDBWUY">https://play.golang.org/p/LrWFLeDBWUY</a></li>
+<li>Documentação do <code>net/http</code> Go package: <a href="https://golang.org/pkg/net/http/">https://golang.org/pkg/net/http/</a></li>
+<li>Go <code>net/http</code> Client: <a href="https://golang.org/pkg/net/http/#Client">https://golang.org/pkg/net/http/#Client</a></li>
+<li>Go <code>net/http</code> Server: <a href="https://golang.org/pkg/net/http/#Server">https://golang.org/pkg/net/http/#Server</a></li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/iniciante/" rel="tag">iniciante</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/http/" rel="tag">http</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de softwares
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

@@ -20,14 +20,11 @@ dando continuidade nos artigos de infraestrutura como código chegou a hora de e
 <meta name="twitter:description" content="Olá,
 dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet."/>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-
 	<link rel="shortcut icon" href="/favicon.ico">
 		
 <script type="application/javascript">
@@ -128,66 +125,66 @@ if (!doNotTrack) {
 <p>O Ansible é escrito em <a href="https://www.python.org/">Python</a> e um requisito dele é o <a href="http://www.paramiko.org/">Paramiko</a> que é uma biblioteca que implementa o protocolo SSHv2. Saber disso esclarece bastante sobre o seu funcionamento pois é através do SSH que o Ansible se conecta nas máquinas que vai provisionar para executar suas tarefas. Então, é muito importante que ao montar o seu playbook você tenha em mente como vai conseguir acessar essa máquinas, imagina que sua receita de provisionamento tem que configurar 100 máquinas, você não querer ficar digitando senha 100 vezes, né? Na AWS a solução mais tradicional para acesso SSH as máquinas são as chaves PEM, veja <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">aqui</a> mais sobre, existem outra formas mas nesse artigo vamos trabalhar com essa apenas.</p>
 <h1 id="estrutura-de-um-projeto-ansible">Estrutura de um projeto Ansible</h1>
 <p>No <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#directory-layout">guia de boas práticas do Ansible</a> são apresentadas duas abordagens de organização do seu projeto:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">production               </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
-</span><span class="w"></span><span class="l">staging                  </span><span class="w"> </span><span class="c"># inventory file for staging environment</span><span class="w">
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">production                # inventory file for production servers</span><span class="w">
+</span><span class="w"></span><span class="l">staging                   # inventory file for staging environment</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="l">group_vars/</span><span class="w">
-</span><span class="w">   </span><span class="l">group1.yml            </span><span class="w"> </span><span class="c"># here we assign variables to particular groups</span><span class="w">
+</span><span class="w">   </span><span class="l">group1.yml             # here we assign variables to particular groups</span><span class="w">
 </span><span class="w">   </span><span class="l">group2.yml</span><span class="w">
 </span><span class="w"></span><span class="l">host_vars/</span><span class="w">
-</span><span class="w">   </span><span class="l">hostname1.yml         </span><span class="w"> </span><span class="c"># here we assign variables to particular systems</span><span class="w">
+</span><span class="w">   </span><span class="l">hostname1.yml          # here we assign variables to particular systems</span><span class="w">
 </span><span class="w">   </span><span class="l">hostname2.yml</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="l">library/                 </span><span class="w"> </span><span class="c"># if any custom modules, put them here (optional)</span><span class="w">
-</span><span class="w"></span><span class="l">module_utils/            </span><span class="w"> </span><span class="c"># if any custom module_utils to support modules, put them here (optional)</span><span class="w">
-</span><span class="w"></span><span class="l">filter_plugins/          </span><span class="w"> </span><span class="c"># if any custom filter plugins, put them here (optional)</span><span class="w">
+</span><span class="w"></span><span class="l">library/                  # if any custom modules, put them here (optional)</span><span class="w">
+</span><span class="w"></span><span class="l">module_utils/             # if any custom module_utils to support modules, put them here (optional)</span><span class="w">
+</span><span class="w"></span><span class="l">filter_plugins/           # if any custom filter plugins, put them here (optional)</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="l">site.yml                 </span><span class="w"> </span><span class="c"># master playbook</span><span class="w">
-</span><span class="w"></span><span class="l">webservers.yml           </span><span class="w"> </span><span class="c"># playbook for webserver tier</span><span class="w">
-</span><span class="w"></span><span class="l">dbservers.yml            </span><span class="w"> </span><span class="c"># playbook for dbserver tier</span><span class="w">
+</span><span class="w"></span><span class="l">site.yml                  # master playbook</span><span class="w">
+</span><span class="w"></span><span class="l">webservers.yml            # playbook for webserver tier</span><span class="w">
+</span><span class="w"></span><span class="l">dbservers.yml             # playbook for dbserver tier</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="l">roles/</span><span class="w">
-</span><span class="w">    </span><span class="l">common/              </span><span class="w"> </span><span class="c"># this hierarchy represents a &#34;role&#34;</span><span class="w">
-</span><span class="w">        </span><span class="l">tasks/           </span><span class="w"> </span><span class="c">#</span><span class="w">
-</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- tasks file can include smaller files if warranted</span><span class="w">
-</span><span class="w">        </span><span class="l">handlers/        </span><span class="w"> </span><span class="c">#</span><span class="w">
-</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- handlers file</span><span class="w">
-</span><span class="w">        </span><span class="l">templates/       </span><span class="w"> </span><span class="c">#  &lt;-- files for use with the template resource</span><span class="w">
-</span><span class="w">            </span><span class="l">ntp.conf.j2  </span><span class="w"> </span><span class="c">#  &lt;------- templates end in .j2</span><span class="w">
-</span><span class="w">        </span><span class="l">files/           </span><span class="w"> </span><span class="c">#</span><span class="w">
-</span><span class="w">            </span><span class="l">bar.txt      </span><span class="w"> </span><span class="c">#  &lt;-- files for use with the copy resource</span><span class="w">
-</span><span class="w">            </span><span class="l">foo.sh       </span><span class="w"> </span><span class="c">#  &lt;-- script files for use with the script resource</span><span class="w">
-</span><span class="w">        </span><span class="l">vars/            </span><span class="w"> </span><span class="c">#</span><span class="w">
-</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- variables associated with this role</span><span class="w">
-</span><span class="w">        </span><span class="l">defaults/        </span><span class="w"> </span><span class="c">#</span><span class="w">
-</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- default lower priority variables for this role</span><span class="w">
-</span><span class="w">        </span><span class="l">meta/            </span><span class="w"> </span><span class="c">#</span><span class="w">
-</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- role dependencies</span><span class="w">
-</span><span class="w">        </span><span class="l">library/         </span><span class="w"> </span><span class="c"># roles can also include custom modules</span><span class="w">
-</span><span class="w">        </span><span class="l">module_utils/    </span><span class="w"> </span><span class="c"># roles can also include custom module_utils</span><span class="w">
-</span><span class="w">        </span><span class="l">lookup_plugins/  </span><span class="w"> </span><span class="c"># or other types of plugins, like lookup in this case</span><span class="w">
+</span><span class="w">    </span><span class="l">common/               # this hierarchy represents a &#34;role&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">tasks/            #</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml      #  &lt;-- tasks file can include smaller files if warranted</span><span class="w">
+</span><span class="w">        </span><span class="l">handlers/         #</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml      #  &lt;-- handlers file</span><span class="w">
+</span><span class="w">        </span><span class="l">templates/        #  &lt;-- files for use with the template resource</span><span class="w">
+</span><span class="w">            </span><span class="l">ntp.conf.j2   #  &lt;------- templates end in .j2</span><span class="w">
+</span><span class="w">        </span><span class="l">files/            #</span><span class="w">
+</span><span class="w">            </span><span class="l">bar.txt       #  &lt;-- files for use with the copy resource</span><span class="w">
+</span><span class="w">            </span><span class="l">foo.sh        #  &lt;-- script files for use with the script resource</span><span class="w">
+</span><span class="w">        </span><span class="l">vars/             #</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml      #  &lt;-- variables associated with this role</span><span class="w">
+</span><span class="w">        </span><span class="l">defaults/         #</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml      #  &lt;-- default lower priority variables for this role</span><span class="w">
+</span><span class="w">        </span><span class="l">meta/             #</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml      #  &lt;-- role dependencies</span><span class="w">
+</span><span class="w">        </span><span class="l">library/          # roles can also include custom modules</span><span class="w">
+</span><span class="w">        </span><span class="l">module_utils/     # roles can also include custom module_utils</span><span class="w">
+</span><span class="w">        </span><span class="l">lookup_plugins/   # or other types of plugins, like lookup in this case</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="l">webtier/             </span><span class="w"> </span><span class="c"># same kind of structure as &#34;common&#34; was above, done for the webtier role</span><span class="w">
-</span><span class="w">    </span><span class="l">monitoring/          </span><span class="w"> </span><span class="c"># &#34;&#34;</span><span class="w">
-</span><span class="w">    </span><span class="l">fooapp/              </span><span class="w"> </span><span class="c"># &#34;&#34;</span><span class="w">
+</span><span class="w">    </span><span class="l">webtier/              # same kind of structure as &#34;common&#34; was above, done for the webtier role</span><span class="w">
+</span><span class="w">    </span><span class="l">monitoring/           # &#34;&#34;</span><span class="w">
+</span><span class="w">    </span><span class="l">fooapp/               # &#34;&#34;</span><span class="w">
 </span></code></pre></div><p>e</p>
 <div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">inventories/</span><span class="w">
 </span><span class="w">   </span><span class="l">production/</span><span class="w">
-</span><span class="w">      </span><span class="l">hosts              </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
+</span><span class="w">      </span><span class="l">hosts               # inventory file for production servers</span><span class="w">
 </span><span class="w">      </span><span class="l">group_vars/</span><span class="w">
-</span><span class="w">         </span><span class="l">group1.yml      </span><span class="w"> </span><span class="c"># here we assign variables to particular groups</span><span class="w">
+</span><span class="w">         </span><span class="l">group1.yml       # here we assign variables to particular groups</span><span class="w">
 </span><span class="w">         </span><span class="l">group2.yml</span><span class="w">
 </span><span class="w">      </span><span class="l">host_vars/</span><span class="w">
-</span><span class="w">         </span><span class="l">hostname1.yml   </span><span class="w"> </span><span class="c"># here we assign variables to particular systems</span><span class="w">
+</span><span class="w">         </span><span class="l">hostname1.yml    # here we assign variables to particular systems</span><span class="w">
 </span><span class="w">         </span><span class="l">hostname2.yml</span><span class="w">
 </span><span class="w">
 </span><span class="w">   </span><span class="l">staging/</span><span class="w">
-</span><span class="w">      </span><span class="l">hosts              </span><span class="w"> </span><span class="c"># inventory file for staging environment</span><span class="w">
+</span><span class="w">      </span><span class="l">hosts               # inventory file for staging environment</span><span class="w">
 </span><span class="w">      </span><span class="l">group_vars/</span><span class="w">
-</span><span class="w">         </span><span class="l">group1.yml      </span><span class="w"> </span><span class="c"># here we assign variables to particular groups</span><span class="w">
+</span><span class="w">         </span><span class="l">group1.yml       # here we assign variables to particular groups</span><span class="w">
 </span><span class="w">         </span><span class="l">group2.yml</span><span class="w">
 </span><span class="w">      </span><span class="l">host_vars/</span><span class="w">
-</span><span class="w">         </span><span class="l">stagehost1.yml  </span><span class="w"> </span><span class="c"># here we assign variables to particular systems</span><span class="w">
+</span><span class="w">         </span><span class="l">stagehost1.yml   # here we assign variables to particular systems</span><span class="w">
 </span><span class="w">         </span><span class="l">stagehost2.yml</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="l">library/</span><span class="w">
@@ -512,7 +509,7 @@ PLAY RECAP *********************************************************************
 		<span class="authorbox__name">Sobre João Maia</span>
 	</div>
 	<div class="authorbox__description">
-		Pessoa que resolve problemas com o uso de software
+		Pessoa que resolve problemas com o uso de softwares
 	</div>
 </div>
 
@@ -548,7 +545,7 @@ PLAY RECAP *********************************************************************
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2021 João Maia.
+			&copy; 2020 João Maia.
 			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
 		</div>
 	</div>

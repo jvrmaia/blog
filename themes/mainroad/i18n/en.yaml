@@ -28,7 +28,7 @@
 
 # Authorbox
 - id: authorbox_name
-  translation: "Sobre {{ .Name }}"
+  translation: "Sobre {{ .Count }}"
 
 # Sidebar
 - id: sidebar_warning
@@ -39,7 +39,7 @@
 
 # Search widget
 - id: search_placeholder
-  translation: "BUSCAR…"
+  translation: "BUSCAR..."
 
 # Languages widget
 - id: languages_title

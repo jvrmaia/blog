@@ -20,14 +20,11 @@ eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instân
 <meta name="twitter:description" content="Olá,
 eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud."/>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-
 	<link rel="shortcut icon" href="/favicon.ico">
 		
 <script type="application/javascript">
@@ -159,10 +156,10 @@ Available commands are:
 </code></pre><h1 id="primeiros-passos">Primeiros passos</h1>
 <p>Com o Packer você pode criar images estáticas para uma diversidade de destinos que na documentação oficial vai encontrar com o nome de <a href="https://www.packer.io/docs/builders/">Builders</a>. Nesse artigo vou me restringir ao ecossistema que já tenho conhecimento que é o uso na <a href="https://aws.amazon.com/">AWS</a>. Então, caso você tenha interesse em reproduzir o que estou abordando nesse artigo faça uma pausa agora para criar a sua conta na AWS agora. Com a conta na AWS criada, vamos agora precisar que você entre no recurso <a href="https://aws.amazon.com/pt/iam/">IAM</a> da AWS para criar um usuário de preferência sem acesso ao painel online e apenas com credenciais de acesso via API, para facilitar coloque ele como administrador mas lembre-se de destruir o usuário depois dos testes e não salve essas credencias em lugar nenhum que seja inseguro, você pode acabar tendo surpresas desagradáveis na sua fatura da AWS.</p>
 <p>Com a credenciais crie um arquivo <code>credentials</code> com o seguinte formato:</p>
-<div class="highlight"><pre class="chroma"><code class="language-env" data-lang="env"><span class="nv">AWS_REGION</span><span class="o">=</span>us-east-1
-<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>...
-<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>...
-</code></pre></div><p>Os arquivos fontes de tudo que será mostrado a seguir se encontra no meu <a href="https://github.com/jvrmaia/packer-playground">Github</a>. Segue o <code>Makefile</code> que usarei para melhor entendimento dos prṕximos passos:</p>
+<pre><code class="language-env" data-lang="env">AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+</code></pre><p>Os arquivos fontes de tudo que será mostrado a seguir se encontra no meu <a href="https://github.com/jvrmaia/packer-playground">Github</a>. Segue o <code>Makefile</code> que usarei para melhor entendimento dos prṕximos passos:</p>
 <div class="highlight"><pre class="chroma"><code class="language-make" data-lang="make"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span> <span class="n">validate</span>
 
 <span class="nv">PCKCMD</span><span class="o">=</span>docker run -it --rm --env-file credentials -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/opt -w /opt hashicorp/packer:1.5.6
@@ -532,7 +529,7 @@ hello from packer
 		<span class="authorbox__name">Sobre João Maia</span>
 	</div>
 	<div class="authorbox__description">
-		Pessoa que resolve problemas com o uso de software
+		Pessoa que resolve problemas com o uso de softwares
 	</div>
 </div>
 
@@ -568,7 +565,7 @@ hello from packer
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2021 João Maia.
+			&copy; 2020 João Maia.
 			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
 		</div>
 	</div>
