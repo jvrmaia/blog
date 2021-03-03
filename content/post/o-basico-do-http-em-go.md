@@ -1,6 +1,6 @@
 ---
 author: "João Maia"
-date: 2020-10-10
+date: 2021-03-03
 title: "O básico do HTTP em Go"
 tags: [
     "golang",
