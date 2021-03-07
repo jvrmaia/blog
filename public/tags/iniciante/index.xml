@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iniciante on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/iniciante/</link>
+    <description>Recent content in iniciante on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/iniciante/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>O básico do HTTP em Go</title>
+      <link>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</guid>
+      <description>Olá,
+nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts.</description>
+    </item>
+    
+    <item>
+      <title>Hashing e criptografia</title>
+      <link>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</guid>
+      <description>Olá,
+A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?
+Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos.</description>
+    </item>
+    
+    <item>
+      <title>Trabalhando com dependências em Go</title>
+      <link>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</link>
+      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</guid>
+      <description>Olá,
+Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho.</description>
+    </item>
+    
+    <item>
+      <title>Organização de projetos e GOPATH</title>
+      <link>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</link>
+      <pubDate>Fri, 17 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</guid>
+      <description>Olá,
+Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não.</description>
+    </item>
+    
+    <item>
+      <title>Instalação do Go</title>
+      <link>http://blog.joaovrmaia.com/post/instalacao-do-go/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/instalacao-do-go/</guid>
+      <description>Olá,
+esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua jornada inicial na linguagem seja uma experiência muito positiva e proveitosa. Nesse artigo vou abordar em especial a questão de como instalar o Go na sua máquina. Como sou usuário de Linux vou dar foco nesse sistema, usuários do OSX provavelmente vão conseguir usar os mesmos passos mas infelizmente não vou conseguir cobrir o caso do Windows por não seu um usuário do sistema.</description>
+    </item>
+    
+    <item>
+      <title>Go: primeiros passos</title>
+      <link>http://blog.joaovrmaia.com/post/go-primeiros-passos/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/go-primeiros-passos/</guid>
+      <description>Olá,
+esse primeiro post sobre Go é para mostrar a quem não sabe nada sobre a linguagem algumas características e minhas opiniões a respeito dela. Caso discorde de algo e/ou tenha alguma correção a ser feita no texto pode me apontar nos comentários ou no meu e-mail que darei toda atenção desde que faça de forma educada.
+Senta que lá vem a História Do Wikipedia:
+ Go é uma linguagem de programação criada pela Google e lançada em código livre em novembro de 2009.</description>
+    </item>
+    
+  </channel>
+</rss>

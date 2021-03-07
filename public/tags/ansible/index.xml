@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ansible on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/ansible/</link>
+    <description>Recent content in ansible on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Fri, 24 Jul 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/ansible/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Conhecendo o Ansible</title>
+      <link>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</guid>
+      <description>Olá,
+dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet.</description>
+    </item>
+    
+  </channel>
+</rss>

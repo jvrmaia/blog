@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Conhecendo o Ansible - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Conhecendo o Ansible" />
+<meta property="og:description" content="Olá,
+dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/conhecendo-o-ansible/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-07-24T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-07-24T00:00:00&#43;00:00" />
+
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Conhecendo o Ansible"/>
+<meta name="twitter:description" content="Olá,
+dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Conhecendo o Ansible</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-24T00:00:00Z">2020-07-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/conhecendo-o-ansible/ansible-logo.png" alt="Conhecendo o Ansible">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o <a href="https://www.ansible.com/">Ansible</a>. Um pouco de história, o Ansible veio como solução semelhante ao <a href="https://puppet.com/">Puppet</a> e <a href="https://www.chef.io/">Chef</a> pela empresa de mesmo nome com o produto sendo o <a href="https://www.ansible.com/products/tower">Ansible Tower</a> que depois foi comprada pela <a href="https://www.redhat.com/pt-br">Red Hat</a> e agora a Red Hat foi comprada pela <a href="https://www.ibm.com/br-pt">IBM</a>. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet. Achei o Ansible muito mais intuitivo ao processo que tinha sempre feito na vida de dar ssh no servidor e rodar scripts em Bash ou fazer manualmente vários processos, vi no Ansible uma forma simples e direta de fazer isso.</p>
+<blockquote>
+<p>Ansible is an open source community project sponsored by Red Hat, it&rsquo;s the simplest way to automate IT. Ansible is the only automation language that can be used across entire IT teams from systems and network administrators to developers and managers.</p>
+</blockquote>
+<h1 id="instalando-o-ansible">Instalando o Ansible</h1>
+<p>A <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">página oficial</a> de instalação do Ansible é bem completa, eu usei por muito tempo o modo via <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip">pip</a> mas hoje tenho instalado via <a href="https://brew.sh/">Linux Brew</a>. Se você tiver necessidade de trabalhar com versões muito específicas do Ansible acredito que a opção do <code>pip</code> vai ser a melhor para o seu caso.</p>
+<h1 id="como-o-ansible-funciona">Como o Ansible funciona</h1>
+<p>O Ansible é escrito em <a href="https://www.python.org/">Python</a> e um requisito dele é o <a href="http://www.paramiko.org/">Paramiko</a> que é uma biblioteca que implementa o protocolo SSHv2. Saber disso esclarece bastante sobre o seu funcionamento pois é através do SSH que o Ansible se conecta nas máquinas que vai provisionar para executar suas tarefas. Então, é muito importante que ao montar o seu playbook você tenha em mente como vai conseguir acessar essa máquinas, imagina que sua receita de provisionamento tem que configurar 100 máquinas, você não querer ficar digitando senha 100 vezes, né? Na AWS a solução mais tradicional para acesso SSH as máquinas são as chaves PEM, veja <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">aqui</a> mais sobre, existem outra formas mas nesse artigo vamos trabalhar com essa apenas.</p>
+<h1 id="estrutura-de-um-projeto-ansible">Estrutura de um projeto Ansible</h1>
+<p>No <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#directory-layout">guia de boas práticas do Ansible</a> são apresentadas duas abordagens de organização do seu projeto:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">production               </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
+</span><span class="w"></span><span class="l">staging                  </span><span class="w"> </span><span class="c"># inventory file for staging environment</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">group_vars/</span><span class="w">
+</span><span class="w">   </span><span class="l">group1.yml            </span><span class="w"> </span><span class="c"># here we assign variables to particular groups</span><span class="w">
+</span><span class="w">   </span><span class="l">group2.yml</span><span class="w">
+</span><span class="w"></span><span class="l">host_vars/</span><span class="w">
+</span><span class="w">   </span><span class="l">hostname1.yml         </span><span class="w"> </span><span class="c"># here we assign variables to particular systems</span><span class="w">
+</span><span class="w">   </span><span class="l">hostname2.yml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">library/                 </span><span class="w"> </span><span class="c"># if any custom modules, put them here (optional)</span><span class="w">
+</span><span class="w"></span><span class="l">module_utils/            </span><span class="w"> </span><span class="c"># if any custom module_utils to support modules, put them here (optional)</span><span class="w">
+</span><span class="w"></span><span class="l">filter_plugins/          </span><span class="w"> </span><span class="c"># if any custom filter plugins, put them here (optional)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">site.yml                 </span><span class="w"> </span><span class="c"># master playbook</span><span class="w">
+</span><span class="w"></span><span class="l">webservers.yml           </span><span class="w"> </span><span class="c"># playbook for webserver tier</span><span class="w">
+</span><span class="w"></span><span class="l">dbservers.yml            </span><span class="w"> </span><span class="c"># playbook for dbserver tier</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">roles/</span><span class="w">
+</span><span class="w">    </span><span class="l">common/              </span><span class="w"> </span><span class="c"># this hierarchy represents a &#34;role&#34;</span><span class="w">
+</span><span class="w">        </span><span class="l">tasks/           </span><span class="w"> </span><span class="c">#</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- tasks file can include smaller files if warranted</span><span class="w">
+</span><span class="w">        </span><span class="l">handlers/        </span><span class="w"> </span><span class="c">#</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- handlers file</span><span class="w">
+</span><span class="w">        </span><span class="l">templates/       </span><span class="w"> </span><span class="c">#  &lt;-- files for use with the template resource</span><span class="w">
+</span><span class="w">            </span><span class="l">ntp.conf.j2  </span><span class="w"> </span><span class="c">#  &lt;------- templates end in .j2</span><span class="w">
+</span><span class="w">        </span><span class="l">files/           </span><span class="w"> </span><span class="c">#</span><span class="w">
+</span><span class="w">            </span><span class="l">bar.txt      </span><span class="w"> </span><span class="c">#  &lt;-- files for use with the copy resource</span><span class="w">
+</span><span class="w">            </span><span class="l">foo.sh       </span><span class="w"> </span><span class="c">#  &lt;-- script files for use with the script resource</span><span class="w">
+</span><span class="w">        </span><span class="l">vars/            </span><span class="w"> </span><span class="c">#</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- variables associated with this role</span><span class="w">
+</span><span class="w">        </span><span class="l">defaults/        </span><span class="w"> </span><span class="c">#</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- default lower priority variables for this role</span><span class="w">
+</span><span class="w">        </span><span class="l">meta/            </span><span class="w"> </span><span class="c">#</span><span class="w">
+</span><span class="w">            </span><span class="l">main.yml     </span><span class="w"> </span><span class="c">#  &lt;-- role dependencies</span><span class="w">
+</span><span class="w">        </span><span class="l">library/         </span><span class="w"> </span><span class="c"># roles can also include custom modules</span><span class="w">
+</span><span class="w">        </span><span class="l">module_utils/    </span><span class="w"> </span><span class="c"># roles can also include custom module_utils</span><span class="w">
+</span><span class="w">        </span><span class="l">lookup_plugins/  </span><span class="w"> </span><span class="c"># or other types of plugins, like lookup in this case</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span><span class="l">webtier/             </span><span class="w"> </span><span class="c"># same kind of structure as &#34;common&#34; was above, done for the webtier role</span><span class="w">
+</span><span class="w">    </span><span class="l">monitoring/          </span><span class="w"> </span><span class="c"># &#34;&#34;</span><span class="w">
+</span><span class="w">    </span><span class="l">fooapp/              </span><span class="w"> </span><span class="c"># &#34;&#34;</span><span class="w">
+</span></code></pre></div><p>e</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">inventories/</span><span class="w">
+</span><span class="w">   </span><span class="l">production/</span><span class="w">
+</span><span class="w">      </span><span class="l">hosts              </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
+</span><span class="w">      </span><span class="l">group_vars/</span><span class="w">
+</span><span class="w">         </span><span class="l">group1.yml      </span><span class="w"> </span><span class="c"># here we assign variables to particular groups</span><span class="w">
+</span><span class="w">         </span><span class="l">group2.yml</span><span class="w">
+</span><span class="w">      </span><span class="l">host_vars/</span><span class="w">
+</span><span class="w">         </span><span class="l">hostname1.yml   </span><span class="w"> </span><span class="c"># here we assign variables to particular systems</span><span class="w">
+</span><span class="w">         </span><span class="l">hostname2.yml</span><span class="w">
+</span><span class="w">
+</span><span class="w">   </span><span class="l">staging/</span><span class="w">
+</span><span class="w">      </span><span class="l">hosts              </span><span class="w"> </span><span class="c"># inventory file for staging environment</span><span class="w">
+</span><span class="w">      </span><span class="l">group_vars/</span><span class="w">
+</span><span class="w">         </span><span class="l">group1.yml      </span><span class="w"> </span><span class="c"># here we assign variables to particular groups</span><span class="w">
+</span><span class="w">         </span><span class="l">group2.yml</span><span class="w">
+</span><span class="w">      </span><span class="l">host_vars/</span><span class="w">
+</span><span class="w">         </span><span class="l">stagehost1.yml  </span><span class="w"> </span><span class="c"># here we assign variables to particular systems</span><span class="w">
+</span><span class="w">         </span><span class="l">stagehost2.yml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">library/</span><span class="w">
+</span><span class="w"></span><span class="l">module_utils/</span><span class="w">
+</span><span class="w"></span><span class="l">filter_plugins/</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">site.yml</span><span class="w">
+</span><span class="w"></span><span class="l">webservers.yml</span><span class="w">
+</span><span class="w"></span><span class="l">dbservers.yml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="l">roles/</span><span class="w">
+</span><span class="w">    </span><span class="l">common/</span><span class="w">
+</span><span class="w">    </span><span class="l">webtier/</span><span class="w">
+</span><span class="w">    </span><span class="l">monitoring/</span><span class="w">
+</span><span class="w">    </span><span class="l">fooapp/</span><span class="w">
+</span></code></pre></div><p>Acho as duas formas de organizar muito boas mas o que vai definir qual será usada será o seu projeto além do que existe a possibilidade de você trabalhar com <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html#intro-dynamic-inventory">inventários dinâmicos</a>. O importante dessas duas abordagens é apresentar os elementos fundamentais do Ansible: <code>playbook</code>, <code>roles</code> e <code>inventory</code>. Estou ignorando nesse momento a parte de <code>plugins</code> do Ansible pois é melhor tratar isso em outro momento pois não é o uso mais comum. Vamos agora entender melhor os outros três elementos.</p>
+<h2 id="playbook">Playbook</h2>
+<p>Esse é o coração do seu projeto, olhando nos exemplos acima de organização de projeto temos três: <code>site.yml</code>, <code>webservers.yml</code> e <code>dbservers.yml</code>. Vamos assumir que nessa estrutura dada o propósito era subir um blog usando o Wordpress, quem para quem não conhece o Wordpress é uma ferramenta para criar blogs escrita em PHP que vai precisar de um servidor de aplicações como o Apache ou NGINX e depende de um banco de dados, no caso o MySQL. Então, qual poderiam ser os objetivos de cada um desses playbooks? No <code>dbservers.yml</code> é onde vamos fazer todos os passos necessários para termos de forma independente o nosso banco de dados funcionando seja ele um banco de uma instância apenas com ou sem backup, tudo relativo a vida desse serviço fica descrita nesse playbook através de passos simples e bem claros como se fosse uma pessoa executando manualmente. No <code>webservers.yml</code> vamos colocar a combinação NGINX e Wordpress porém nesse caso o nosso módulo não consegue viver de forma independente pois ele precisa de uma banco de dados. Então, chegamos no <code>site.yml</code> que é o nosso projeto final que junta o Wordpress com o MySQL assim possibilitando seu blog de existir.</p>
+<p>O que podemos entender aqui dos playbooks é que eles são roteiros de execução de comandos ou alterações no seu alvo que podem ser totalmente independentes ou dependentes de outros playbooks.</p>
+<h2 id="roles">Roles</h2>
+<p>Olhando novamente o exemplo acima temos dentro de roles a pasta <code>monitoring</code>. Seria interessante tanto no nosso Wordpress quanto o MySQL termos uma monitoria desses serviços e como é boa prática usar uma ferramenta de monitoria comum em toda sua arquitetura podemos criar um componente que configura essa monitoria de forma segregada do contexto principal do projeto e usar como biblioteca. Então, basicamente podemos entender que roles são outros projetos Ansible que tem toda a sua estrutra para construir partes de sua infraestrutura de forma configurável por outros projetos. Então, assim como o <code>pip</code> que é um gestor de bibliotecas em Python onde é distribuido o Ansible e suas dependências em Python, o Ansible tem uma ferramenta para tal, esse é o <a href="https://galaxy.ansible.com/">Ansible Galaxy</a>. Com o Ansible Galaxy você é capaz de gerenciar suas dependências de roles no projeto e em um sistema de comunidade colaborar ou receber ajuda de outras pessoas em projetos importantes para a sua infraestrutura.</p>
+<h2 id="inventory">Inventory</h2>
+<p>Muito legal você ser capaz de executar toda essa automação de infraestrutura editando apenas alguns arquivos YAML. Só que para isso tudo funcionar é preciso de um alvo e é no inventory que vamos definir isso seja passando uma lista de máquinas ou apenas uma, como acessar essas máquinas, variáveis associadas a essas máquinas e é possível também agrupar algumas dessas máquinas em grupos, por exemplo, um cluster de uma banco de dados NoSQL provavelmente vai compartilhar muita informação e podem ser agrupadas em uma configuração apenas.</p>
+<h1 id="seu-primeiro-playbook">Seu primeiro Playbook</h1>
+<p>Com essa introdução teórica do Ansible já podemos partir um pouco para o uso prático com exemplos, no meu Github tenho um <a href="https://github.com/jvrmaia/ansible-playground">repositório</a> que usei para demonstrar um pouco do Ansible que vou aproveitar nesse artigo. Neste respositório eu usei o Vagrant para tester os playbooks do Ansible, caso não tenha Vagrant no seu ambiente é possível subir uma máquina na nuvem de sua preferência e fazer uns ajustes na parte de conectar na máquina ou usar Docker localmente, se precisar de ajuda com isso avise nos comentários. O exemplo que vamos trabalhar aqui é o da pasta <code>ansible-roles-and-playbook</code>.</p>
+<p>Neste projeto a máquina alvo a ser provisionada é um CentOS 7 que pode ser conferido no Vagrantfile e vai ter um IP 20.20.20.20 que é acessível da minha máquina local e a chave de SSH para acesso vai ser a minha local do Vagrant, detalhe que eu não preciso fazer nada aqui além de rodar o Vagrant. Agora, vamos navegar pelos arquivos da pasta falando um pouco mais de cada.</p>
+<h2 id="ansiblecfg">ansible.cfg</h2>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">defaults</span><span class="p">]</span>
+<span class="nx">hostfile</span><span class="p">=</span><span class="nx">hosts</span>
+<span class="nx">roles_path</span><span class="p">=.</span><span class="err">/</span><span class="nx">roles</span>
+
+<span class="p">[</span><span class="nx">ssh_connection</span><span class="p">]</span>
+<span class="nx">ssh_args</span> <span class="p">=</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">UserKnownHostsFile</span><span class="p">=</span><span class="err">/</span><span class="nx">dev</span><span class="err">/</span><span class="nx">null</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">StrictHostKeyChecking</span><span class="p">=</span><span class="nx">no</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">IdentitiesOnly</span><span class="p">=</span><span class="nx">yes</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">ControlMaster</span><span class="p">=</span><span class="nx">auto</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">ControlPersist</span><span class="p">=</span><span class="mi">60</span><span class="nx">s</span>
+</code></pre></div><p>Esse é o arquivo de configuração local do Ansible, como podem ver estou informando nele quel é o meu arquivo que contém as informações do hosts do projeto, onde estão minhas roles e algumas configurações do SSH que é a forma que o Ansible usa para se conectar nas máquinas.</p>
+<h2 id="hosts">hosts</h2>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">db</span><span class="p">]</span>
+<span class="mf">20.20</span><span class="p">.</span><span class="mf">20.20</span>
+
+<span class="p">[</span><span class="nx">db</span><span class="err">:</span><span class="nx">vars</span><span class="p">]</span>
+<span class="nx">ansible_ssh_user</span><span class="p">=</span><span class="nx">vagrant</span>
+<span class="nx">ansible_ssh_private_key_file</span><span class="p">=</span><span class="err">~/</span><span class="p">.</span><span class="nx">vagrant</span><span class="p">.</span><span class="nx">d</span><span class="err">/</span><span class="nx">insecure_private_key</span>
+</code></pre></div><p>Nesse projeto vamos subir um banco de dados apenas então criei essa entrada <code>[db]</code> para informar seus dados que nesse caso é apenas o seu IP que é o mesmo definido no Vagrant. Em <code>[db:vars]</code>, estou definindo umas variáveis referentes a essa máquina virtual que são seu usuário SSH e sua chave de acesso, por exemplo, quem optar por usar uma máquina na AWS com o Amazon Linux o valor do usuário SSH seria <code>ec2-user</code> e o valor da chave seria o caminho para sua chave PEM.</p>
+<h2 id="requirementsyml">requirements.yml</h2>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span>- <span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">geerlingguy.mysql</span><span class="w">
+</span></code></pre></div><p>Esse arquivo será usando pelo Ansible Galaxy para gerir suas dependências, no caso estamos usando uma role pronta do MySQL pois não quero lidar com isso e prefiro a delegar para alguém que já fez que confio e toda a comunidade que já colaborou com ela. Para ter as roles no seu ambiente local para usar é bem simples:</p>
+<pre><code>$ ansible-galaxy install -r requirements.yml 
+- downloading role 'mysql', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.1.0.tar.gz
+- extracting geerlingguy.mysql to /opt/roles/geerlingguy.mysql
+- geerlingguy.mysql (3.1.0) was installed successfully
+</code></pre><h2 id="testyml">test.yml</h2>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Debug date</span><span class="w">
+</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
+</span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">date</span><span class="w">
+</span><span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">date</span><span class="w">
+</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l">var=date</span><span class="w">
+</span></code></pre></div><p>Esse é um exemplo de playbook que alterei da versão do Github na parte de <code>hosts</code> para apontar para minha máquina local apenas. Podemos ver que a estrutura é bem simples, primeiro é dado um nome ao conjunto de tarefas que vamos executar, definimos o alvo e por fim uma lista de tarefas. Nas tarefas o que fiz foi apenas executar um comando do Linux, <code>date</code>, e salvar o seu valor na variável <code>date</code>. Por fim, uso a opção de <code>debug</code> do Ansible para imprimir o valor retornado e outras informações mais no terminal. Veja o resultado da execução do playbook:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ansible-playbook test.yml 
+<span class="o">[</span>WARNING<span class="o">]</span>: No inventory was parsed, only implicit localhost is available
+<span class="o">[</span>WARNING<span class="o">]</span>: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match <span class="s1">&#39;all&#39;</span>
+
+PLAY <span class="o">[</span>Debug date<span class="o">]</span> ********************************************************************************************************************************************************************************************************************************************
+
+TASK <span class="o">[</span>Gathering Facts<span class="o">]</span> ***************************************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>localhost<span class="o">]</span>
+
+TASK <span class="o">[</span>command<span class="o">]</span> ***********************************************************************************************************************************************************************************************************************************************
+changed: <span class="o">[</span>localhost<span class="o">]</span>
+
+TASK <span class="o">[</span>debug<span class="o">]</span> *************************************************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>localhost<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">{</span>
+    <span class="s2">&#34;date&#34;</span>: <span class="o">{</span>
+        <span class="s2">&#34;changed&#34;</span>: true,
+        <span class="s2">&#34;cmd&#34;</span>: <span class="o">[</span>
+            <span class="s2">&#34;date&#34;</span>
+        <span class="o">]</span>,
+        <span class="s2">&#34;delta&#34;</span>: <span class="s2">&#34;0:00:00.002301&#34;</span>,
+        <span class="s2">&#34;end&#34;</span>: <span class="s2">&#34;2020-07-22 06:23:53.943966&#34;</span>,
+        <span class="s2">&#34;failed&#34;</span>: false,
+        <span class="s2">&#34;rc&#34;</span>: 0,
+        <span class="s2">&#34;start&#34;</span>: <span class="s2">&#34;2020-07-22 06:23:53.941665&#34;</span>,
+        <span class="s2">&#34;stderr&#34;</span>: <span class="s2">&#34;&#34;</span>,
+        <span class="s2">&#34;stderr_lines&#34;</span>: <span class="o">[]</span>,
+        <span class="s2">&#34;stdout&#34;</span>: <span class="s2">&#34;Wed Jul 22 06:23:53 -03 2020&#34;</span>,
+        <span class="s2">&#34;stdout_lines&#34;</span>: <span class="o">[</span>
+            <span class="s2">&#34;Wed Jul 22 06:23:53 -03 2020&#34;</span>
+        <span class="o">]</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************
+localhost                  : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">skipped</span><span class="o">=</span><span class="m">0</span>    <span class="nv">rescued</span><span class="o">=</span><span class="m">0</span>    <span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>   
+  
+</code></pre></div><h2 id="provisionyml">provision.yml</h2>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Configure database server</span><span class="w">
+</span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">db</span><span class="w">
+</span><span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">mysql_root_password</span><span class="p">:</span><span class="w"> </span><span class="l">super-secure-password</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">mysql_databases</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my_app_db</span><span class="w">
+</span><span class="w">        </span><span class="nt">encoding</span><span class="p">:</span><span class="w"> </span><span class="l">utf8</span><span class="w">
+</span><span class="w">        </span><span class="nt">collation</span><span class="p">:</span><span class="w"> </span><span class="l">utf8_general_ci</span><span class="w">
+</span><span class="w">    </span>- <span class="nt">mysql_users</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">app_user</span><span class="w">
+</span><span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;%&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">similarly-secure-password</span><span class="w">
+</span><span class="w">        </span><span class="nt">priv</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;my_app_db.*:ALL&#34;</span><span class="w">
+</span><span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- {<span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">geerlingguy.mysql }</span><span class="w">
+</span></code></pre></div><p>Mudei um pouco do original pois movi o <code>become</code> para o playbook inteiro e não apenas a role e mudei as configurações do host para ser uma instância CentOS 8 que subi na AWS. Como podem ver é bem parecido com o playbook de teste mudando que não tem tarefas nesse, tudo ficou contido na role precisando apenas passar algumas variáveis para ele funcionar. Vamos executar para ver a execução dele:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ansible-playbook provision.yml -i hosts 
+
+PLAY <span class="o">[</span>Configure database server<span class="o">]</span> *****************************************************************************************************************************************************************************************************************************
+
+TASK <span class="o">[</span>Gathering Facts<span class="o">]</span> ***************************************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/variables.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Include OS-specific variables.<span class="o">]</span> ****************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>/home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/vars/RedHat-8.yml<span class="o">)</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_packages.<span class="o">]</span> ************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_daemon.<span class="o">]</span> **************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_slow_query_log_file.<span class="o">]</span> *************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_log_error.<span class="o">]</span> ***********************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_syslog_tag.<span class="o">]</span> **********************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_pid_file.<span class="o">]</span> ************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_config_file.<span class="o">]</span> *********************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_config_include_dir.<span class="o">]</span> **************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_socket.<span class="o">]</span> **************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Define mysql_supports_innodb_large_prefix.<span class="o">]</span> ****************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/setup-RedHat.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Ensure MySQL packages are installed.<span class="o">]</span> **********************************************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Check <span class="k">if</span> MySQL packages were installed.<span class="o">]</span> *******************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/configure.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Get MySQL version.<span class="o">]</span> ****************************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Copy my.cnf global MySQL configuration.<span class="o">]</span> *******************************************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Verify mysql include directory exists.<span class="o">]</span> ********************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Copy my.cnf override files into include directory.<span class="o">]</span> ********************************************************************************************************************************************************************************
+
+TASK <span class="o">[</span>geerlingguy.mysql : Create slow query log file <span class="o">(</span><span class="k">if</span> configured<span class="o">)</span>.<span class="o">]</span> ***************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Create datadir <span class="k">if</span> it does not exist<span class="o">]</span> ***********************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Set ownership on slow query log file <span class="o">(</span><span class="k">if</span> configured<span class="o">)</span>.<span class="o">]</span> *****************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Create error log file <span class="o">(</span><span class="k">if</span> configured<span class="o">)</span>.<span class="o">]</span> ********************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Set ownership on error log file <span class="o">(</span><span class="k">if</span> configured<span class="o">)</span>.<span class="o">]</span> **********************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Ensure MySQL is started and enabled on boot.<span class="o">]</span> **************************************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/secure-installation.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Ensure default user is present.<span class="o">]</span> ***************************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Copy user-my.cnf file with password credentials.<span class="o">]</span> **********************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Disallow root login remotely<span class="o">]</span> ******************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>DELETE FROM mysql.user WHERE <span class="nv">User</span><span class="o">=</span><span class="s1">&#39;root&#39;</span> AND Host NOT IN <span class="o">(</span><span class="s1">&#39;localhost&#39;</span>, <span class="s1">&#39;127.0.0.1&#39;</span>, <span class="s1">&#39;::1&#39;</span><span class="o">))</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Get list of hosts <span class="k">for</span> the root user.<span class="o">]</span> **********************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Update MySQL root password <span class="k">for</span> localhost root account <span class="o">(</span>5.7.x<span class="o">)</span>.<span class="o">]</span> ********************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>127.0.0.1<span class="o">)</span> 
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>::1<span class="o">)</span> 
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>localhost<span class="o">)</span> 
+
+TASK <span class="o">[</span>geerlingguy.mysql : Update MySQL root password <span class="k">for</span> localhost root account <span class="o">(</span>&lt; 5.7.x<span class="o">)</span>.<span class="o">]</span> ******************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>127.0.0.1<span class="o">)</span>
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>::1<span class="o">)</span>
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>localhost<span class="o">)</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Copy .my.cnf file with root password credentials.<span class="o">]</span> *********************************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Get list of hosts <span class="k">for</span> the anonymous user.<span class="o">]</span> *****************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Remove anonymous MySQL users.<span class="o">]</span> *****************************************************************************************************************************************************************************************************
+
+TASK <span class="o">[</span>geerlingguy.mysql : Remove MySQL <span class="nb">test</span> database.<span class="o">]</span> *******************************************************************************************************************************************************************************************************
+ok: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/databases.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Ensure MySQL databases are present.<span class="o">]</span> ***********************************************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">={</span><span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;my_app_db&#39;</span>, <span class="s1">&#39;encoding&#39;</span>: <span class="s1">&#39;utf8&#39;</span>, <span class="s1">&#39;collation&#39;</span>: <span class="s1">&#39;utf8_general_ci&#39;</span><span class="o">})</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/users.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Ensure MySQL users are present.<span class="o">]</span> ***************************************************************************************************************************************************************************************************
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span> <span class="o">=</span>&gt; <span class="o">(</span><span class="nv">item</span><span class="o">=</span>None<span class="o">)</span>
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : include_tasks<span class="o">]</span> *********************************************************************************************************************************************************************************************************************
+included: /home/jvrmaia/Workspace/jvrmaia/ansible-playground/ansible-roles-and-playbook/roles/geerlingguy.mysql/tasks/replication.yml <span class="k">for</span> 18.222.238.109
+
+TASK <span class="o">[</span>geerlingguy.mysql : Ensure replication user exists on master.<span class="o">]</span> *****************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Check slave replication status.<span class="o">]</span> ***************************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Check master replication status.<span class="o">]</span> **************************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Configure replication on the slave.<span class="o">]</span> ***********************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+TASK <span class="o">[</span>geerlingguy.mysql : Start replication.<span class="o">]</span> ****************************************************************************************************************************************************************************************************************
+skipping: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+RUNNING HANDLER <span class="o">[</span>geerlingguy.mysql : restart mysql<span class="o">]</span> **********************************************************************************************************************************************************************************************************
+<span class="o">[</span>WARNING<span class="o">]</span>: Ignoring <span class="s2">&#34;sleep&#34;</span> as it is not used in <span class="s2">&#34;systemd&#34;</span>
+changed: <span class="o">[</span>18.222.238.109<span class="o">]</span>
+
+PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************
+18.222.238.109             : <span class="nv">ok</span><span class="o">=</span><span class="m">34</span>   <span class="nv">changed</span><span class="o">=</span><span class="m">8</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">skipped</span><span class="o">=</span><span class="m">17</span>   <span class="nv">rescued</span><span class="o">=</span><span class="m">0</span>    <span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>   
+</code></pre></div><p>Repare pelo log como é feito o passo a passo para configurar o MySQL desde a identificação da máquina alvo do provisionamento. Imagina ter que realizar isso tudo de forma manual e as possibilidades de errar coisas triviais? Não ache também que isso tudo que mostrei é perfeito. Fiz na AWS e com CentOS porque no meu teste inicial com Docker e Ubuntu deu erro com o Python e pelo que vi não estava bem resolvido na versão que estou usando.</p>
+<h1 id="dicas-gerais">Dicas gerais</h1>
+<ul>
+<li>Sempre um <code>ansible.cfg</code> nos seus projetos para facilitar algumas configurações;</li>
+<li>Abuse dos <code>-v</code> ao rodar seus playbooks quando precisar depurar algum problema;</li>
+<li>Cuidado com as versõs de Python e dependências de pacotes do Python;</li>
+<li>Use a abuse de roles prontas no Ansible Galaxy;</li>
+<li>Evite complexidade no seu playbook principal, quebre em roles;</li>
+<li>Use um editor que tenha bom suporte para YAML;</li>
+<li>Playbooks podem ser demorados para executar, se possível rode de uma VM dentro da sua infra para evitar problemas de rede e use screen ou tmux; e</li>
+<li>Não complique o simples.</li>
+</ul>
+<h1 id="referências-para-estudo">Referências para estudo</h1>
+<ul>
+<li><a href="https://www.youtube.com/user/linuxtipscanal">Canal da LinuxTips</a></li>
+<li><a href="https://leanpub.com/u/geerlingguy">Livros do Jeff Geerling na Leanpub</a></li>
+<li><a href="https://www.youtube.com/channel/UC-JJ1NXjx8QI-tuG0PMFbhA">O Matheus Fidelis está fazendo uma sequência de videos usando Ansible para subir uma stack CNCF</a></li>
+<li><a href="https://www.ansible.com/resources">Recursos no site do Ansible</a></li>
+</ul>
+<h1 id="considerações-finais">Considerações finais</h1>
+<p>Ficou bem superficial mas era só para dar um &ldquo;cheiro&rdquo; no assunto mesmo pois vou precisar dessa pequena base de conhecimento para voltarmos naquele artigo do Packer e adicionar o Ansible nele, ainda vamos ter um de Terraform no meio do caminho.</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/ansible/" rel="tag">ansible</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de softwares
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

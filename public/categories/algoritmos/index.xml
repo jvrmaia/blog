@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algoritmos on João Maia</title>
+    <link>http://blog.joaovrmaia.com/categories/algoritmos/</link>
+    <description>Recent content in algoritmos on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Mon, 17 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.joaovrmaia.com/categories/algoritmos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hashing e criptografia</title>
+      <link>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</guid>
+      <description>Olá,
+A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?
+Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos.</description>
+    </item>
+    
+  </channel>
+</rss>

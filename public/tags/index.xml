@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/</link>
+    <description>Recent content in Tags on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang</title>
+      <link>http://blog.joaovrmaia.com/tags/golang/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>http://blog.joaovrmaia.com/tags/http/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iniciante</title>
+      <link>http://blog.joaovrmaia.com/tags/iniciante/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/iniciante/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bgp</title>
+      <link>http://blog.joaovrmaia.com/tags/bgp/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/bgp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>infraestrutura</title>
+      <link>http://blog.joaovrmaia.com/tags/infraestrutura/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/infraestrutura/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bitbucket</title>
+      <link>http://blog.joaovrmaia.com/tags/bitbucket/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/bitbucket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dns</title>
+      <link>http://blog.joaovrmaia.com/tags/dns/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/dns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>http://blog.joaovrmaia.com/tags/git/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>http://blog.joaovrmaia.com/tags/github/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gitlab</title>
+      <link>http://blog.joaovrmaia.com/tags/gitlab/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/gitlab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ansible</title>
+      <link>http://blog.joaovrmaia.com/tags/ansible/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>http://blog.joaovrmaia.com/tags/aws/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iam</title>
+      <link>http://blog.joaovrmaia.com/tags/iam/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/iam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>http://blog.joaovrmaia.com/tags/security/</link>
+      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>packer</title>
+      <link>http://blog.joaovrmaia.com/tags/packer/</link>
+      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/packer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dicas</title>
+      <link>http://blog.joaovrmaia.com/tags/dicas/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/dicas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terminal</title>
+      <link>http://blog.joaovrmaia.com/tags/terminal/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>http://blog.joaovrmaia.com/tags/python/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>http://blog.joaovrmaia.com/tags/devops/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>diagrama</title>
+      <link>http://blog.joaovrmaia.com/tags/diagrama/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/diagrama/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

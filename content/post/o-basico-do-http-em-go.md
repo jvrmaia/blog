@@ -1,6 +1,6 @@
 ---
 author: "João Maia"
-date: 2021-03-03
+date: 2021-03-07
 title: "O básico do HTTP em Go"
 tags: [
     "golang",
@@ -67,7 +67,7 @@ Tente imaginar o que é esperado de retorno dessa função e compare com a respo
 
 Repare que para todos os tipos ele retornou o valor padrão, no caso nulo, do tipo e no caso quando era um ponteiro do valor retornou `nil` e detalhes entre um espaço maior no começo entre `0` e `false` que é por conta da `string` vazia. [Aqui](https://golang.org/ref/spec#The_zero_value) tem mais sobre como é isso em Go.
 
-Vamos faze mais um teste que é na parte de lidar com a informação das requisições no seu formato mais comum hoje na Web que é o [JSON](https://www.json.org/json-pt.html). No caso para simplificar vou escrever o JSON direto na string ao invés de emular a requisição ([código](https://play.golang.org/p/LrWFLeDBWUY)):
+Vamos fazer mais um teste que é na parte de lidar com a informação das requisições no seu formato mais comum hoje na Web que é o [JSON](https://www.json.org/json-pt.html). No caso para simplificar vou escrever o JSON direto na string ao invés de emular a requisição ([código](https://play.golang.org/p/LrWFLeDBWUY)):
 
 ```go
 package main
@@ -193,7 +193,7 @@ type Client struct {
 }
 ```
 
-Podemos ver que temos algumas configurações interessantes na estrutura do `Client` mas hoje vamos falar apenas do `Timeout` que é onde um erro pode custar caro.
+Podemos ver que temos algumas configurações interessantes na estrutura do `Client`, vamos falar do `Timeout` que é onde um erro pode custar caro.
 
 > A Timeout of zero means no timeout.
 
@@ -204,6 +204,187 @@ Como vimos na parte anterior o Go trabalha com valores nulos por padrão e na co
 Se ainda não ficou claro o conceito de tempo de expiração vamos aproveitar o nosso momento atual de pandemia que estamos fazendo reuniões de forma virtual e eventos online, é bem provável que você já tenha participado de alguma que não tinha membros suficientes ainda para começar e alguém dito: "Vamos esperar 5 minutos e então começamos", esse é o tempo de expiração.
 
 Lembra que na parte de HTTP falamos que a resposta do servidor de forma simples é o estado de retorno, cabeçalho e corpo da mensagem? Então, esse configuração de expiração é para até o momento que o corpo da mensagem tenha sido completamente lido senão temos esse erro igual na imagem do Google Chrome acima.
+
+Outra parte importante do `Client` é essa parte de `Transport` que vai ter várias configurações importantes:
+
+```go
+type Transport struct {
+
+    // Proxy specifies a function to return a proxy for a given
+    // Request. If the function returns a non-nil error, the
+    // request is aborted with the provided error.
+    //
+    // The proxy type is determined by the URL scheme. "http",
+    // "https", and "socks5" are supported. If the scheme is empty,
+    // "http" is assumed.
+    //
+    // If Proxy is nil or returns a nil *URL, no proxy is used.
+    Proxy func(*Request) (*url.URL, error)
+
+    // DialContext specifies the dial function for creating unencrypted TCP connections.
+    // If DialContext is nil (and the deprecated Dial below is also nil),
+    // then the transport dials using package net.
+    //
+    // DialContext runs concurrently with calls to RoundTrip.
+    // A RoundTrip call that initiates a dial may end up using
+    // a connection dialed previously when the earlier connection
+    // becomes idle before the later DialContext completes.
+    DialContext func(ctx context.Context, network, addr string) (net.Conn, error) // Go 1.7
+
+    // Dial specifies the dial function for creating unencrypted TCP connections.
+    //
+    // Dial runs concurrently with calls to RoundTrip.
+    // A RoundTrip call that initiates a dial may end up using
+    // a connection dialed previously when the earlier connection
+    // becomes idle before the later Dial completes.
+    //
+    // Deprecated: Use DialContext instead, which allows the transport
+    // to cancel dials as soon as they are no longer needed.
+    // If both are set, DialContext takes priority.
+    Dial func(network, addr string) (net.Conn, error)
+
+    // DialTLSContext specifies an optional dial function for creating
+    // TLS connections for non-proxied HTTPS requests.
+    //
+    // If DialTLSContext is nil (and the deprecated DialTLS below is also nil),
+    // DialContext and TLSClientConfig are used.
+    //
+    // If DialTLSContext is set, the Dial and DialContext hooks are not used for HTTPS
+    // requests and the TLSClientConfig and TLSHandshakeTimeout
+    // are ignored. The returned net.Conn is assumed to already be
+    // past the TLS handshake.
+    DialTLSContext func(ctx context.Context, network, addr string) (net.Conn, error) // Go 1.14
+
+    // DialTLS specifies an optional dial function for creating
+    // TLS connections for non-proxied HTTPS requests.
+    //
+    // Deprecated: Use DialTLSContext instead, which allows the transport
+    // to cancel dials as soon as they are no longer needed.
+    // If both are set, DialTLSContext takes priority.
+    DialTLS func(network, addr string) (net.Conn, error) // Go 1.4
+
+    // TLSClientConfig specifies the TLS configuration to use with
+    // tls.Client.
+    // If nil, the default configuration is used.
+    // If non-nil, HTTP/2 support may not be enabled by default.
+    TLSClientConfig *tls.Config
+
+    // TLSHandshakeTimeout specifies the maximum amount of time waiting to
+    // wait for a TLS handshake. Zero means no timeout.
+    TLSHandshakeTimeout time.Duration // Go 1.3
+
+    // DisableKeepAlives, if true, disables HTTP keep-alives and
+    // will only use the connection to the server for a single
+    // HTTP request.
+    //
+    // This is unrelated to the similarly named TCP keep-alives.
+    DisableKeepAlives bool
+
+    // DisableCompression, if true, prevents the Transport from
+    // requesting compression with an "Accept-Encoding: gzip"
+    // request header when the Request contains no existing
+    // Accept-Encoding value. If the Transport requests gzip on
+    // its own and gets a gzipped response, it's transparently
+    // decoded in the Response.Body. However, if the user
+    // explicitly requested gzip it is not automatically
+    // uncompressed.
+    DisableCompression bool
+
+    // MaxIdleConns controls the maximum number of idle (keep-alive)
+    // connections across all hosts. Zero means no limit.
+    MaxIdleConns int // Go 1.7
+
+    // MaxIdleConnsPerHost, if non-zero, controls the maximum idle
+    // (keep-alive) connections to keep per-host. If zero,
+    // DefaultMaxIdleConnsPerHost is used.
+    MaxIdleConnsPerHost int
+
+    // MaxConnsPerHost optionally limits the total number of
+    // connections per host, including connections in the dialing,
+    // active, and idle states. On limit violation, dials will block.
+    //
+    // Zero means no limit.
+    MaxConnsPerHost int // Go 1.11
+
+    // IdleConnTimeout is the maximum amount of time an idle
+    // (keep-alive) connection will remain idle before closing
+    // itself.
+    // Zero means no limit.
+    IdleConnTimeout time.Duration // Go 1.7
+
+    // ResponseHeaderTimeout, if non-zero, specifies the amount of
+    // time to wait for a server's response headers after fully
+    // writing the request (including its body, if any). This
+    // time does not include the time to read the response body.
+    ResponseHeaderTimeout time.Duration // Go 1.1
+
+    // ExpectContinueTimeout, if non-zero, specifies the amount of
+    // time to wait for a server's first response headers after fully
+    // writing the request headers if the request has an
+    // "Expect: 100-continue" header. Zero means no timeout and
+    // causes the body to be sent immediately, without
+    // waiting for the server to approve.
+    // This time does not include the time to send the request header.
+    ExpectContinueTimeout time.Duration // Go 1.6
+
+    // TLSNextProto specifies how the Transport switches to an
+    // alternate protocol (such as HTTP/2) after a TLS ALPN
+    // protocol negotiation. If Transport dials an TLS connection
+    // with a non-empty protocol name and TLSNextProto contains a
+    // map entry for that key (such as "h2"), then the func is
+    // called with the request's authority (such as "example.com"
+    // or "example.com:1234") and the TLS connection. The function
+    // must return a RoundTripper that then handles the request.
+    // If TLSNextProto is not nil, HTTP/2 support is not enabled
+    // automatically.
+    TLSNextProto map[string]func(authority string, c *tls.Conn) RoundTripper // Go 1.6
+
+    // ProxyConnectHeader optionally specifies headers to send to
+    // proxies during CONNECT requests.
+    // To set the header dynamically, see GetProxyConnectHeader.
+    ProxyConnectHeader Header // Go 1.8
+
+    // GetProxyConnectHeader optionally specifies a func to return
+    // headers to send to proxyURL during a CONNECT request to the
+    // ip:port target.
+    // If it returns an error, the Transport's RoundTrip fails with
+    // that error. It can return (nil, nil) to not add headers.
+    // If GetProxyConnectHeader is non-nil, ProxyConnectHeader is
+    // ignored.
+    GetProxyConnectHeader func(ctx context.Context, proxyURL *url.URL, target string) (Header, error) // Go 1.16
+
+    // MaxResponseHeaderBytes specifies a limit on how many
+    // response bytes are allowed in the server's response
+    // header.
+    //
+    // Zero means to use a default limit.
+    MaxResponseHeaderBytes int64 // Go 1.7
+
+    // WriteBufferSize specifies the size of the write buffer used
+    // when writing to the transport.
+    // If zero, a default (currently 4KB) is used.
+    WriteBufferSize int // Go 1.13
+
+    // ReadBufferSize specifies the size of the read buffer used
+    // when reading from the transport.
+    // If zero, a default (currently 4KB) is used.
+    ReadBufferSize int // Go 1.13
+
+    // ForceAttemptHTTP2 controls whether HTTP/2 is enabled when a non-zero
+    // Dial, DialTLS, or DialContext func or TLSClientConfig is provided.
+    // By default, use of any those fields conservatively disables HTTP/2.
+    // To use a custom dialer or TLS config and still attempt HTTP/2
+    // upgrades, set this to true.
+    ForceAttemptHTTP2 bool // Go 1.13
+    // contains filtered or unexported fields
+}
+```
+
+Nele é interessante notar que podemos fazer o uso de `Proxy` caso seja um requisito seu, você também pode criar conexões customizadas com as funções `Dial` e configurar o `TLS Client`. Esses recursos são legais mas acabam sendo casos bem pontuais no nosso projeto e não comuns. O que vale mais a pena ficar atento aqui são outros atributos que vão estar fortemente ligados a resiliência do nosso `HTTP Client`, são eles:
+- `DisableKeepAlives`: é uma configuração que existe nos dois contextos e é bem interessante quando habilitada pois permite você saber ser a comunicação entre cliente e servidor não foi quebrada;
+- `MaxIdleConns` e `MaxIdleConnsPerHost`: essa é uma configuração casada com a anterior, pois para ter essa monitoria é preciso manter uma conexão aberta entre cliente e servidor para saber da saúde desse canal, essa configuração limita a quantidade de conexões desse tipo que podem existir, isso é bem importante para você não lotar sua aplicação de conexões que não estão transferindo dados e apenas validando a contectividade;
+- `IdleConnTimeout`: se você usar o recurso do TCP Keep-alive é também importante ficar atento a isso pois se o valor padrão é não ter limite e isso pode fazer sua aplicação chegar no valor máximo de conexões abertas mais rápido; e
+- `ForceAttemptHTTP2`: se você pode, eu recomendo. =)
 
 ## Server
 
@@ -301,6 +482,21 @@ type Server struct {
 }
 ```
 
+Assim como o `Client` o `Server` tem várias configurações importantes e precisamos tomar bastante cuidado com elas, aqui também vamos ter questões a serem configuradas sobre `Timeout`:
+- `ReadTimeout`: esse é o tempo que seu servidor vai esperar para ler todas as informações da requisição que está recebendo e caso nulo não terá limite de tempo;
+- `ReadHeaderTimeout`:  parecido com o anterior mas apenas para o Header, caso ele não seja definido usará o `ReadTimeout` caso tenha sido definido;
+- `WriteTimeout`: esse é o tempo de vida total da requisição no seu servidor e caso não configurado a requisição pode ficar presa eternamente no seu servidor causando danos a ele; e
+- `IdleTimeout`: é o tempo máximo que o seu servidor vai ficar disponível ao cliente sem troca de dados efetivas.
+
+Além disso, temos como configurar o TLS através de `TLSConfig` que é muito importante ter cuidado caso sua aplicação fique acessível diretamente na Internet. Algumas outras configurações que são importante ter cuidado:
+- `Addr`: aqui você configura o endereço que seu servidor vai escutar requisições, por exemplo, "127.0.0.1:3000" significa que apenas requisições vindo da própria máquina que roda o servidor na porta 3000 vão ser aceitas, o padrão é toda requisição na porta 80;
+- `Handler`: nesse componentes cadastramos as rotas e métodos que esse nosso servidor vai responder; e
+- `ErrorLog`: caso você tenha um sistema de agregação de logs customizados você pode definir ele aqui.
+
+# Conclusão
+
+É muito importante estar atento a esses detalhes do Go sobre valores padrão pois isso pode nos causar grandes problemas com comportamentos não esperados, mesmo você usando bibliotecas que fazem abstrações dessa parte nativa do HTTP do Go sofrem do mesmo problema falando das bibliotecas mais populares. Caso tenha interesse em ver isso mais na prática eu tenho um projeto no meu GitLab para testar esses comportamentos, confira ele [aqui](https://gitlab.com/jvrmaia/golang-http-playground).
+
 # Referências
 
 - HTTP: https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol
@@ -314,3 +510,4 @@ type Server struct {
 - Documentação do `net/http` Go package: https://golang.org/pkg/net/http/
 - Go `net/http` Client: https://golang.org/pkg/net/http/#Client
 - Go `net/http` Server: https://golang.org/pkg/net/http/#Server
+- Go HTTP playground: https://gitlab.com/jvrmaia/golang-http-playground

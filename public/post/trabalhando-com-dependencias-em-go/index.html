@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Trabalhando com dependências em Go - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Trabalhando com dependências em Go" />
+<meta property="og:description" content="Olá,
+Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-01-22T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-01-22T00:00:00&#43;00:00" />
+
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Trabalhando com dependências em Go"/>
+<meta name="twitter:description" content="Olá,
+Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Trabalhando com dependências em Go</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-22T00:00:00Z">2020-01-22</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linguagens-de-programa%C3%A7%C3%A3o/" rel="category">linguagens de programação</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/trabalhando-com-dependencias-em-go/modules.png" alt="Trabalhando com dependências em Go">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho.</p>
+<p>Quando comecei com Go não tinha nenhuma ferramenta de gestão de dependências em Go, então, a solução era manter ou um <code>make dep</code> que tinha todos os <code>go get</code> necessários para rodar o projeto ou algum script em bash que fazia o mesmo trabalho. Sofrido, não? Para quem vinha de de C/C++ era até melhor a experiência mas para quem já vinha de Ruby, Python e Java, por exemplo, era horrível a experiência. Não demorou muito com a aderência da comunidade pela linguagem isso ser uma reclamação constante e emergir da comunidade algumas soluções até a solução oficial da linguagem hoje, segue a minha jornada que vou abordar em mais detalhes a seguir: Godeps, govendor, Glide, go dep e go modules.</p>
+<h1 id="godeps">Godeps</h1>
+<p><a href="https://github.com/tools/godep">Esse</a> foi o primeiro projeto que usei para gerir dependências em Go. Foi uma experiência de uso de ferramenta bem ruim e ai começava a saga de comitar a pasta <code>vendor</code> no repositório para não correr risco de quebrar a integração contínua.</p>
+<h1 id="govendor">govendor</h1>
+<p>Esse ainda consta no Github <a href="https://github.com/kardianos/govendor">aqui</a>. Foi o primeiro que usei depois do Godeps e ajudou bastante com a interface de linha de comandos dele, ajudou o controlar melhor e ficar mais com cara de sistema de gestão de dependências iguais ao que eu tinha familiaridade de outras linguagens.</p>
+<h1 id="glide">Glide</h1>
+<p>Ainda sentindo com os problemas do govendor, achei o <a href="https://github.com/Masterminds/glide">Glide</a> que ajudou muito com o conceito de arquivo de <code>lock</code> que versionava as minhas dependências. Agora sim, estava satisfeito pois tinha chegado a um nível próximo ao do que vinha usando no Python e Ruby, o que faltava era ter um serviço central para cuidar das dependências.</p>
+<h1 id="go-dep">go dep</h1>
+<p>Estava feliz com meus projetos migrados para o Glide e me deparo com a chegada do <a href="https://github.com/golang/dep">go dep</a>, pronto, mais uma vez lá vamos nós migrar por conta que parece que a solução oficial da linguagem vai ser essa. Acabou que a migração não aconteceu e entrei em um hiato de trabalhar com Go e não tive a experiência de usar.</p>
+<h1 id="go-modules">go modules</h1>
+<p>Afastado da programação em Go, eis que surge o <a href="https://blog.golang.org/using-go-modules">Go Modules</a> e parece que a saga da gestão de dependências chega ao fim. Agora, voltando a programar em Go tenho como meta usar ele mas ainda estamos aqui com umas outras pendências mais importantes no projeto antes de migrar, estou ansioso para testar mas nos projetos que vi no Github que usam e testei a experiência ficou bem melhor. Nos <a href="https://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/">último artigo</a> acabei dando <code>spoiler</code> de como usar <code>go modules</code> no projeto <code>hello</code>. Como é a cara desse <code>go modules</code>:</p>
+<pre><code>$ go mod
+Go mod provides access to operations on modules.
+
+Note that support for modules is built into all the go commands,
+not just 'go mod'. For example, day-to-day adding, removing, upgrading,
+and downgrading of dependencies should be done using 'go get'.
+See 'go help modules' for an overview of module functionality.
+
+Usage:
+
+    go mod &lt;command&gt; [arguments]
+
+The commands are:
+
+    download    download modules to local cache
+    edit        edit go.mod from tools or scripts
+    graph       print module requirement graph
+    init        initialize new module in current directory
+    tidy        add missing and remove unused modules
+    vendor      make vendored copy of dependencies
+    verify      verify dependencies have expected content
+    why         explain why packages or modules are needed
+
+Use &quot;go help mod &lt;command&gt;&quot; for more information about a command.
+</code></pre>
+<p>Alterando o projeto <code>hello</code> para ver como funciona o <code>go modules</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">morestrings</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;testing&#34;</span>
+    <span class="s">&#34;github.com/stretchr/testify/assert&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">TestReverseRunes</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">cases</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+        <span class="nx">in</span><span class="p">,</span> <span class="nx">want</span> <span class="kt">string</span>
+    <span class="p">}{</span>
+        <span class="p">{</span><span class="s">&#34;Hello, world&#34;</span><span class="p">,</span> <span class="s">&#34;dlrow ,olleH&#34;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">&#34;Hello, 世界&#34;</span><span class="p">,</span> <span class="s">&#34;界世 ,olleH&#34;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">c</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">cases</span> <span class="p">{</span>
+        <span class="nx">got</span> <span class="o">:=</span> <span class="nf">ReverseRunes</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">in</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">want</span> <span class="p">{</span>
+            <span class="nx">assert</span><span class="p">.</span><span class="nf">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Executando agora vamos ter o seguinte resultado:</p>
+<pre><code>$ go test ./...
+go: finding github.com/stretchr/testify v1.4.0
+go: downloading github.com/stretchr/testify v1.4.0
+go: extracting github.com/stretchr/testify v1.4.0
+go: downloading gopkg.in/yaml.v2 v2.2.2
+go: downloading github.com/davecgh/go-spew v1.1.0
+go: downloading github.com/pmezard/go-difflib v1.0.0
+go: extracting gopkg.in/yaml.v2 v2.2.2
+go: extracting github.com/pmezard/go-difflib v1.0.0
+go: extracting github.com/davecgh/go-spew v1.1.0
+go: finding github.com/pmezard/go-difflib v1.0.0
+go: finding github.com/davecgh/go-spew v1.1.0
+go: finding gopkg.in/yaml.v2 v2.2.2
+?   	github.com/jvrmaia/hello	[no test files]
+ok  	github.com/jvrmaia/hello/morestrings	0.002s
+</code></pre>
+<p>Repare que ainda não temos uma pasta <code>vendor</code> trabalhando dessa forma no projeto:</p>
+<pre><code>$ ls
+go.mod  go.sum  hello.go  morestrings/
+</code></pre>
+<p>Para criar a estrutura do <code>vendor</code> basta usar o comando <code>go mod vendor</code>, veja o resultado:</p>
+<pre><code>$ tree -L 3 .
+.
+├── go.mod
+├── go.sum
+├── hello.go
+├── morestrings
+│   ├── morestrings.go
+│   └── reverse_test.go
+└── vendor
+    ├── github.com
+    │   ├── davecgh
+    │   ├── google
+    │   ├── pmezard
+    │   └── stretchr
+    ├── gopkg.in
+    │   └── yaml.v2
+    └── modules.txt
+$ cat vendor/modules.txt
+# github.com/davecgh/go-spew v1.1.0
+github.com/davecgh/go-spew/spew
+# github.com/google/go-cmp v0.4.0
+github.com/google/go-cmp/cmp
+github.com/google/go-cmp/cmp/internal/diff
+github.com/google/go-cmp/cmp/internal/flags
+github.com/google/go-cmp/cmp/internal/function
+github.com/google/go-cmp/cmp/internal/value
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
+# github.com/stretchr/testify v1.4.0
+github.com/stretchr/testify/assert
+# gopkg.in/yaml.v2 v2.2.2
+gopkg.in/yaml.v2
+</code></pre>
+<p>Existem outras coisas mais a serem exploradas no <code>go modules</code> mas recomendo que agora você tente ir por você mesmo nessa descoberta e para ajudar no próximo tópico recomendo alguns artigos sobre essa parte da história de gestão de dependências em Go e sobre o uso de <code>go modules</code>.</p>
+<p>Espero que com essa sequência de artigos tenha ajudado você a começar a sua jornada em Go.</p>
+<h1 id="artigos-relacionados-ao-tema">Artigos relacionados ao tema</h1>
+<ul>
+<li><a href="https://research.swtch.com/deps">Our Software Dependency Problem</a></li>
+<li><a href="https://github.com/golang/go/wiki/PackageManagementTools">Wiki do Go sobre ferramentes de gestão de dependências</a></li>
+<li><a href="https://www.freecodecamp.org/news/an-intro-to-dep-how-to-manage-your-golang-project-dependencies-7b07d84e7ba5/">An intro to dep: How to manage your Golang project dependencies</a></li>
+<li><a href="https://medium.com/@adiach3nko/package-management-with-go-modules-the-pragmatic-guide-c831b4eaaf31">Package Management With Go Modules: The Pragmatic Guide</a></li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/iniciante/" rel="tag">iniciante</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de softwares
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

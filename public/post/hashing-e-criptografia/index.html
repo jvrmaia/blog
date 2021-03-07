@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hashing e criptografia - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Hashing e criptografia" />
+<meta property="og:description" content="Olá,
+A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?
+Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/hashing-e-criptografia/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-02-17T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2020-02-17T00:00:00&#43;00:00" />
+
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hashing e criptografia"/>
+<meta name="twitter:description" content="Olá,
+A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?
+Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Hashing e criptografia</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-02-17T00:00:00Z">2020-02-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algoritmos/" rel="category">algoritmos</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/hashing-e-criptografia/criptografia.jpeg" alt="Hashing e criptografia">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?</p>
+<h1 id="visitando-a-matemática">Visitando a matemática</h1>
+<p>Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos. Então, vou assumir que todos tenham estudado teoria de conjuntos e funções. Se tem dúvidas sobre os dois assuntos segue uma <a href="https://www.youtube.com/watch?v=2g0o0lzQin8&amp;list=PL83s8LGM84J6Ew0fa1Ue2YZlNEqRXCBQo">playlist</a> do canal <a href="https://www.youtube.com/channel/UCjIPRjJZtGhzWD2LrEKOHMA">Matemática Rio com Prof. Rafael Procopio</a> que mostra tudo sobre o assunto.</p>
+<p>De forma breve, vamos revisitar algumas definições de forma simplificada:</p>
+<ul>
+<li>Função injetora: nunca aponta elementos distintos do seu domínio para o mesmo elemento de seu contradomínio;</li>
+<li>Função sobrejetora: é quando o seu contradomínio é igual a sua imagem;</li>
+<li>Função bijetora: é quando a função é injetora e sobrejetora ao mesmo tempo;</li>
+<li>Função inversa: sendo <code>f</code> uma função que mapeia valores do domínio <code>A</code> para o conjunto <code>B</code>, uma função inversa <code>g</code> é aquela que mapeio o domínio <code>B</code> para o contradomínio <code>A</code>.</li>
+</ul>
+<p><img src="/img/hashing-e-criptografia/tipos-de-funcoes.jpg" alt="Tipos de funções"></p>
+<h1 id="relacionamento-entre-matemática-e-computação">Relacionamento entre matemática e computação</h1>
+<p>Independente da linguagem que você tenha experiência, de alguma forma é possível criar funções com ela, vamos escolher o Python aqui como exemplo por conta de sua simplicidade, segue um exemplo de função que calcula o dobre de um valor:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">dobro</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">dobro</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div><p>A presentação matemática poderia ser nesse caso:</p>
+<p>$$
+\begin{equation}f: \mathbb{Z} \to \mathbb{Z}, y = f(x) = x * 2\end{equation}
+$$</p>
+<p>Onde <code>f</code> representa a função <code>dobro</code> do Python e <code>a</code> representa o <code>x</code> e o domínio da função é um número inteiro. Essa é uma representação bem simples mas muito importante para o que vamos ver mais a seguir. Outro exemplo interessante:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">quadrado</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">quadrado</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="mf">9.0</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div><p>A presentação matemática poderia ser nesse caso:</p>
+<p>$$
+\begin{equation}g: \mathbb{R} \to \mathbb{R} ^ + , y = g(x) = x ^ 2\end{equation}
+$$</p>
+<p>Olhando as funções <code>f</code> e <code>g</code> dado as suas definições de domínios, sabe dizer o que elas são? A resposta é simples, <code>f</code> no caso é injetora pois os números impares do contradomínio não estão presentes na imagem da função e na função <code>g</code> ela é uma função sobrejetora pois, por exemplo, para valores de <code>x</code> iguais a 3 ou -3 o valor é 9 e para todo valor de seu domínio vai ter um contradomínio correpondente, logo sua imagem vai ser o contradomínio.</p>
+<p>Ficou faltando apenas uma das funções dentre as mencionadas no tópico anterior: bijetora. Você pode se perguntar por que a função <code>g</code> não é? Simples, não existe valor $$\mathbb{R} ^ +$$ cuja multiplicação por ele mesmo seja um número negativo. Então, para termos um exemplo simes de uma função bijetora, vamos ao caso mais trivial:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">identidade</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">identidade</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div><p>$$
+\begin{equation}h: \mathbb{Z} \to \mathbb{Z}, y = h(x) = x\end{equation}
+$$</p>
+<p>Agora que já fizemos uma introdução da matemática e um breve paralelo com a computação podemos dar continuidade ao tópico principal.</p>
+<h1 id="hashing">Hashing</h1>
+<p>Um função de hash é aquela que transforma o seu valor de entrada em uma saída de tamanho fixo, em geral pequena, usualmente de 256 a 512 bits. Uma boa função de hash tem que ter algumas características para seu uso:</p>
+<ul>
+<li>a computação do seu valor deve ser eficiente para qualquer entrada;</li>
+<li>usando um valor de hash calculado deve ser extramamente complexo chegar no seu valor de entrada;</li>
+<li>deve ser complexo de mudar a entrada sem mudar o resultado do hash; e</li>
+<li>deve ser difícli encontrar duas entradas com o mesmo valor de hash.</li>
+</ul>
+<p>São exemplos de função hash: MD5, SHA-1, SHA-256, SHA-3, and BLAKE2. As duas primeiras você programador que já utilizou git ou fez download de uma ISO linux ou software já devem ter visto elas antes. O MD5 é uma função de hash muito simples usada para você validar que fez o download de um arquivo correto, como isso funciona?</p>
+<ol>
+<li>Vou criar um arquivo chamado <code>a.txt</code> com o conteúdo: <code>teste</code>;</li>
+<li>Executo o <code>md5sum a.txt</code> para validar saber seu MD5: <code>1ca308df6cdb0a8bf40d59be2a17eac1</code>;</li>
+<li>Envio o arquivo para uma outra pessoa qualquer;</li>
+<li>A pessoa executa o mesmo comando do passo <code>2</code>; e</li>
+<li>Avalia resultado:
+<ul>
+<li>Se o valor for diferente significa que o arquivo chegou corrompido ou adulterado no meio do caminho; ou</li>
+<li>Se o valor for o mesmo, o arquivo foi recebido sem problemas.</li>
+</ul>
+</li>
+</ol>
+<p>E o git? Já reparou que toda vez que você faz um commit um valor fica associado aquela mudança? Exemplo, no último commit que fiz nesse blog de mensagem, <code>update</code>, ficou associado a ele um hash <code>92259c5e7f2ac0cce49c971312fd548c4dbbe07d</code> que é um resultado da função SHA-1.</p>
+<h1 id="criptografia">Criptografia</h1>
+<p>Criptografia não tem uma definição clara se você fizer uma busca mas olhando o significado da palavra vinda do grego temos: kryptós, &ldquo;escondido&rdquo;, e gráphein, &ldquo;escrita&rdquo;. Então, podemos encarar esse significa que refleto no uso como sua defição, a criptografia é largamente usada onde precisamos de criar uma comunicação segura, por exemplo, o HTTPS que usamos para abrir páginas na internet. Todo esse processo consiste em duas etapas que são: encriptação de decriptação. Na encriptação é a fase que pegados os dados puros e transformamos ele em dados embaralhados e a decriptação é o processo que reverte esse embaralhamento. Se você viu o filme <a href="https://www.imdb.com/title/tt2084970/">O Jogo da Imitação</a> deve ter entendido do que estou falando, outro exemplo, quem na escola nunca criou alguma linguagem nova para se comunicar com os amigos para não serem entendidos tipo a <a href="https://pt.wikipedia.org/wiki/L%C3%ADngua_do_P">Língua do P</a>?</p>
+<p>Dentro desse universo de algoritmos a criptografia se divide em dois grupos: simétricas e assimétricas. Criptografia simétrica é aquela que uma chave de segredo será usada pelas duas partes da comunição, por exemplo, suponha um cofre que você e outra pessoa tenham a chave dele, então, vocês decidem conversar através de um bilhete que para cada um escrever e ler é preciso usar a chave para abrir o cofre, logo, vocês conseguem estabelecer uma comunicação restrita que existe apenas uma chave para abrir o cofre onde tem a informação. Na assimétrica o processo é diferente, nesse caso os comunicadores vão gerar duas chaves, uma privada e outra pública, os dois comunicadores vão fazer as trocas dessa chave pública para conseguirem se comunicar. Então, cada comunicador vai fazer a encriptação da mensagem com a chave pública do comunicador para que ele possa com a chave privada dele abrir a mensagem.</p>
+<p>Nesse caso a criptografia se parece muito com a função bijetora para ter sua funcionalidade atendida mas isso não é verdade pois como podemos ver no parágrafo anterior existe um elementro extra que é a chave de criptografia. O que nos daria algo do tipo:</p>
+<p>$$
+\begin{equation}encrypt: (\mathbb{X},\mathbb{X}) \to \mathbb{X}, encrypt(msg, key) = crypt\_msg\end{equation}
+$$</p>
+<p>$$
+\begin{equation}decrypt: (\mathbb{X},\mathbb{X}) \to \mathbb{X}, decrypt(crypt\_msg, key) = msg\end{equation}
+$$</p>
+<p>$$
+\begin{equation}\mathbb{X}\ é\ um\ texto\ qualquer\end{equation}
+$$</p>
+<p>Exemplos de criptografias:</p>
+<ul>
+<li>Data Encryption Standard (DES) por Horst Feistel</li>
+<li>Advanced Encryption Standard (AES) por Rijndael</li>
+<li>Pretty Good Privacy (PGP) por Phil Zimmermann</li>
+<li>X.509 por International Telecommunications Union</li>
+<li>Transport Layer Security (TLS) por  Internet Engineering Task Force (IETF)</li>
+</ul>
+<p>Vamos testar? Exemplo usando a <a href="https://pypi.org/project/pycrypto/">pycrypto</a>:</p>
+<pre><code>&gt;&gt;&gt; from Crypto.Cipher import AES
+&gt;&gt;&gt; obj = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456')
+&gt;&gt;&gt; message = &quot;The answer is no&quot;
+&gt;&gt;&gt; ciphertext = obj.encrypt(message)
+&gt;&gt;&gt; ciphertext
+'\xd6\x83\x8dd!VT\x92\xaa`A\x05\xe0\x9b\x8b\xf1'
+&gt;&gt;&gt; obj2 = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456')
+&gt;&gt;&gt; obj2.decrypt(ciphertext)
+'The answer is no'
+</code></pre>
+<h1 id="conclusão">Conclusão</h1>
+<p>Como podemos ver hashing e criptografia não a mesma coisa e o assunto é bem complexo, um dos motivos de demorar a ter escrito esse artigo também. O importante é a mensagem que coloquei no começo de não escrever a sua criptografia ou hashing para uso na vida real se não tem a experiência devida. O legal é fazer para uso de estudos e caso se interessar pelo assunto contribuir com algum projeto que lide com isso, segue a <a href="https://en.wikipedia.org/wiki/Comparison_of_cryptography_libraries">lista</a> de vários projetos de criptografia.</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/hashing/" rel="tag">hashing</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/criptografia/" rel="tag">criptografia</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/iniciante/" rel="tag">iniciante</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de softwares
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
