@@ -12,6 +12,16 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
+    <loc>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/categories/devops/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>http://blog.joaovrmaia.com/tags/golang/</loc>
     <lastmod>2021-03-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -48,6 +58,11 @@
     <priority>0.5</priority>
   </url><url>
     <loc>http://blog.joaovrmaia.com/tags/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/tags/terraform/</loc>
     <lastmod>2021-03-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -123,11 +138,6 @@
     <priority>0.5</priority>
   </url><url>
     <loc>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</loc>
-    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>http://blog.joaovrmaia.com/categories/devops/</loc>
     <lastmod>2020-07-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

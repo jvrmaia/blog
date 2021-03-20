@@ -4,17 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>rede de computadores - João Maia</title>
+	<title>terraform - João Maia</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="rede de computadores" />
+		<meta property="og:title" content="terraform" />
 <meta property="og:description" content="Blog pessoal de João Maia, opiniões apenas minha aqui" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/categories/rede-de-computadores/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/tags/terraform/" />
 
 
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="rede de computadores"/>
+<meta name="twitter:title" content="terraform"/>
 <meta name="twitter:description" content="Blog pessoal de João Maia, opiniões apenas minha aqui"/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="alternate" type="application/rss+xml" href="/categories/rede-de-computadores/index.xml" title="João Maia">
+	<link rel="alternate" type="application/rss+xml" href="/tags/terraform/index.xml" title="João Maia">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -104,52 +104,28 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main">
 	<header class="main__header">
-		<h1 class="main__title">rede de computadores</h1>
+		<h1 class="main__title">terraform</h1>
 	</header><article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/">
-			<img src="/img/e-esse-tal-de-bgp/bgp.png" alt="E esse tal de BGP?" />
+		<a href="http://blog.joaovrmaia.com/post/conhecendo-o-terraform/">
+			<img src="/img/conhecendo-o-terraform/terraform.png" alt="Conhecendo o Terraform" />
 		</a>
 	</figure>
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/post/e-esse-tal-de-bgp/" rel="bookmark">
-			E esse tal de BGP?
+			<a href="/post/conhecendo-o-terraform/" rel="bookmark">
+			Conhecendo o Terraform
 			</a>
 		</h2>
 		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-12-02T00:00:00Z">2020-12-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rede-de-computadores/" rel="category">rede de computadores</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-07T00:00:00Z">2021-03-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		Olá,
-nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
-Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="http://blog.joaovrmaia.com/post/vamos-falar-de-dns/">
-			<img src="/img/vamos-falar-de-dns/dns.png" alt="Vamos falar de DNS?" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/vamos-falar-de-dns/" rel="bookmark">
-			Vamos falar de DNS?
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-28T00:00:00Z">2020-08-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rede-de-computadores/" rel="category">rede de computadores</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Olá,
-você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
-Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.
+venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do Terraform que fecha esse ciclo de ferramentas que venho apresentando.
 	</div>
 </article>
 </main>

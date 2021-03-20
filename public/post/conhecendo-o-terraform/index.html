@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Conhecendo o Terraform - João Maia</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Conhecendo o Terraform" />
+<meta property="og:description" content="Olá,
+venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do Terraform que fecha esse ciclo de ferramentas que venho apresentando." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/conhecendo-o-terraform/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-03-07T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-03-07T00:00:00&#43;00:00" />
+
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Conhecendo o Terraform"/>
+<meta name="twitter:description" content="Olá,
+venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do Terraform que fecha esse ciclo de ferramentas que venho apresentando."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-61280444-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="João Maia" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">João Maia</div>
+					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">Sobre</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/post/">
+				
+				<span class="menu__text">Posts</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/tags/">
+				
+				<span class="menu__text">Tags</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/categories/">
+				
+				<span class="menu__text">Categoria</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="http://www.joaovrmaia.com">
+				
+				<span class="menu__text">Site pessoal</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Conhecendo o Terraform</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-07T00:00:00Z">2021-03-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/img/conhecendo-o-terraform/terraform.png" alt="Conhecendo o Terraform">
+		</figure><div class="content post__content clearfix">
+			<p>Olá,</p>
+<p>venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do <a href="https://www.terraform.io/">Terraform</a> que fecha esse ciclo de ferramentas que venho apresentando. Olhando de maneira breve e superficial ou vendo pessoas comentar a respeito dele temos um primeiro entendimento que o Terraform é uma ferramenta apenas de provisionar infraestrutura em lugares como <a href="https://aws.amazon.com/">AWS</a>, <a href="https://cloud.google.com/">Google Cloud</a> e <a href="https://azure.microsoft.com/en-us/">Azure</a>. Isso não é uma verdade pois o objetivo dele é provisionar <em>qualquer</em> serviço de Cloud desde que ele forneça uma API para tal, dentro da terminologia do Terraform chamamos esse serviço de Cloud de <code>provider</code>.</p>
+<h1 id="comparando-terraform-com-outras-soluções">Comparando Terraform com outras soluções</h1>
+<p>No primeiro momento que vemos o uso de Terraform muito orientado a AWS ou outro Cloud Provider já logo imaginamos que ele faz a mesma coisa que <a href="https://www.ansible.com/">Ansible</a>, <a href="https://puppet.com/">Puppet</a> ou <a href="https://www.chef.io/">Chef</a> e são a mesma coisa, isso não é verdade, as soluções mencionadas são ferramentas de gestão de configuração. O Ansible já apresentado aqui no blog, por exemplo, tem a capacidade de provisionar serviços dentro de uma máquina virtual como, por exemplo, instalar o <a href="https://nginx.org/en/">NGINX</a>. O Terraform não tem esse mesmo papel do Ansible, na verdade eles se complementam pois ele pode consumir trabalhos feitos pelo Ansible para provisionar sua solução na sua Cloud, por exemplo, a sua imagem de máquina virtual de NGINX o Terraform pode consumir para criar uma solução com ela em alta disponibilidade na AWS usando multiplas zonas e regiões através de balanceadores de carga e afins tudo feito via Terraform.</p>
+<p>Então, podemos imaginar que o Terraform é uma solução igual ao <a href="https://aws.amazon.com/cloudformation/">Cloud Formation</a> para quem usa AWS pois usando ele vamos definir nossa infraestrutura na nuvem. Qual a diferença entre eles? No Terraform você tem uma única sintaxe que poderá usar a vários <code>providers</code> mas isso não significa que o mesmo código que você usa para subir uma máquina virtual na AWS seja igual ao mesmo na Azure. No Terraform, é trabalhado a fase de planejamento, ou seja, antes de aplicar sua mudança na definição de infraestrutura é possível ver como ela será afetada além de conseguir ver um grafo de dependência do mesmo. Isso é extremamente interessante pois vai te ajudar a evitar possíveis problemas se aplicado diretamente.</p>
+<h1 id="instalando-o-terraform">Instalando o Terraform</h1>
+<p>Pessoalmente gosto mais de gestores de versões das ferramentas que uso e no caso do Terraform temos a solução do <a href="https://github.com/tfutils/tfenv">tfenv</a>. Outras formas de usar o terraform seria baixando o binário dele e colocando no sue <code>$PATH</code> ou usando algumas imagem Docker. A cara do <code>tfenv</code>:</p>
+<pre><code>$ tfenv 
+tfenv 2.0.0-37-g0494129
+Usage: tfenv &lt;command&gt; [&lt;options&gt;]
+
+Commands:
+   install       Install a specific version of Terraform
+   use           Switch a version to use
+   uninstall     Uninstall a specific version of Terraform
+   list          List all installed versions
+   list-remote   List all installable versions  
+</code></pre><p>Listando versões disponíveis:</p>
+<pre><code>$ tfenv list-remote
+0.15.0-beta1
+0.15.0-alpha20210210
+0.15.0-alpha20210127
+0.15.0-alpha20210107
+0.14.8
+0.14.7
+0.14.6
+...
+0.2.0
+0.1.1
+0.1.0
+</code></pre><p>Instalando:</p>
+<pre><code>$ tfenv install 0.15.0-beta1
+Installing Terraform v0.15.0-beta1
+Downloading release tarball from https://releases.hashicorp.com/terraform/0.15.0-beta1/terraform_0.15.0-beta1_linux_amd64.zip
+####################################################################################################################################################################################################################################################### 100.0%
+Downloading SHA hash file from https://releases.hashicorp.com/terraform/0.15.0-beta1/terraform_0.15.0-beta1_SHA256SUMS
+Unable to verify OpenPGP signature unless logged into keybase and following hashicorp
+Archive:  tfenv_download.ArSDdY/terraform_0.15.0-beta1_linux_amd64.zip
+  inflating: /home/jvrmaia/.tfenv/versions/0.15.0-beta1/terraform  
+Installation of terraform v0.15.0-beta1 successful. To make this your default version, run 'tfenv use 0.15.0-beta1'
+</code></pre><p>Usando:</p>
+<pre><code>$ tfenv use 0.15.0-beta1
+Switching default version to v0.15.0-beta1
+Switching completed
+$ terraform -version
+Terraform v0.15.0-beta1
+on linux_amd64
+</code></pre><h1 id="na-prática">Na prática</h1>
+<p>O exemplo de códido apresentado aqui se encontra no repositório <a href="https://gitlab.com/jvrmaia/terraform-intro-example">terraform-intro-example</a> na minha conta do GitLab, segue:</p>
+<div class="highlight"><pre class="chroma"><code class="language-terraform" data-lang="terraform"><span class="kr">variable</span> <span class="s2">&#34;aws_region&#34;</span> <span class="p">{</span>
+  <span class="na">description</span> = <span class="s2">&#34;AWS Region&#34;</span>
+  <span class="na">type</span>        = <span class="nx">string</span>
+  <span class="na">default</span>     = <span class="s2">&#34;us-east-1&#34;</span>
+<span class="p">}</span>
+<span class="kr">
+</span><span class="kr">provider</span> <span class="s2">&#34;aws&#34;</span> <span class="p">{</span>
+  <span class="na">region</span> = <span class="nb">var</span><span class="p">.</span><span class="nx">aws_region</span>
+<span class="p">}</span>
+<span class="kr">
+</span><span class="kr">module</span> <span class="s2">&#34;iam_user&#34;</span> <span class="p">{</span>
+  <span class="na">source</span>  = <span class="s2">&#34;terraform-aws-modules/iam/aws//modules/iam-user&#34;</span>
+  <span class="na">version</span> = <span class="s2">&#34;~&gt; 3.0&#34;</span>
+
+  <span class="na">name</span>                          = <span class="s2">&#34;test-user&#34;</span>
+  <span class="na">force_destroy</span>                 = <span class="kc">true</span>
+  <span class="na">create_iam_user_login_profile</span> = <span class="kc">false</span>
+<span class="p">}</span>
+<span class="kr">
+</span><span class="kr">module</span> <span class="s2">&#34;iam_assumable_roles&#34;</span> <span class="p">{</span>
+  <span class="na">source</span>  = <span class="s2">&#34;terraform-aws-modules/iam/aws//modules/iam-assumable-roles&#34;</span>
+  <span class="na">version</span> = <span class="s2">&#34;~&gt; 3.0&#34;</span>
+
+  <span class="na">trusted_role_arns</span> = <span class="p">[</span>
+<span class="kr">    module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">this_iam_user_arn</span>
+  <span class="p">]</span>
+
+  <span class="na">create_admin_role</span> = <span class="kc">true</span>
+
+  <span class="na">create_poweruser_role</span> = <span class="kc">true</span>
+  <span class="na">poweruser_role_name</span>   = <span class="s2">&#34;developer&#34;</span>
+
+  <span class="na">create_readonly_role</span>       = <span class="kc">true</span>
+  <span class="na">readonly_role_requires_mfa</span> = <span class="kc">false</span>
+<span class="p">}</span>
+<span class="kr">
+</span><span class="kr">output</span> <span class="s2">&#34;access_key_id&#34;</span> <span class="p">{</span>
+  <span class="na">description</span> = <span class="s2">&#34;test-user ACCESS_KEY_ID&#34;</span>
+  <span class="na">value</span>       = <span class="nb">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">this_iam_access_key_id</span>
+<span class="p">}</span>
+<span class="kr">
+</span><span class="kr">output</span> <span class="s2">&#34;access_key_secret&#34;</span> <span class="p">{</span>
+  <span class="na">description</span> = <span class="s2">&#34;test-user ACCESS_KEY_SECRET&#34;</span>
+  <span class="na">value</span>       = <span class="nb">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">this_iam_access_key_secret</span>
+  <span class="na">sensitive</span>   = <span class="kc">true</span>
+<span class="p">}</span> 
+</code></pre></div><p>Como podemos ver é um código bem simples que não faz muitas coisas pois não vou me aprofundar nesse assunto hoje, é só para ter um primeiro contato e noção da ferramenta. Nitidamente o código é voltado a AWS e logo no começo já podemos ver que o Terraform nos permite criar variáveis e configurar valores padrão nelas uma coisa bem interessante nisso é a <code>description</code> que ajuda na documentação do código.</p>
+<p>Lembra que falei que no Terraform trabalhomos com <code>providers</code>? Então, como pode notar logo em segui temos essa declaração de <code>provider</code> definida. Em sequência, vem outro recurso muito legal do Terraform que são os módulos que nos permitem evitar repetição de código e resolver problemas complexos através de composição de soluções. Por fim, crio algumas variáveis de retorno do meu código com uma particularidade na última que marco como <code>sensitive</code> pois se trata de um segredo.</p>
+<p>No começo comentei que o Terraform diferente de outras ferramentas tem uma parte de teste da mudança, vamos conferir como é isso:</p>
+<div class="highlight"><pre class="chroma"><code class="language-terraform" data-lang="terraform"><span class="err">$</span> <span class="nx">terraform</span> <span class="nx">plan</span>
+
+<span class="nx">An</span> <span class="nx">execution</span> <span class="nx">plan</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">generated</span> <span class="nx">and</span> <span class="nx">is</span> <span class="nx">shown</span> <span class="nx">below</span><span class="p">.</span>
+<span class="nx">Resource</span> <span class="nx">actions</span> <span class="nx">are</span> <span class="nx">indicated</span> <span class="nx">with</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">symbols</span><span class="o">:</span>
+  <span class="o">+</span> <span class="nx">create</span>
+ <span class="o">&lt;=</span> <span class="nx">read</span> <span class="p">(</span><span class="nb">data</span> <span class="nx">resources</span><span class="p">)</span>
+
+<span class="nx">Terraform</span> <span class="nx">will</span> <span class="nx">perform</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">actions</span><span class="o">:</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.data.aws_iam_policy_document.assume_role will be read during apply
+</span><span class="c1">  # (config refers to values not yet known)
+</span><span class="c1"></span> <span class="o">&lt;=</span> <span class="nb">data</span> <span class="s2">&#34;aws_iam_policy_document&#34;</span> <span class="s2">&#34;assume_role&#34;</span>  <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">json</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">statement</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">actions</span> = <span class="p">[</span>
+              <span class="o">+</span> <span class="s2">&#34;sts:AssumeRole&#34;</span><span class="p">,</span>
+            <span class="p">]</span>
+          <span class="o">+</span> <span class="na">effect</span>  = <span class="s2">&#34;Allow&#34;</span>
+
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[</span>
+                  <span class="o">+</span> <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">),</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;AWS&#34;</span>
+            <span class="p">}</span>
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;Service&#34;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.data.aws_iam_policy_document.assume_role_with_mfa will be read during apply
+</span><span class="c1">  # (config refers to values not yet known)
+</span><span class="c1"></span> <span class="o">&lt;=</span> <span class="nb">data</span> <span class="s2">&#34;aws_iam_policy_document&#34;</span> <span class="s2">&#34;assume_role_with_mfa&#34;</span>  <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">json</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">statement</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">actions</span> = <span class="p">[</span>
+              <span class="o">+</span> <span class="s2">&#34;sts:AssumeRole&#34;</span><span class="p">,</span>
+            <span class="p">]</span>
+          <span class="o">+</span> <span class="na">effect</span>  = <span class="s2">&#34;Allow&#34;</span>
+
+          <span class="o">+</span> <span class="nx">condition</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">test</span>     = <span class="s2">&#34;Bool&#34;</span>
+              <span class="o">+</span><span class="nb"> values</span>   <span class="o">=</span> <span class="p">[</span>
+                  <span class="o">+</span> <span class="s2">&#34;true&#34;</span><span class="p">,</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">variable</span> = <span class="s2">&#34;aws:MultiFactorAuthPresent&#34;</span>
+            <span class="p">}</span>
+          <span class="o">+</span> <span class="nx">condition</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">test</span>     = <span class="s2">&#34;NumericLessThan&#34;</span>
+              <span class="o">+</span><span class="nb"> values</span>   <span class="o">=</span> <span class="p">[</span>
+                  <span class="o">+</span> <span class="s2">&#34;86400&#34;</span><span class="p">,</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">variable</span> = <span class="s2">&#34;aws:MultiFactorAuthAge&#34;</span>
+            <span class="p">}</span>
+
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[</span>
+                  <span class="o">+</span> <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">),</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;AWS&#34;</span>
+            <span class="p">}</span>
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;Service&#34;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.admin[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;admin&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">assume_role_policy</span>    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">create_date</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span>
+      <span class="o">+</span> <span class="na">id</span>                    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">managed_policy_arns</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span>
+      <span class="o">+</span> <span class="na">name</span>                  = <span class="s2">&#34;admin&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>             = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">inline_policy</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">name</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+          <span class="o">+</span> <span class="na">policy</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.poweruser[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;poweruser&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">assume_role_policy</span>    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">create_date</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span>
+      <span class="o">+</span> <span class="na">id</span>                    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">managed_policy_arns</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span>
+      <span class="o">+</span> <span class="na">name</span>                  = <span class="s2">&#34;developer&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>             = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">inline_policy</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">name</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+          <span class="o">+</span> <span class="na">policy</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.readonly[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;readonly&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">assume_role_policy</span>    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">create_date</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span>
+      <span class="o">+</span> <span class="na">id</span>                    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">managed_policy_arns</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span>
+      <span class="o">+</span> <span class="na">name</span>                  = <span class="s2">&#34;readonly&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>             = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">inline_policy</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">name</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+          <span class="o">+</span> <span class="na">policy</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;admin&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>         = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/AdministratorAccess&#34;</span>
+      <span class="o">+</span> <span class="na">role</span>       = <span class="s2">&#34;admin&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;poweruser&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>         = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/PowerUserAccess&#34;</span>
+      <span class="o">+</span> <span class="na">role</span>       = <span class="s2">&#34;developer&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.readonly[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;readonly&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>         = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/ReadOnlyAccess&#34;</span>
+      <span class="o">+</span> <span class="na">role</span>       = <span class="s2">&#34;readonly&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_user.aws_iam_access_key.this_no_pgp[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_access_key&#34;</span> <span class="s2">&#34;this_no_pgp&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">create_date</span>          = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">encrypted_secret</span>     = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">id</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">key_fingerprint</span>      = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">secret</span>               = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">ses_smtp_password_v4</span> = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">status</span>               = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">user</span>                 = <span class="s2">&#34;test-user&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_user.aws_iam_user.this[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_user&#34;</span> <span class="s2">&#34;this&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_destroy</span> = <span class="kc">true</span>
+      <span class="o">+</span> <span class="na">id</span>            = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">name</span>          = <span class="s2">&#34;test-user&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>          = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>     = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="nx">Plan</span><span class="o">:</span> <span class="m">8</span> <span class="nx">to</span> <span class="nx">add</span><span class="p">,</span> <span class="m">0</span> <span class="nx">to</span> <span class="nx">change</span><span class="p">,</span> <span class="m">0</span> <span class="nx">to</span> <span class="nx">destroy</span><span class="p">.</span>
+
+<span class="nx">Changes</span> <span class="nx">to</span> <span class="nx">Outputs</span><span class="o">:</span>
+  <span class="o">+</span> <span class="na">access_key_id</span>     = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+  <span class="o">+</span> <span class="na">access_key_secret</span> = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+
+<span class="o">------------------------------------------------------------------------</span>
+
+<span class="nx">Note</span><span class="o">:</span> <span class="nx">You</span> <span class="nx">didn</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">specify</span> <span class="nx">an</span> <span class="s2">&#34;-out&#34;</span> <span class="nx">parameter</span> <span class="nx">to</span> <span class="nx">save</span> <span class="nx">this</span> <span class="nx">plan</span><span class="p">,</span> <span class="nx">so</span> <span class="nx">Terraform</span>
+<span class="nb">can</span><span class="err">&#39;</span><span class="nx">t</span> <span class="nx">guarantee</span> <span class="nx">that</span> <span class="nx">exactly</span> <span class="nx">these</span> <span class="nx">actions</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">performed</span> <span class="nx">if</span>
+<span class="s2">&#34;terraform apply&#34;</span> <span class="nx">is</span> <span class="nx">subsequently</span> <span class="nx">run</span><span class="p">.</span>
+</code></pre></div><p>Assim como usamos o <code>diff</code> no terminal para comparar dois arquivos ou <code>git diff</code> para verificar a diferença de dois commits no git o <code>plan</code> do Terraform nos mostra essa mesma visão de qual a diferença prevista no seu <code>provider</code> caso você aplique esse código. Um ponto de atenção, não é verdade dizer que já que o <code>plan</code> funcionou o <code>apply</code> vai funcionar também, podem ter outras questões envolvidas como questões de permissão que vão te impedir de ter sucesso ao aplicar o código. Vamos aplicar ele agora:</p>
+<div class="highlight"><pre class="chroma"><code class="language-terraform" data-lang="terraform"><span class="err">$</span> <span class="nx">terraform</span> <span class="nx">apply</span>
+
+<span class="nx">An</span> <span class="nx">execution</span> <span class="nx">plan</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">generated</span> <span class="nx">and</span> <span class="nx">is</span> <span class="nx">shown</span> <span class="nx">below</span><span class="p">.</span>
+<span class="nx">Resource</span> <span class="nx">actions</span> <span class="nx">are</span> <span class="nx">indicated</span> <span class="nx">with</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">symbols</span><span class="o">:</span>
+  <span class="o">+</span> <span class="nx">create</span>
+ <span class="o">&lt;=</span> <span class="nx">read</span> <span class="p">(</span><span class="nb">data</span> <span class="nx">resources</span><span class="p">)</span>
+
+<span class="nx">Terraform</span> <span class="nx">will</span> <span class="nx">perform</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">actions</span><span class="o">:</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.data.aws_iam_policy_document.assume_role will be read during apply
+</span><span class="c1">  # (config refers to values not yet known)
+</span><span class="c1"></span> <span class="o">&lt;=</span> <span class="nb">data</span> <span class="s2">&#34;aws_iam_policy_document&#34;</span> <span class="s2">&#34;assume_role&#34;</span>  <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">json</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">statement</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">actions</span> = <span class="p">[</span>
+              <span class="o">+</span> <span class="s2">&#34;sts:AssumeRole&#34;</span><span class="p">,</span>
+            <span class="p">]</span>
+          <span class="o">+</span> <span class="na">effect</span>  = <span class="s2">&#34;Allow&#34;</span>
+
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[</span>
+                  <span class="o">+</span> <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">),</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;AWS&#34;</span>
+            <span class="p">}</span>
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;Service&#34;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.data.aws_iam_policy_document.assume_role_with_mfa will be read during apply
+</span><span class="c1">  # (config refers to values not yet known)
+</span><span class="c1"></span> <span class="o">&lt;=</span> <span class="nb">data</span> <span class="s2">&#34;aws_iam_policy_document&#34;</span> <span class="s2">&#34;assume_role_with_mfa&#34;</span>  <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">json</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">statement</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">actions</span> = <span class="p">[</span>
+              <span class="o">+</span> <span class="s2">&#34;sts:AssumeRole&#34;</span><span class="p">,</span>
+            <span class="p">]</span>
+          <span class="o">+</span> <span class="na">effect</span>  = <span class="s2">&#34;Allow&#34;</span>
+
+          <span class="o">+</span> <span class="nx">condition</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">test</span>     = <span class="s2">&#34;Bool&#34;</span>
+              <span class="o">+</span><span class="nb"> values</span>   <span class="o">=</span> <span class="p">[</span>
+                  <span class="o">+</span> <span class="s2">&#34;true&#34;</span><span class="p">,</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">variable</span> = <span class="s2">&#34;aws:MultiFactorAuthPresent&#34;</span>
+            <span class="p">}</span>
+          <span class="o">+</span> <span class="nx">condition</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">test</span>     = <span class="s2">&#34;NumericLessThan&#34;</span>
+              <span class="o">+</span><span class="nb"> values</span>   <span class="o">=</span> <span class="p">[</span>
+                  <span class="o">+</span> <span class="s2">&#34;86400&#34;</span><span class="p">,</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">variable</span> = <span class="s2">&#34;aws:MultiFactorAuthAge&#34;</span>
+            <span class="p">}</span>
+
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[</span>
+                  <span class="o">+</span> <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">),</span>
+                <span class="p">]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;AWS&#34;</span>
+            <span class="p">}</span>
+          <span class="o">+</span> <span class="nx">principals</span> <span class="p">{</span>
+              <span class="o">+</span> <span class="na">identifiers</span> = <span class="p">[]</span>
+              <span class="o">+</span> <span class="na">type</span>        = <span class="s2">&#34;Service&#34;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.admin[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;admin&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">assume_role_policy</span>    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">create_date</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span>
+      <span class="o">+</span> <span class="na">id</span>                    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">managed_policy_arns</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span>
+      <span class="o">+</span> <span class="na">name</span>                  = <span class="s2">&#34;admin&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>             = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">inline_policy</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">name</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+          <span class="o">+</span> <span class="na">policy</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.poweruser[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;poweruser&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">assume_role_policy</span>    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">create_date</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span>
+      <span class="o">+</span> <span class="na">id</span>                    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">managed_policy_arns</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span>
+      <span class="o">+</span> <span class="na">name</span>                  = <span class="s2">&#34;developer&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>             = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">inline_policy</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">name</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+          <span class="o">+</span> <span class="na">policy</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.readonly[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;readonly&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">assume_role_policy</span>    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">create_date</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span>
+      <span class="o">+</span> <span class="na">id</span>                    = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">managed_policy_arns</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span>
+      <span class="o">+</span> <span class="na">name</span>                  = <span class="s2">&#34;readonly&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>             = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+
+      <span class="o">+</span> <span class="nx">inline_policy</span> <span class="p">{</span>
+          <span class="o">+</span> <span class="na">name</span>   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+          <span class="o">+</span> <span class="na">policy</span> = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;admin&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>         = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/AdministratorAccess&#34;</span>
+      <span class="o">+</span> <span class="na">role</span>       = <span class="s2">&#34;admin&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;poweruser&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>         = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/PowerUserAccess&#34;</span>
+      <span class="o">+</span> <span class="na">role</span>       = <span class="s2">&#34;developer&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.readonly[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;readonly&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">id</span>         = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/ReadOnlyAccess&#34;</span>
+      <span class="o">+</span> <span class="na">role</span>       = <span class="s2">&#34;readonly&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_user.aws_iam_access_key.this_no_pgp[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_access_key&#34;</span> <span class="s2">&#34;this_no_pgp&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">create_date</span>          = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">encrypted_secret</span>     = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">id</span>                   = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">key_fingerprint</span>      = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">secret</span>               = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">ses_smtp_password_v4</span> = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">status</span>               = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">user</span>                 = <span class="s2">&#34;test-user&#34;</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_user.aws_iam_user.this[0] will be created
+</span><span class="c1"></span>  <span class="o">+</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_user&#34;</span> <span class="s2">&#34;this&#34;</span> <span class="p">{</span>
+      <span class="o">+</span> <span class="na">arn</span>           = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">force_destroy</span> = <span class="kc">true</span>
+      <span class="o">+</span> <span class="na">id</span>            = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+      <span class="o">+</span> <span class="na">name</span>          = <span class="s2">&#34;test-user&#34;</span>
+      <span class="o">+</span> <span class="na">path</span>          = <span class="s2">&#34;/&#34;</span>
+      <span class="o">+</span> <span class="na">unique_id</span>     = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="nx">Plan</span><span class="o">:</span> <span class="m">8</span> <span class="nx">to</span> <span class="nx">add</span><span class="p">,</span> <span class="m">0</span> <span class="nx">to</span> <span class="nx">change</span><span class="p">,</span> <span class="m">0</span> <span class="nx">to</span> <span class="nx">destroy</span><span class="p">.</span>
+
+<span class="nx">Changes</span> <span class="nx">to</span> <span class="nx">Outputs</span><span class="o">:</span>
+  <span class="o">+</span> <span class="na">access_key_id</span>     = <span class="p">(</span><span class="nx">known</span> <span class="nx">after</span> <span class="nx">apply</span><span class="p">)</span>
+  <span class="o">+</span> <span class="na">access_key_secret</span> = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+
+<span class="nx">Do</span> <span class="nx">you</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">perform</span> <span class="nx">these</span> <span class="nx">actions</span><span class="o">?</span>
+  <span class="nx">Terraform</span> <span class="nx">will</span> <span class="nx">perform</span> <span class="nx">the</span> <span class="nx">actions</span> <span class="nx">described</span> <span class="nx">above</span><span class="p">.</span>
+  <span class="nx">Only</span> <span class="err">&#39;</span><span class="nx">yes</span><span class="err">&#39;</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">accepted</span> <span class="nx">to</span> <span class="nx">approve</span><span class="p">.</span>
+
+  <span class="nx">Enter</span> <span class="nx">a</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">yes</span>
+<span class="kr">
+</span><span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_user</span><span class="p">.</span><span class="nx">this</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_user</span><span class="p">.</span><span class="nx">this</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">2</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">test</span><span class="o">-</span><span class="nx">user</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nb">data</span><span class="p">.</span><span class="nx">aws_iam_policy_document</span><span class="p">.</span><span class="nx">assume_role</span><span class="o">:</span> <span class="nx">Reading</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nb">data</span><span class="p">.</span><span class="nx">aws_iam_policy_document</span><span class="p">.</span><span class="nx">assume_role_with_mfa</span><span class="o">:</span> <span class="nx">Reading</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_access_key</span><span class="p">.</span><span class="nx">this_no_pgp</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nb">data</span><span class="p">.</span><span class="nx">aws_iam_policy_document</span><span class="p">.</span><span class="nx">assume_role</span><span class="o">:</span> <span class="nx">Read</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">0</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="m">119073080</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nb">data</span><span class="p">.</span><span class="nx">aws_iam_policy_document</span><span class="p">.</span><span class="nx">assume_role_with_mfa</span><span class="o">:</span> <span class="nx">Read</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">0</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="m">3139435766</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_access_key</span><span class="p">.</span><span class="nx">this_no_pgp</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">1</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">AKIAREMIJPA7PUSCWR34</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">10</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">readonly</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Still</span> <span class="nx">creating</span><span class="p">...</span> <span class="p">[</span><span class="m">10</span><span class="nx">s</span> <span class="nx">elapsed</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Still</span> <span class="nx">creating</span><span class="p">...</span> <span class="p">[</span><span class="m">10</span><span class="nx">s</span> <span class="nx">elapsed</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">1</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">readonly</span><span class="m">-20210320110254508000000001</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">14</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">developer</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">14</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">admin</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creating</span><span class="p">...</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">2</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">developer</span><span class="m">-20210320110259289300000002</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Creation</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">2</span><span class="nx">s</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">admin</span><span class="m">-20210320110259289400000003</span><span class="p">]</span>
+
+<span class="nx">Apply</span> <span class="nx">complete</span><span class="o">!</span> <span class="nx">Resources</span><span class="o">:</span> <span class="m">8</span> <span class="nx">added</span><span class="p">,</span> <span class="m">0</span> <span class="nx">changed</span><span class="p">,</span> <span class="m">0</span> <span class="nx">destroyed</span><span class="p">.</span>
+
+<span class="nx">Outputs</span><span class="o">:</span>
+
+<span class="na">access_key_id</span> = <span class="s2">&#34;AKIAREMIJPA7PUSCWR34&#34;</span>
+<span class="na">access_key_secret</span> = <span class="o">&lt;</span><span class="nx">sensitive</span><span class="o">&gt;</span>
+</code></pre></div><p>Como podemos ver ele mostra o resultado <code>plan</code> novamente e pede a confirmação para dar continuidade no <code>apply</code>, confirmando ele exibe o log do que acontece e por fim exibe os <code>outputs</code> definidos. Depois de executar vai reparar que no mesmo diretório foi criado o <code>terraform.tfstate</code> que é o estado final com os valores dos recursos na AWS, isso vai nos ajudar na evolução do projeto, nele o dado que marcamos como sensível vai estar de forma aberta também. Por fim, podemos também desfazer tudo que foi feito com o comando de <code>destroy</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-terraform" data-lang="terraform"><span class="err">$</span> <span class="nx">terraform</span> <span class="nx">destroy</span>
+
+<span class="nx">An</span> <span class="nx">execution</span> <span class="nx">plan</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">generated</span> <span class="nx">and</span> <span class="nx">is</span> <span class="nx">shown</span> <span class="nx">below</span><span class="p">.</span>
+<span class="nx">Resource</span> <span class="nx">actions</span> <span class="nx">are</span> <span class="nx">indicated</span> <span class="nx">with</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">symbols</span><span class="o">:</span>
+  <span class="o">-</span> <span class="nx">destroy</span>
+
+<span class="nx">Terraform</span> <span class="nx">will</span> <span class="nx">perform</span> <span class="nx">the</span> <span class="nx">following</span> <span class="nx">actions</span><span class="o">:</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.admin[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;admin&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">arn</span>                   = <span class="s2">&#34;arn:aws:iam::078132115518:role/admin&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">assume_role_policy</span>    =<span class="nb"> jsonencode</span><span class="p">(</span>
+            <span class="p">{</span>
+              <span class="o">-</span> <span class="na">Statement</span> = <span class="p">[</span>
+                  <span class="o">-</span> <span class="p">{</span>
+                      <span class="o">-</span> <span class="na">Action</span>    = <span class="s2">&#34;sts:AssumeRole&#34;</span>
+                      <span class="o">-</span> <span class="na">Condition</span> = <span class="p">{</span>
+                          <span class="o">-</span> <span class="na">Bool</span>            = <span class="p">{</span>
+                              <span class="o">-</span> <span class="nx">aws</span><span class="o">:</span><span class="na">MultiFactorAuthPresent</span> = <span class="s2">&#34;true&#34;</span>
+                            <span class="p">}</span>
+                          <span class="o">-</span> <span class="na">NumericLessThan</span> = <span class="p">{</span>
+                              <span class="o">-</span> <span class="nx">aws</span><span class="o">:</span><span class="na">MultiFactorAuthAge</span> = <span class="s2">&#34;86400&#34;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                      <span class="o">-</span> <span class="na">Effect</span>    = <span class="s2">&#34;Allow&#34;</span>
+                      <span class="o">-</span> <span class="na">Principal</span> = <span class="p">{</span>
+                          <span class="o">-</span> <span class="na">AWS</span> = <span class="s2">&#34;arn:aws:iam::078132115518:user/test-user&#34;</span>
+                        <span class="p">}</span>
+                      <span class="o">-</span> <span class="na">Sid</span>       = <span class="s2">&#34;&#34;</span>
+                    <span class="p">},</span>
+                <span class="p">]</span>
+              <span class="o">-</span> <span class="na">Version</span>   = <span class="s2">&#34;2012-10-17&#34;</span>
+            <span class="p">}</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">create_date</span>           = <span class="s2">&#34;2021-03-20T11:02:55Z&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">id</span>                    = <span class="s2">&#34;admin&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">managed_policy_arns</span>   = <span class="p">[]</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">name</span>                  = <span class="s2">&#34;admin&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">unique_id</span>             = <span class="s2">&#34;AROAREMIJPA7HRCB6FDJT&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+
+      <span class="o">-</span> <span class="nx">inline_policy</span> <span class="p">{}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.poweruser[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;poweruser&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">arn</span>                   = <span class="s2">&#34;arn:aws:iam::078132115518:role/developer&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">assume_role_policy</span>    =<span class="nb"> jsonencode</span><span class="p">(</span>
+            <span class="p">{</span>
+              <span class="o">-</span> <span class="na">Statement</span> = <span class="p">[</span>
+                  <span class="o">-</span> <span class="p">{</span>
+                      <span class="o">-</span> <span class="na">Action</span>    = <span class="s2">&#34;sts:AssumeRole&#34;</span>
+                      <span class="o">-</span> <span class="na">Condition</span> = <span class="p">{</span>
+                          <span class="o">-</span> <span class="na">Bool</span>            = <span class="p">{</span>
+                              <span class="o">-</span> <span class="nx">aws</span><span class="o">:</span><span class="na">MultiFactorAuthPresent</span> = <span class="s2">&#34;true&#34;</span>
+                            <span class="p">}</span>
+                          <span class="o">-</span> <span class="na">NumericLessThan</span> = <span class="p">{</span>
+                              <span class="o">-</span> <span class="nx">aws</span><span class="o">:</span><span class="na">MultiFactorAuthAge</span> = <span class="s2">&#34;86400&#34;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                      <span class="o">-</span> <span class="na">Effect</span>    = <span class="s2">&#34;Allow&#34;</span>
+                      <span class="o">-</span> <span class="na">Principal</span> = <span class="p">{</span>
+                          <span class="o">-</span> <span class="na">AWS</span> = <span class="s2">&#34;arn:aws:iam::078132115518:user/test-user&#34;</span>
+                        <span class="p">}</span>
+                      <span class="o">-</span> <span class="na">Sid</span>       = <span class="s2">&#34;&#34;</span>
+                    <span class="p">},</span>
+                <span class="p">]</span>
+              <span class="o">-</span> <span class="na">Version</span>   = <span class="s2">&#34;2012-10-17&#34;</span>
+            <span class="p">}</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">create_date</span>           = <span class="s2">&#34;2021-03-20T11:02:55Z&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">id</span>                    = <span class="s2">&#34;developer&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">managed_policy_arns</span>   = <span class="p">[]</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">name</span>                  = <span class="s2">&#34;developer&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">unique_id</span>             = <span class="s2">&#34;AROAREMIJPA7IECKWDPBQ&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+
+      <span class="o">-</span> <span class="nx">inline_policy</span> <span class="p">{}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role.readonly[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role&#34;</span> <span class="s2">&#34;readonly&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">arn</span>                   = <span class="s2">&#34;arn:aws:iam::078132115518:role/readonly&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">assume_role_policy</span>    =<span class="nb"> jsonencode</span><span class="p">(</span>
+            <span class="p">{</span>
+              <span class="o">-</span> <span class="na">Statement</span> = <span class="p">[</span>
+                  <span class="o">-</span> <span class="p">{</span>
+                      <span class="o">-</span> <span class="na">Action</span>    = <span class="s2">&#34;sts:AssumeRole&#34;</span>
+                      <span class="o">-</span> <span class="na">Effect</span>    = <span class="s2">&#34;Allow&#34;</span>
+                      <span class="o">-</span> <span class="na">Principal</span> = <span class="p">{</span>
+                          <span class="o">-</span> <span class="na">AWS</span> = <span class="s2">&#34;arn:aws:iam::078132115518:user/test-user&#34;</span>
+                        <span class="p">}</span>
+                      <span class="o">-</span> <span class="na">Sid</span>       = <span class="s2">&#34;&#34;</span>
+                    <span class="p">},</span>
+                <span class="p">]</span>
+              <span class="o">-</span> <span class="na">Version</span>   = <span class="s2">&#34;2012-10-17&#34;</span>
+            <span class="p">}</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">create_date</span>           = <span class="s2">&#34;2021-03-20T11:02:51Z&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">force_detach_policies</span> = <span class="kc">false</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">id</span>                    = <span class="s2">&#34;readonly&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">managed_policy_arns</span>   = <span class="p">[]</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">max_session_duration</span>  = <span class="m">3600</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">name</span>                  = <span class="s2">&#34;readonly&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">path</span>                  = <span class="s2">&#34;/&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">unique_id</span>             = <span class="s2">&#34;AROAREMIJPA7PSOGAMO4N&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+
+      <span class="o">-</span> <span class="nx">inline_policy</span> <span class="p">{}</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;admin&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">id</span>         = <span class="s2">&#34;admin-20210320110259289400000003&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/AdministratorAccess&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">role</span>       = <span class="s2">&#34;admin&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;poweruser&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">id</span>         = <span class="s2">&#34;developer-20210320110259289300000002&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/PowerUserAccess&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">role</span>       = <span class="s2">&#34;developer&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_assumable_roles.aws_iam_role_policy_attachment.readonly[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_role_policy_attachment&#34;</span> <span class="s2">&#34;readonly&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">id</span>         = <span class="s2">&#34;readonly-20210320110254508000000001&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">policy_arn</span> = <span class="s2">&#34;arn:aws:iam::aws:policy/ReadOnlyAccess&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">role</span>       = <span class="s2">&#34;readonly&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_user.aws_iam_access_key.this_no_pgp[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_access_key&#34;</span> <span class="s2">&#34;this_no_pgp&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">create_date</span>          = <span class="s2">&#34;2021-03-20T11:02:45Z&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">id</span>                   = <span class="s2">&#34;AKIAREMIJPA7PUSCWR34&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">secret</span>               = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+      <span class="o">-</span> <span class="na">ses_smtp_password_v4</span> = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+      <span class="o">-</span> <span class="na">status</span>               = <span class="s2">&#34;Active&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">user</span>                 = <span class="s2">&#34;test-user&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+    <span class="p">}</span><span class="c1">
+</span><span class="c1">
+</span><span class="c1">  # module.iam_user.aws_iam_user.this[0] will be destroyed
+</span><span class="c1"></span>  <span class="o">-</span> <span class="nx">resource</span> <span class="s2">&#34;aws_iam_user&#34;</span> <span class="s2">&#34;this&#34;</span> <span class="p">{</span>
+      <span class="o">-</span> <span class="na">arn</span>           = <span class="s2">&#34;arn:aws:iam::078132115518:user/test-user&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">force_destroy</span> = <span class="kc">true</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">id</span>            = <span class="s2">&#34;test-user&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">name</span>          = <span class="s2">&#34;test-user&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">path</span>          = <span class="s2">&#34;/&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+      <span class="o">-</span> <span class="na">unique_id</span>     = <span class="s2">&#34;AIDAREMIJPA7EUM7QNEOJ&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+    <span class="p">}</span>
+
+<span class="nx">Plan</span><span class="o">:</span> <span class="m">0</span> <span class="nx">to</span> <span class="nx">add</span><span class="p">,</span> <span class="m">0</span> <span class="nx">to</span> <span class="nx">change</span><span class="p">,</span> <span class="m">8</span> <span class="nx">to</span> <span class="nx">destroy</span><span class="p">.</span>
+
+<span class="nx">Changes</span> <span class="nx">to</span> <span class="nx">Outputs</span><span class="o">:</span>
+  <span class="o">-</span> <span class="na">access_key_id</span>     = <span class="s2">&#34;AKIAREMIJPA7PUSCWR34&#34;</span> <span class="o">-&gt;</span> <span class="nx">null</span>
+  <span class="o">-</span> <span class="na">access_key_secret</span> = <span class="p">(</span><span class="nx">sensitive</span> <span class="nx">value</span><span class="p">)</span>
+
+<span class="nx">Do</span> <span class="nx">you</span> <span class="nx">really</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">destroy</span> <span class="nx">all</span> <span class="nx">resources</span><span class="o">?</span>
+  <span class="nx">Terraform</span> <span class="nx">will</span> <span class="nx">destroy</span> <span class="nx">all</span> <span class="nx">your</span> <span class="nx">managed</span> <span class="nx">infrastructure</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">shown</span> <span class="nx">above</span><span class="p">.</span>
+  <span class="nx">There</span> <span class="nx">is</span> <span class="nx">no</span> <span class="nx">undo</span><span class="p">.</span> <span class="nx">Only</span> <span class="err">&#39;</span><span class="nx">yes</span><span class="err">&#39;</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">accepted</span> <span class="nx">to</span> <span class="nx">confirm</span><span class="p">.</span>
+
+  <span class="nx">Enter</span> <span class="nx">a</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">yes</span>
+<span class="kr">
+</span><span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">developer</span><span class="m">-20210320110259289300000002</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">admin</span><span class="m">-20210320110259289400000003</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">readonly</span><span class="m">-20210320110254508000000001</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_access_key</span><span class="p">.</span><span class="nx">this_no_pgp</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">AKIAREMIJPA7PUSCWR34</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">1</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_access_key</span><span class="p">.</span><span class="nx">this_no_pgp</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">1</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">1</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">readonly</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role_policy_attachment</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">1</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">developer</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">admin</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">admin</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">2</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">readonly</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">2</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_assumable_roles</span><span class="p">.</span><span class="nx">aws_iam_role</span><span class="p">.</span><span class="nx">poweruser</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">2</span><span class="nx">s</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_user</span><span class="p">.</span><span class="nx">this</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destroying</span><span class="p">...</span> <span class="p">[</span><span class="na">id</span>=<span class="nx">test</span><span class="o">-</span><span class="nx">user</span><span class="p">]</span>
+<span class="kr">module</span><span class="p">.</span><span class="nx">iam_user</span><span class="p">.</span><span class="nx">aws_iam_user</span><span class="p">.</span><span class="nx">this</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">:</span> <span class="nx">Destruction</span> <span class="nx">complete</span> <span class="nx">after</span> <span class="m">7</span><span class="nx">s</span>
+
+<span class="nx">Destroy</span> <span class="nx">complete</span><span class="o">!</span> <span class="nx">Resources</span><span class="o">:</span> <span class="m">8</span> <span class="nx">destroyed</span><span class="p">.</span>
+</code></pre></div><p>Isso é bem importante pois caso você estaja apenas testando algo na AWS você vai garantir que não terá nenhum custo imprevisto com algo que esqueceu ligado. =)</p>
+<p>Antes de finalizar, em nenhum momento mostrei as configurações de acesso para modificar a AWS, tudo isso foi porque já tenho na minha máquina o AWS CLI configurado e ele usou a configuração dele para ter acesso.</p>
+<h1 id="concluindo">Concluindo</h1>
+<p>O Terraform é uma ferramenta bem legal e poderosa para essa nossa jornada de infraestrutura como código mas ela não é perfeita e nunca será como todos as outras ferramentas que fazem o mesmo trabalho ou parecido. Cabe a você entender o seu contexto e saber como aplicar ele da melhor forma. Segue uma lista de lugares onde você pode aprender mais sobre Terraform:</p>
+<ul>
+<li><a href="https://www.youtube.com/c/LinuxTips/featured">Canal da Linux Tips</a></li>
+<li><a href="https://www.amazon.com.br/Terraform-Running-Writing-Infrastructure-English-ebook/dp/B07XKF258P/">Terraform Up &amp; Running</a></li>
+<li><a href="https://www.amazon.com.br/Terraform-Book-English-James-Turnbull-ebook/dp/B01MZYE7OY">The Terraform Book</a></li>
+</ul>
+<h1 id="referências">Referências</h1>
+<ul>
+<li>Terraform: <a href="https://www.terraform.io/">https://www.terraform.io/</a></li>
+<li>AWS: <a href="https://aws.amazon.com/">https://aws.amazon.com/</a></li>
+<li>Google Cloud: <a href="https://cloud.google.com/">https://cloud.google.com/</a></li>
+<li>Azure: <a href="https://azure.microsoft.com/en-us/">https://azure.microsoft.com/en-us/</a></li>
+<li>Ansible: <a href="https://www.ansible.com/">https://www.ansible.com/</a></li>
+<li>Puppet: <a href="https://puppet.com/">https://puppet.com/</a></li>
+<li>Chef: <a href="https://www.chef.io/">https://www.chef.io/</a></li>
+<li>NGINX: <a href="https://nginx.org/en/">https://nginx.org/en/</a></li>
+<li>AWS Cloud Formation: <a href="https://aws.amazon.com/cloudformation/">https://aws.amazon.com/cloudformation/</a></li>
+<li>tfenv: <a href="https://github.com/tfutils/tfenv">https://github.com/tfutils/tfenv</a></li>
+<li>Canal da Linux Tips: <a href="https://www.youtube.com/c/LinuxTips/featured">https://www.youtube.com/c/LinuxTips/featured</a></li>
+<li>Terraform Up &amp; Running: <a href="https://www.amazon.com.br/Terraform-Running-Writing-Infrastructure-English-ebook/dp/B07XKF258P/">https://www.amazon.com.br/Terraform-Running-Writing-Infrastructure-English-ebook/dp/B07XKF258P/</a></li>
+<li>The Terraform Book: <a href="https://www.amazon.com.br/Terraform-Book-English-James-Turnbull-ebook/dp/B01MZYE7OY">https://www.amazon.com.br/Terraform-Book-English-James-Turnbull-ebook/dp/B01MZYE7OY</a></li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/terraform/" rel="tag">terraform</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">Sobre João Maia</span>
+	</div>
+	<div class="authorbox__description">
+		Pessoa que resolve problemas com o uso de softwares
+	</div>
+</div>
+
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 João Maia.
+			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
