@@ -1,6 +1,6 @@
 # General
 - id: read_more
-  translation: "Leia mais…"
+  translation: "Read more…"
 
 - id: menu_label
   translation: "Menu"
@@ -10,48 +10,48 @@
 
 # Post meta
 - id: meta_lastmod
-  translation: "Última modificação"
+  translation: "Last Modified"
 
 - id: meta_translations
-  translation: "Traduções"
+  translation: "Translations"
 
 # Table of Contents
 - id: toc_title
-  translation: "Conteúdo da página"
+  translation: "Page content"
 
 # Post nav
 - id: post_nav_prev
-  translation: "Anterior"
+  translation: "Previous"
 
 - id: post_nav_next
-  translation: "Próximo"
+  translation: "Next"
 
 # Authorbox
 - id: authorbox_name
-  translation: "Sobre {{ .Name }}"
+  translation: "About {{ .Name }}"
 
 # Sidebar
 - id: sidebar_warning
-  translation: "ATENÇÃO"
+  translation: "WARNING"
 
 - id: sidebar_recommendation
-  translation: "Ative pelo menos um widget da barra lateral."
+  translation: "Please activate at least one sidebar widget."
 
 # Search widget
 - id: search_placeholder
-  translation: "BUSCAR…"
+  translation: "SEARCH…"
 
 # Languages widget
 - id: languages_title
-  translation: "Línguas"
+  translation: "Languages"
 
 # Categories widget
 - id: categories_title
-  translation: "Categorias"
+  translation: "Categories"
 
 # Recent Posts widget
 - id: recent_title
-  translation: "Postagens recentes"
+  translation: "Recent Posts"
 
 # Social widget
 - id: social_title
@@ -64,30 +64,31 @@
 # Footer
 - id: footer_credits
   translation:
-    "Gerado com <a href=\"https://gohugo.io/\" rel=\"nofollow noopener\" target=\"_blank\">Hugo</a> com o tema \
-    <a href=\"https://github.com/Vimux/Mainroad/\" rel=\"nofollow noopener\" target=\"_blank\">Mainroad</a>."
+    "Generated with <a href=\"https://gohugo.io/\" rel=\"nofollow noopener\" target=\"_blank\">Hugo</a> and \
+    <a href=\"https://github.com/Vimux/Mainroad/\" rel=\"nofollow noopener\" target=\"_blank\">Mainroad</a> theme."
 
 # 404
 - id: 404_title
-  translation: "404. Página não encontrada"
+  translation: "404. Page not found"
 
 - id: 404_text
   translation:
-    "A página que você estava procurando parece ter sido excluída ou não existe. Por favor, use a pesquisa ou vá para"
+    "The page you were looking for appears to have been moved, deleted or does not exist. Please, use search or go to"
 
 - id: 404_linktext
-  translation: "página principal"
+  translation: "main page"
 
 # No posts empty state
 - id: noposts_warning_title
-  translation: "Você ainda não tem nenhuma postagem!"
+  translation: "You don't have any posts yet!"
 
 - id: noposts_warning_description
   translation:
-    "Quando você criar uma postagem em qualquer pasta (seção) dentro do diretório <b>content</b>, ele vai aparecer aqui. \
-    Apenas uma seção (a que conter mais postagens) será exibida na página principal por padrão."
+    "Once you post something in any folder (section) under the <b>content</b> directory, it will appear here. Only one \
+    section (with the most posts) will be displayed on the main page by default."
 
 - id: noposts_warning_tip
   translation:
-    "<b>Dica:</b> Você pode mostrar quantas seções você quiser com o parâmetro de configuração \
-    <b><a href=\"https://gohugo.io/functions/where/#mainsections\" rel=\"nofollow noopener\" target=\"_blank\">mainSections</a></b>."
+    "<b>Tip:</b> You can show as many sections as you like with \
+    <b><a href=\"https://gohugo.io/functions/where/#mainsections\" rel=\"nofollow noopener\" target=\"_blank\">mainSections</a></b> \
+    config parameter."

@@ -3,7 +3,7 @@
 **Mainroad** is a responsive, simple, clean and content-focused [Hugo](https://gohugo.io/) theme based on the
 [MH Magazine lite](https://wordpress.org/themes/mh-magazine-lite/) WordPress theme.
 
-**[Demo (Fast update)](https://mainroad-demo.netlify.app/)** | [Standart Demo](https://themes.gohugo.io/theme/mainroad/)
+**[Demo (Fast update)](https://mainroad-demo.netlify.app/)** | [Standard Demo](https://themes.gohugo.io/theme/mainroad/)
 
 ![screenshot](https://raw.githubusercontent.com/Vimux/Mainroad/master/images/screenshot.png)
 
@@ -112,6 +112,7 @@ googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 
 [Params.widgets]
   recent_num = 5 # Set the number of articles in the "Recent articles" widget
+  categories_counter = false # Enable counter for each category in "Categories" widget
   tags_counter = false # Enable counter for each tag in "Tags" widget
 
 [Params.widgets.social]
