@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sobre</title>
       <link>http://blog.joaovrmaia.com/about/</link>
@@ -16,6 +16,16 @@
       <guid>http://blog.joaovrmaia.com/about/</guid>
       <description>Olá,
 comecei a olhar códigos quando era criança e vi um material sobre cracking, lembra daqueles seriais para piratear software? então&amp;hellip;, tudo pelo interesse de conseguir jogar os meus jogos. Foi divertido futucar no Assembly sem entender muito dos conceitos que ali existem que só fui aprender em Microprocessadores na UFES. Depois desse breve momento tive um hiato no assunto até os anos próximos ao vestibular onde a convite do meu vizinho fui fazer um curso de desenvolvimento de sites com HTML, CSS e Flash, acabei tendo o contato com o Pascal na época também pois a turma antes da minha aula era de Delphi e como sempre fui de chegar cedo acabava vendo um pouco da aula.</description>
+    </item>
+    
+    <item>
+      <title>OpenResty na prática</title>
+      <link>http://blog.joaovrmaia.com/post/openresty-na-pratica/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/openresty-na-pratica/</guid>
+      <description>Olá,
+OpenResty é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de Proxy ou Load Balancer. O projeto é um fork do NGINX e evoluido com o uso do LuaJIT para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma empresa por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.</description>
     </item>
     
     <item>
@@ -200,18 +210,6 @@ Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opini�
       <guid>http://blog.joaovrmaia.com/post/instalacao-do-go/</guid>
       <description>Olá,
 esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua jornada inicial na linguagem seja uma experiência muito positiva e proveitosa. Nesse artigo vou abordar em especial a questão de como instalar o Go na sua máquina. Como sou usuário de Linux vou dar foco nesse sistema, usuários do OSX provavelmente vão conseguir usar os mesmos passos mas infelizmente não vou conseguir cobrir o caso do Windows por não seu um usuário do sistema.</description>
-    </item>
-    
-    <item>
-      <title>Go: primeiros passos</title>
-      <link>http://blog.joaovrmaia.com/post/go-primeiros-passos/</link>
-      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/go-primeiros-passos/</guid>
-      <description>Olá,
-esse primeiro post sobre Go é para mostrar a quem não sabe nada sobre a linguagem algumas características e minhas opiniões a respeito dela. Caso discorde de algo e/ou tenha alguma correção a ser feita no texto pode me apontar nos comentários ou no meu e-mail que darei toda atenção desde que faça de forma educada.
-Senta que lá vem a História Do Wikipedia:
- Go é uma linguagem de programação criada pela Google e lançada em código livre em novembro de 2009.</description>
     </item>
     
   </channel>

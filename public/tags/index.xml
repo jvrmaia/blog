@@ -7,7 +7,34 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>lua</title>
+      <link>http://blog.joaovrmaia.com/tags/lua/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/lua/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>http://blog.joaovrmaia.com/tags/nginx/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openresty</title>
+      <link>http://blog.joaovrmaia.com/tags/openresty/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/openresty/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>golang</title>
       <link>http://blog.joaovrmaia.com/tags/golang/</link>
@@ -158,33 +185,6 @@
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/tags/dicas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>terminal</title>
-      <link>http://blog.joaovrmaia.com/tags/terminal/</link>
-      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/terminal/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>http://blog.joaovrmaia.com/tags/python/</link>
-      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>devops</title>
-      <link>http://blog.joaovrmaia.com/tags/devops/</link>
-      <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/devops/</guid>
       <description></description>
     </item>
     

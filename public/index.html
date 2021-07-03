@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.81.0" />
+	<meta name="generator" content="Hugo 0.83.0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -105,6 +105,28 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="http://blog.joaovrmaia.com/post/openresty-na-pratica/">
+			<img src="/img/openresty-na-pratica/openresty.png" alt="OpenResty na prática" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/openresty-na-pratica/" rel="bookmark">
+			OpenResty na prática
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-07-02T00:00:00Z">2021-07-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/desenvolvimento/" rel="category">desenvolvimento</a>, <a class="meta__link" href="/categories/infraestrutura/" rel="category">infraestrutura</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Olá,
+OpenResty é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de Proxy ou Load Balancer. O projeto é um fork do NGINX e evoluido com o uso do LuaJIT para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma empresa por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.
+	</div>
+</article><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="http://blog.joaovrmaia.com/post/conhecendo-o-terraform/">
 			<img src="/img/conhecendo-o-terraform/terraform.png" alt="Conhecendo o Terraform" />
@@ -304,28 +326,6 @@ sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e
 		Olá,
 eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud.
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/">
-			<img src="/img/analisando-dados-no-terminal/terminal-tips.png" alt="Analisando dados no terminal" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/analisando-dados-no-terminal/" rel="bookmark">
-			Analisando dados no terminal
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-05-01T00:00:00Z">2020-05-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/produtividade/" rel="category">produtividade</a>, <a class="meta__link" href="/categories/devops/" rel="category">devops</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Olá,
-recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no Twitter surgiram comentários interessantes.
-	</div>
 </article>
 </main>
 
@@ -338,64 +338,54 @@ recentemente fazendo uma inspeção na aplicação precisei ver seu logs para en
 			<aside class="sidebar"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
-			<input class="widget-search__field" type="search" placeholder="BUSCAR…" value="" name="q" aria-label="BUSCAR…">
+			<input class="widget-search__field" type="search" placeholder="SEARCH…" value="" name="q" aria-label="SEARCH…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="http://blog.joaovrmaia.com" />
 	</form>
 </div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">Postagens recentes</h4>
+	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/openresty-na-pratica/">OpenResty na prática</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/conhecendo-o-terraform/">Conhecendo o Terraform</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/o-basico-do-http-em-go/">O básico do HTTP em Go</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/e-esse-tal-de-bgp/">E esse tal de BGP?</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/git-e-afins-para-iniciantes-parte-2/">Git e afins para iniciantes - parte 2</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/vamos-falar-de-dns/">Vamos falar de DNS?</a></li>
 		</ul>
 	</div>
 </div>
 <div class="widget-categories widget">
-	<h4 class="widget__title">Categorias</h4>
+	<h4 class="widget__title">Categories</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/algoritmos/">algoritmos</a>
-			</li>
+				<a class="widget__link" href="/categories/algoritmos/">algoritmos</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/aws/">aws</a>
-			</li>
+				<a class="widget__link" href="/categories/aws/">aws</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/desenvolvimento/">desenvolvimento</a>
-			</li>
+				<a class="widget__link" href="/categories/desenvolvimento/">desenvolvimento</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/devops/">devops</a>
-			</li>
+				<a class="widget__link" href="/categories/devops/">devops</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/devsecops/">devsecops</a>
-			</li>
+				<a class="widget__link" href="/categories/devsecops/">devsecops</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/documenta%C3%A7%C3%A3o/">documentação</a>
-			</li>
+				<a class="widget__link" href="/categories/documenta%C3%A7%C3%A3o/">documentação</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/http/">http</a>
-			</li>
+				<a class="widget__link" href="/categories/http/">http</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/linguagens-de-programa%C3%A7%C3%A3o/">linguagens de programação</a>
-			</li>
+				<a class="widget__link" href="/categories/infraestrutura/">infraestrutura</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/produtividade/">produtividade</a>
-			</li>
+				<a class="widget__link" href="/categories/linguagens-de-programa%C3%A7%C3%A3o/">linguagens de programação</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/rede-de-computadores/">rede de computadores</a>
-			</li>
+				<a class="widget__link" href="/categories/produtividade/">produtividade</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/seguran%C3%A7a/">segurança</a>
-			</li>
+				<a class="widget__link" href="/categories/rede-de-computadores/">rede de computadores</a></li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/testes/">testes</a>
-			</li>
+				<a class="widget__link" href="/categories/seguran%C3%A7a/">segurança</a></li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/testes/">testes</a></li>
 		</ul>
 	</div>
 </div>
@@ -425,8 +415,10 @@ recentemente fazendo uma inspeção na aplicação precisei ver seu logs para en
 		<a class="widget-taglist__link widget__link btn" href="/tags/iam/" title="iam">iam</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/infraestrutura/" title="infraestrutura">infraestrutura</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/iniciante/" title="iniciante">iniciante</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lua/" title="lua">lua</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/node/" title="node">node</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/openresty/" title="openresty">openresty</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/packer/" title="packer">packer</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/security/" title="security">security</a>
@@ -499,7 +491,7 @@ recentemente fazendo uma inspeção na aplicação precisei ver seu logs para en
 		
 		<div class="footer__copyright">
 			&copy; 2021 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

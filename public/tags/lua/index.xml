@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lua on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/lua/</link>
+    <description>Recent content in lua on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenResty na prática</title>
+      <link>http://blog.joaovrmaia.com/post/openresty-na-pratica/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/openresty-na-pratica/</guid>
+      <description>Olá,
+OpenResty é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de Proxy ou Load Balancer. O projeto é um fork do NGINX e evoluido com o uso do LuaJIT para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma empresa por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.</description>
+    </item>
+    
+  </channel>
+</rss>
