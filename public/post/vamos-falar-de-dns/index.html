@@ -13,8 +13,8 @@ você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha at�
 Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/vamos-falar-de-dns/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-08-28T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-08-28T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-08-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-28T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -152,7 +152,7 @@ if (!doNotTrack) {
 </ol>
 <h3 id="nomear-servidores">Nomear servidores</h3>
 <p>Essa é uma funcionalidade que já conversamos aqui um pouco. Vamos explorar um pouco mais essa funcionalidade, vamos entender um pouco mais sobre o <code>google.com</code> e para isso vamos usar o comando <code>host</code> do Linux:</p>
-<pre><code>$ host google.com
+<pre tabindex="0"><code>$ host google.com
 google.com has address 172.217.29.110
 google.com has IPv6 address 2800:3f0:4004:807::200e
 google.com mail is handled by 30 alt2.aspmx.l.google.com.
@@ -161,7 +161,7 @@ google.com mail is handled by 10 aspmx.l.google.com.
 google.com mail is handled by 50 alt4.aspmx.l.google.com.
 google.com mail is handled by 40 alt3.aspmx.l.google.com.
 </code></pre><p>Veja que interessante, ele converte o DNS do Google em IP e ainda tem outra informações interessantes. Repare que ele forneceu duas versões de IP. Uma pausa para esse assunto, hoje temos duas versões do protocolo IP em uso na Internet, o <a href="https://pt.wikipedia.org/wiki/IPv4">IPv4</a> e <a href="https://pt.wikipedia.org/wiki/IPv6">IPv6</a>, por conta de uma limitação de combinações diferentes de IP e a explosão de dispositivos e serviços que hoje conseguem ter interface com a rede de computadores o protocolo se tornou limitado. Com isso, surgiu o IPv6 que veio atender a essa nova demanda de IPs. Além disso, ele também identificou que nesse domínio do Google tem um serviços de email como podemos ver. Olhe agora como podemos explorar ainda mais o <code>host</code> no estudo do domínio do Google:</p>
-<pre><code>$ host -a google.com
+<pre tabindex="0"><code>$ host -a google.com
 Trying &quot;google.com&quot;
 ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 43764
 ;; flags: qr rd ra; QUERY: 1, ANSWER: 12, AUTHORITY: 0, ADDITIONAL: 0
@@ -185,13 +185,13 @@ google.com.		443	IN	MX	50 alt4.aspmx.l.google.com.
 
 Received 298 bytes from 127.0.0.53#53 in 74 ms
 </code></pre><p>Veja que interessantes quanta informação a mais temos, nesse momento vamos olhar apenas essas:</p>
-<pre><code>google.com.		111294	IN	NS	ns1.google.com.
+<pre tabindex="0"><code>google.com.		111294	IN	NS	ns1.google.com.
 google.com.		111294	IN	NS	ns3.google.com.
 google.com.		111294	IN	NS	ns2.google.com.
 google.com.		111294	IN	NS	ns4.google.com.
 </code></pre><p>Vamos falar sobre isso nos próximos tópicos mas esses são os servidores do Google que fazem o papel de serviço de DNS deles, ou seja, são essas máquinas que sabem traduzir tudo que for <code>*.google.com</code> em um IP.</p>
 <p>Curiosamente rodei o primeiro comando mais uma vez depois de um certo espaço de tempo e veja o resultado:</p>
-<pre><code>$ host google.com
+<pre tabindex="0"><code>$ host google.com
 google.com has address 216.58.222.78
 google.com has IPv6 address 2800:3f0:4004:804::200e
 google.com mail is handled by 10 aspmx.l.google.com.
@@ -210,7 +210,7 @@ google.com mail is handled by 30 alt2.aspmx.l.google.com.
 <h2 id="resolvendo-dns-no-linux">Resolvendo DNS no Linux</h2>
 <p>Vamos supor que você está no Linux e vai fazer acesso de algum site no seu navegador, esse blog, por exemplo. Como já sabemos o <code>blog.joaovrmaia.com</code> é apenas um apelido para abstrair algum IP na rede mundial de computadores, como já diria o Jefferson da <a href="https://www.linuxtips.io/">LinuxTips</a>, e vamos precisar desse IP para chegar lá e trocar dados com ele.</p>
 <p>No Linux vai ocorrer a chamada <a href="https://man7.org/linux/man-pages/man3/gethostbyname.3.html"><code>gethostbyname()</code></a> quem vai começar a jornada pela resolução desse IP. Essa nossa chamada vai gerar uma consulta que será feita na Internet mas como nossa máquina lança essa consulta na Internet? No nosso sistema temos um arquivo, <code>/etc/resolv.conf</code>, que é gerenciado pelo sistema operacional e alimentado pela sua rede caso não tenha feito alguma modificação manual nele. Os valores desse arquivo no geral vem através do serviço de <a href="https://pt.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a> que podemos falar a respeito em outro momento. Veja como é o arquivo:</p>
-<pre><code class="language-conf" data-lang="conf"># This file is managed by man:systemd-resolved(8). Do not edit.
+<pre tabindex="0"><code class="language-conf" data-lang="conf"># This file is managed by man:systemd-resolved(8). Do not edit.
 #
 # This is a dynamic resolv.conf file for connecting local clients to the
 # internal DNS stub resolver of systemd-resolved. This file lists all
@@ -230,7 +230,7 @@ nameserver 127.0.0.53
 options edns0
 search br
 </code></pre><p>Então, nosso DNS está rodando para esse IP <code>127.0.0.53</code> que na verdade é uma abstração do <a href="https://pt.wikipedia.org/wiki/Systemd">systemd</a>. Então, vamos executar o comando sugerido no arquivo de configuração:</p>
-<pre><code>$ resolvectl status
+<pre tabindex="0"><code>$ resolvectl status
 Global
        LLMNR setting: no                  
 MulticastDNS setting: no                  
@@ -283,7 +283,7 @@ MulticastDNS setting: no
 
 ...
 </code></pre><p>Omitindo algumas partes esse são nossos reais servidores de DNS: 192.168.15.1 e fe8a0::96ea:eaff:feb5:aa35 nas duas versões de IP. Esse valor é do meu roteador e provedor de Internet que é o segundo passo nessa jornada para buscar o IP do meu blog. Antes de continuar a jornada, teria como eu evitar todo esse caminho em busca do IP? Algumas vez você já tenha passado por problemas de DNS em algum lugar e precisou colocar o DNS de forma manual na sua máquina, para isso precisou apenas editar o <code>/etc/hosts</code> correto? Como o sistema sabe como dele deve buscar ali? Existe outro recurso no nosso sistema que diz a prioridade de onde buscar essa informação, é o <a href="https://man7.org/linux/man-pages/man5/nsswitch.conf.5.html"><code>nsswitch</code></a>:</p>
-<pre><code># /etc/nsswitch.conf
+<pre tabindex="0"><code># /etc/nsswitch.conf
 #
 # Example configuration of GNU Name Service Switch functionality.
 # If you have the `glibc-doc-reference' and `info' packages installed, try:
@@ -304,7 +304,7 @@ rpc:            db files
 
 netgroup:       nis
 </code></pre><p>Como podemos ver em <code>hosts:          files mdns4_minimal [NOTFOUND=return] dns</code> o primeiro local a ser consultado é o o arquivo do sistema. Vamos fazer um teste! Vou editar no <code>/etc/hosts</code> o endereço do meu blog para localhost.</p>
-<pre><code>$ ping blog.joaovrmaia.com
+<pre tabindex="0"><code>$ ping blog.joaovrmaia.com
 PING jvrmaia.github.io (185.199.110.153) 56(84) bytes of data.
 64 bytes from 185.199.110.153 (185.199.110.153): icmp_seq=1 ttl=56 time=20.7 ms
 ...
@@ -314,7 +314,7 @@ PING localhost (127.0.0.1) 56(84) bytes of data.
 64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.061 ms
 ...
 </code></pre><p>Agora, já sabemos como nasce a requisição para resolver um nome pelo DNS. Veja bem, olhando o seu <code>/etc/hosts</code>, reparou algo?</p>
-<pre><code>127.0.0.1	localhost 
+<pre tabindex="0"><code>127.0.0.1	localhost 
 127.0.1.1	avell
 
 # The following lines are desirable for IPv6 capable hosts

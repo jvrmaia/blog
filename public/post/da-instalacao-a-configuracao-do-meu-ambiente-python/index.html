@@ -13,8 +13,8 @@ Apesar de não estar mais usando Python nas aplicações de produção que traba
 Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-04-28T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-04-28T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-04-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-28T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -127,7 +127,7 @@ if (!doNotTrack) {
 <p>Na maioria das versões mais modernas de sistema operacional Linux e OS X acredito que o Python padrão já seja o Python 3+ dado que o Python 2 já foi descontinuado. Quem chega no Python agora e não é um desenvolvedor que use Python nos seus sistemas é bem comum você usar o Python do sistema operacional e ser feliz com isso. Eventualmente, você vai correr o risco de alguma coisa que você instale quebre com outra instalada mas é bem difícil de ver isso acontecer dentro do que já observei até hoje. Já se você for um desenvolvedor Python isso pode se tornar rotineiro.</p>
 <p>Então, como resolver esse problema? Um solução que já uso tem uns anos e não vejo motivos para mudar é o <a href="https://github.com/pyenv/pyenv">pyenv</a>. O <code>pyenv</code> é um gestor e instalador de versões de Python no seu sistema. O <code>README</code> do projeto é bem claro sobre a instalação dele e acredito que você não vai ter dificuldades nessa parte, um adicional que faço é nesse ponto do <a href="https://github.com/pyenv/pyenv#homebrew-on-macos">Homebrew</a>, o Homebrew também funciona no Linux e recomendo o uso, mais detalhes a respeito podem ser vistos <a href="https://docs.brew.sh/Homebrew-on-Linux">aqui</a>.</p>
 <p>Vamos seguir agora assumindo que o <code>pyenv</code> já está 100% configurado na sua máquina, a primeira coisa que precisamos fazer é lista quais versões de Python estão disponíveis:</p>
-<pre><code>$ pyenv install -l
+<pre tabindex="0"><code>$ pyenv install -l
 Available versions:
   2.1.3
   2.2.3
@@ -210,7 +210,7 @@ Available versions:
   stackless-3.5.4
 
 </code></pre><p>Para instalar agora é simples: <code>pyenv install &lt;versão&gt;</code>. Aqui no meu caso tenho instalado algumas versões apenas:</p>
-<pre><code>$ pyenv versions
+<pre tabindex="0"><code>$ pyenv versions
   system
   3.6.9
   * 3.7.5 (set by /home/jvrmaia/.pyenv/version)
@@ -218,7 +218,7 @@ Available versions:
   3.8.0/envs/flask-docker-example
   flask-docker-example
 </code></pre><p>Como pode perceber a versão 3.7.5 tem um <code>*</code> na frente pois é a versão atual. Para listar a versão atual apenas:</p>
-<pre><code>$ pyenv version
+<pre tabindex="0"><code>$ pyenv version
 3.7.5 (set by /home/jvrmaia/.pyenv/version)
 </code></pre><p>Outro fato curioso é o <code>system</code> na lista de versões de Python, é assim que o <code>pyenv</code> se refere a versão instalada pelo sistema operacional e não ele. Agora, com os Python&rsquo;s que você precisa instalado você precisa escolher qual vai usar, tem duas formas de selecionar e inspecionar isso: <code>global</code> e <code>local</code>. O <code>global</code> como o próprio nome já sugere é para a configuração global do Python, no meu caso como visto anteriormente é o 3.7.5. Isso pode ser conferido rodando o comando <code>pyenv global</code>, no caso de você passar algum argumento extra e se esse argumento for outra versão instalada, essa versão vai assumir o papel de versão global. O <code>local</code> segue o mesmo comportamento da <code>global</code> só que no escopo de onde você executa o comando, supondo que o seu diretório atual seja <code>/tmp/app_py</code> e você execute <code>pyenv local 3.8.0</code>, a versão local vai ser alterada para a 3.8.0 e para persistir essa informação será criado um arquivo <code>.python-version</code> com o valor 3.8.0 para que caso você entre dentro dessa árvore dos seus diretórios o <code>pyenv</code> troque o Python do <code>$PATH</code> automaticamente.</p>
 <h1 id="ambientes-virtuais-do-python">Ambientes virtuais do Python</h1>
@@ -230,7 +230,7 @@ Available versions:
 <p>&ldquo;I built Poetry because I wanted a single tool to manage my Python projects from start to finish. I wanted something reliable and intuitive that the community could use and enjoy.&rdquo; Sébastien Eustace</p>
 </blockquote>
 <p>Como podemos ver na declaração do criador o Poetry vai além de gerenciar suas dependências mas aqui vou ficar apenas até essa parte que é o que faço uso hoje. No meu Github tenho um projeto chamado <a href="https://github.com/jvrmaia/flask-docker-example/tree/master/app">flask-docker-example</a> que é um exemplo de como colocar uma aplicação <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> em Docker:</p>
-<pre><code>(flask-docker-example) =&gt; ~/Workspace/jvrmaia/flask-docker-example/app
+<pre tabindex="0"><code>(flask-docker-example) =&gt; ~/Workspace/jvrmaia/flask-docker-example/app
 $ tree .
 .
 ├── __init__.py
@@ -239,7 +239,7 @@ $ tree .
 └── whoami.py
 
 </code></pre><p>Essa é a estrutura do projeto na parte de código, a estrutura inicial  que criei com o <code>poetry init</code> mas antes de entrar nisso vamos instalar o Poetry, nesse caso recomendo instalar o Poetry fora do seu ambiente virtual de forma que o acesso fique global com o <code>pip</code>: <code>pip install poetry</code>. A &ldquo;interface&rdquo; do Poetry:</p>
-<pre><code>$ poetry
+<pre tabindex="0"><code>$ poetry
 Poetry version 1.0.5
 
 USAGE
@@ -283,7 +283,7 @@ AVAILABLE COMMANDS
   update                 Update the dependencies as according to the pyproject.toml file.
   version                Shows the version of the project or bumps it when a valid bump rule is provided.
 </code></pre><p>Para adicionar dependências no seu projeto basta fazer como é mostrado no exemplo do site:</p>
-<pre><code>$ poetry add pendulum
+<pre tabindex="0"><code>$ poetry add pendulum
 Using version ^2.0.5 for pendulum
 
 Updating dependencies
@@ -299,7 +299,7 @@ Package operations: 4 installs, 0 updates, 0 removals
   - Installing pendulum (2.0.5)
 </code></pre><p>Caso você tenha feito apenas um clone de um projeto e queira instalar elas é só executar o comando <code>install</code>. Agora, vamos entender os dois arquivos gerandos que cuidam da gestão desse ambiente: 1) <code>pyproject.toml</code>: esse guarda as informações do seu projeto; e 2) <code>poetry.lock</code> que em detalhes versiona as suas depências e as dependências de suas dependências. Isso é muito importante para evitar que uma pessoa que fez a configuração do projeto após um certo tempo de existência não instale uma subdependência com versão superior a do momento da criação com quebras de API quebrando o projeto.</p>
 <p><code>pyproject.toml</code></p>
-<pre><code> [tool.poetry]
+<pre tabindex="0"><code> [tool.poetry]
  name = &quot;flask-docker-example&quot;
  version = &quot;0.1.0&quot;
  description = &quot;Flask dockerize example&quot;
@@ -331,7 +331,7 @@ pylint = &quot;^2.4.4&quot;
 requires = [&quot;poetry&gt;=0.12&quot;]
 build-backend = &quot;poetry.masonry.api&quot;
 </code></pre><p><code>poetry.lock</code></p>
-<pre><code>[[package]]
+<pre tabindex="0"><code>[[package]]
 category = &quot;dev&quot;
 description = &quot;An abstract syntax tree for Python with inference support.&quot;
 name = &quot;astroid&quot;

@@ -7,15 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sobre</title>
       <link>http://blog.joaovrmaia.com/about/</link>
       <pubDate>Fri, 25 Jan 2019 16:38:52 -0300</pubDate>
       
       <guid>http://blog.joaovrmaia.com/about/</guid>
+      <description>Onde estou&amp;hellip;
+Twitter
+Instagram
+GitLab
+Github
+Tchau!</description>
+    </item>
+    
+    <item>
+      <title>Dica de ferramenta: SDKMAN!</title>
+      <link>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</guid>
       <description>Olá,
-comecei a olhar códigos quando era criança e vi um material sobre cracking, lembra daqueles seriais para piratear software? então&amp;hellip;, tudo pelo interesse de conseguir jogar os meus jogos. Foi divertido futucar no Assembly sem entender muito dos conceitos que ali existem que só fui aprender em Microprocessadores na UFES. Depois desse breve momento tive um hiato no assunto até os anos próximos ao vestibular onde a convite do meu vizinho fui fazer um curso de desenvolvimento de sites com HTML, CSS e Flash, acabei tendo o contato com o Pascal na época também pois a turma antes da minha aula era de Delphi e como sempre fui de chegar cedo acabava vendo um pouco da aula.</description>
+se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Java, Kotlin e Scala e tem ferramentas de gestão de projeto como Maven, Gradle e sbt o SDKMAN! pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o Kico, ele escreveu um guia da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.</description>
     </item>
     
     <item>
@@ -200,16 +214,6 @@ Esse é o último artigo da minha sequência proposta para introduzir novas pess
       <guid>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</guid>
       <description>Olá,
 Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não.</description>
-    </item>
-    
-    <item>
-      <title>Instalação do Go</title>
-      <link>http://blog.joaovrmaia.com/post/instalacao-do-go/</link>
-      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/instalacao-do-go/</guid>
-      <description>Olá,
-esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua jornada inicial na linguagem seja uma experiência muito positiva e proveitosa. Nesse artigo vou abordar em especial a questão de como instalar o Go na sua máquina. Como sou usuário de Linux vou dar foco nesse sistema, usuários do OSX provavelmente vão conseguir usar os mesmos passos mas infelizmente não vou conseguir cobrir o caso do Windows por não seu um usuário do sistema.</description>
     </item>
     
   </channel>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.83.0" />
+	<meta name="generator" content="Hugo 0.88.1" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -105,6 +105,28 @@ if (!doNotTrack) {
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/">
+			<img src="/img/dica-de-ferramenta-sdkman/sdkman.png" alt="Dica de ferramenta: SDKMAN!" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/post/dica-de-ferramenta-sdkman/" rel="bookmark">
+			Dica de ferramenta: SDKMAN!
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-10-30T00:00:00Z">2021-10-30</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/desenvolvimento/" rel="category">desenvolvimento</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Olá,
+se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Java, Kotlin e Scala e tem ferramentas de gestão de projeto como Maven, Gradle e sbt o SDKMAN! pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o Kico, ele escreveu um guia da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.
+	</div>
+</article><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="http://blog.joaovrmaia.com/post/openresty-na-pratica/">
 			<img src="/img/openresty-na-pratica/openresty.png" alt="OpenResty na prática" />
@@ -304,33 +326,11 @@ dando continuidade nos artigos de infraestrutura como código chegou a hora de e
 		Olá,
 sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo.
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="http://blog.joaovrmaia.com/post/conhecendo-o-packer/">
-			<img src="/img/conhecendo-o-packer/packer.png" alt="Conhecendo o Packer" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/post/conhecendo-o-packer/" rel="bookmark">
-			Conhecendo o Packer
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-05-23T00:00:00Z">2020-05-23</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/devops/" rel="category">devops</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Olá,
-eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud.
-	</div>
 </article>
 </main>
 
 <div class="pagination">
-	<span class="pagination__item pagination__item--current">1/2</span>
+	<span class="pagination__item pagination__item--current">1/3</span>
 	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
 </div>
 
@@ -348,11 +348,11 @@ eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instân
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/post/dica-de-ferramenta-sdkman/">Dica de ferramenta: SDKMAN!</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/openresty-na-pratica/">OpenResty na prática</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/conhecendo-o-terraform/">Conhecendo o Terraform</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/o-basico-do-http-em-go/">O básico do HTTP em Go</a></li>
 			<li class="widget__item"><a class="widget__link" href="/post/e-esse-tal-de-bgp/">E esse tal de BGP?</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/git-e-afins-para-iniciantes-parte-2/">Git e afins para iniciantes - parte 2</a></li>
 		</ul>
 	</div>
 </div>
@@ -410,17 +410,21 @@ eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instân
 		<a class="widget-taglist__link widget__link btn" href="/tags/github/" title="github">github</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/gitlab/" title="gitlab">gitlab</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/golang/" title="golang">golang</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gradle/" title="gradle">gradle</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hashing/" title="hashing">hashing</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/http/" title="http">http</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/iam/" title="iam">iam</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/infraestrutura/" title="infraestrutura">infraestrutura</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/iniciante/" title="iniciante">iniciante</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/java/" title="java">java</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jvm/" title="JVM">JVM</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lua/" title="lua">lua</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/nginx/" title="nginx">nginx</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/node/" title="node">node</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/openresty/" title="openresty">openresty</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/packer/" title="packer">packer</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/python/" title="python">python</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/scala/" title="scala">scala</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/security/" title="security">security</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/seguran%C3%A7a/" title="segurança">segurança</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/supertest/" title="supertest">supertest</a>

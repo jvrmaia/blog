@@ -12,8 +12,8 @@
 sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-06-15T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-06-15T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-06-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-15T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -145,7 +145,7 @@ if (!doNotTrack) {
 <p><code>Policy</code> é a forma mais granular de criar permissões na AWS, basicamente você vai dizer se algo pode ou não, o que é essa ação e ao que dentro da AWS ela será aplicada. Vamos exemplificar, uma <code>Policy</code> poder ser a permissão de fazer um <code>GetObject</code> em um <code>bucket</code> específico do <code>s3</code>, se essa <code>Policy</code> for dada a um usuário ele terá o poder de pegar qualquer arquivo desse <code>bucket</code> e fazer um cópia local em sua máquina dado que ele saiba da existência do mesmo pois a permissão dada não permite ele listar os itens do <code>bucket</code>.</p>
 <h3 id="exemplo">Exemplo</h3>
 <p>A <code>Policy</code> é descrita em formato <code>JSON</code>, segue um exemplo:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
@@ -169,7 +169,7 @@ if (!doNotTrack) {
 <span class="p">}</span>
 </code></pre></div><p>No exemplo acima estou permitindo tudo no <code>s3</code> no primeiro momento mas depois me certifico que no <code>bucket</code> de backups de um banco de dados nada é permitido.</p>
 <p>Políticas dinâmicas:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
    <span class="nt">&#34;Statement&#34;</span><span class="p">:[{</span>
       <span class="nt">&#34;Effect&#34;</span><span class="p">:</span><span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
       <span class="nt">&#34;Action&#34;</span><span class="p">:</span><span class="s2">&#34;s3:*&#34;</span><span class="p">,</span>

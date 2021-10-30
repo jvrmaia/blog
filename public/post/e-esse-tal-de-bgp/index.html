@@ -13,8 +13,8 @@ nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol
 Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-02T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-12-02T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-12-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-02T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -147,7 +147,7 @@ if (!doNotTrack) {
 <p>Outro ponto interessante, supondo que você seja o administrador do AS1 e um terceiro do AS2, não é porque você escolheu o modelo <code>cold</code> que a comunicação de <code>s1</code> e <code>s2</code> vão ser sempre assim. Como disse no começo, o BGP é descentralizado e assimétrico. Então, o administrado do BGP do AS2 pode manipular a tabela de rotas para usar o algoritmo <code>hot</code>.</p>
 <p>O que acontece na prática? Nenhum dos dois. O algoritmo usado na prática é o seleção de rota. Cada roteador vai ter uma configuração de preferência local e isso pode ser configurado por seu auto-aprendizado ou pode aprender através de outros roteadores do seu AS. A forma desse aprendizado é controlada através de políticas criadas pelo administrador da rede e as isso é feito em forma de rank onde mais com maior rank são as escolhidas. Depois de varrer a preferência local o roteamento dos prefixos restantes é feito através da escolha do menor caminho que é feito pelo <a href="https://en.wikipedia.org/wiki/Distance-vector_routing_protocol"><code>Distance-Vector (DV) Routing Algorithm</code></a>. Sobrando ainda mais prefixos a escolha de roteamento é feita pelo <code>hot potato</code> e por fim BGP identifiers.</p>
 <h1 id="verificando-rotas-de-bgp">Verificando rotas de BGP</h1>
-<pre><code>$ telnet route-views.saopaulo.routeviews.org
+<pre tabindex="0"><code>$ telnet route-views.saopaulo.routeviews.org
 Trying 2001:12ff:0:6192::217...
 Connected to route-views.saopaulo.routeviews.org.
 Escape character is '^]'.

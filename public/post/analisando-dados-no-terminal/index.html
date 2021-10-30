@@ -12,8 +12,8 @@
 recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no Twitter surgiram comentários interessantes." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-05-01T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-05-01T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-05-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-01T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -127,10 +127,10 @@ if (!doNotTrack) {
 <p>Os principais comandos que vou utilizar aqui são: <a href="http://man7.org/linux/man-pages/man1/cat.1.html">cat</a>, <a href="https://stedolan.github.io/jq/">jq</a>, <a href="https://www.gnu.org/software/gawk/manual/gawk.html">awk</a>, <a href="http://man7.org/linux/man-pages/man1/sort.1.html">sort</a>, <a href="http://man7.org/linux/man-pages/man1/tail.1.html">tail</a>, <a href="http://linuxcommand.org/lc3_man_pages/grep1.html">grep</a>, <a href="http://man7.org/linux/man-pages/man1/uniq.1.html">uniq</a> e <a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipelines</a>.</p>
 <h2 id="cat">cat</h2>
 <p>O <code>cat</code> é um comando bem simples que é usado no geral para mostrar no terminal as informações de uma arquivo ou mais passados via argumentos, por exemplo:</p>
-<pre><code>$ cat hello.txt
+<pre tabindex="0"><code>$ cat hello.txt
 world
 </code></pre><p>Existem alguns outros recursos interessantes que valem nota para o uso que são as opções <code>-n</code> e <code>-b</code>:</p>
-<pre><code>$ cat -n hello.txt
+<pre tabindex="0"><code>$ cat -n hello.txt
      1 world
 $ cat linhas.txt
 primeira linha
@@ -145,13 +145,13 @@ $ cat -b linhas.txt
 </code></pre><p>Ambos mostram o número da linha com a diferença que na segunda opção as linhas em branco não são consideradas.</p>
 <h3 id="bônus">Bônus</h3>
 <p>Descobrir o que acontece se fizermos isso:</p>
-<pre><code>$ cat &gt;a.txt&lt;&lt;EOF
+<pre tabindex="0"><code>$ cat &gt;a.txt&lt;&lt;EOF
 &gt; abcEOF
 &gt; 123
 &gt; EOF
 </code></pre><h2 id="tail">tail</h2>
 <p>O <code>tail</code> parece com o <code>cat</code> mas o que ele faz é retornar os dados na ordem inversa do <code>cat</code> e com limitação na quantidade de linhas. Vamos testar com o <code>/etc/resolv.conf</code>:</p>
-<pre><code>$ cat -n /etc/resolv.conf
+<pre tabindex="0"><code>$ cat -n /etc/resolv.conf
      1	# This file is managed by man:systemd-resolved(8). Do not edit.
      2	#
      3	# This is a dynamic resolv.conf file for connecting local clients to the
@@ -171,7 +171,7 @@ $ cat -b linhas.txt
     17	nameserver 127.0.0.53
     18	options edns0
 </code></pre><p>Usei o <code>cat</code> aqui para termos uma visibilidade do quem no arquivo como um todo. Agora, vamos ao <code>tail</code>.</p>
-<pre><code>$ tail /etc/resolv.conf
+<pre tabindex="0"><code>$ tail /etc/resolv.conf
 #
 # Third party programs must not access this file directly, but only through the
 # symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,
@@ -183,7 +183,7 @@ $ cat -b linhas.txt
 nameserver 127.0.0.53
 options edns0
 </code></pre><p>Já deu para notar que a quantidade de dados que veio foi reduzida, sabendo que são 18 linhas, para ver todas com o <code>tail</code>, podemos fazer:</p>
-<pre><code>$ tail -n 18 /etc/resolv.conf
+<pre tabindex="0"><code>$ tail -n 18 /etc/resolv.conf
 # This file is managed by man:systemd-resolved(8). Do not edit.
 #
 # This is a dynamic resolv.conf file for connecting local clients to the
@@ -203,20 +203,20 @@ options edns0
 nameserver 127.0.0.53
 options edns0
 </code></pre><p>Assim como podemos fazer para ver menos linhas:</p>
-<pre><code>$ tail -n 2 /etc/resolv.conf
+<pre tabindex="0"><code>$ tail -n 2 /etc/resolv.conf
 nameserver 127.0.0.53
 options edns0
 </code></pre><h3 id="bônus-1">Bônus</h3>
 <p>Procure algum arquivo de log com escrita constante no seu computador ou servidor e execute, por exemplo: <code>$ tail -f /var/log/syslog</code>.</p>
 <h2 id="pipelines">pipelines</h2>
 <p>Acho que esse usamos e acabamos nem percebendo, quem nunca viu algum projeto livre por ai que o primeiro comando não é um <code>curl</code> ou <code>wget</code> para fazer download de uma aquivo, um <code>|</code> e <code>bash</code>. Então, esse <code>|</code> é o <code>pipelines</code>. O que esse comando fazer é conectar uma cadeia de comandos:</p>
-<pre><code>comando1 | comando2 | comando3 | ... | comandoN
+<pre tabindex="0"><code>comando1 | comando2 | comando3 | ... | comandoN
 </code></pre><p>O que estamos fazendo ai é que o <code>comando1</code> vai gerar uma saída que vai ser entrada do <code>comando2</code> que por consequência vai gerar uma saída nova que será a entrada do <code>comando3</code> e assim até o <code>comandoN</code>. No próximo item, <code>jq</code>, vamos explorar melhor isso na prática.</p>
 <h3 id="bônus-2">Bônus</h3>
 <p>Existe uma variação do comando, <code>|&amp;</code>, que é para redirecionar as saídas de erro.</p>
 <h2 id="jq">jq</h2>
 <p>É uma ferramenta bem legal feita em Node para lidarmos com JSON/string no terminal. Aqui não vamos explorar muito ela pois acho que isso pode ser um artigo só para isso de tantas coisas interessantes que ele tem. Vamos supor o seguinte JSON de uma compra em e-commerce:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span>
     <span class="nt">&#34;cliente&#34;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">3243</span><span class="p">,</span>
@@ -264,10 +264,10 @@ options edns0
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><h3 id="nome-do-cliente">Nome do cliente</h3>
-<pre><code>$ cat compra.json | jq .cliente.nome
+<pre tabindex="0"><code>$ cat compra.json | jq .cliente.nome
 &quot;joão da silva&quot;
 </code></pre><h3 id="listar-produtos">Listar produtos</h3>
-<pre><code>$ cat compra.json | jq .carrinho.produtos
+<pre tabindex="0"><code>$ cat compra.json | jq .carrinho.produtos
 [
   {
     &quot;id&quot;: 123,
@@ -289,20 +289,20 @@ options edns0
   }
 ]
 </code></pre><h3 id="nome-dos-produtos">Nome dos produtos</h3>
-<pre><code>$ cat compra.json | jq .carrinho.produtos[].nome
+<pre tabindex="0"><code>$ cat compra.json | jq .carrinho.produtos[].nome
 &quot;livro do dragão&quot;
 &quot;copos&quot;
 &quot;camisa preta&quot;
 </code></pre><h3 id="valor-da-entrega">Valor da entrega</h3>
-<pre><code>$ cat compra.json | jq .entrega.valor
+<pre tabindex="0"><code>$ cat compra.json | jq .entrega.valor
 0
 </code></pre><h3 id="quantidade-de-itens-bônus">Quantidade de itens (Bônus)</h3>
-<pre><code>$ cat compra.json | jq -n '[inputs | .carrinho.produtos[].quantidade] | reduce .[] as $num (0; .+$num)'
+<pre tabindex="0"><code>$ cat compra.json | jq -n '[inputs | .carrinho.produtos[].quantidade] | reduce .[] as $num (0; .+$num)'
 12
 </code></pre><h2 id="grep">grep</h2>
 <p>O <code>grep</code> é uma comando para procurar padrões em arquivos e imprimir suas ocorrências por linha. Vamos explorar o uso <code>grep</code> no arquivo: <code>/etc/sysctl.conf</code>.</p>
 <h3 id="todas-configurações-presentes-relativas-a-ipv4">Todas configurações presentes relativas a IPv4</h3>
-<pre><code>$ grep ipv4 /etc/sysctl.conf
+<pre tabindex="0"><code>$ grep ipv4 /etc/sysctl.conf
 #net.ipv4.conf.default.rp_filter=1
 #net.ipv4.conf.all.rp_filter=1
 #net.ipv4.tcp_syncookies=1
@@ -314,7 +314,7 @@ options edns0
 #net.ipv4.conf.all.log_martians = 1
 </code></pre><h3 id="todas-as-configurações-ativas">Todas as configurações ativas</h3>
 <p>Sabendo que <code>#</code> no começo da linha significa que a linha está comentada.</p>
-<pre><code>$ grep -v ^# /etc/sysctl.conf
+<pre tabindex="0"><code>$ grep -v ^# /etc/sysctl.conf
 
 
 
@@ -330,7 +330,7 @@ options edns0
 fs.inotify.max_user_watches=524288 # nao comentada
 </code></pre><p>Várias linhas em branco e nota-se que a última não foi pega no <code>grep</code> pois o <code>^</code> indica começo da linha, como o <code>#</code> está no meio da linha o casamento de padrão é falso.</p>
 <h3 id="bônus-3">Bônus</h3>
-<pre><code>$ grep -i --color -e 'ipv[46]' /etc/sysctl.conf
+<pre tabindex="0"><code>$ grep -i --color -e 'ipv[46]' /etc/sysctl.conf
 #net.ipv4.conf.default.rp_filter=1
 #net.ipv4.conf.all.rp_filter=1
 # Note: This may impact IPv6 TCP sessions too
@@ -349,7 +349,7 @@ fs.inotify.max_user_watches=524288 # nao comentada
 </code></pre><p>Recomendo executar para ver a opção <code>--color</code> funcionando e entender melhor a <code>-i</code>.</p>
 <h2 id="sort">sort</h2>
 <p>Como próprio nome sugere, o <code>sort</code> vai ordenar uma entrada informada por linhas. Vamos tomar o seguinte arquivo para exemplo:</p>
-<pre><code>$ cat ordenar.txt
+<pre tabindex="0"><code>$ cat ordenar.txt
 zambia
 nigeria
 áfrica do sul
@@ -365,7 +365,7 @@ mandagascar
 
 ~`''`
 </code></pre><p>Você acha que conseguiria ordenar apenas no olhar de forma igual?</p>
-<pre><code>$ sort ordenar.txt
+<pre tabindex="0"><code>$ sort ordenar.txt
 
 ~`''`
 !@#!@#
@@ -382,7 +382,7 @@ nigeria
 zambia
 </code></pre><h3 id="bônus-4">Bônus</h3>
 <p>Considerando o seguinte arquivo:</p>
-<pre><code>$ cat colunas.txt
+<pre tabindex="0"><code>$ cat colunas.txt
 9 banana
 8 maçã
 7 abacate
@@ -395,7 +395,7 @@ zambia
 </code></pre><p>Entenda o comportamento de <code>sort -k1 colunas.txt</code> e <code>sort -k2 colunas.txt</code>.</p>
 <h2 id="uniq">uniq</h2>
 <p>O <code>uniq</code> pelo nome já da sinais do que faça, o que ele faz é informar ou omitir linhas repetidas, vamos considerar o seguinte arquivo:</p>
-<pre><code>$ cat uniq.txt
+<pre tabindex="0"><code>$ cat uniq.txt
 zzzz
 bbbb
 zzzz
@@ -410,7 +410,7 @@ bbbb
 mmmm
 cccc
 </code></pre><p>Fazendo o teste mais óbvio com o <code>uniq</code>:</p>
-<pre><code>$ uniq uniq.txt
+<pre tabindex="0"><code>$ uniq uniq.txt
 zzzz
 bbbb
 zzzz
@@ -429,7 +429,7 @@ cccc
 <p>Filter adjacent matching lines from INPUT (or standard input), writing to OUTPUT (or standard output).</p>
 </blockquote>
 <p>Então, para ser efetivo no uso do <code>uniq</code> precisamos de usar o sort antes, vejamos:</p>
-<pre><code>$ sort uniq.txt | uniq
+<pre tabindex="0"><code>$ sort uniq.txt | uniq
 aaaa
 bbbb
 cccc
@@ -442,11 +442,11 @@ oooo
 zzzz
 </code></pre><p>Agora sim conseguimos ver o uso efetivo do <code>uniq</code>.</p>
 <h3 id="vendo-apenas-os-dados-repetidos">Vendo apenas os dados repetidos</h3>
-<pre><code>$ sort uniq.txt | uniq -d
+<pre tabindex="0"><code>$ sort uniq.txt | uniq -d
 bbbb
 zzzz
 </code></pre><h3 id="vendo-apenas-os-únicos">Vendo apenas os únicos</h3>
-<pre><code>$ sort uniq.txt | uniq -u
+<pre tabindex="0"><code>$ sort uniq.txt | uniq -u
 aaaa
 cccc
 eeee
@@ -457,7 +457,7 @@ mmmm
 oooo
 </code></pre><h3 id="bônus-5">Bônus</h3>
 <p>Contanto as ocorrências:</p>
-<pre><code>$ sort uniq.txt | uniq -c
+<pre tabindex="0"><code>$ sort uniq.txt | uniq -c
       1 aaaa
       2 bbbb
       1 cccc
@@ -478,7 +478,7 @@ oooo
 </blockquote>
 <p>Então, sabendo do tamanho do universo que é o <code>awk</code> é claro que esse artigo não vai cobrir ele e vamos ser pontuais no que precisamos para resolver o nosso desafio de analisar os logs.</p>
 <p>Vamos considerar o seguinte arquivo:</p>
-<pre><code>$ cat awk1.txt
+<pre tabindex="0"><code>$ cat awk1.txt
 colunaA colunaB colunaC
 1       a       !
 2       b       @
@@ -487,7 +487,7 @@ colunaA colunaB colunaC
 5       e       %
 6       f       &amp;
 </code></pre><h3 id="retornando-a-entrada">Retornando a entrada</h3>
-<pre><code>$ awk '{print($0)}' awk1.txt
+<pre tabindex="0"><code>$ awk '{print($0)}' awk1.txt
 colunaA colunaB colunaC
 1       a       !
 2       b       @
@@ -496,7 +496,7 @@ colunaA colunaB colunaC
 5       e       %
 6       f       &amp;
 </code></pre><h3 id="retornando-os-dados-isolados-por-coluna">Retornando os dados isolados por coluna</h3>
-<pre><code>$ awk '{print($1)}' awk1.txt
+<pre tabindex="0"><code>$ awk '{print($1)}' awk1.txt
 colunaA
 1
 2
@@ -504,7 +504,7 @@ colunaA
 4
 5
 6
-</code></pre><pre><code>$ awk '{print($2)}' awk1.txt
+</code></pre><pre tabindex="0"><code>$ awk '{print($2)}' awk1.txt
 colunaB
 a
 b
@@ -512,7 +512,7 @@ c
 d
 e
 f
-</code></pre><pre><code>$ awk '{print($3)}' awk1.txt
+</code></pre><pre tabindex="0"><code>$ awk '{print($3)}' awk1.txt
 colunaC
 !
 @
@@ -521,22 +521,22 @@ $
 %
 &amp;
 </code></pre><h3 id="usando-o-split">Usando o <code>split</code></h3>
-<pre><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[0]) }'
-</code></pre><pre><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[1]) }'
+<pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[0]) }'
+</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[1]) }'
 0
-</code></pre><pre><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[1]) }'
+</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[1]) }'
 0
-</code></pre><pre><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[10]) }'
+</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[10]) }'
 9
-</code></pre><pre><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[11]) }'
+</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[11]) }'
 
 </code></pre><p>Fique atento, o <code>awk</code> não da erro ao acessar uma posição do <code>array</code> que não possui dados.</p>
 <h3 id="bônus-6">Bônus</h3>
-<pre><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); c = l[3]; print c; if (c &lt; 2) { print(&quot;a&quot;) } else if (c == 2) { print(&quot;b&quot;) } else print(&quot;c&quot;) }'
+<pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); c = l[3]; print c; if (c &lt; 2) { print(&quot;a&quot;) } else if (c == 2) { print(&quot;b&quot;) } else print(&quot;c&quot;) }'
 </code></pre><p>Qual é a resposta?</p>
 <h1 id="gerador-aleatório-de-logs">Gerador aleatório de logs</h1>
 <p>Para demonstrar o uso combinado das ferramentas era preciso gerar um data set de logs. Hoje, é bem comum boa parte das aplicações escrevem seus logs no formato de JSON e esse era o meu caso. Então, no nosso arquivo de log vai conter apenas um JSON, por exemplo:</p>
-<pre><code>{&quot;remote_ip_addr&quot;: &quot;82.58.153.167&quot;, &quot;access_token&quot;: &quot;secret_a7f49337ecff4c50a97c3d23e7386e23&quot;, &quot;x_tid&quot;: &quot;d8d3d5b0-bd8d-4386-b381-c760a70b9f49&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;GET&quot;, &quot;path&quot;: &quot;/users/1&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:21&quot;, &quot;status_code&quot;: 201}
+<pre tabindex="0"><code>{&quot;remote_ip_addr&quot;: &quot;82.58.153.167&quot;, &quot;access_token&quot;: &quot;secret_a7f49337ecff4c50a97c3d23e7386e23&quot;, &quot;x_tid&quot;: &quot;d8d3d5b0-bd8d-4386-b381-c760a70b9f49&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;GET&quot;, &quot;path&quot;: &quot;/users/1&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:21&quot;, &quot;status_code&quot;: 201}
 {&quot;remote_ip_addr&quot;: &quot;188.235.234.165&quot;, &quot;access_token&quot;: &quot;secret_df60122168e048ba846b81fed1b09a1d&quot;, &quot;x_tid&quot;: &quot;d60291e2-e5a2-4222-a038-67f4adc88012&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;DELETE&quot;, &quot;path&quot;: &quot;/robots.txt&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:45&quot;, &quot;status_code&quot;: 200}
 {&quot;remote_ip_addr&quot;: &quot;51.203.201.123&quot;, &quot;access_token&quot;: &quot;secret_b36d6af8a0d542f1ae5be86ac38688a0&quot;, &quot;x_tid&quot;: &quot;74016c10-be59-45ff-b13c-ffd8732919d8&quot;, &quot;user_agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;, &quot;method&quot;: &quot;DELETE&quot;, &quot;path&quot;: &quot;/users/12&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:48&quot;, &quot;status_code&quot;: 400}
 {&quot;remote_ip_addr&quot;: &quot;59.1.220.255&quot;, &quot;access_token&quot;: &quot;secret_2eb5ec132dac4fecaeb32ef12cfd7cd8&quot;, &quot;x_tid&quot;: &quot;64659fa4-f9d6-4e10-98d5-fb5178a2cd1c&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;PUT&quot;, &quot;path&quot;: &quot;/security.txt&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:57&quot;, &quot;status_code&quot;: 500}
@@ -557,7 +557,7 @@ $
 <li><code>status_code</code>: código HTTP de retorno dado pelo serviço.</li>
 </ul>
 <h2 id="código-do-gerador-de-log">Código do gerador de log</h2>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">socket</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -621,10 +621,10 @@ $
         <span class="s2">&#34;status_code&#34;</span><span class="p">:</span> <span class="n">STATUSES</span><span class="p">[</span><span class="n">random_status_pos</span><span class="p">],</span>
     <span class="p">}</span>
     <span class="n">dt</span> <span class="o">+=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">randrange</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
 </code></pre></div><h1 id="analisando-os-logs">Analisando os logs</h1>
 <h2 id="contando-a-quantidade-de-status_code">Contando a quantidade de status_code</h2>
-<pre><code>$ python generate.py | jq .status_code | sort | uniq --count
+<pre tabindex="0"><code>$ python generate.py | jq .status_code | sort | uniq --count
   14257 200
   14179 201
   14411 301
@@ -632,7 +632,7 @@ $
   14069 401
   28724 500
 </code></pre><h2 id="rank-do-user-agents">Rank do user-agents</h2>
-<pre><code>$ python generate.py | jq .user_agent | sort | uniq --count | sort -k1 -n -r
+<pre tabindex="0"><code>$ python generate.py | jq .user_agent | sort | uniq --count | sort -k1 -n -r
   20113 &quot;Wget/1.15 (linux-gnu)&quot;
   10030 &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;
   10008 &quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;
@@ -643,13 +643,13 @@ $
    9963 &quot;Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)&quot;
    9925 &quot;Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)&quot;
 </code></pre><h2 id="descobrindo-se-teve-conflitos-de-x-tid">Descobrindo se teve conflitos de X-TID</h2>
-<pre><code>$ python generate.py | jq .x_tid | sort | uniq --count | awk '{ if ($1 &gt; 1) print($0) }'
+<pre tabindex="0"><code>$ python generate.py | jq .x_tid | sort | uniq --count | awk '{ if ($1 &gt; 1) print($0) }'
 $ echo $?
 0
 </code></pre><p>Como não teve retorno e a execução foi um sucesso, significa que não teve conflitos de X-TID.</p>
 <h2 id="rank-das-classes-de-ip">Rank das classes de IP</h2>
 <p>Primeiro, vamos entender a decomposição decimal do IP, 172.16.254.1, por exemplo.</p>
-<pre><code>172 = 10101100 (8 bits)
+<pre tabindex="0"><code>172 = 10101100 (8 bits)
 16  = 00010000 (8 bits)
 254 = 11111110 (8 bits)
 1   = 00000001 (8 bits)
@@ -689,7 +689,7 @@ total de 32 bitss (4 bytes)
 </li>
 </ul>
 <p>Detalhes sobre as classes de IP <a href="https://pt.wikipedia.org/wiki/Endere%C3%A7o_IP#Classes_de_endere.C3.A7os">aqui</a>.</p>
-<pre><code>$ python generate.py | jq '.remote_ip_addr|split(&quot;.&quot;)[0]|tonumber' | awk '{ if ($1 &lt;= 127) { print &quot;A&quot;; } else if ($1 &lt;= 191) { print &quot;B&quot;; } else if ($1 &lt;= 223) { print &quot;C&quot;; } else if ($1 &lt;= 239) { print &quot;D&quot;; }  else { print &quot;E&quot;; } }' | sort | uniq -c | sort -k2
+<pre tabindex="0"><code>$ python generate.py | jq '.remote_ip_addr|split(&quot;.&quot;)[0]|tonumber' | awk '{ if ($1 &lt;= 127) { print &quot;A&quot;; } else if ($1 &lt;= 191) { print &quot;B&quot;; } else if ($1 &lt;= 223) { print &quot;C&quot;; } else if ($1 &lt;= 239) { print &quot;D&quot;; }  else { print &quot;E&quot;; } }' | sort | uniq -c | sort -k2
   49540 A
   23552 B
   10068 C

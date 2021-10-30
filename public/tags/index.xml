@@ -7,7 +7,43 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Fri, 02 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>gradle</title>
+      <link>http://blog.joaovrmaia.com/tags/gradle/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/gradle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>http://blog.joaovrmaia.com/tags/java/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JVM</title>
+      <link>http://blog.joaovrmaia.com/tags/jvm/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/jvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>http://blog.joaovrmaia.com/tags/scala/</link>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/scala/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>lua</title>
       <link>http://blog.joaovrmaia.com/tags/lua/</link>
@@ -149,42 +185,6 @@
       <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/tags/aws/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>iam</title>
-      <link>http://blog.joaovrmaia.com/tags/iam/</link>
-      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/iam/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>security</title>
-      <link>http://blog.joaovrmaia.com/tags/security/</link>
-      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>packer</title>
-      <link>http://blog.joaovrmaia.com/tags/packer/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/packer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dicas</title>
-      <link>http://blog.joaovrmaia.com/tags/dicas/</link>
-      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/dicas/</guid>
       <description></description>
     </item>
     

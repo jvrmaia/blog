@@ -12,8 +12,8 @@
 nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-03-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-03-07T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-03-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-07T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -125,7 +125,7 @@ if (!doNotTrack) {
 <h1 id="go">Go</h1>
 <p>Já escrevi alguns outros artigos sobre Go no blog, para listar todos veja <a href="https://blog.joaovrmaia.com/tags/golang/">aqui</a>. Aqui só quero contextualizar algumas curiosidades sobre Go que são importantes para não só para trabalhar com HTTP mas vão te ajudar em outros momentos mais quando usar Go.</p>
 <p>Vamos testar o seguinte código que você conferir online <a href="https://play.golang.org/p/F3st816reYz">aqui</a>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
 	<span class="s">&#34;fmt&#34;</span>
@@ -155,10 +155,10 @@ if (!doNotTrack) {
 	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">exemplo</span><span class="p">{})</span>
 <span class="p">}</span>
 </code></pre></div><p>Tente imaginar o que é esperado de retorno dessa função e compare com a resposta abaixo:</p>
-<pre><code>{0  false map[] &lt;nil&gt; 0 0 {0 0 &lt;nil&gt;} &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt;}
+<pre tabindex="0"><code>{0  false map[] &lt;nil&gt; 0 0 {0 0 &lt;nil&gt;} &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt;}
 </code></pre><p>Repare que para todos os tipos ele retornou o valor padrão, no caso nulo, do tipo e no caso quando era um ponteiro do valor retornou <code>nil</code> e detalhes entre um espaço maior no começo entre <code>0</code> e <code>false</code> que é por conta da <code>string</code> vazia. <a href="https://golang.org/ref/spec#The_zero_value">Aqui</a> tem mais sobre como é isso em Go.</p>
 <p>Vamos fazer mais um teste que é na parte de lidar com a informação das requisições no seu formato mais comum hoje na Web que é o <a href="https://www.json.org/json-pt.html">JSON</a>. No caso para simplificar vou escrever o JSON direto na string ao invés de emular a requisição (<a href="https://play.golang.org/p/LrWFLeDBWUY">código</a>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
 	<span class="s">&#34;fmt&#34;</span>
@@ -206,7 +206,7 @@ if (!doNotTrack) {
 	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">body</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div><p>Resultado:</p>
-<pre><code>{}
+<pre tabindex="0"><code>{}
 {   }
 
 {&quot;uuid&quot;:&quot;3954567d-67c2-4a1c-85b9-764a73bf3d5c&quot;}
@@ -218,7 +218,7 @@ if (!doNotTrack) {
 <h1 id="go-e-http">Go e HTTP</h1>
 <p>Agora que já tivemos essa pré-conversa sobre HTTP e Go podemos juntar as duas coisas para conversar sobre como Go implementa o <code>package net/http</code> onde a documentação se encontra <a href="https://golang.org/pkg/net/http/">aqui</a>. Como já adiantamos a conversa vai ser em torno do lado <a href="https://golang.org/pkg/net/http/#Client">Client</a> e do <a href="https://golang.org/pkg/net/http/#Server">Server</a>.</p>
 <h2 id="client">Client</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Client</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Client</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="c1">// Transport specifies the mechanism by which individual
 </span><span class="c1"></span>    <span class="c1">// HTTP requests are made.
 </span><span class="c1"></span>    <span class="c1">// If nil, DefaultTransport is used.
@@ -277,7 +277,7 @@ if (!doNotTrack) {
 <p>Se ainda não ficou claro o conceito de tempo de expiração vamos aproveitar o nosso momento atual de pandemia que estamos fazendo reuniões de forma virtual e eventos online, é bem provável que você já tenha participado de alguma que não tinha membros suficientes ainda para começar e alguém dito: &ldquo;Vamos esperar 5 minutos e então começamos&rdquo;, esse é o tempo de expiração.</p>
 <p>Lembra que na parte de HTTP falamos que a resposta do servidor de forma simples é o estado de retorno, cabeçalho e corpo da mensagem? Então, esse configuração de expiração é para até o momento que o corpo da mensagem tenha sido completamente lido senão temos esse erro igual na imagem do Google Chrome acima.</p>
 <p>Outra parte importante do <code>Client</code> é essa parte de <code>Transport</code> que vai ter várias configurações importantes:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Transport</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Transport</span> <span class="kd">struct</span> <span class="p">{</span>
 
     <span class="c1">// Proxy specifies a function to return a proxy for a given
 </span><span class="c1"></span>    <span class="c1">// Request. If the function returns a non-nil error, the
@@ -455,7 +455,7 @@ if (!doNotTrack) {
 <li><code>ForceAttemptHTTP2</code>: se você pode, eu recomendo. =)</li>
 </ul>
 <h2 id="server">Server</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Server</span> <span class="kd">struct</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Server</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="c1">// Addr optionally specifies the TCP address for the server to listen on,
 </span><span class="c1"></span>    <span class="c1">// in the form &#34;host:port&#34;. If empty, &#34;:http&#34; (port 80) is used.
 </span><span class="c1"></span>    <span class="c1">// The service names are defined in RFC 6335 and assigned by IANA.

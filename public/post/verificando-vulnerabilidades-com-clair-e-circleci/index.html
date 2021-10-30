@@ -12,8 +12,8 @@
 nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando Clair e Circle CI. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-03-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-03-07T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-03-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-07T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -138,7 +138,7 @@ if (!doNotTrack) {
 </blockquote>
 <h1 id="o-projeto">O projeto</h1>
 <p>Quando esbarro em dúvidas em alguma entrega no trabalho e preciso explorar alguns recursos com mais agilidade ou buscar apoio na comunidade tenho por hábito por fazer algum projeto aberto no meu Github para isso. Então, para testar o Clair e Circle CI peguei um projeto antigo meu que usei para ajudar uma pessoa a como rodar <a href="https://github.com/jvrmaia/flask-docker-example">Flask em Docker</a>. O código não tem nada de complexo, apenas executa uma aplicação Flask que tem apenas um recurso que informa o nome da máquina e versão do projeto.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">socket</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">decouple</span> <span class="kn">import</span> <span class="n">config</span>
 
@@ -146,14 +146,14 @@ if (!doNotTrack) {
 
 <span class="n">VERSION</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s1">&#39;VERSION&#39;</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&#34; - &#34;</span> <span class="o">+</span> <span class="n">VERSION</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">)</span>
 </code></pre></div><p>A criação do Docker dele é bem simples também:</p>
-<div class="highlight"><pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> python:3.8</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> python:3.8</span><span class="err">
 </span><span class="err">
 </span><span class="err"></span><span class="k">LABEL</span> maintainer <span class="s2">&#34;Joao Maia &lt;joao@joaovrmaia.com&gt;&#34;</span><span class="err">
 </span><span class="err">
@@ -173,7 +173,7 @@ if (!doNotTrack) {
 </span></code></pre></div><p>Como podemos ver, é bem simples e sem grandes riscos de segurança já que usamos uma imagem Docker oficial do Docker Hub, né?</p>
 <h1 id="configurando-o-circle-ci">Configurando o Circle CI</h1>
 <p>O Circle CI é bem simples de configurar, você primeiro precisa conectar seu Github no Circle CI para ele conseguir criar as chaves no seu repositório para se conectar. Feito isso, você ainda nele precisa ativar o repositório para ser executado pelo Circle CI, por fim criar o arquivo no seu projeto <code>.circleci/config.yml</code>. No meu caso, o arquivo ficou assim:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2.1</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2.1</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="nt">orbs</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span><span class="nt">clair-scanner</span><span class="p">:</span><span class="w"> </span><span class="l">ovotech/clair-scanner@1.6.0</span><span class="w">
@@ -212,7 +212,7 @@ if (!doNotTrack) {
 <h1 id="resultados">Resultados</h1>
 <p><img src="/img/verificando-vulnerabilidades-com-clair-e-circleci/circleci-fail.png" alt="Build falhando"></p>
 <p>Pois é, falhou! Pelo visto mesmo a imagem sendo oficial não podemos confiar nela para evitar problemas de segurança em nossas aplicações. Sobre os problemas encontrados:</p>
-<pre><code>Status: Downloaded newer image for *******/flask-docker-example:latest
+<pre tabindex="0"><code>Status: Downloaded newer image for *******/flask-docker-example:latest
 docker.io/*******/flask-docker-example:latest
 2020/03/07 10:19:57 [INFO] ▶ Start clair-scanner
 2020/03/07 10:20:12 [INFO] ▶ Server listening on port 9279
@@ -230,7 +230,7 @@ docker.io/*******/flask-docker-example:latest
 2020/03/07 10:20:15 [WARN] ▶ Image [*******/flask-docker-example:latest] contains 354 total vulnerabilities
 2020/03/07 10:20:15 [ERRO] ▶ Image [*******/flask-docker-example:latest] contains 8 unapproved vulnerabilities
 </code></pre><p>Um exemplo de parte da lista detalhada:</p>
-<pre><code>+------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
+<pre tabindex="0"><code>+------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
 | STATUS     | CVE SEVERITY                | PACKAGE NAME    | PACKAGE VERSION           | CVE DESCRIPTION                                                  |
 +------------+-----------------------------+-----------------+---------------------------+------------------------------------------------------------------+
 | Unapproved | Critical CVE-2019-19816     | linux           | 4.19.98-1                 | In the Linux kernel 5.0.21, mounting a crafted btrfs             |

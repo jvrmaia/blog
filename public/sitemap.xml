@@ -8,21 +8,56 @@
     <priority>0.5</priority>
   </url><url>
     <loc>http://blog.joaovrmaia.com/categories/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>http://blog.joaovrmaia.com/categories/desenvolvimento/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>http://blog.joaovrmaia.com/categories/infraestrutura/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
+    <loc>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/tags/gradle/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/tags/java/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>http://blog.joaovrmaia.com/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/tags/jvm/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/post/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/tags/scala/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/tags/</loc>
+    <lastmod>2021-10-30T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>http://blog.joaovrmaia.com/categories/infraestrutura/</loc>
     <lastmod>2021-07-02T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -43,16 +78,6 @@
     <priority>0.5</priority>
   </url><url>
     <loc>http://blog.joaovrmaia.com/post/openresty-na-pratica/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>http://blog.joaovrmaia.com/post/</loc>
-    <lastmod>2021-07-02T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>http://blog.joaovrmaia.com/tags/</loc>
     <lastmod>2021-07-02T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

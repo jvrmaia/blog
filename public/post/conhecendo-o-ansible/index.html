@@ -12,8 +12,8 @@
 dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/conhecendo-o-ansible/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-07-24T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-07-24T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-07-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-24T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -129,7 +129,7 @@ if (!doNotTrack) {
 <p>O Ansible é escrito em <a href="https://www.python.org/">Python</a> e um requisito dele é o <a href="http://www.paramiko.org/">Paramiko</a> que é uma biblioteca que implementa o protocolo SSHv2. Saber disso esclarece bastante sobre o seu funcionamento pois é através do SSH que o Ansible se conecta nas máquinas que vai provisionar para executar suas tarefas. Então, é muito importante que ao montar o seu playbook você tenha em mente como vai conseguir acessar essa máquinas, imagina que sua receita de provisionamento tem que configurar 100 máquinas, você não querer ficar digitando senha 100 vezes, né? Na AWS a solução mais tradicional para acesso SSH as máquinas são as chaves PEM, veja <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">aqui</a> mais sobre, existem outra formas mas nesse artigo vamos trabalhar com essa apenas.</p>
 <h1 id="estrutura-de-um-projeto-ansible">Estrutura de um projeto Ansible</h1>
 <p>No <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#directory-layout">guia de boas práticas do Ansible</a> são apresentadas duas abordagens de organização do seu projeto:</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">production               </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">production               </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
 </span><span class="w"></span><span class="l">staging                  </span><span class="w"> </span><span class="c"># inventory file for staging environment</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="l">group_vars/</span><span class="w">
@@ -172,7 +172,7 @@ if (!doNotTrack) {
 </span><span class="w">    </span><span class="l">monitoring/          </span><span class="w"> </span><span class="c"># &#34;&#34;</span><span class="w">
 </span><span class="w">    </span><span class="l">fooapp/              </span><span class="w"> </span><span class="c"># &#34;&#34;</span><span class="w">
 </span></code></pre></div><p>e</p>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">inventories/</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">inventories/</span><span class="w">
 </span><span class="w">   </span><span class="l">production/</span><span class="w">
 </span><span class="w">      </span><span class="l">hosts              </span><span class="w"> </span><span class="c"># inventory file for production servers</span><span class="w">
 </span><span class="w">      </span><span class="l">group_vars/</span><span class="w">
@@ -216,15 +216,15 @@ if (!doNotTrack) {
 <p>Com essa introdução teórica do Ansible já podemos partir um pouco para o uso prático com exemplos, no meu Github tenho um <a href="https://github.com/jvrmaia/ansible-playground">repositório</a> que usei para demonstrar um pouco do Ansible que vou aproveitar nesse artigo. Neste respositório eu usei o Vagrant para tester os playbooks do Ansible, caso não tenha Vagrant no seu ambiente é possível subir uma máquina na nuvem de sua preferência e fazer uns ajustes na parte de conectar na máquina ou usar Docker localmente, se precisar de ajuda com isso avise nos comentários. O exemplo que vamos trabalhar aqui é o da pasta <code>ansible-roles-and-playbook</code>.</p>
 <p>Neste projeto a máquina alvo a ser provisionada é um CentOS 7 que pode ser conferido no Vagrantfile e vai ter um IP 20.20.20.20 que é acessível da minha máquina local e a chave de SSH para acesso vai ser a minha local do Vagrant, detalhe que eu não preciso fazer nada aqui além de rodar o Vagrant. Agora, vamos navegar pelos arquivos da pasta falando um pouco mais de cada.</p>
 <h2 id="ansiblecfg">ansible.cfg</h2>
-<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">defaults</span><span class="p">]</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">defaults</span><span class="p">]</span>
 <span class="nx">hostfile</span><span class="p">=</span><span class="nx">hosts</span>
 <span class="nx">roles_path</span><span class="p">=.</span><span class="err">/</span><span class="nx">roles</span>
 
 <span class="p">[</span><span class="nx">ssh_connection</span><span class="p">]</span>
-<span class="nx">ssh_args</span> <span class="p">=</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">UserKnownHostsFile</span><span class="p">=</span><span class="err">/</span><span class="nx">dev</span><span class="err">/</span><span class="nx">null</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">StrictHostKeyChecking</span><span class="p">=</span><span class="nx">no</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">IdentitiesOnly</span><span class="p">=</span><span class="nx">yes</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">ControlMaster</span><span class="p">=</span><span class="nx">auto</span> <span class="err">-</span><span class="nx">o</span> <span class="nx">ControlPersist</span><span class="p">=</span><span class="mi">60</span><span class="nx">s</span>
+<span class="nx">ssh_args</span> <span class="p">=</span> <span class="nx">-o</span> <span class="nx">UserKnownHostsFile</span><span class="p">=</span><span class="err">/</span><span class="nx">dev</span><span class="err">/</span><span class="nx">null</span> <span class="nx">-o</span> <span class="nx">StrictHostKeyChecking</span><span class="p">=</span><span class="nx">no</span> <span class="nx">-o</span> <span class="nx">IdentitiesOnly</span><span class="p">=</span><span class="nx">yes</span> <span class="nx">-o</span> <span class="nx">ControlMaster</span><span class="p">=</span><span class="nx">auto</span> <span class="nx">-o</span> <span class="nx">ControlPersist</span><span class="p">=</span><span class="mi">60</span><span class="nx">s</span>
 </code></pre></div><p>Esse é o arquivo de configuração local do Ansible, como podem ver estou informando nele quel é o meu arquivo que contém as informações do hosts do projeto, onde estão minhas roles e algumas configurações do SSH que é a forma que o Ansible usa para se conectar nas máquinas.</p>
 <h2 id="hosts">hosts</h2>
-<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">db</span><span class="p">]</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">db</span><span class="p">]</span>
 <span class="mf">20.20</span><span class="p">.</span><span class="mf">20.20</span>
 
 <span class="p">[</span><span class="nx">db</span><span class="err">:</span><span class="nx">vars</span><span class="p">]</span>
@@ -232,16 +232,16 @@ if (!doNotTrack) {
 <span class="nx">ansible_ssh_private_key_file</span><span class="p">=</span><span class="err">~/</span><span class="p">.</span><span class="nx">vagrant</span><span class="p">.</span><span class="nx">d</span><span class="err">/</span><span class="nx">insecure_private_key</span>
 </code></pre></div><p>Nesse projeto vamos subir um banco de dados apenas então criei essa entrada <code>[db]</code> para informar seus dados que nesse caso é apenas o seu IP que é o mesmo definido no Vagrant. Em <code>[db:vars]</code>, estou definindo umas variáveis referentes a essa máquina virtual que são seu usuário SSH e sua chave de acesso, por exemplo, quem optar por usar uma máquina na AWS com o Amazon Linux o valor do usuário SSH seria <code>ec2-user</code> e o valor da chave seria o caminho para sua chave PEM.</p>
 <h2 id="requirementsyml">requirements.yml</h2>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
 </span><span class="w"></span>- <span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">geerlingguy.mysql</span><span class="w">
 </span></code></pre></div><p>Esse arquivo será usando pelo Ansible Galaxy para gerir suas dependências, no caso estamos usando uma role pronta do MySQL pois não quero lidar com isso e prefiro a delegar para alguém que já fez que confio e toda a comunidade que já colaborou com ela. Para ter as roles no seu ambiente local para usar é bem simples:</p>
-<pre><code>$ ansible-galaxy install -r requirements.yml 
+<pre tabindex="0"><code>$ ansible-galaxy install -r requirements.yml 
 - downloading role 'mysql', owned by geerlingguy
 - downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.1.0.tar.gz
 - extracting geerlingguy.mysql to /opt/roles/geerlingguy.mysql
 - geerlingguy.mysql (3.1.0) was installed successfully
 </code></pre><h2 id="testyml">test.yml</h2>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
 </span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Debug date</span><span class="w">
 </span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
 </span><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
@@ -250,7 +250,7 @@ if (!doNotTrack) {
 </span><span class="w">
 </span><span class="w">    </span>- <span class="nt">debug</span><span class="p">:</span><span class="w"> </span><span class="l">var=date</span><span class="w">
 </span></code></pre></div><p>Esse é um exemplo de playbook que alterei da versão do Github na parte de <code>hosts</code> para apontar para minha máquina local apenas. Podemos ver que a estrutura é bem simples, primeiro é dado um nome ao conjunto de tarefas que vamos executar, definimos o alvo e por fim uma lista de tarefas. Nas tarefas o que fiz foi apenas executar um comando do Linux, <code>date</code>, e salvar o seu valor na variável <code>date</code>. Por fim, uso a opção de <code>debug</code> do Ansible para imprimir o valor retornado e outras informações mais no terminal. Veja o resultado da execução do playbook:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ansible-playbook test.yml 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ansible-playbook test.yml 
 <span class="o">[</span>WARNING<span class="o">]</span>: No inventory was parsed, only implicit localhost is available
 <span class="o">[</span>WARNING<span class="o">]</span>: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match <span class="s1">&#39;all&#39;</span>
 
@@ -287,7 +287,7 @@ PLAY RECAP *********************************************************************
 localhost                  : <span class="nv">ok</span><span class="o">=</span><span class="m">3</span>    <span class="nv">changed</span><span class="o">=</span><span class="m">1</span>    <span class="nv">unreachable</span><span class="o">=</span><span class="m">0</span>    <span class="nv">failed</span><span class="o">=</span><span class="m">0</span>    <span class="nv">skipped</span><span class="o">=</span><span class="m">0</span>    <span class="nv">rescued</span><span class="o">=</span><span class="m">0</span>    <span class="nv">ignored</span><span class="o">=</span><span class="m">0</span>   
   
 </code></pre></div><h2 id="provisionyml">provision.yml</h2>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nn">---</span><span class="w">
 </span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Configure database server</span><span class="w">
 </span><span class="w">  </span><span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">db</span><span class="w">
 </span><span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
@@ -305,7 +305,7 @@ localhost                  : <span class="nv">ok</span><span class="o">=</span><
 </span><span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w">
 </span><span class="w">    </span>- {<span class="w"> </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">geerlingguy.mysql }</span><span class="w">
 </span></code></pre></div><p>Mudei um pouco do original pois movi o <code>become</code> para o playbook inteiro e não apenas a role e mudei as configurações do host para ser uma instância CentOS 8 que subi na AWS. Como podem ver é bem parecido com o playbook de teste mudando que não tem tarefas nesse, tudo ficou contido na role precisando apenas passar algumas variáveis para ele funcionar. Vamos executar para ver a execução dele:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ansible-playbook provision.yml -i hosts 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ ansible-playbook provision.yml -i hosts 
 
 PLAY <span class="o">[</span>Configure database server<span class="o">]</span> *****************************************************************************************************************************************************************************************************************************
 

@@ -12,8 +12,8 @@
 no último artigo encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-08-28T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-08-28T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-08-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-28T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -139,7 +139,7 @@ if (!doNotTrack) {
 <p><img src="/img/git-e-afins-para-iniciantes-parte-2/git-flows.png" alt="Git flows"></p>
 <p>Agora vamos voltar ao assunto técnico e começar a entender como o Git funciona para trabalhar de forma colaborativa. Na imagem acima ilustra bem tudo que acontece e adiciona mais informações que não tinhamos abordados antes no primeiro artigo. Vamos imaginar que nosso projeto consiste de camadas como uma lasanha ou bolo para quem prefere doce e quem prefere agridoce coloca no comentário a opção. A primeira camada que vem ali na base de apoio é o seu <code>Workspace</code> que é onde você trabalha ativamente modificando o projeto. Quando você cria uma arquivo e adicionar ele no repositório com um <code>git add</code> esse arquivo vai para uma camada acima que é o <code>Staging</code> seria como ter feito um acordo verbal com seu repositório mas não no papel de forma oficial. Pensando ainda nesse arquivo, quando você faz o commit do que está feito em <code>Staging</code> suas alterações são de fato adicionadas a história do projeto mas apenas de forma local. Então, chega a hora de começar a trabalhar de forma colaborativa, vamos precisar conectar esse nosso repositório local a um repositório remoto.</p>
 <p>Vamos observar esse próprio blog que é um repositório no Github, para isso vamos precisar observar um aquivo de configuração que fica dentro do projeto em <code>.git/config</code>:</p>
-<pre><code>$ cat .git/config 
+<pre tabindex="0"><code>$ cat .git/config 
 [core]
 	repositoryformatversion = 0
 	filemode = true
@@ -157,7 +157,7 @@ if (!doNotTrack) {
 <p>Fork feito é hora de copiar para sua máquina o repositório. Para isso precisamos pegar a URL para clonar o projeto conforme demonstrado na figura abaixo no caso para o meu blog.</p>
 <p><img src="/img/git-e-afins-para-iniciantes-parte-2/git-clone.png" alt="Clonando o projeto do blog"></p>
 <p>Vamos executar o clone do repositório:</p>
-<pre><code>$ git clone git@github.com:jvrmaia/blog.git
+<pre tabindex="0"><code>$ git clone git@github.com:jvrmaia/blog.git
 Cloning into 'blog'...
 remote: Enumerating objects: 394, done.
 remote: Counting objects: 100% (394/394), done.
@@ -166,7 +166,7 @@ remote: Total 2985 (delta 187), reused 320 (delta 123), pack-reused 2591
 Receiving objects: 100% (2985/2985), 6.21 MiB | 794.00 KiB/s, done.
 Resolving deltas: 100% (1525/1525), done.
 </code></pre><p>Agora, você pode executar modificações a vontade para enviar para alteração. Veja o estado atual do repo enquanto escrevo o artigo:</p>
-<pre><code>$ git status
+<pre tabindex="0"><code>$ git status
 On branch post/git-2
 Changes not staged for commit:
   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
@@ -180,7 +180,7 @@ Untracked files:
 
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
 </code></pre><p>Repare que estou escrevendo ele em uma branch separada chamada &ldquo;post/git-2&rdquo;, já tenho um arquivo alterado que é o <a href="https://pt.wikipedia.org/wiki/Markdown">Markdown</a> do artigo e duas imagens não presentes ainda no histórico do Git desse projeto, esse é o meu Workspace. Vamos colocar agora essas alterações em Staging:</p>
-<pre><code>$ git add  .
+<pre tabindex="0"><code>$ git add  .
 $ git status
 On branch post/git-2
 Changes to be committed:
@@ -189,13 +189,13 @@ Changes to be committed:
 	new file:   static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
 	new file:   static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 </code></pre><p>Pronto, agora temos as alterações salvas em Staging e podemos fazer o commit delas no repositório local, veja:</p>
-<pre><code>$ git commit -m &quot;trabalho em progresso&quot;
+<pre tabindex="0"><code>$ git commit -m &quot;trabalho em progresso&quot;
 [post/git-2 cd8e683] trabalho em progresso
  3 files changed, 91 insertions(+), 5 deletions(-)
  create mode 100644 static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
  create mode 100644 static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 </code></pre><p>Por fim, podemos agora enviar as alterações de volta para o Github que é o repositório remoto do projeto:</p>
-<pre><code>$ git push origin post/git-2 
+<pre tabindex="0"><code>$ git push origin post/git-2 
 Enumerating objects: 17, done.
 Counting objects: 100% (17/17), done.
 Delta compression using up to 8 threads

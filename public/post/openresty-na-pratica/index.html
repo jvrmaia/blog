@@ -12,8 +12,8 @@
 OpenResty é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de Proxy ou Load Balancer. O projeto é um fork do NGINX e evoluido com o uso do LuaJIT para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma empresa por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/openresty-na-pratica/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-07-02T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-02T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2021-07-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-02T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <p>Como o foco aqui é ir na prática vamos começar pelo exemplo mais trivial da programação que é o &ldquo;Hello World&rdquo;.</p>
 <h2 id="arquivos">Arquivos</h2>
 <h3 id="docker-composeyml">docker-compose.yml</h3>
-<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
 </span><span class="w">  </span><span class="nt">openresty</span><span class="p">:</span><span class="w">
@@ -132,7 +132,7 @@ if (!doNotTrack) {
 </span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
 </span></code></pre></div><h3 id="dockerfile">Dockerfile</h3>
-<div class="highlight"><pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> openresty/openresty:1.19.3.2-1-alpine</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> openresty/openresty:1.19.3.2-1-alpine</span><span class="err">
 </span><span class="err">
 </span><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintener</span><span class="o">=</span><span class="s2">&#34;joão maia &lt;joao@joaovrmaia.com&gt;&#34;</span><span class="err">
 </span><span class="err"></span><span class="k">LABEL</span> <span class="nv">project</span><span class="o">=</span><span class="s2">&#34;openresty-na-pratica&#34;</span><span class="err">
@@ -143,7 +143,7 @@ if (!doNotTrack) {
 </span><span class="err">
 </span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8080</span><span class="err">
 </span></code></pre></div><h3 id="nginxconf">nginx.conf</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">worker_processes  1<span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">worker_processes  1<span class="p">;</span>
 error_log logs/error.log<span class="p">;</span>
 
 events <span class="o">{</span>
@@ -155,7 +155,7 @@ http <span class="o">{</span>
 	include server.conf<span class="p">;</span>
 <span class="o">}</span>
 </code></pre></div><h3 id="serverconf">server.conf</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
 	listen 8080<span class="p">;</span>
 	location / <span class="o">{</span>
 		default_type text/html<span class="p">;</span>
@@ -166,7 +166,7 @@ http <span class="o">{</span>
 <span class="o">}</span>
 </code></pre></div><p>Aqui é a única parte que tem algo de diferente para quem já usa nginx pois tem esse bloco que conseguimos invocar um bloco de código em Lua.</p>
 <h2 id="executando">Executando</h2>
-<pre><code>$ docker-compose up -d
+<pre tabindex="0"><code>$ docker-compose up -d
 $ curl -i localhost:8080
 HTTP/1.1 200 OK
 Server: openresty/1.19.3.2
@@ -179,7 +179,7 @@ Connection: keep-alive
 </code></pre><h2 id="refatorando">Refatorando</h2>
 <p>Escrever seu código Lua dentro de um arquivo do NGINX não é muito produtivo e gera problemas para criar testes então vamos refatorar o projeto para isolar o código em Lua em um arquivo:</p>
 <h3 id="nginxconf-1">nginx.conf</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">worker_processes  1<span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">worker_processes  1<span class="p">;</span>
 error_log logs/error.log<span class="p">;</span>
 
 events <span class="o">{</span>
@@ -193,7 +193,7 @@ http <span class="o">{</span>
 <span class="o">}</span>
 </code></pre></div><p>Adiciona-se uma entrada para dizer onde estão os arquivos Lua.</p>
 <h3 id="serverconf-1">server.conf</h3>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
 	listen 8080<span class="p">;</span>
 	location / <span class="o">{</span>
 		default_type text/html<span class="p">;</span>
@@ -204,7 +204,7 @@ http <span class="o">{</span>
 <span class="o">}</span>
 </code></pre></div><p>Importa o módulo e executa sua função exportada.</p>
 <h1 id="applua">app.lua</h1>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="kr">function</span> <span class="nc">_M</span><span class="p">.</span><span class="nf">hello_world</span><span class="p">()</span> 
     <span class="n">ngx.say</span><span class="p">(</span><span class="s2">&#34;&lt;p&gt;hello, world&lt;/p&gt;&#34;</span><span class="p">)</span>
@@ -214,7 +214,7 @@ http <span class="o">{</span>
 </code></pre></div><h1 id="contador-de-requisições">Contador de requisições</h1>
 <p>Vamos agora fazer algo mais além de apenas imprimir algo fixo e vamos retorar a quantidade de requisições recebidas pelo seu servidor. Para isso vamos mudar apenas nosso arquivo Lua do projeto anterior:</p>
 <h2 id="applua-1">app.lua</h2>
-<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -225,7 +225,7 @@ http <span class="o">{</span>
 
 <span class="kr">return</span> <span class="n">_M</span>
 </code></pre></div><h2 id="executando-1">Executando</h2>
-<pre><code>$ for i in `seq 1 10`; do curl localhost:8080; done
+<pre tabindex="0"><code>$ for i in `seq 1 10`; do curl localhost:8080; done
 1
 2
 3

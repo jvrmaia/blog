@@ -12,8 +12,8 @@
 Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-04-23T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-04-23T00:00:00&#43;00:00" />
+<meta property="article:published_time" content="2020-04-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-23T00:00:00+00:00" />
 
 
 		<meta name="twitter:card" content="summary"/>
@@ -126,32 +126,32 @@ if (!doNotTrack) {
 <p>O <code>Diagrams</code> possui quatro objetos principais para desenhar diagramas: <code>Diagram</code>, <code>Node</code>, <code>Cluster</code> e <code>Edge</code>.</p>
 <h2 id="diagram">Diagram</h2>
 <p>Esse é o seu desenho final que vai ser exportado em imagem. Ele pode ser modificado para exportar o diagrama nos seguintes formatos: png, jpg, svg, e pdf.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Diagram</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Diagram</span>
 <span class="o">...</span>
 
 <span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Minha infra&#34;</span><span class="p">,</span> <span class="n">outformat</span><span class="o">=</span><span class="s2">&#34;jpg&#34;</span><span class="p">):</span>
     <span class="o">...</span>
 </code></pre></div><h2 id="node">Node</h2>
 <p>São os componentes do seu diagrama, por exemplo, EC2, RDS, Docker e outros.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Diagram</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Diagram</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.compute</span> <span class="kn">import</span> <span class="n">EC2</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.database</span> <span class="kn">import</span> <span class="n">RDS</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">ELB</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.storage</span> <span class="kn">import</span> <span class="n">S3</span>
 
-<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Web Services&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Web Services&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">ELB</span><span class="p">(</span><span class="s2">&#34;lb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;userdb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">S3</span><span class="p">(</span><span class="s2">&#34;store&#34;</span><span class="p">)</span>
     <span class="n">ELB</span><span class="p">(</span><span class="s2">&#34;lb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;userdb&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;stat&#34;</span><span class="p">)</span>
     <span class="p">(</span><span class="n">ELB</span><span class="p">(</span><span class="s2">&#34;lb&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">))</span> <span class="o">-</span> <span class="n">EC2</span><span class="p">(</span><span class="s2">&#34;web&#34;</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">RDS</span><span class="p">(</span><span class="s2">&#34;userdb&#34;</span><span class="p">)</span>
 </code></pre></div><p>Os objetos do tipo <code>Node</code> possuem operadores especiais: <code>&gt;&gt;</code>, <code>&lt;&lt;</code> e <code>-</code>. Eles são usados para mostrar a direção da conexão dos componentes, no caso do <code>-</code> a direção é nos 2 sentidos.</p>
 <h2 id="cluster">Cluster</h2>
 <p>É a forma que agrupamos os componentes da nossa infraestrutura.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.compute</span> <span class="kn">import</span> <span class="n">ECS</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.database</span> <span class="kn">import</span> <span class="n">RDS</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">Route53</span>
 
-<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Simple Web Service with DB Cluster&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Simple Web Service with DB Cluster&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">dns</span> <span class="o">=</span> <span class="n">Route53</span><span class="p">(</span><span class="s2">&#34;dns&#34;</span><span class="p">)</span>
     <span class="n">web</span> <span class="o">=</span> <span class="n">ECS</span><span class="p">(</span><span class="s2">&#34;service&#34;</span><span class="p">)</span>
 
@@ -163,7 +163,7 @@ if (!doNotTrack) {
     <span class="n">dns</span> <span class="o">&gt;&gt;</span> <span class="n">web</span> <span class="o">&gt;&gt;</span> <span class="n">db_master</span>
 </code></pre></div><h2 id="edge">Edge</h2>
 <p>São as operações especiais de conexões entre os componentes que vimos em <code>Node</code>. Aqui tornamos ela explícita para customizações.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span><span class="p">,</span> <span class="n">Edge</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span><span class="p">,</span> <span class="n">Edge</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.analytics</span> <span class="kn">import</span> <span class="n">Spark</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.compute</span> <span class="kn">import</span> <span class="n">Server</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.database</span> <span class="kn">import</span> <span class="n">PostgreSQL</span>
@@ -173,7 +173,7 @@ if (!doNotTrack) {
 <span class="kn">from</span> <span class="nn">diagrams.onprem.network</span> <span class="kn">import</span> <span class="n">Nginx</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.queue</span> <span class="kn">import</span> <span class="n">Kafka</span>
 
-<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Advanced Web Service with On-Premise (colored)&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Advanced Web Service with On-Premise (colored)&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">ingress</span> <span class="o">=</span> <span class="n">Nginx</span><span class="p">(</span><span class="s2">&#34;ingress&#34;</span><span class="p">)</span>
 
     <span class="n">metrics</span> <span class="o">=</span> <span class="n">Prometheus</span><span class="p">(</span><span class="s2">&#34;metric&#34;</span><span class="p">)</span>
@@ -203,7 +203,7 @@ if (!doNotTrack) {
 <p>O fonte dos exemplos estão <a href="https://github.com/jvrmaia/diagram-as-code">aqui</a>.</p>
 <h2 id="blog">Blog</h2>
 <h3 id="código">Código</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">VPC</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.database</span> <span class="kn">import</span> <span class="n">RDS</span>
 <span class="kn">from</span> <span class="nn">diagrams.aws.network</span> <span class="kn">import</span> <span class="n">Route53</span>
@@ -211,7 +211,7 @@ if (!doNotTrack) {
 <span class="kn">from</span> <span class="nn">diagrams.onprem.container</span> <span class="kn">import</span> <span class="n">Docker</span>
 
 
-<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Blog stack&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;Blog stack&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;AWS&#34;</span><span class="p">):</span>
         <span class="n">dns</span> <span class="o">=</span> <span class="n">Route53</span><span class="p">(</span><span class="s2">&#34;meu.blog.br&#34;</span><span class="p">)</span>
 
@@ -230,14 +230,14 @@ if (!doNotTrack) {
 <p><img src="/img/desenhando-infraestrutura-com-codigo/blog_stack.png" alt="blog stack"></p>
 <h2 id="elastic-stack">Elastic Stack</h2>
 <h3 id="código-1">Código</h3>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">diagrams</span> <span class="kn">import</span> <span class="n">Cluster</span><span class="p">,</span> <span class="n">Diagram</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.database</span> <span class="kn">import</span> <span class="n">Cassandra</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.monitoring</span> <span class="kn">import</span> <span class="n">Kibana</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.search</span> <span class="kn">import</span> <span class="n">Elasticsearch</span>
 <span class="kn">from</span> <span class="nn">diagrams.onprem.logging</span> <span class="kn">import</span> <span class="n">Logstash</span>
 
 
-<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;ELK&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">with</span> <span class="n">Diagram</span><span class="p">(</span><span class="s2">&#34;ELK&#34;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">Cluster</span><span class="p">(</span><span class="s2">&#34;cassandra&#34;</span><span class="p">):</span>
         <span class="n">cassandra_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cassandra</span><span class="p">(</span><span class="s2">&#34;c01&#34;</span><span class="p">),</span>
                              <span class="n">Cassandra</span><span class="p">(</span><span class="s2">&#34;c02&#34;</span><span class="p">),</span>
