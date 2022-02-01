@@ -7,10 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.joaovrmaia.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>arquitetura de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>engenharia de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/engenharia-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/engenharia-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>estratégia de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/estrat%C3%A9gia-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/estrat%C3%A9gia-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>governança de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/governan%C3%A7a-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/governan%C3%A7a-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plataforma de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/plataforma-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/plataforma-de-dados/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>desenvolvimento</title>

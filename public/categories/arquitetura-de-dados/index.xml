@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arquitetura de dados on João Maia</title>
+    <link>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</link>
+    <description>Recent content in arquitetura de dados on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.joaovrmaia.com/categories/arquitetura-de-dados/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Os desafios de criar uma arquitetura moderna de dados</title>
+      <link>http://blog.joaovrmaia.com/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</guid>
+      <description>Olá,
+é quase certo que você escute de qualquer empresa no mercado hoje que possuem um cultura orientada a dados ou que estão em busca disso, a expressão em inglês Data-Driven. Porém, não são todas que conseguem de fato assim como é com a tal transformação digital que ainda escutamos por ai. Talvez, não estamos sabendo diferenciar a fome da vontade de comer. A fome é uma necessidade do nosso corpo em busca de nutrição para nos dar poder de realizar nossas atividades.</description>
+    </item>
+    
+  </channel>
+</rss>

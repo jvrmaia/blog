@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sobre</title>
       <link>http://blog.joaovrmaia.com/about/</link>
@@ -20,6 +20,16 @@ Instagram
 GitLab
 Github
 Tchau!</description>
+    </item>
+    
+    <item>
+      <title>Os desafios de criar uma arquitetura moderna de dados</title>
+      <link>http://blog.joaovrmaia.com/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</guid>
+      <description>Olá,
+é quase certo que você escute de qualquer empresa no mercado hoje que possuem um cultura orientada a dados ou que estão em busca disso, a expressão em inglês Data-Driven. Porém, não são todas que conseguem de fato assim como é com a tal transformação digital que ainda escutamos por ai. Talvez, não estamos sabendo diferenciar a fome da vontade de comer. A fome é uma necessidade do nosso corpo em busca de nutrição para nos dar poder de realizar nossas atividades.</description>
     </item>
     
     <item>
@@ -204,16 +214,6 @@ Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse
       <guid>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</guid>
       <description>Olá,
 Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho.</description>
-    </item>
-    
-    <item>
-      <title>Organização de projetos e GOPATH</title>
-      <link>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</link>
-      <pubDate>Fri, 17 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/</guid>
-      <description>Olá,
-Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não.</description>
     </item>
     
   </channel>

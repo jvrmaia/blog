@@ -7,7 +7,52 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>arquitetura de dados</title>
+      <link>http://blog.joaovrmaia.com/tags/arquitetura-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/arquitetura-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>engenharia de dados</title>
+      <link>http://blog.joaovrmaia.com/tags/engenharia-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/engenharia-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>estratégia de dados</title>
+      <link>http://blog.joaovrmaia.com/tags/estrat%C3%A9gia-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/estrat%C3%A9gia-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>governança de dados</title>
+      <link>http://blog.joaovrmaia.com/tags/governan%C3%A7a-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/governan%C3%A7a-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plataforma de dados</title>
+      <link>http://blog.joaovrmaia.com/tags/plataforma-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/plataforma-de-dados/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>gradle</title>
       <link>http://blog.joaovrmaia.com/tags/gradle/</link>
@@ -140,51 +185,6 @@
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/tags/dns/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>git</title>
-      <link>http://blog.joaovrmaia.com/tags/git/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>github</title>
-      <link>http://blog.joaovrmaia.com/tags/github/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/github/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gitlab</title>
-      <link>http://blog.joaovrmaia.com/tags/gitlab/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/gitlab/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ansible</title>
-      <link>http://blog.joaovrmaia.com/tags/ansible/</link>
-      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/ansible/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>aws</title>
-      <link>http://blog.joaovrmaia.com/tags/aws/</link>
-      <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/aws/</guid>
       <description></description>
     </item>
     
