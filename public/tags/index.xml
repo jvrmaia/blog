@@ -7,16 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 19 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>produtividade</title>
-      <link>http://blog.joaovrmaia.com/tags/produtividade/</link>
-      <pubDate>Sat, 19 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/produtividade/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>arquitetura de dados</title>
       <link>http://blog.joaovrmaia.com/tags/arquitetura-de-dados/</link>
@@ -185,6 +176,15 @@
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/tags/bitbucket/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dns</title>
+      <link>http://blog.joaovrmaia.com/tags/dns/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/tags/dns/</guid>
       <description></description>
     </item>
     

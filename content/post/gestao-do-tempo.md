@@ -9,6 +9,7 @@ categories: [
     "produtividade"
 ]
 thumbnail: "img/gestao-do-tempo/gestao-do-tempo.jpeg"
+draft: true
 ---
 
 Olá,
