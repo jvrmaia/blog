@@ -31,6 +31,17 @@ recentemente fazendo uma inspeção na aplicação precisei ver seu logs para en
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,9 +115,12 @@ recentemente fazendo uma inspeção na aplicação precisei ver seu logs para en
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/analisando-dados-no-terminal/terminal-tips.png" alt="Analisando dados no terminal">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/analisando-dados-no-terminal/terminal-tips.png" alt="Analisando dados no terminal">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no <a href="https://twitter.com/jvrmaia/status/1255963940804313088">Twitter</a> surgiram comentários interessantes. O primeiro foi esse <a href="https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html">artigo</a> e o segundo foi a ferramenta <a href="https://www.gnu.org/software/datamash/">datamash</a>.</p>
 <blockquote>
@@ -147,7 +161,7 @@ $ cat -b linhas.txt
      4	# internal DNS stub resolver of systemd-resolved. This file lists all
      5	# configured search domains.
      6	#
-     7	# Run &quot;systemd-resolve --status&quot; to see details about the uplink DNS servers
+     7	# Run &#34;systemd-resolve --status&#34; to see details about the uplink DNS servers
      8	# currently in use.
      9	#
     10	# Third party programs must not access this file directly, but only through the
@@ -179,7 +193,7 @@ options edns0
 # internal DNS stub resolver of systemd-resolved. This file lists all
 # configured search domains.
 #
-# Run &quot;systemd-resolve --status&quot; to see details about the uplink DNS servers
+# Run &#34;systemd-resolve --status&#34; to see details about the uplink DNS servers
 # currently in use.
 #
 # Third party programs must not access this file directly, but only through the
@@ -205,88 +219,88 @@ options edns0
 <p>Existe uma variação do comando, <code>|&amp;</code>, que é para redirecionar as saídas de erro.</p>
 <h2 id="jq">jq</h2>
 <p>É uma ferramenta bem legal feita em Node para lidarmos com JSON/string no terminal. Aqui não vamos explorar muito ela pois acho que isso pode ser um artigo só para isso de tantas coisas interessantes que ele tem. Vamos supor o seguinte JSON de uma compra em e-commerce:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span>
-    <span class="nt">&#34;cliente&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">3243</span><span class="p">,</span>
-        <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;joão da silva&#34;</span>
-    <span class="p">},</span>
-    <span class="nt">&#34;estado&#34;</span><span class="p">:</span> <span class="s2">&#34;aguardando pagamento&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;valor_total&#34;</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span>
-    <span class="nt">&#34;carrinho&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;valor&#34;</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span>
-        <span class="nt">&#34;produtos&#34;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-                <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;livro do dragão&#34;</span><span class="p">,</span>
-                <span class="nt">&#34;quantidade&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="nt">&#34;valor_unitario&#34;</span><span class="p">:</span> <span class="mf">150.0</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span>
-                <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;copos&#34;</span><span class="p">,</span>
-                <span class="nt">&#34;quantidade&#34;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-                <span class="nt">&#34;valor_unitario&#34;</span><span class="p">:</span> <span class="mf">10.0</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">213</span><span class="p">,</span>
-                <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;camisa preta&#34;</span><span class="p">,</span>
-                <span class="nt">&#34;quantidade&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="nt">&#34;valor_unitario&#34;</span><span class="p">:</span> <span class="mf">50.0</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="nt">&#34;entrega&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;endereco&#34;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&#34;rua&#34;</span><span class="p">:</span> <span class="s2">&#34;rua x&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;numero&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
-            <span class="nt">&#34;complemento&#34;</span><span class="p">:</span> <span class="s2">&#34;apt 101&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;cidade&#34;</span><span class="p">:</span> <span class="s2">&#34;vitoria&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;estado&#34;</span><span class="p">:</span> <span class="s2">&#34;es&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;cep&#34;</span><span class="p">:</span> <span class="s2">&#34;29000000&#34;</span>
-        <span class="p">},</span>
-        <span class="nt">&#34;valor&#34;</span><span class="p">:</span> <span class="mf">0.0</span>
-    <span class="p">},</span>
-    <span class="nt">&#34;pagamento&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;tipo&#34;</span><span class="p">:</span> <span class="s2">&#34;boleto&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;codigo_barra&#34;</span><span class="p">:</span> <span class="s2">&#34;23790504004200050320330008109206182470000019900&#34;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="nome-do-cliente">Nome do cliente</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;cliente&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">3243</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;joão da silva&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;estado&#34;</span><span class="p">:</span> <span class="s2">&#34;aguardando pagamento&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;valor_total&#34;</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;carrinho&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;valor&#34;</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;produtos&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;livro do dragão&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;quantidade&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;valor_unitario&#34;</span><span class="p">:</span> <span class="mf">150.0</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">312</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;copos&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;quantidade&#34;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;valor_unitario&#34;</span><span class="p">:</span> <span class="mf">10.0</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">213</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;nome&#34;</span><span class="p">:</span> <span class="s2">&#34;camisa preta&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;quantidade&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&#34;valor_unitario&#34;</span><span class="p">:</span> <span class="mf">50.0</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;entrega&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;endereco&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;rua&#34;</span><span class="p">:</span> <span class="s2">&#34;rua x&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;numero&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;complemento&#34;</span><span class="p">:</span> <span class="s2">&#34;apt 101&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;cidade&#34;</span><span class="p">:</span> <span class="s2">&#34;vitoria&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;estado&#34;</span><span class="p">:</span> <span class="s2">&#34;es&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;cep&#34;</span><span class="p">:</span> <span class="s2">&#34;29000000&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;valor&#34;</span><span class="p">:</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;pagamento&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;tipo&#34;</span><span class="p">:</span> <span class="s2">&#34;boleto&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;codigo_barra&#34;</span><span class="p">:</span> <span class="s2">&#34;23790504004200050320330008109206182470000019900&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="nome-do-cliente">Nome do cliente</h3>
 <pre tabindex="0"><code>$ cat compra.json | jq .cliente.nome
-&quot;joão da silva&quot;
+&#34;joão da silva&#34;
 </code></pre><h3 id="listar-produtos">Listar produtos</h3>
 <pre tabindex="0"><code>$ cat compra.json | jq .carrinho.produtos
 [
   {
-    &quot;id&quot;: 123,
-    &quot;nome&quot;: &quot;livro do dragão&quot;,
-    &quot;quantidade&quot;: 1,
-    &quot;valor_unitario&quot;: 150
+    &#34;id&#34;: 123,
+    &#34;nome&#34;: &#34;livro do dragão&#34;,
+    &#34;quantidade&#34;: 1,
+    &#34;valor_unitario&#34;: 150
   },
   {
-    &quot;id&quot;: 312,
-    &quot;nome&quot;: &quot;copos&quot;,
-    &quot;quantidade&quot;: 10,
-    &quot;valor_unitario&quot;: 10
+    &#34;id&#34;: 312,
+    &#34;nome&#34;: &#34;copos&#34;,
+    &#34;quantidade&#34;: 10,
+    &#34;valor_unitario&#34;: 10
   },
   {
-    &quot;id&quot;: 213,
-    &quot;nome&quot;: &quot;camisa preta&quot;,
-    &quot;quantidade&quot;: 1,
-    &quot;valor_unitario&quot;: 50
+    &#34;id&#34;: 213,
+    &#34;nome&#34;: &#34;camisa preta&#34;,
+    &#34;quantidade&#34;: 1,
+    &#34;valor_unitario&#34;: 50
   }
 ]
 </code></pre><h3 id="nome-dos-produtos">Nome dos produtos</h3>
 <pre tabindex="0"><code>$ cat compra.json | jq .carrinho.produtos[].nome
-&quot;livro do dragão&quot;
-&quot;copos&quot;
-&quot;camisa preta&quot;
+&#34;livro do dragão&#34;
+&#34;copos&#34;
+&#34;camisa preta&#34;
 </code></pre><h3 id="valor-da-entrega">Valor da entrega</h3>
 <pre tabindex="0"><code>$ cat compra.json | jq .entrega.valor
 0
 </code></pre><h3 id="quantidade-de-itens-bônus">Quantidade de itens (Bônus)</h3>
-<pre tabindex="0"><code>$ cat compra.json | jq -n '[inputs | .carrinho.produtos[].quantidade] | reduce .[] as $num (0; .+$num)'
+<pre tabindex="0"><code>$ cat compra.json | jq -n &#39;[inputs | .carrinho.produtos[].quantidade] | reduce .[] as $num (0; .+$num)&#39;
 12
 </code></pre><h2 id="grep">grep</h2>
 <p>O <code>grep</code> é uma comando para procurar padrões em arquivos e imprimir suas ocorrências por linha. Vamos explorar o uso <code>grep</code> no arquivo: <code>/etc/sysctl.conf</code>.</p>
@@ -319,7 +333,7 @@ options edns0
 fs.inotify.max_user_watches=524288 # nao comentada
 </code></pre><p>Várias linhas em branco e nota-se que a última não foi pega no <code>grep</code> pois o <code>^</code> indica começo da linha, como o <code>#</code> está no meio da linha o casamento de padrão é falso.</p>
 <h3 id="bônus-3">Bônus</h3>
-<pre tabindex="0"><code>$ grep -i --color -e 'ipv[46]' /etc/sysctl.conf
+<pre tabindex="0"><code>$ grep -i --color -e &#39;ipv[46]&#39; /etc/sysctl.conf
 #net.ipv4.conf.default.rp_filter=1
 #net.ipv4.conf.all.rp_filter=1
 # Note: This may impact IPv6 TCP sessions too
@@ -352,11 +366,11 @@ mandagascar
 !@#!@#
 5$%$%
 
-~`''`
+~`&#39;&#39;`
 </code></pre><p>Você acha que conseguiria ordenar apenas no olhar de forma igual?</p>
 <pre tabindex="0"><code>$ sort ordenar.txt
 
-~`''`
+~`&#39;&#39;`
 !@#!@#
 123
 123123
@@ -476,7 +490,7 @@ colunaA colunaB colunaC
 5       e       %
 6       f       &amp;
 </code></pre><h3 id="retornando-a-entrada">Retornando a entrada</h3>
-<pre tabindex="0"><code>$ awk '{print($0)}' awk1.txt
+<pre tabindex="0"><code>$ awk &#39;{print($0)}&#39; awk1.txt
 colunaA colunaB colunaC
 1       a       !
 2       b       @
@@ -485,7 +499,7 @@ colunaA colunaB colunaC
 5       e       %
 6       f       &amp;
 </code></pre><h3 id="retornando-os-dados-isolados-por-coluna">Retornando os dados isolados por coluna</h3>
-<pre tabindex="0"><code>$ awk '{print($1)}' awk1.txt
+<pre tabindex="0"><code>$ awk &#39;{print($1)}&#39; awk1.txt
 colunaA
 1
 2
@@ -493,7 +507,7 @@ colunaA
 4
 5
 6
-</code></pre><pre tabindex="0"><code>$ awk '{print($2)}' awk1.txt
+</code></pre><pre tabindex="0"><code>$ awk &#39;{print($2)}&#39; awk1.txt
 colunaB
 a
 b
@@ -501,7 +515,7 @@ c
 d
 e
 f
-</code></pre><pre tabindex="0"><code>$ awk '{print($3)}' awk1.txt
+</code></pre><pre tabindex="0"><code>$ awk &#39;{print($3)}&#39; awk1.txt
 colunaC
 !
 @
@@ -510,30 +524,29 @@ $
 %
 &amp;
 </code></pre><h3 id="usando-o-split">Usando o <code>split</code></h3>
-<pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[0]) }'
-</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[1]) }'
+<pre tabindex="0"><code>$ echo &#34;0,1,2,3,4,5,6,7,8,9&#34; | awk &#39;{ split($0,l,&#34;,&#34;); print(l[0]) }&#39;
+</code></pre><pre tabindex="0"><code>$ echo &#34;0,1,2,3,4,5,6,7,8,9&#34; | awk &#39;{ split($0,l,&#34;,&#34;); print(l[1]) }&#39;
 0
-</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[1]) }'
+</code></pre><pre tabindex="0"><code>$ echo &#34;0,1,2,3,4,5,6,7,8,9&#34; | awk &#39;{ split($0,l,&#34;,&#34;); print(l[1]) }&#39;
 0
-</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[10]) }'
+</code></pre><pre tabindex="0"><code>$ echo &#34;0,1,2,3,4,5,6,7,8,9&#34; | awk &#39;{ split($0,l,&#34;,&#34;); print(l[10]) }&#39;
 9
-</code></pre><pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); print(l[11]) }'
-
+</code></pre><pre tabindex="0"><code>$ echo &#34;0,1,2,3,4,5,6,7,8,9&#34; | awk &#39;{ split($0,l,&#34;,&#34;); print(l[11]) }&#39;
 </code></pre><p>Fique atento, o <code>awk</code> não da erro ao acessar uma posição do <code>array</code> que não possui dados.</p>
 <h3 id="bônus-6">Bônus</h3>
-<pre tabindex="0"><code>$ echo &quot;0,1,2,3,4,5,6,7,8,9&quot; | awk '{ split($0,l,&quot;,&quot;); c = l[3]; print c; if (c &lt; 2) { print(&quot;a&quot;) } else if (c == 2) { print(&quot;b&quot;) } else print(&quot;c&quot;) }'
+<pre tabindex="0"><code>$ echo &#34;0,1,2,3,4,5,6,7,8,9&#34; | awk &#39;{ split($0,l,&#34;,&#34;); c = l[3]; print c; if (c &lt; 2) { print(&#34;a&#34;) } else if (c == 2) { print(&#34;b&#34;) } else print(&#34;c&#34;) }&#39;
 </code></pre><p>Qual é a resposta?</p>
 <h1 id="gerador-aleatório-de-logs">Gerador aleatório de logs</h1>
 <p>Para demonstrar o uso combinado das ferramentas era preciso gerar um data set de logs. Hoje, é bem comum boa parte das aplicações escrevem seus logs no formato de JSON e esse era o meu caso. Então, no nosso arquivo de log vai conter apenas um JSON, por exemplo:</p>
-<pre tabindex="0"><code>{&quot;remote_ip_addr&quot;: &quot;82.58.153.167&quot;, &quot;access_token&quot;: &quot;secret_a7f49337ecff4c50a97c3d23e7386e23&quot;, &quot;x_tid&quot;: &quot;d8d3d5b0-bd8d-4386-b381-c760a70b9f49&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;GET&quot;, &quot;path&quot;: &quot;/users/1&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:21&quot;, &quot;status_code&quot;: 201}
-{&quot;remote_ip_addr&quot;: &quot;188.235.234.165&quot;, &quot;access_token&quot;: &quot;secret_df60122168e048ba846b81fed1b09a1d&quot;, &quot;x_tid&quot;: &quot;d60291e2-e5a2-4222-a038-67f4adc88012&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;DELETE&quot;, &quot;path&quot;: &quot;/robots.txt&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:45&quot;, &quot;status_code&quot;: 200}
-{&quot;remote_ip_addr&quot;: &quot;51.203.201.123&quot;, &quot;access_token&quot;: &quot;secret_b36d6af8a0d542f1ae5be86ac38688a0&quot;, &quot;x_tid&quot;: &quot;74016c10-be59-45ff-b13c-ffd8732919d8&quot;, &quot;user_agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;, &quot;method&quot;: &quot;DELETE&quot;, &quot;path&quot;: &quot;/users/12&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:48&quot;, &quot;status_code&quot;: 400}
-{&quot;remote_ip_addr&quot;: &quot;59.1.220.255&quot;, &quot;access_token&quot;: &quot;secret_2eb5ec132dac4fecaeb32ef12cfd7cd8&quot;, &quot;x_tid&quot;: &quot;64659fa4-f9d6-4e10-98d5-fb5178a2cd1c&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;PUT&quot;, &quot;path&quot;: &quot;/security.txt&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:58:57&quot;, &quot;status_code&quot;: 500}
-{&quot;remote_ip_addr&quot;: &quot;199.18.137.169&quot;, &quot;access_token&quot;: &quot;secret_289c094aa4784d60987873f914b326a6&quot;, &quot;x_tid&quot;: &quot;af1d4979-de7e-4f9d-95f5-9de310d570b7&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;PUT&quot;, &quot;path&quot;: &quot;/health&quot;, &quot;timestamp&quot;: &quot;2020-04-30 03:59:33&quot;, &quot;status_code&quot;: 301}
-{&quot;remote_ip_addr&quot;: &quot;24.109.83.239&quot;, &quot;access_token&quot;: &quot;secret_e34f7166be1f40c2be3754aafffe334b&quot;, &quot;x_tid&quot;: &quot;47cfaca0-0345-441a-bb03-670285f29854&quot;, &quot;user_agent&quot;: &quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;, &quot;method&quot;: &quot;POST&quot;, &quot;path&quot;: &quot;/robots.txt&quot;, &quot;timestamp&quot;: &quot;2020-04-30 04:00:01&quot;, &quot;status_code&quot;: 500}
-{&quot;remote_ip_addr&quot;: &quot;62.112.131.39&quot;, &quot;access_token&quot;: &quot;secret_b3351fdeb0cb40279c6d1f48febf5838&quot;, &quot;x_tid&quot;: &quot;60b8714d-4cdc-4948-932c-19f594b8e8eb&quot;, &quot;user_agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;, &quot;method&quot;: &quot;GET&quot;, &quot;path&quot;: &quot;/robots.txt&quot;, &quot;timestamp&quot;: &quot;2020-04-30 04:00:21&quot;, &quot;status_code&quot;: 301}
-{&quot;remote_ip_addr&quot;: &quot;50.243.130.83&quot;, &quot;access_token&quot;: &quot;secret_f9c8f3495f324707b2a49878ce253844&quot;, &quot;x_tid&quot;: &quot;7ab5d9d4-2629-423c-b9b7-309fcab1958b&quot;, &quot;user_agent&quot;: &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;, &quot;method&quot;: &quot;POST&quot;, &quot;path&quot;: &quot;/&quot;, &quot;timestamp&quot;: &quot;2020-04-30 04:00:39&quot;, &quot;status_code&quot;: 500}
-{&quot;remote_ip_addr&quot;: &quot;17.180.155.70&quot;, &quot;access_token&quot;: &quot;secret_bae6bfd17dbc4ec9b7c9d6b2974f9ef6&quot;, &quot;x_tid&quot;: &quot;4a3beff7-bc2c-4535-bba0-9b9906f846bc&quot;, &quot;user_agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0&quot;, &quot;method&quot;: &quot;GET&quot;, &quot;path&quot;: &quot;/users/35&quot;, &quot;timestamp&quot;: &quot;2020-04-30 04:00:54&quot;, &quot;status_code&quot;: 400}
+<pre tabindex="0"><code>{&#34;remote_ip_addr&#34;: &#34;82.58.153.167&#34;, &#34;access_token&#34;: &#34;secret_a7f49337ecff4c50a97c3d23e7386e23&#34;, &#34;x_tid&#34;: &#34;d8d3d5b0-bd8d-4386-b381-c760a70b9f49&#34;, &#34;user_agent&#34;: &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;, &#34;method&#34;: &#34;GET&#34;, &#34;path&#34;: &#34;/users/1&#34;, &#34;timestamp&#34;: &#34;2020-04-30 03:58:21&#34;, &#34;status_code&#34;: 201}
+{&#34;remote_ip_addr&#34;: &#34;188.235.234.165&#34;, &#34;access_token&#34;: &#34;secret_df60122168e048ba846b81fed1b09a1d&#34;, &#34;x_tid&#34;: &#34;d60291e2-e5a2-4222-a038-67f4adc88012&#34;, &#34;user_agent&#34;: &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;, &#34;method&#34;: &#34;DELETE&#34;, &#34;path&#34;: &#34;/robots.txt&#34;, &#34;timestamp&#34;: &#34;2020-04-30 03:58:45&#34;, &#34;status_code&#34;: 200}
+{&#34;remote_ip_addr&#34;: &#34;51.203.201.123&#34;, &#34;access_token&#34;: &#34;secret_b36d6af8a0d542f1ae5be86ac38688a0&#34;, &#34;x_tid&#34;: &#34;74016c10-be59-45ff-b13c-ffd8732919d8&#34;, &#34;user_agent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&#34;, &#34;method&#34;: &#34;DELETE&#34;, &#34;path&#34;: &#34;/users/12&#34;, &#34;timestamp&#34;: &#34;2020-04-30 03:58:48&#34;, &#34;status_code&#34;: 400}
+{&#34;remote_ip_addr&#34;: &#34;59.1.220.255&#34;, &#34;access_token&#34;: &#34;secret_2eb5ec132dac4fecaeb32ef12cfd7cd8&#34;, &#34;x_tid&#34;: &#34;64659fa4-f9d6-4e10-98d5-fb5178a2cd1c&#34;, &#34;user_agent&#34;: &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;, &#34;method&#34;: &#34;PUT&#34;, &#34;path&#34;: &#34;/security.txt&#34;, &#34;timestamp&#34;: &#34;2020-04-30 03:58:57&#34;, &#34;status_code&#34;: 500}
+{&#34;remote_ip_addr&#34;: &#34;199.18.137.169&#34;, &#34;access_token&#34;: &#34;secret_289c094aa4784d60987873f914b326a6&#34;, &#34;x_tid&#34;: &#34;af1d4979-de7e-4f9d-95f5-9de310d570b7&#34;, &#34;user_agent&#34;: &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;, &#34;method&#34;: &#34;PUT&#34;, &#34;path&#34;: &#34;/health&#34;, &#34;timestamp&#34;: &#34;2020-04-30 03:59:33&#34;, &#34;status_code&#34;: 301}
+{&#34;remote_ip_addr&#34;: &#34;24.109.83.239&#34;, &#34;access_token&#34;: &#34;secret_e34f7166be1f40c2be3754aafffe334b&#34;, &#34;x_tid&#34;: &#34;47cfaca0-0345-441a-bb03-670285f29854&#34;, &#34;user_agent&#34;: &#34;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&#34;, &#34;method&#34;: &#34;POST&#34;, &#34;path&#34;: &#34;/robots.txt&#34;, &#34;timestamp&#34;: &#34;2020-04-30 04:00:01&#34;, &#34;status_code&#34;: 500}
+{&#34;remote_ip_addr&#34;: &#34;62.112.131.39&#34;, &#34;access_token&#34;: &#34;secret_b3351fdeb0cb40279c6d1f48febf5838&#34;, &#34;x_tid&#34;: &#34;60b8714d-4cdc-4948-932c-19f594b8e8eb&#34;, &#34;user_agent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&#34;, &#34;method&#34;: &#34;GET&#34;, &#34;path&#34;: &#34;/robots.txt&#34;, &#34;timestamp&#34;: &#34;2020-04-30 04:00:21&#34;, &#34;status_code&#34;: 301}
+{&#34;remote_ip_addr&#34;: &#34;50.243.130.83&#34;, &#34;access_token&#34;: &#34;secret_f9c8f3495f324707b2a49878ce253844&#34;, &#34;x_tid&#34;: &#34;7ab5d9d4-2629-423c-b9b7-309fcab1958b&#34;, &#34;user_agent&#34;: &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;, &#34;method&#34;: &#34;POST&#34;, &#34;path&#34;: &#34;/&#34;, &#34;timestamp&#34;: &#34;2020-04-30 04:00:39&#34;, &#34;status_code&#34;: 500}
+{&#34;remote_ip_addr&#34;: &#34;17.180.155.70&#34;, &#34;access_token&#34;: &#34;secret_bae6bfd17dbc4ec9b7c9d6b2974f9ef6&#34;, &#34;x_tid&#34;: &#34;4a3beff7-bc2c-4535-bba0-9b9906f846bc&#34;, &#34;user_agent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0&#34;, &#34;method&#34;: &#34;GET&#34;, &#34;path&#34;: &#34;/users/35&#34;, &#34;timestamp&#34;: &#34;2020-04-30 04:00:54&#34;, &#34;status_code&#34;: 400}
 </code></pre><p>Entrando nos detalhes dos campos do log do nosso serviço acima:</p>
 <ul>
 <li><code>remote_ip_addr</code>: uma string com endereço IP da origem da requisição;</li>
@@ -546,72 +559,72 @@ $
 <li><code>status_code</code>: código HTTP de retorno dado pelo serviço.</li>
 </ul>
 <h2 id="código-do-gerador-de-log">Código do gerador de log</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">import</span> <span class="nn">struct</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">uuid</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
-
-
-<span class="k">def</span> <span class="nf">generate_ip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">inet_ntoa</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;I&#39;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0xffffffff</span><span class="p">)))</span>
-
-<span class="n">IP_DATASET_SIZE</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">IP_DATASET</span> <span class="o">=</span> <span class="p">[</span><span class="n">generate_ip</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">IP_DATASET_SIZE</span><span class="p">)]</span>
-<span class="n">LOG_SIZE</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">USER_AGENTS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;curl/7.35.0&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;Wget/1.15 (linux-gnu)&#34;</span>
-<span class="p">]</span>
-<span class="n">STATUSES</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
-<span class="n">PATHS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&#34;/&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/health&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/security.txt&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/robots.txt&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/users&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/users/1&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/users/12&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/users/35&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/users/100&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;/admin/users&#34;</span>
-<span class="p">]</span>
-<span class="n">METHODS</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;PUT&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;DELETE&#34;</span>
-<span class="p">]</span>
-
-<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">LOG_SIZE</span><span class="p">):</span>
-    <span class="n">random_ip_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">IP_DATASET_SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">random_user_agent_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">USER_AGENTS</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">random_status_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">STATUSES</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">random_path_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">PATHS</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">random_method_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">METHODS</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&#34;remote_ip_addr&#34;</span><span class="p">:</span> <span class="n">IP_DATASET</span><span class="p">[</span><span class="n">random_ip_pos</span><span class="p">],</span>
-        <span class="s2">&#34;access_token&#34;</span><span class="p">:</span> <span class="s2">&#34;secret_&#34;</span> <span class="o">+</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">,</span>
-        <span class="s2">&#34;x_tid&#34;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()),</span>
-        <span class="s2">&#34;user_agent&#34;</span><span class="p">:</span> <span class="n">USER_AGENTS</span><span class="p">[</span><span class="n">random_user_agent_pos</span><span class="p">],</span>
-        <span class="s2">&#34;method&#34;</span><span class="p">:</span> <span class="n">METHODS</span><span class="p">[</span><span class="n">random_method_pos</span><span class="p">],</span>
-        <span class="s2">&#34;path&#34;</span><span class="p">:</span> <span class="n">PATHS</span><span class="p">[</span><span class="n">random_path_pos</span><span class="p">],</span>
-        <span class="s2">&#34;timestamp&#34;</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">),</span>
-        <span class="s2">&#34;status_code&#34;</span><span class="p">:</span> <span class="n">STATUSES</span><span class="p">[</span><span class="n">random_status_pos</span><span class="p">],</span>
-    <span class="p">}</span>
-    <span class="n">dt</span> <span class="o">+=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">randrange</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
-</code></pre></div><h1 id="analisando-os-logs">Analisando os logs</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">struct</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">uuid</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_ip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">inet_ntoa</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;I&#39;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0xffffffff</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IP_DATASET_SIZE</span> <span class="o">=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="n">IP_DATASET</span> <span class="o">=</span> <span class="p">[</span><span class="n">generate_ip</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">IP_DATASET_SIZE</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">LOG_SIZE</span> <span class="o">=</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl"><span class="n">USER_AGENTS</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;curl/7.35.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Wget/1.15 (linux-gnu)&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">STATUSES</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">301</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">401</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">PATHS</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/health&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/security.txt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/robots.txt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/users&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/users/1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/users/12&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/users/35&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/users/100&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/admin/users&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">METHODS</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;POST&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;PUT&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;DELETE&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">LOG_SIZE</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_ip_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">IP_DATASET_SIZE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_user_agent_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">USER_AGENTS</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_status_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">STATUSES</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_path_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">PATHS</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_method_pos</span> <span class="o">=</span> <span class="n">randrange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">METHODS</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;remote_ip_addr&#34;</span><span class="p">:</span> <span class="n">IP_DATASET</span><span class="p">[</span><span class="n">random_ip_pos</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;access_token&#34;</span><span class="p">:</span> <span class="s2">&#34;secret_&#34;</span> <span class="o">+</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;x_tid&#34;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;user_agent&#34;</span><span class="p">:</span> <span class="n">USER_AGENTS</span><span class="p">[</span><span class="n">random_user_agent_pos</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;method&#34;</span><span class="p">:</span> <span class="n">METHODS</span><span class="p">[</span><span class="n">random_method_pos</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;path&#34;</span><span class="p">:</span> <span class="n">PATHS</span><span class="p">[</span><span class="n">random_path_pos</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;timestamp&#34;</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;status_code&#34;</span><span class="p">:</span> <span class="n">STATUSES</span><span class="p">[</span><span class="n">random_status_pos</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dt</span> <span class="o">+=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">randrange</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+</span></span></code></pre></div><h1 id="analisando-os-logs">Analisando os logs</h1>
 <h2 id="contando-a-quantidade-de-status_code">Contando a quantidade de status_code</h2>
 <pre tabindex="0"><code>$ python generate.py | jq .status_code | sort | uniq --count
   14257 200
@@ -622,17 +635,17 @@ $
   28724 500
 </code></pre><h2 id="rank-do-user-agents">Rank do user-agents</h2>
 <pre tabindex="0"><code>$ python generate.py | jq .user_agent | sort | uniq --count | sort -k1 -n -r
-  20113 &quot;Wget/1.15 (linux-gnu)&quot;
-  10030 &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&quot;
-  10008 &quot;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&quot;
-   9993 &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393&quot;
-   9992 &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&quot;
-   9988 &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0&quot;
-   9988 &quot;curl/7.35.0&quot;
-   9963 &quot;Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)&quot;
-   9925 &quot;Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)&quot;
+  20113 &#34;Wget/1.15 (linux-gnu)&#34;
+  10030 &#34;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)&#34;
+  10008 &#34;Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)&#34;
+   9993 &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393&#34;
+   9992 &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36&#34;
+   9988 &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:53.0) Gecko/20100101 Firefox/53.0&#34;
+   9988 &#34;curl/7.35.0&#34;
+   9963 &#34;Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)&#34;
+   9925 &#34;Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)&#34;
 </code></pre><h2 id="descobrindo-se-teve-conflitos-de-x-tid">Descobrindo se teve conflitos de X-TID</h2>
-<pre tabindex="0"><code>$ python generate.py | jq .x_tid | sort | uniq --count | awk '{ if ($1 &gt; 1) print($0) }'
+<pre tabindex="0"><code>$ python generate.py | jq .x_tid | sort | uniq --count | awk &#39;{ if ($1 &gt; 1) print($0) }&#39;
 $ echo $?
 0
 </code></pre><p>Como não teve retorno e a execução foi um sucesso, significa que não teve conflitos de X-TID.</p>
@@ -678,7 +691,7 @@ total de 32 bitss (4 bytes)
 </li>
 </ul>
 <p>Detalhes sobre as classes de IP <a href="https://pt.wikipedia.org/wiki/Endere%C3%A7o_IP#Classes_de_endere.C3.A7os">aqui</a>.</p>
-<pre tabindex="0"><code>$ python generate.py | jq '.remote_ip_addr|split(&quot;.&quot;)[0]|tonumber' | awk '{ if ($1 &lt;= 127) { print &quot;A&quot;; } else if ($1 &lt;= 191) { print &quot;B&quot;; } else if ($1 &lt;= 223) { print &quot;C&quot;; } else if ($1 &lt;= 239) { print &quot;D&quot;; }  else { print &quot;E&quot;; } }' | sort | uniq -c | sort -k2
+<pre tabindex="0"><code>$ python generate.py | jq &#39;.remote_ip_addr|split(&#34;.&#34;)[0]|tonumber&#39; | awk &#39;{ if ($1 &lt;= 127) { print &#34;A&#34;; } else if ($1 &lt;= 191) { print &#34;B&#34;; } else if ($1 &lt;= 223) { print &#34;C&#34;; } else if ($1 &lt;= 239) { print &#34;D&#34;; }  else { print &#34;E&#34;; } }&#39; | sort | uniq -c | sort -k2
   49540 A
   23552 B
   10068 C
@@ -721,7 +734,7 @@ total de 32 bitss (4 bytes)
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

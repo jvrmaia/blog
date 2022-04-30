@@ -31,6 +31,17 @@ OpenResty é uma plataforma completa para trabalhar como uma primeira camada na 
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,56 +115,59 @@ OpenResty é uma plataforma completa para trabalhar como uma primeira camada na 
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/openresty-na-pratica/openresty.png" alt="OpenResty na prática">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/openresty-na-pratica/openresty.png" alt="OpenResty na prática">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p><a href="https://openresty.org/en/">OpenResty</a> é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de <a href="https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/">Proxy ou Load Balancer</a>. O projeto é um fork do <a href="https://nginx.org/en/">NGINX</a> e evoluido com o uso do <a href="https://luajit.org/">LuaJIT</a> para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma <a href="https://openresty.com/en/">empresa</a> por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.</p>
 <h1 id="hello-world">Hello World</h1>
 <p>Como o foco aqui é ir na prática vamos começar pelo exemplo mais trivial da programação que é o &ldquo;Hello World&rdquo;.</p>
 <h2 id="arquivos">Arquivos</h2>
 <h3 id="docker-composeyml">docker-compose.yml</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">openresty</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
-</span></code></pre></div><h3 id="dockerfile">Dockerfile</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> openresty/openresty:1.19.3.2-1-alpine</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintener</span><span class="o">=</span><span class="s2">&#34;joão maia &lt;joao@joaovrmaia.com&gt;&#34;</span><span class="err">
-</span><span class="err"></span><span class="k">LABEL</span> <span class="nv">project</span><span class="o">=</span><span class="s2">&#34;openresty-na-pratica&#34;</span><span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">COPY</span> src/nginx/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf<span class="err">
-</span><span class="err"></span><span class="k">COPY</span> src/nginx/server.conf /usr/local/openresty/nginx/conf/server.conf<span class="err">
-</span><span class="err"></span><span class="k">COPY</span> src/lua /opt/app<span class="err">
-</span><span class="err">
-</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8080</span><span class="err">
-</span></code></pre></div><h3 id="nginxconf">nginx.conf</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">worker_processes  1<span class="p">;</span>
-error_log logs/error.log<span class="p">;</span>
-
-events <span class="o">{</span>
-    worker_connections 1024<span class="p">;</span>
-<span class="o">}</span>
-
-
-http <span class="o">{</span>
-	include server.conf<span class="p">;</span>
-<span class="o">}</span>
-</code></pre></div><h3 id="serverconf">server.conf</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
-	listen 8080<span class="p">;</span>
-	location / <span class="o">{</span>
-		default_type text/html<span class="p">;</span>
-		content_by_lua_block <span class="o">{</span>
-			ngx.say<span class="o">(</span><span class="s2">&#34;&lt;p&gt;hello, world&lt;/p&gt;&#34;</span><span class="o">)</span>
-		<span class="o">}</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div><p>Aqui é a única parte que tem algo de diferente para quem já usa nginx pois tem esse bloco que conseguimos invocar um bloco de código em Lua.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">openresty</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">
+</span></span></span></code></pre></div><h3 id="dockerfile">Dockerfile</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> openresty/openresty:1.19.3.2-1-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintener</span><span class="o">=</span><span class="s2">&#34;joão maia &lt;joao@joaovrmaia.com&gt;&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">project</span><span class="o">=</span><span class="s2">&#34;openresty-na-pratica&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> src/nginx/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> src/nginx/server.conf /usr/local/openresty/nginx/conf/server.conf<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> src/lua /opt/app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8080</span><span class="err">
+</span></span></span></code></pre></div><h3 id="nginxconf">nginx.conf</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">worker_processes  1<span class="p">;</span>
+</span></span><span class="line"><span class="cl">error_log logs/error.log<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">events <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    worker_connections 1024<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	include server.conf<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="serverconf">server.conf</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	listen 8080<span class="p">;</span>
+</span></span><span class="line"><span class="cl">	location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		default_type text/html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">		content_by_lua_block <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			ngx.say<span class="o">(</span><span class="s2">&#34;&lt;p&gt;hello, world&lt;/p&gt;&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>Aqui é a única parte que tem algo de diferente para quem já usa nginx pois tem esse bloco que conseguimos invocar um bloco de código em Lua.</p>
 <h2 id="executando">Executando</h2>
 <pre tabindex="0"><code>$ docker-compose up -d
 $ curl -i localhost:8080
@@ -168,52 +182,52 @@ Connection: keep-alive
 </code></pre><h2 id="refatorando">Refatorando</h2>
 <p>Escrever seu código Lua dentro de um arquivo do NGINX não é muito produtivo e gera problemas para criar testes então vamos refatorar o projeto para isolar o código em Lua em um arquivo:</p>
 <h3 id="nginxconf-1">nginx.conf</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">worker_processes  1<span class="p">;</span>
-error_log logs/error.log<span class="p">;</span>
-
-events <span class="o">{</span>
-    worker_connections 1024<span class="p">;</span>
-<span class="o">}</span>
-
-
-http <span class="o">{</span>
-    lua_package_path <span class="s1">&#39;/opt/app/?.lua;;&#39;</span><span class="p">;</span>
-	include server.conf<span class="p">;</span>
-<span class="o">}</span>
-</code></pre></div><p>Adiciona-se uma entrada para dizer onde estão os arquivos Lua.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">worker_processes  1<span class="p">;</span>
+</span></span><span class="line"><span class="cl">error_log logs/error.log<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">events <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    worker_connections 1024<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    lua_package_path <span class="s1">&#39;/opt/app/?.lua;;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	include server.conf<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>Adiciona-se uma entrada para dizer onde estão os arquivos Lua.</p>
 <h3 id="serverconf-1">server.conf</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
-	listen 8080<span class="p">;</span>
-	location / <span class="o">{</span>
-		default_type text/html<span class="p">;</span>
-		content_by_lua_block <span class="o">{</span>
-			require<span class="o">(</span><span class="s1">&#39;app&#39;</span><span class="o">)</span>.hello_world<span class="o">()</span>
-		<span class="o">}</span>
-	<span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div><p>Importa o módulo e executa sua função exportada.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	listen 8080<span class="p">;</span>
+</span></span><span class="line"><span class="cl">	location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		default_type text/html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">		content_by_lua_block <span class="o">{</span>
+</span></span><span class="line"><span class="cl">			require<span class="o">(</span><span class="s1">&#39;app&#39;</span><span class="o">)</span>.hello_world<span class="o">()</span>
+</span></span><span class="line"><span class="cl">		<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>Importa o módulo e executa sua função exportada.</p>
 <h1 id="applua">app.lua</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="kr">function</span> <span class="nc">_M</span><span class="p">.</span><span class="nf">hello_world</span><span class="p">()</span> 
-    <span class="n">ngx.say</span><span class="p">(</span><span class="s2">&#34;&lt;p&gt;hello, world&lt;/p&gt;&#34;</span><span class="p">)</span>
-<span class="kr">end</span>
-
-<span class="kr">return</span> <span class="n">_M</span>
-</code></pre></div><h1 id="contador-de-requisições">Contador de requisições</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">function</span> <span class="nc">_M</span><span class="p">.</span><span class="nf">hello_world</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">ngx.say</span><span class="p">(</span><span class="s2">&#34;&lt;p&gt;hello, world&lt;/p&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">return</span> <span class="n">_M</span>
+</span></span></code></pre></div><h1 id="contador-de-requisições">Contador de requisições</h1>
 <p>Vamos agora fazer algo mais além de apenas imprimir algo fixo e vamos retorar a quantidade de requisições recebidas pelo seu servidor. Para isso vamos mudar apenas nosso arquivo Lua do projeto anterior:</p>
 <h2 id="applua-1">app.lua</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="kr">function</span> <span class="nc">_M</span><span class="p">.</span><span class="nf">hello_world</span><span class="p">()</span> 
-    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">ngx.say</span><span class="p">(</span><span class="n">counter</span><span class="p">);</span>
-<span class="kr">end</span>
-
-<span class="kr">return</span> <span class="n">_M</span>
-</code></pre></div><h2 id="executando-1">Executando</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lua" data-lang="lua"><span class="line"><span class="cl"><span class="n">_M</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">function</span> <span class="nc">_M</span><span class="p">.</span><span class="nf">hello_world</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ngx.say</span><span class="p">(</span><span class="n">counter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">return</span> <span class="n">_M</span>
+</span></span></code></pre></div><h2 id="executando-1">Executando</h2>
 <pre tabindex="0"><code>$ for i in `seq 1 10`; do curl localhost:8080; done
 1
 2
@@ -232,7 +246,7 @@ http <span class="o">{</span>
 <h1 id="referências">Referências</h1>
 <ul>
 <li>Sife oficial do OpenResty: <a href="https://openresty.org/en/">https://openresty.org/en/</a></li>
-<li>&ldquo;What is a Reverse Proxy vs. Load Balancer?&quot;: <a href="https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/">https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/</a></li>
+<li>&ldquo;What is a Reverse Proxy vs. Load Balancer?&rdquo;: <a href="https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/">https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/</a></li>
 <li>Site oficial do NGINX: <a href="https://nginx.org/en/">https://nginx.org/en/</a></li>
 <li>LuaJIT: <a href="https://luajit.org/">https://luajit.org/</a></li>
 <li>Empresa do OpenResty: <a href="https://openresty.com/en/">https://openresty.com/en/</a></li>
@@ -275,7 +289,7 @@ http <span class="o">{</span>
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

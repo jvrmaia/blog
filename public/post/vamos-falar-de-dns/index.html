@@ -33,6 +33,17 @@ Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só come
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -106,9 +117,12 @@ Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só come
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/vamos-falar-de-dns/dns.png" alt="Vamos falar de DNS?">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/vamos-falar-de-dns/dns.png" alt="Vamos falar de DNS?">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na <a href="https://www.ietf.org/rfc/rfc1034.txt">rfc1034</a>, sobre a implementação <a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a> e para quem tiver mais curiosidade a <a href="https://en.wikipedia.org/wiki/Domain_Name_System#RFC_documents">lista completa</a>.</p>
 <p>Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</p>
@@ -151,7 +165,7 @@ google.com mail is handled by 50 alt4.aspmx.l.google.com.
 google.com mail is handled by 40 alt3.aspmx.l.google.com.
 </code></pre><p>Veja que interessante, ele converte o DNS do Google em IP e ainda tem outra informações interessantes. Repare que ele forneceu duas versões de IP. Uma pausa para esse assunto, hoje temos duas versões do protocolo IP em uso na Internet, o <a href="https://pt.wikipedia.org/wiki/IPv4">IPv4</a> e <a href="https://pt.wikipedia.org/wiki/IPv6">IPv6</a>, por conta de uma limitação de combinações diferentes de IP e a explosão de dispositivos e serviços que hoje conseguem ter interface com a rede de computadores o protocolo se tornou limitado. Com isso, surgiu o IPv6 que veio atender a essa nova demanda de IPs. Além disso, ele também identificou que nesse domínio do Google tem um serviços de email como podemos ver. Olhe agora como podemos explorar ainda mais o <code>host</code> no estudo do domínio do Google:</p>
 <pre tabindex="0"><code>$ host -a google.com
-Trying &quot;google.com&quot;
+Trying &#34;google.com&#34;
 ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 43764
 ;; flags: qr rd ra; QUERY: 1, ANSWER: 12, AUTHORITY: 0, ADDITIONAL: 0
 
@@ -205,7 +219,7 @@ google.com mail is handled by 30 alt2.aspmx.l.google.com.
 # internal DNS stub resolver of systemd-resolved. This file lists all
 # configured search domains.
 #
-# Run &quot;resolvectl status&quot; to see details about the uplink DNS servers
+# Run &#34;resolvectl status&#34; to see details about the uplink DNS servers
 # currently in use.
 #
 # Third party programs must not access this file directly, but only through the
@@ -275,8 +289,8 @@ MulticastDNS setting: no
 <pre tabindex="0"><code># /etc/nsswitch.conf
 #
 # Example configuration of GNU Name Service Switch functionality.
-# If you have the `glibc-doc-reference' and `info' packages installed, try:
-# `info libc &quot;Name Service Switch&quot;' for information about this file.
+# If you have the `glibc-doc-reference&#39; and `info&#39; packages installed, try:
+# `info libc &#34;Name Service Switch&#34;&#39; for information about this file.
 
 passwd:         files systemd
 group:          files systemd
@@ -487,7 +501,7 @@ ff02::2 ip6-allrouters
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

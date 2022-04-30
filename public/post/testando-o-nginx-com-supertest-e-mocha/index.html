@@ -31,6 +31,17 @@ testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda n
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,9 +115,12 @@ testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda n
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/testando-o-nginx-com-supertest-e-mocha/nginx-logo.png" alt="Testando o NGINX com SuperTest e Mocha">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/testando-o-nginx-com-supertest-e-mocha/nginx-logo.png" alt="Testando o NGINX com SuperTest e Mocha">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda não faz nada a respeito saiba que já está atrasado. Com a transformação da infraestrutura em código acabando com os processos manuais e nem sempre documentados é preciso também trazer as boas práticas do mundo de desenvolvimento de software para a infraestrutura. Graças ao Docker subir uma representação da sua infraestrutura ficou mais fácil realizar esse processo apesar de ainda não ser 100% fiel ao ambiente de produção.</p>
 <p>Muitos já devem ter usado ou usam o <a href="https://www.nginx.com/">NGINX</a> como balanceador de carga da sua infraestrutura ou até para outros recursos mais avançados que ele permite com suas integrações de plugins, por exemplo, o projeto <a href="https://openresty.org/en/">OpenResty</a>. Se o seu NGINX tem diversos recursos e configurações particulares é preciso que você tenha controle disso e apenas comentar na configuração do arquivo talvez não seja o suficiente caso se lembre de fazer isso. Com testes conseguimos garantir melhor o entendimento e propósito dessas configurações. Então, como escrever testes para isso?</p>
@@ -127,184 +141,184 @@ testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda n
 +-----------------+              +-----------------+                   +------------------+
 </code></pre><h1 id="infraestrutura-dos-testes">Infraestrutura dos testes</h1>
 <p>Agora que já sabemos a estutura da infraestrutura que vamos testar precimos tornar ela real. A escolha foi usar <a href="https://docs.docker.com/compose/">docker-compose</a> que é uma ferramenta muito usada em ambiente de desenvolvimento hoje para subir o ambiente completo:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">gateway</span><span class="w">
-</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">./gateway</span><span class="w">
-</span><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">echo</span><span class="w">
-</span><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">echo</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">80</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">fake-vpc</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">echo</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">echo</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">hashicorp/http-echo</span><span class="w">
-</span><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span>-<span class="l">listen=:3000 -text=&#34;hello world&#34;</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">3000</span><span class="p">:</span><span class="m">3000</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">fake-vpc</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="nt">test-runner</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">./tests</span><span class="w">
-</span><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">GATEWAY_HOST=gateway</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">gateway</span><span class="w">
-</span><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">gateway</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">fake-vpc</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">fake-vpc</span><span class="p">:</span><span class="w">
-</span></code></pre></div><p>Não temos novidades aqui para quem já está acostumado com o uso, declaramos nossos 3 serviços e fizemos as configurações devidas de rede para resolverem por nome dentro da rede virtualizada pelo Docker e exportamos as portas necessárias para testar de forma local o SuperTest ou simplesmente um <code>curl</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.2&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">./gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">echo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">echo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">fake-vpc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">echo</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">echo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">hashicorp/http-echo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span>-<span class="l">listen=:3000 -text=&#34;hello world&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">3000</span><span class="p">:</span><span class="m">3000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">fake-vpc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">test-runner</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">./tests</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">GATEWAY_HOST=gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">gateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">fake-vpc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">fake-vpc</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><p>Não temos novidades aqui para quem já está acostumado com o uso, declaramos nossos 3 serviços e fizemos as configurações devidas de rede para resolverem por nome dentro da rede virtualizada pelo Docker e exportamos as portas necessárias para testar de forma local o SuperTest ou simplesmente um <code>curl</code>.</p>
 <h1 id="gateway">Gateway</h1>
 <p>O nosso gateway não tem muitas customizações, basicamente adicionei o proxy reverso para o <code>echo</code> e adicionei uma configuração para <code>gzip</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">gzip</span>  <span class="no">on</span><span class="p">;</span>
-</code></pre></div><p>Adicionando o <code>echo</code>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
-    <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
-    <span class="kn">server_name</span>  <span class="s">localhost</span><span class="p">;</span>
-
-    <span class="c1">#charset koi8-r;
-</span><span class="c1"></span>    <span class="c1">#access_log  /var/log/nginx/host.access.log  main;
-</span><span class="c1"></span>
-    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-        <span class="kn">root</span>   <span class="s">/usr/share/nginx/html</span><span class="p">;</span>
-        <span class="kn">index</span>  <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kn">location</span> <span class="s">/echo</span> <span class="p">{</span>
-        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
-        <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
-        <span class="kn">proxy_pass</span> <span class="s">http://echo:3000</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kn">//</span> <span class="s">omitido</span> <span class="s">o</span> <span class="s">restante</span>
-<span class="err">}</span>
-</code></pre></div><h1 id="os-testes">Os testes</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">gzip</span>  <span class="no">on</span><span class="p">;</span>
+</span></span></code></pre></div><p>Adicionando o <code>echo</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span>  <span class="s">localhost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#charset koi8-r;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">#access_log  /var/log/nginx/host.access.log  main;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">root</span>   <span class="s">/usr/share/nginx/html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">index</span>  <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/echo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_pass</span> <span class="s">http://echo:3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kn">//</span> <span class="s">omitido</span> <span class="s">o</span> <span class="s">restante</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><h1 id="os-testes">Os testes</h1>
 <p>Não tem muito mistério, primeiro você tem que inicializar o executor do SuperTest para fazer as chamadas HTTP no Gateway e por fim descrever os testes usando o Mocha:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
-
-<span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;supertest&#39;</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">);</span>
-
-<span class="kr">const</span> <span class="nx">GATEWAY_HOST</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">GATEWAY_HOST</span> <span class="o">||</span> <span class="s1">&#39;http://localhost:8080&#39;</span>
-<span class="kr">const</span> <span class="nx">runner</span> <span class="o">=</span> <span class="nx">request</span><span class="p">(</span><span class="nx">GATEWAY_HOST</span><span class="p">);</span>
-
-
-<span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Gateway tests&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-
-    <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Root path must return HTTP/200&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">runner</span>
-            <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-    <span class="p">});</span>
-
-    <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Non existis path must return HTTP/404&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">runner</span>
-            <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/404&#39;</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-    <span class="p">});</span>
-
-    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Headers configurations&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-
-        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Server must be NGINX&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="nx">runner</span>
-                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">.</span><span class="nx">server</span><span class="p">,</span> <span class="s1">&#39;nginx/1.17.9&#39;</span><span class="p">);</span>
-                <span class="p">})</span>
-                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-        <span class="p">});</span>
-
-        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Content-Type must be HTML&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="nx">runner</span>
-                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">[</span><span class="s1">&#39;content-type&#39;</span><span class="p">],</span> <span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
-                <span class="p">})</span>
-                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-        <span class="p">});</span>
-
-        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Connection must be closed&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="nx">runner</span>
-                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">.</span><span class="nx">connection</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">);</span>
-                <span class="p">})</span>
-                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-        <span class="p">});</span>
-
-        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Content encoding must be gzip&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="nx">runner</span>
-                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">[</span><span class="s1">&#39;content-encoding&#39;</span><span class="p">],</span> <span class="s1">&#39;gzip&#39;</span><span class="p">);</span>
-                <span class="p">})</span>
-                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-        <span class="p">});</span>
-
-    <span class="p">});</span>
-
-    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Application path&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-
-        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;/echo must return to application&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="nx">runner</span>
-                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/echo&#39;</span><span class="p">)</span>
-                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span> <span class="s1">&#39;hello world\n&#39;</span><span class="p">);</span>
-                <span class="p">})</span>
-                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-        <span class="p">});</span>
-
-    <span class="p">})</span>
-
-<span class="p">});</span>
-</code></pre></div><p>Olhando em detalhes para entender melhor:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Content encoding must be gzip&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">runner</span>
-        <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-            <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">[</span><span class="s1">&#39;content-encoding&#39;</span><span class="p">],</span> <span class="s1">&#39;gzip&#39;</span><span class="p">);</span>
-        <span class="p">})</span>
-        <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div><p>O nosso executor, no caso a variável <code>runner</code>, executa uma chamad HTTP/GET na raíz do nosso Gateway e de resultado esperamos que o <code>Content-Encoding</code> seja <code>gzip</code> como bem definimos no arquivo de configuração e por fim fechamos a <code>Promise</code> do teste com o <code>.end(done)</code>. Detalhe importante, lembre-se que as chaves dos valores do <code>Header</code> não são sensíveis ao caso, o que isso significa, você pode enviar sua requisição escrito <code>Content-Encoding</code> ou <code>content-encoding</code> que não faz diferença, são tratados iguais. Afim de evitar confusão, o SuperTest padroniza tudo no minúsculo.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;supertest&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">GATEWAY_HOST</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">GATEWAY_HOST</span> <span class="o">||</span> <span class="s1">&#39;http://localhost:8080&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">runner</span> <span class="o">=</span> <span class="nx">request</span><span class="p">(</span><span class="nx">GATEWAY_HOST</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Gateway tests&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Root path must return HTTP/200&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Non existis path must return HTTP/404&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/404&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Headers configurations&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Server must be NGINX&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">.</span><span class="nx">server</span><span class="p">,</span> <span class="s1">&#39;nginx/1.17.9&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Content-Type must be HTML&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">[</span><span class="s1">&#39;content-type&#39;</span><span class="p">],</span> <span class="s1">&#39;text/html&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Connection must be closed&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">.</span><span class="nx">connection</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Content encoding must be gzip&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">[</span><span class="s1">&#39;content-encoding&#39;</span><span class="p">],</span> <span class="s1">&#39;gzip&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;Application path&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;/echo must return to application&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/echo&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">text</span><span class="p">,</span> <span class="s1">&#39;hello world\n&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Olhando em detalhes para entender melhor:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">it</span><span class="p">(</span><span class="s1">&#39;Content encoding must be gzip&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">runner</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">expect</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">header</span><span class="p">[</span><span class="s1">&#39;content-encoding&#39;</span><span class="p">],</span> <span class="s1">&#39;gzip&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">done</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>O nosso executor, no caso a variável <code>runner</code>, executa uma chamad HTTP/GET na raíz do nosso Gateway e de resultado esperamos que o <code>Content-Encoding</code> seja <code>gzip</code> como bem definimos no arquivo de configuração e por fim fechamos a <code>Promise</code> do teste com o <code>.end(done)</code>. Detalhe importante, lembre-se que as chaves dos valores do <code>Header</code> não são sensíveis ao caso, o que isso significa, você pode enviar sua requisição escrito <code>Content-Encoding</code> ou <code>content-encoding</code> que não faz diferença, são tratados iguais. Afim de evitar confusão, o SuperTest padroniza tudo no minúsculo.</p>
 <h1 id="colocando-no-ci">Colocando no CI</h1>
 <p>Tenho usado o Circle CI para isso pois é fácil o uso e para projetos abertos não tem custo e usamos ele na empresa. Acho ele bem completo para ajudar nisso mas acho que falta melhorar na parte de granularidade de acessos e permissões da organização e projetos. Aproveitando a brincadeira coloquei de quebra um teste no CI para ver ser o Dockerfile tá seguindo as boas práticas também com o <a href="https://github.com/hadolint/hadolint">Hadolint</a>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2.1</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">machine</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">checkout</span><span class="w">
-</span><span class="w">
-</span><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
-</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile lint &#39;gateway&#39;</span><span class="w">
-</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w">
-</span><span class="w">                    </span><span class="l">docker run --rm -i hadolint/hadolint &lt; ./gateway/Dockerfile</span><span class="w">
-</span><span class="w">
-</span><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
-</span><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Test &#39;gateway&#39; image</span><span class="w">
-</span><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span><span class="sd">                    docker-compose up -d echo gateway
-</span><span class="sd">                    docker-compose up test-runner</span><span class="w">                    
-</span></code></pre></div><p>Será que funcionou? Veja a imagem do CI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">machine</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">checkout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Dockerfile lint &#39;gateway&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="l">docker run --rm -i hadolint/hadolint &lt; ./gateway/Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">run</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Test &#39;gateway&#39; image</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">                    docker-compose up -d echo gateway
+</span></span></span><span class="line"><span class="cl"><span class="sd">                    docker-compose up test-runner</span><span class="w">                    
+</span></span></span></code></pre></div><p>Será que funcionou? Veja a imagem do CI:</p>
 <p><img src="/img/testando-o-nginx-com-supertest-e-mocha/circleci.png" alt="Circle CI"></p>
 <p>Acho que era isso que queria passar nesse artigo, até o próximo.</p>
 
@@ -351,7 +365,7 @@ testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda n
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

@@ -31,6 +31,17 @@ se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Jav
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,9 +115,12 @@ se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Jav
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/dica-de-ferramenta-sdkman/sdkman.png" alt="Dica de ferramenta: SDKMAN!">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/dica-de-ferramenta-sdkman/sdkman.png" alt="Dica de ferramenta: SDKMAN!">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>se você trabalha com projetos que usam <a href="https://en.wikipedia.org/wiki/Java_virtual_machine">Java Virtual Machine (JVM)</a>, ou seja, <a href="https://www.java.com/en/">Java</a>, <a href="https://kotlinlang.org/">Kotlin</a> e <a href="https://scala-lang.org/">Scala</a> e tem ferramentas de gestão de projeto como <a href="https://maven.apache.org/">Maven</a>, <a href="https://gradle.org/">Gradle</a> e <a href="https://www.scala-sbt.org/">sbt</a> o <a href="https://sdkman.io/">SDKMAN!</a> pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o <a href="https://twitter.com/loboweissmann">Kico</a>, ele escreveu um <a href="https://itexto.com.br/configurando-seu-ambiente-de-desenvolvimento-java-com-sdkman/">guia</a> da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.</p>
 <p>O processo de instalar e configurar o SDKMAN! é bem simples e você pode seguir o <a href="https://sdkman.io/install">tutorial do site oficial</a>. Depois de instalado e configurado basta chamar ele na linha de comando para entender seu funcionamento:</p>
@@ -219,7 +233,7 @@ SDKMAN 5.12.2
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

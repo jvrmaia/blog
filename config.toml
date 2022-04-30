@@ -10,7 +10,7 @@ hasCJKLanguage = false
 paginate = 10
 rssLimit = 20
 disqusShortname = "blog-hugo"
-googleAnalytics = "UA-61280444-1"
+googleAnalytics = "G-GLJ7ZMHBL3"
 copyright = "João Maia"
 
 pygmentsUseClasses=true

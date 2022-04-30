@@ -31,6 +31,17 @@ esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua 
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,9 +115,12 @@ esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua 
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/instalacao-do-go/go.jpeg" alt="Instalação do Go">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/instalacao-do-go/go.jpeg" alt="Instalação do Go">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua jornada inicial na linguagem seja uma experiência muito positiva e proveitosa. Nesse artigo vou abordar em especial a questão de como instalar o Go na sua máquina. Como sou usuário de Linux vou dar foco nesse sistema, usuários do OSX provavelmente vão conseguir usar os mesmos passos mas infelizmente não vou conseguir cobrir o caso do Windows por não seu um usuário do sistema. Minha recomendação para os usuários de Windows é usar o <a href="https://docs.microsoft.com/pt-br/windows/wsl/install-win10">WSL</a> e usar algum distribuição Linux.</p>
 <h1 id="documentação-oficial">Documentação oficial</h1>
@@ -232,7 +246,7 @@ gvm gos (installed)
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

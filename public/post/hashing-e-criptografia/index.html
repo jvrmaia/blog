@@ -33,6 +33,17 @@ Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -106,9 +117,12 @@ Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/hashing-e-criptografia/criptografia.jpeg" alt="Hashing e criptografia">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/hashing-e-criptografia/criptografia.jpeg" alt="Hashing e criptografia">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?</p>
 <h1 id="visitando-a-matemática">Visitando a matemática</h1>
@@ -123,36 +137,36 @@ Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse
 <p><img src="/img/hashing-e-criptografia/tipos-de-funcoes.jpg" alt="Tipos de funções"></p>
 <h1 id="relacionamento-entre-matemática-e-computação">Relacionamento entre matemática e computação</h1>
 <p>Independente da linguagem que você tenha experiência, de alguma forma é possível criar funções com ela, vamos escolher o Python aqui como exemplo por conta de sua simplicidade, segue um exemplo de função que calcula o dobre de um valor:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">dobro</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">dobro</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="mi">2</span>
-<span class="o">&gt;&gt;&gt;</span>
-</code></pre></div><p>A presentação matemática poderia ser nesse caso:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">dobro</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dobro</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span>
+</span></span></code></pre></div><p>A presentação matemática poderia ser nesse caso:</p>
 <p>$$
 \begin{equation}f: \mathbb{Z} \to \mathbb{Z}, y = f(x) = x * 2\end{equation}
 $$</p>
 <p>Onde <code>f</code> representa a função <code>dobro</code> do Python e <code>a</code> representa o <code>x</code> e o domínio da função é um número inteiro. Essa é uma representação bem simples mas muito importante para o que vamos ver mais a seguir. Outro exemplo interessante:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">quadrado</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">quadrado</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
-<span class="mf">9.0</span>
-<span class="o">&gt;&gt;&gt;</span>
-</code></pre></div><p>A presentação matemática poderia ser nesse caso:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">quadrado</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">quadrado</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mf">9.0</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span>
+</span></span></code></pre></div><p>A presentação matemática poderia ser nesse caso:</p>
 <p>$$
 \begin{equation}g: \mathbb{R} \to \mathbb{R} ^ + , y = g(x) = x ^ 2\end{equation}
 $$</p>
 <p>Olhando as funções <code>f</code> e <code>g</code> dado as suas definições de domínios, sabe dizer o que elas são? A resposta é simples, <code>f</code> no caso é injetora pois os números impares do contradomínio não estão presentes na imagem da função e na função <code>g</code> ela é uma função sobrejetora pois, por exemplo, para valores de <code>x</code> iguais a 3 ou -3 o valor é 9 e para todo valor de seu domínio vai ter um contradomínio correpondente, logo sua imagem vai ser o contradomínio.</p>
 <p>Ficou faltando apenas uma das funções dentre as mencionadas no tópico anterior: bijetora. Você pode se perguntar por que a função <code>g</code> não é? Simples, não existe valor $$\mathbb{R} ^ +$$ cuja multiplicação por ele mesmo seja um número negativo. Então, para termos um exemplo simes de uma função bijetora, vamos ao caso mais trivial:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">identidade</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="o">...</span>     <span class="k">return</span> <span class="n">a</span>
-<span class="o">...</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">identidade</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="mi">6</span>
-<span class="o">&gt;&gt;&gt;</span>
-</code></pre></div><p>$$
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">identidade</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">identidade</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span>
+</span></span></code></pre></div><p>$$
 \begin{equation}h: \mathbb{Z} \to \mathbb{Z}, y = h(x) = x\end{equation}
 $$</p>
 <p>Agora que já fizemos uma introdução da matemática e um breve paralelo com a computação podemos dar continuidade ao tópico principal.</p>
@@ -250,7 +264,7 @@ $$</p>
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

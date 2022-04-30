@@ -31,6 +31,17 @@ eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instân
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,9 +115,12 @@ eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instân
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/conhecendo-o-packer/packer.png" alt="Conhecendo o Packer">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/conhecendo-o-packer/packer.png" alt="Conhecendo o Packer">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: <a href="https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AMIs.html">AWS</a>, <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/">Azure</a> e <a href="https://cloud.google.com/compute/docs/images">Google Cloud</a>.</p>
 <p>E o que o Packer tem a ver com isso? Vamos a descrição oficial:</p>
@@ -149,39 +163,39 @@ Available commands are:
 </code></pre><h1 id="primeiros-passos">Primeiros passos</h1>
 <p>Com o Packer você pode criar images estáticas para uma diversidade de destinos que na documentação oficial vai encontrar com o nome de <a href="https://www.packer.io/docs/builders/">Builders</a>. Nesse artigo vou me restringir ao ecossistema que já tenho conhecimento que é o uso na <a href="https://aws.amazon.com/">AWS</a>. Então, caso você tenha interesse em reproduzir o que estou abordando nesse artigo faça uma pausa agora para criar a sua conta na AWS agora. Com a conta na AWS criada, vamos agora precisar que você entre no recurso <a href="https://aws.amazon.com/pt/iam/">IAM</a> da AWS para criar um usuário de preferência sem acesso ao painel online e apenas com credenciais de acesso via API, para facilitar coloque ele como administrador mas lembre-se de destruir o usuário depois dos testes e não salve essas credencias em lugar nenhum que seja inseguro, você pode acabar tendo surpresas desagradáveis na sua fatura da AWS.</p>
 <p>Com a credenciais crie um arquivo <code>credentials</code> com o seguinte formato:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-env" data-lang="env"><span class="nv">AWS_REGION</span><span class="o">=</span>us-east-1
-<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>...
-<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>...
-</code></pre></div><p>Os arquivos fontes de tudo que será mostrado a seguir se encontra no meu <a href="https://github.com/jvrmaia/packer-playground">Github</a>. Segue o <code>Makefile</code> que usarei para melhor entendimento dos prṕximos passos:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-make" data-lang="make"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span> <span class="n">validate</span>
-
-<span class="nv">PCKCMD</span><span class="o">=</span>docker run -it --rm --env-file credentials -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/opt -w /opt hashicorp/packer:1.5.6
-
-<span class="nf">build</span><span class="o">:</span>
-	<span class="si">${</span><span class="nv">PCKCMD</span><span class="si">}</span> build <span class="si">${</span><span class="nv">TPLPATH</span><span class="si">}</span>
-
-<span class="nf">validate</span><span class="o">:</span>
-	<span class="si">${</span><span class="nv">PCKCMD</span><span class="si">}</span> validate <span class="si">${</span><span class="nv">TPLPATH</span><span class="si">}</span>
-</code></pre></div><h2 id="criando-o-primeiro-manifesto">Criando o primeiro manifesto</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_ACCESS_KEY`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_SECRET_KEY`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;aws_region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_REGION`}}&#34;</span>
-    <span class="p">},</span>
-    <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_access_key`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_secret_key`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_region`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;source_ami&#34;</span><span class="p">:</span> <span class="s2">&#34;ami-085925f297f89fce1&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;instance_type&#34;</span><span class="p">:</span> <span class="s2">&#34;t2.micro&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;ami_name&#34;</span><span class="p">:</span> <span class="s2">&#34;hello-world-packer&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;subnet_id&#34;</span><span class="p">:</span> <span class="s2">&#34;subnet-025e117e9c9cd0f91&#34;</span>
-    <span class="p">}]</span>
-<span class="p">}</span>
-</code></pre></div><p>Nosso arquivo de manifesto consiste nesse exemplo em duas partes, na primeira declaramos variáveis a serem usadas no manifesto e informo que ela vão ser informadas através de variáveis de ambiente no meu sistema. Na segunda parte, temos uma lista de <code>Builders</code>, no caso, vamos fazer apenas com o da AWS como dito anteriormente. Entrando em detalhes de cada item:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-env" data-lang="env"><span class="line"><span class="cl"><span class="nv">AWS_REGION</span><span class="o">=</span>us-east-1
+</span></span><span class="line"><span class="cl"><span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>...
+</span></span><span class="line"><span class="cl"><span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>...
+</span></span></code></pre></div><p>Os arquivos fontes de tudo que será mostrado a seguir se encontra no meu <a href="https://github.com/jvrmaia/packer-playground">Github</a>. Segue o <code>Makefile</code> que usarei para melhor entendimento dos prṕximos passos:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-make" data-lang="make"><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span> <span class="n">validate</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">PCKCMD</span><span class="o">=</span>docker run -it --rm --env-file credentials -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/opt -w /opt hashicorp/packer:1.5.6
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="si">${</span><span class="nv">PCKCMD</span><span class="si">}</span> build <span class="si">${</span><span class="nv">TPLPATH</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">validate</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="si">${</span><span class="nv">PCKCMD</span><span class="si">}</span> validate <span class="si">${</span><span class="nv">TPLPATH</span><span class="si">}</span>
+</span></span></code></pre></div><h2 id="criando-o-primeiro-manifesto">Criando o primeiro manifesto</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_ACCESS_KEY`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_SECRET_KEY`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;aws_region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_REGION`}}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_access_key`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_secret_key`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_region`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;source_ami&#34;</span><span class="p">:</span> <span class="s2">&#34;ami-085925f297f89fce1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;instance_type&#34;</span><span class="p">:</span> <span class="s2">&#34;t2.micro&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ami_name&#34;</span><span class="p">:</span> <span class="s2">&#34;hello-world-packer&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;subnet_id&#34;</span><span class="p">:</span> <span class="s2">&#34;subnet-025e117e9c9cd0f91&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Nosso arquivo de manifesto consiste nesse exemplo em duas partes, na primeira declaramos variáveis a serem usadas no manifesto e informo que ela vão ser informadas através de variáveis de ambiente no meu sistema. Na segunda parte, temos uma lista de <code>Builders</code>, no caso, vamos fazer apenas com o da AWS como dito anteriormente. Entrando em detalhes de cada item:</p>
 <ul>
 <li><code>type</code>: aqui informo o tipo de <code>Builder</code>, no caso, AWS;</li>
 <li><code>access_key</code> e <code>secret_key</code>: são as credenciais de acesso que o Packer precisa para executar a operação na AWS;</li>
@@ -210,7 +224,7 @@ amazon-ebs: output will be in this color.
 ==&gt; amazon-ebs: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
 ==&gt; amazon-ebs: Launching a source AWS instance...
 ==&gt; amazon-ebs: Adding tags to source instance
-    amazon-ebs: Adding tag: &quot;Name&quot;: &quot;Packer Builder&quot;
+    amazon-ebs: Adding tag: &#34;Name&#34;: &#34;Packer Builder&#34;
     amazon-ebs: Instance ID: i-0a76f2665b8c6632a
 ==&gt; amazon-ebs: Waiting for instance (i-0a76f2665b8c6632a) to become ready...
 ==&gt; amazon-ebs: Using ssh communicator to connect: 54.160.68.147
@@ -227,7 +241,7 @@ amazon-ebs: output will be in this color.
 ==&gt; amazon-ebs: No volumes to clean up, skipping
 ==&gt; amazon-ebs: Deleting temporary security group...
 ==&gt; amazon-ebs: Deleting temporary keypair...
-Build 'amazon-ebs' finished.
+Build &#39;amazon-ebs&#39; finished.
 
 ==&gt; Builds finished. The artifacts of successful builds are:
 --&gt; amazon-ebs: AMIs were created:
@@ -249,44 +263,44 @@ us-east-1: ami-0d054dd9d276b95f7
 <p><img src="/img/conhecendo-o-packer/hello-world-packer-ami.png" alt="painel da aws com a imagem criada"></p>
 <h1 id="provisionando-com-o-packer">Provisionando com o Packer</h1>
 <p>Agora, além de criar nossa instância vamos querer fazer algo mais, vamos fazer modificações na imagem e validar elas. Então, no nosso arquivod de manifesto vamos criar uma nova entrada de informações para isso, no Packer são chamados de <a href="https://www.packer.io/docs/provisioners/">Provisioners</a>. Assim como no <code>Builders</code> é possível passar uma lista de <code>Provisioners</code>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_ACCESS_KEY`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_SECRET_KEY`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;aws_region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_REGION`}}&#34;</span>
-    <span class="p">},</span>
-    <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_access_key`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_secret_key`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_region`}}&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;source_ami&#34;</span><span class="p">:</span> <span class="s2">&#34;ami-085925f297f89fce1&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;instance_type&#34;</span><span class="p">:</span> <span class="s2">&#34;t2.micro&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;ami_name&#34;</span><span class="p">:</span> <span class="s2">&#34;nginx-with-packer&#34;</span><span class="p">,</span>
-        <span class="nt">&#34;subnet_id&#34;</span><span class="p">:</span> <span class="s2">&#34;subnet-025e117e9c9cd0f91&#34;</span>
-    <span class="p">}],</span>
-    <span class="nt">&#34;provisioners&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo apt install -y nginx&#34;</span><span class="p">]</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;file&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;/opt/nginx/index.html&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;destination&#34;</span><span class="p">:</span> <span class="s2">&#34;/tmp/index.html&#34;</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo cp /tmp/index.html /var/www/html/index.html&#34;</span><span class="p">]</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo rm /var/www/html/index.nginx-debian.html&#34;</span><span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div><p>Vamos entender aqui o que foi feito de novo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;variables&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;aws_access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_ACCESS_KEY`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;aws_secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_SECRET_KEY`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;aws_region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{env `AWS_REGION`}}&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;builders&#34;</span><span class="p">:</span> <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;amazon-ebs&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;access_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_access_key`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;secret_key&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_secret_key`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;region&#34;</span><span class="p">:</span> <span class="s2">&#34;{{user `aws_region`}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;source_ami&#34;</span><span class="p">:</span> <span class="s2">&#34;ami-085925f297f89fce1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;instance_type&#34;</span><span class="p">:</span> <span class="s2">&#34;t2.micro&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ssh_username&#34;</span><span class="p">:</span> <span class="s2">&#34;ubuntu&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ami_name&#34;</span><span class="p">:</span> <span class="s2">&#34;nginx-with-packer&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;subnet_id&#34;</span><span class="p">:</span> <span class="s2">&#34;subnet-025e117e9c9cd0f91&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;provisioners&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo apt install -y nginx&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;file&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;/opt/nginx/index.html&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;destination&#34;</span><span class="p">:</span> <span class="s2">&#34;/tmp/index.html&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo cp /tmp/index.html /var/www/html/index.html&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;inline&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;sudo rm /var/www/html/index.nginx-debian.html&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Vamos entender aqui o que foi feito de novo:</p>
 <ul>
 <li><code>provisioners</code>: lista de operações a serem feitas de provisionamento;</li>
 <li>provisionamento do tipo <code>shell</code>: o que fizemos foi passar uma linha de comando simples, nota, nos dois últimos comandos poderia ter feito os dois juntos separando por <code>,</code> dentro do <code>array</code> de <code>inline</code>; e</li>
@@ -309,7 +323,7 @@ amazon-ebs: output will be in this color.
 ==&gt; amazon-ebs: Authorizing access to port 22 from [0.0.0.0/0] in the temporary security groups...
 ==&gt; amazon-ebs: Launching a source AWS instance...
 ==&gt; amazon-ebs: Adding tags to source instance
-    amazon-ebs: Adding tag: &quot;Name&quot;: &quot;Packer Builder&quot;
+    amazon-ebs: Adding tag: &#34;Name&#34;: &#34;Packer Builder&#34;
     amazon-ebs: Instance ID: i-0d5b35d6607c22bda
 ==&gt; amazon-ebs: Waiting for instance (i-0d5b35d6607c22bda) to become ready...
 ==&gt; amazon-ebs: Using ssh communicator to connect: 100.25.111.123
@@ -462,7 +476,7 @@ index.html 18 B / 18 B [========================================================
 ==&gt; amazon-ebs: No volumes to clean up, skipping
 ==&gt; amazon-ebs: Deleting temporary security group...
 ==&gt; amazon-ebs: Deleting temporary keypair...
-Build 'amazon-ebs' finished.
+Build &#39;amazon-ebs&#39; finished.
 
 ==&gt; Builds finished. The artifacts of successful builds are:
 --&gt; amazon-ebs: AMIs were created:
@@ -530,7 +544,7 @@ hello from packer
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

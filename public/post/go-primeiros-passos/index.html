@@ -35,6 +35,17 @@ Senta que lá vem a História Do Wikipedia:
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -108,9 +119,12 @@ Senta que lá vem a História Do Wikipedia:
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/go-primeiros-passos/golang.jpg" alt="Go: primeiros passos">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/go-primeiros-passos/golang.jpg" alt="Go: primeiros passos">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>esse primeiro post sobre <a href="https://golang.org/">Go</a> é para mostrar a quem não sabe nada sobre a linguagem algumas características e minhas opiniões a respeito dela. Caso discorde de algo e/ou tenha alguma correção a ser feita no texto pode me apontar nos comentários ou no meu <a href="mailto:joao@joaovrmaia.com">e-mail</a> que darei toda atenção desde que faça de forma educada.</p>
 <h1 id="senta-que-lá-vem-a-história">Senta que lá vem a História</h1>
@@ -269,7 +283,7 @@ Senta que lá vem a História Do Wikipedia:
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     

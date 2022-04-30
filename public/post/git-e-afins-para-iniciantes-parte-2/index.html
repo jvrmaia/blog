@@ -31,6 +31,17 @@ no último artigo encerramos na parte do Git como serviço que é onde começamo
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
+}
+</script>
+
 </head>
 <body class="body">
 	<div class="container container--outer">
@@ -104,9 +115,12 @@ no último artigo encerramos na parte do Git como serviço que é onde começamo
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/git-e-afins-para-iniciantes-parte-2/git.png" alt="Git e afins para iniciantes - parte 2">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/git-e-afins-para-iniciantes-parte-2/git.png" alt="Git e afins para iniciantes - parte 2">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>no <a href="https://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/">último artigo</a> encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.</p>
 <h1 id="git-como-serviço">Git como serviço</h1>
@@ -134,10 +148,10 @@ no último artigo encerramos na parte do Git como serviço que é onde começamo
 	filemode = true
 	bare = false
 	logallrefupdates = true
-[remote &quot;origin&quot;]
+[remote &#34;origin&#34;]
 	url = git@github.com:jvrmaia/blog.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
-[branch &quot;published&quot;]
+[branch &#34;published&#34;]
 	remote = origin
 	merge = refs/heads/published
 </code></pre><p>Como podemos ver temos uma configuração de <code>remote</code> no projeto que faz referência a um projeto remoto e assim fazemos o enlace entre o projeto local e remoto. Como disse, no meu caso uso o Github para isso e por isso consta aquela configuração de <a href="https://pt.wikipedia.org/wiki/URL">URL</a>. Repare que não é bem uma URL como estamos acostumados com sites mas é por conta do protocolo usado para me comunicar com o Github ser o <a href="https://pt.wikipedia.org/wiki/Secure_Shell">SSH</a>. Caso tivesse colocado uma configuração de URL usando <a href="https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> eu teria que em todo o processo de enviar ou pegar código no Github ter que passar pelo processo de login, com o SSH conseguimos criar essa facilidade no processo.</p>
@@ -147,7 +161,7 @@ no último artigo encerramos na parte do Git como serviço que é onde começamo
 <p><img src="/img/git-e-afins-para-iniciantes-parte-2/git-clone.png" alt="Clonando o projeto do blog"></p>
 <p>Vamos executar o clone do repositório:</p>
 <pre tabindex="0"><code>$ git clone git@github.com:jvrmaia/blog.git
-Cloning into 'blog'...
+Cloning into &#39;blog&#39;...
 remote: Enumerating objects: 394, done.
 remote: Counting objects: 100% (394/394), done.
 remote: Compressing objects: 100% (241/241), done.
@@ -158,27 +172,27 @@ Resolving deltas: 100% (1525/1525), done.
 <pre tabindex="0"><code>$ git status
 On branch post/git-2
 Changes not staged for commit:
-  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+  (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
+  (use &#34;git restore &lt;file&gt;...&#34; to discard changes in working directory)
 	modified:   content/post/git-e-afins-para-iniciantes-parte-2.md
 
 Untracked files:
-  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
 	static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
 	static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
 </code></pre><p>Repare que estou escrevendo ele em uma branch separada chamada &ldquo;post/git-2&rdquo;, já tenho um arquivo alterado que é o <a href="https://pt.wikipedia.org/wiki/Markdown">Markdown</a> do artigo e duas imagens não presentes ainda no histórico do Git desse projeto, esse é o meu Workspace. Vamos colocar agora essas alterações em Staging:</p>
 <pre tabindex="0"><code>$ git add  .
 $ git status
 On branch post/git-2
 Changes to be committed:
-  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+  (use &#34;git restore --staged &lt;file&gt;...&#34; to unstage)
 	modified:   content/post/git-e-afins-para-iniciantes-parte-2.md
 	new file:   static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
 	new file:   static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 </code></pre><p>Pronto, agora temos as alterações salvas em Staging e podemos fazer o commit delas no repositório local, veja:</p>
-<pre tabindex="0"><code>$ git commit -m &quot;trabalho em progresso&quot;
+<pre tabindex="0"><code>$ git commit -m &#34;trabalho em progresso&#34;
 [post/git-2 cd8e683] trabalho em progresso
  3 files changed, 91 insertions(+), 5 deletions(-)
  create mode 100644 static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
@@ -279,7 +293,7 @@ To github.com:jvrmaia/blog.git
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
