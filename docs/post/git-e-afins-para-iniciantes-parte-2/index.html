@@ -11,32 +11,36 @@
 <meta property="og:description" content="Olá,
 no último artigo encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-08-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-28T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git e afins para iniciantes - parte 2"/>
 <meta name="twitter:description" content="Olá,
 no último artigo encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
+
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -111,9 +115,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/git-e-afins-para-iniciantes-parte-2/git.png" alt="Git e afins para iniciantes - parte 2">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/git-e-afins-para-iniciantes-parte-2/git.png" alt="Git e afins para iniciantes - parte 2">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>no <a href="https://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/">último artigo</a> encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.</p>
 <h1 id="git-como-serviço">Git como serviço</h1>
@@ -135,16 +142,16 @@ if (!doNotTrack) {
 <p><img src="/img/git-e-afins-para-iniciantes-parte-2/git-flows.png" alt="Git flows"></p>
 <p>Agora vamos voltar ao assunto técnico e começar a entender como o Git funciona para trabalhar de forma colaborativa. Na imagem acima ilustra bem tudo que acontece e adiciona mais informações que não tinhamos abordados antes no primeiro artigo. Vamos imaginar que nosso projeto consiste de camadas como uma lasanha ou bolo para quem prefere doce e quem prefere agridoce coloca no comentário a opção. A primeira camada que vem ali na base de apoio é o seu <code>Workspace</code> que é onde você trabalha ativamente modificando o projeto. Quando você cria uma arquivo e adicionar ele no repositório com um <code>git add</code> esse arquivo vai para uma camada acima que é o <code>Staging</code> seria como ter feito um acordo verbal com seu repositório mas não no papel de forma oficial. Pensando ainda nesse arquivo, quando você faz o commit do que está feito em <code>Staging</code> suas alterações são de fato adicionadas a história do projeto mas apenas de forma local. Então, chega a hora de começar a trabalhar de forma colaborativa, vamos precisar conectar esse nosso repositório local a um repositório remoto.</p>
 <p>Vamos observar esse próprio blog que é um repositório no Github, para isso vamos precisar observar um aquivo de configuração que fica dentro do projeto em <code>.git/config</code>:</p>
-<pre><code>$ cat .git/config 
+<pre tabindex="0"><code>$ cat .git/config 
 [core]
 	repositoryformatversion = 0
 	filemode = true
 	bare = false
 	logallrefupdates = true
-[remote &quot;origin&quot;]
+[remote &#34;origin&#34;]
 	url = git@github.com:jvrmaia/blog.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
-[branch &quot;published&quot;]
+[branch &#34;published&#34;]
 	remote = origin
 	merge = refs/heads/published
 </code></pre><p>Como podemos ver temos uma configuração de <code>remote</code> no projeto que faz referência a um projeto remoto e assim fazemos o enlace entre o projeto local e remoto. Como disse, no meu caso uso o Github para isso e por isso consta aquela configuração de <a href="https://pt.wikipedia.org/wiki/URL">URL</a>. Repare que não é bem uma URL como estamos acostumados com sites mas é por conta do protocolo usado para me comunicar com o Github ser o <a href="https://pt.wikipedia.org/wiki/Secure_Shell">SSH</a>. Caso tivesse colocado uma configuração de URL usando <a href="https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> eu teria que em todo o processo de enviar ou pegar código no Github ter que passar pelo processo de login, com o SSH conseguimos criar essa facilidade no processo.</p>
@@ -153,8 +160,8 @@ if (!doNotTrack) {
 <p>Fork feito é hora de copiar para sua máquina o repositório. Para isso precisamos pegar a URL para clonar o projeto conforme demonstrado na figura abaixo no caso para o meu blog.</p>
 <p><img src="/img/git-e-afins-para-iniciantes-parte-2/git-clone.png" alt="Clonando o projeto do blog"></p>
 <p>Vamos executar o clone do repositório:</p>
-<pre><code>$ git clone git@github.com:jvrmaia/blog.git
-Cloning into 'blog'...
+<pre tabindex="0"><code>$ git clone git@github.com:jvrmaia/blog.git
+Cloning into &#39;blog&#39;...
 remote: Enumerating objects: 394, done.
 remote: Counting objects: 100% (394/394), done.
 remote: Compressing objects: 100% (241/241), done.
@@ -162,36 +169,36 @@ remote: Total 2985 (delta 187), reused 320 (delta 123), pack-reused 2591
 Receiving objects: 100% (2985/2985), 6.21 MiB | 794.00 KiB/s, done.
 Resolving deltas: 100% (1525/1525), done.
 </code></pre><p>Agora, você pode executar modificações a vontade para enviar para alteração. Veja o estado atual do repo enquanto escrevo o artigo:</p>
-<pre><code>$ git status
+<pre tabindex="0"><code>$ git status
 On branch post/git-2
 Changes not staged for commit:
-  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+  (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
+  (use &#34;git restore &lt;file&gt;...&#34; to discard changes in working directory)
 	modified:   content/post/git-e-afins-para-iniciantes-parte-2.md
 
 Untracked files:
-  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
 	static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
 	static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 
-no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
 </code></pre><p>Repare que estou escrevendo ele em uma branch separada chamada &ldquo;post/git-2&rdquo;, já tenho um arquivo alterado que é o <a href="https://pt.wikipedia.org/wiki/Markdown">Markdown</a> do artigo e duas imagens não presentes ainda no histórico do Git desse projeto, esse é o meu Workspace. Vamos colocar agora essas alterações em Staging:</p>
-<pre><code>$ git add  .
+<pre tabindex="0"><code>$ git add  .
 $ git status
 On branch post/git-2
 Changes to be committed:
-  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+  (use &#34;git restore --staged &lt;file&gt;...&#34; to unstage)
 	modified:   content/post/git-e-afins-para-iniciantes-parte-2.md
 	new file:   static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
 	new file:   static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 </code></pre><p>Pronto, agora temos as alterações salvas em Staging e podemos fazer o commit delas no repositório local, veja:</p>
-<pre><code>$ git commit -m &quot;trabalho em progresso&quot;
+<pre tabindex="0"><code>$ git commit -m &#34;trabalho em progresso&#34;
 [post/git-2 cd8e683] trabalho em progresso
  3 files changed, 91 insertions(+), 5 deletions(-)
  create mode 100644 static/img/git-e-afins-para-iniciantes-parte-2/git-clone.png
  create mode 100644 static/img/git-e-afins-para-iniciantes-parte-2/linux-fork.png
 </code></pre><p>Por fim, podemos agora enviar as alterações de volta para o Github que é o repositório remoto do projeto:</p>
-<pre><code>$ git push origin post/git-2 
+<pre tabindex="0"><code>$ git push origin post/git-2 
 Enumerating objects: 17, done.
 Counting objects: 100% (17/17), done.
 Delta compression using up to 8 threads
@@ -275,7 +282,7 @@ To github.com:jvrmaia/blog.git
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
 		Pessoa que resolve problemas com o uso de softwares
@@ -286,7 +293,7 @@ To github.com:jvrmaia/blog.git
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -314,8 +321,8 @@ To github.com:jvrmaia/blog.git
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

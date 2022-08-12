@@ -12,9 +12,10 @@
 você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
 Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/vamos-falar-de-dns/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/vamos-falar-de-dns/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-08-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-28T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Vamos falar de DNS?"/>
@@ -22,23 +23,26 @@ Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só come
 você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
 Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
+
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -113,9 +117,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/vamos-falar-de-dns/dns.png" alt="Vamos falar de DNS?">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/vamos-falar-de-dns/dns.png" alt="Vamos falar de DNS?">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na <a href="https://www.ietf.org/rfc/rfc1034.txt">rfc1034</a>, sobre a implementação <a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a> e para quem tiver mais curiosidade a <a href="https://en.wikipedia.org/wiki/Domain_Name_System#RFC_documents">lista completa</a>.</p>
 <p>Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</p>
@@ -148,7 +155,7 @@ if (!doNotTrack) {
 </ol>
 <h3 id="nomear-servidores">Nomear servidores</h3>
 <p>Essa é uma funcionalidade que já conversamos aqui um pouco. Vamos explorar um pouco mais essa funcionalidade, vamos entender um pouco mais sobre o <code>google.com</code> e para isso vamos usar o comando <code>host</code> do Linux:</p>
-<pre><code>$ host google.com
+<pre tabindex="0"><code>$ host google.com
 google.com has address 172.217.29.110
 google.com has IPv6 address 2800:3f0:4004:807::200e
 google.com mail is handled by 30 alt2.aspmx.l.google.com.
@@ -157,8 +164,8 @@ google.com mail is handled by 10 aspmx.l.google.com.
 google.com mail is handled by 50 alt4.aspmx.l.google.com.
 google.com mail is handled by 40 alt3.aspmx.l.google.com.
 </code></pre><p>Veja que interessante, ele converte o DNS do Google em IP e ainda tem outra informações interessantes. Repare que ele forneceu duas versões de IP. Uma pausa para esse assunto, hoje temos duas versões do protocolo IP em uso na Internet, o <a href="https://pt.wikipedia.org/wiki/IPv4">IPv4</a> e <a href="https://pt.wikipedia.org/wiki/IPv6">IPv6</a>, por conta de uma limitação de combinações diferentes de IP e a explosão de dispositivos e serviços que hoje conseguem ter interface com a rede de computadores o protocolo se tornou limitado. Com isso, surgiu o IPv6 que veio atender a essa nova demanda de IPs. Além disso, ele também identificou que nesse domínio do Google tem um serviços de email como podemos ver. Olhe agora como podemos explorar ainda mais o <code>host</code> no estudo do domínio do Google:</p>
-<pre><code>$ host -a google.com
-Trying &quot;google.com&quot;
+<pre tabindex="0"><code>$ host -a google.com
+Trying &#34;google.com&#34;
 ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 43764
 ;; flags: qr rd ra; QUERY: 1, ANSWER: 12, AUTHORITY: 0, ADDITIONAL: 0
 
@@ -181,13 +188,13 @@ google.com.		443	IN	MX	50 alt4.aspmx.l.google.com.
 
 Received 298 bytes from 127.0.0.53#53 in 74 ms
 </code></pre><p>Veja que interessantes quanta informação a mais temos, nesse momento vamos olhar apenas essas:</p>
-<pre><code>google.com.		111294	IN	NS	ns1.google.com.
+<pre tabindex="0"><code>google.com.		111294	IN	NS	ns1.google.com.
 google.com.		111294	IN	NS	ns3.google.com.
 google.com.		111294	IN	NS	ns2.google.com.
 google.com.		111294	IN	NS	ns4.google.com.
 </code></pre><p>Vamos falar sobre isso nos próximos tópicos mas esses são os servidores do Google que fazem o papel de serviço de DNS deles, ou seja, são essas máquinas que sabem traduzir tudo que for <code>*.google.com</code> em um IP.</p>
 <p>Curiosamente rodei o primeiro comando mais uma vez depois de um certo espaço de tempo e veja o resultado:</p>
-<pre><code>$ host google.com
+<pre tabindex="0"><code>$ host google.com
 google.com has address 216.58.222.78
 google.com has IPv6 address 2800:3f0:4004:804::200e
 google.com mail is handled by 10 aspmx.l.google.com.
@@ -206,13 +213,13 @@ google.com mail is handled by 30 alt2.aspmx.l.google.com.
 <h2 id="resolvendo-dns-no-linux">Resolvendo DNS no Linux</h2>
 <p>Vamos supor que você está no Linux e vai fazer acesso de algum site no seu navegador, esse blog, por exemplo. Como já sabemos o <code>blog.joaovrmaia.com</code> é apenas um apelido para abstrair algum IP na rede mundial de computadores, como já diria o Jefferson da <a href="https://www.linuxtips.io/">LinuxTips</a>, e vamos precisar desse IP para chegar lá e trocar dados com ele.</p>
 <p>No Linux vai ocorrer a chamada <a href="https://man7.org/linux/man-pages/man3/gethostbyname.3.html"><code>gethostbyname()</code></a> quem vai começar a jornada pela resolução desse IP. Essa nossa chamada vai gerar uma consulta que será feita na Internet mas como nossa máquina lança essa consulta na Internet? No nosso sistema temos um arquivo, <code>/etc/resolv.conf</code>, que é gerenciado pelo sistema operacional e alimentado pela sua rede caso não tenha feito alguma modificação manual nele. Os valores desse arquivo no geral vem através do serviço de <a href="https://pt.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a> que podemos falar a respeito em outro momento. Veja como é o arquivo:</p>
-<pre><code class="language-conf" data-lang="conf"># This file is managed by man:systemd-resolved(8). Do not edit.
+<pre tabindex="0"><code class="language-conf" data-lang="conf"># This file is managed by man:systemd-resolved(8). Do not edit.
 #
 # This is a dynamic resolv.conf file for connecting local clients to the
 # internal DNS stub resolver of systemd-resolved. This file lists all
 # configured search domains.
 #
-# Run &quot;resolvectl status&quot; to see details about the uplink DNS servers
+# Run &#34;resolvectl status&#34; to see details about the uplink DNS servers
 # currently in use.
 #
 # Third party programs must not access this file directly, but only through the
@@ -226,7 +233,7 @@ nameserver 127.0.0.53
 options edns0
 search br
 </code></pre><p>Então, nosso DNS está rodando para esse IP <code>127.0.0.53</code> que na verdade é uma abstração do <a href="https://pt.wikipedia.org/wiki/Systemd">systemd</a>. Então, vamos executar o comando sugerido no arquivo de configuração:</p>
-<pre><code>$ resolvectl status
+<pre tabindex="0"><code>$ resolvectl status
 Global
        LLMNR setting: no                  
 MulticastDNS setting: no                  
@@ -279,11 +286,11 @@ MulticastDNS setting: no
 
 ...
 </code></pre><p>Omitindo algumas partes esse são nossos reais servidores de DNS: 192.168.15.1 e fe8a0::96ea:eaff:feb5:aa35 nas duas versões de IP. Esse valor é do meu roteador e provedor de Internet que é o segundo passo nessa jornada para buscar o IP do meu blog. Antes de continuar a jornada, teria como eu evitar todo esse caminho em busca do IP? Algumas vez você já tenha passado por problemas de DNS em algum lugar e precisou colocar o DNS de forma manual na sua máquina, para isso precisou apenas editar o <code>/etc/hosts</code> correto? Como o sistema sabe como dele deve buscar ali? Existe outro recurso no nosso sistema que diz a prioridade de onde buscar essa informação, é o <a href="https://man7.org/linux/man-pages/man5/nsswitch.conf.5.html"><code>nsswitch</code></a>:</p>
-<pre><code># /etc/nsswitch.conf
+<pre tabindex="0"><code># /etc/nsswitch.conf
 #
 # Example configuration of GNU Name Service Switch functionality.
-# If you have the `glibc-doc-reference' and `info' packages installed, try:
-# `info libc &quot;Name Service Switch&quot;' for information about this file.
+# If you have the `glibc-doc-reference&#39; and `info&#39; packages installed, try:
+# `info libc &#34;Name Service Switch&#34;&#39; for information about this file.
 
 passwd:         files systemd
 group:          files systemd
@@ -300,7 +307,7 @@ rpc:            db files
 
 netgroup:       nis
 </code></pre><p>Como podemos ver em <code>hosts:          files mdns4_minimal [NOTFOUND=return] dns</code> o primeiro local a ser consultado é o o arquivo do sistema. Vamos fazer um teste! Vou editar no <code>/etc/hosts</code> o endereço do meu blog para localhost.</p>
-<pre><code>$ ping blog.joaovrmaia.com
+<pre tabindex="0"><code>$ ping blog.joaovrmaia.com
 PING jvrmaia.github.io (185.199.110.153) 56(84) bytes of data.
 64 bytes from 185.199.110.153 (185.199.110.153): icmp_seq=1 ttl=56 time=20.7 ms
 ...
@@ -310,7 +317,7 @@ PING localhost (127.0.0.1) 56(84) bytes of data.
 64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.061 ms
 ...
 </code></pre><p>Agora, já sabemos como nasce a requisição para resolver um nome pelo DNS. Veja bem, olhando o seu <code>/etc/hosts</code>, reparou algo?</p>
-<pre><code>127.0.0.1	localhost 
+<pre tabindex="0"><code>127.0.0.1	localhost 
 127.0.1.1	avell
 
 # The following lines are desirable for IPv6 capable hosts
@@ -483,7 +490,7 @@ ff02::2 ip6-allrouters
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
 		Pessoa que resolve problemas com o uso de softwares
@@ -494,7 +501,7 @@ ff02::2 ip6-allrouters
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -522,8 +529,8 @@ ff02::2 ip6-allrouters
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

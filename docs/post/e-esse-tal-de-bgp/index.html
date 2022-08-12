@@ -12,9 +12,10 @@
 nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
 Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-12-02T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-12-02T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="E esse tal de BGP?"/>
@@ -32,16 +33,16 @@ Contextualizando O primeiro passo é entender em qual nível estamos falando den
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -116,9 +117,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/e-esse-tal-de-bgp/bgp.png" alt="E esse tal de BGP?">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/e-esse-tal-de-bgp/bgp.png" alt="E esse tal de BGP?">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>nesse artigo pretendo explicar um pouco sobre o que é o <a href="https://tools.ietf.org/html/rfc4271">Border Gateway Protocol (BGP)</a> mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.</p>
 <h1 id="contextualizando">Contextualizando</h1>
@@ -146,10 +150,10 @@ if (!doNotTrack) {
 <p>Outro ponto interessante, supondo que você seja o administrador do AS1 e um terceiro do AS2, não é porque você escolheu o modelo <code>cold</code> que a comunicação de <code>s1</code> e <code>s2</code> vão ser sempre assim. Como disse no começo, o BGP é descentralizado e assimétrico. Então, o administrado do BGP do AS2 pode manipular a tabela de rotas para usar o algoritmo <code>hot</code>.</p>
 <p>O que acontece na prática? Nenhum dos dois. O algoritmo usado na prática é o seleção de rota. Cada roteador vai ter uma configuração de preferência local e isso pode ser configurado por seu auto-aprendizado ou pode aprender através de outros roteadores do seu AS. A forma desse aprendizado é controlada através de políticas criadas pelo administrador da rede e as isso é feito em forma de rank onde mais com maior rank são as escolhidas. Depois de varrer a preferência local o roteamento dos prefixos restantes é feito através da escolha do menor caminho que é feito pelo <a href="https://en.wikipedia.org/wiki/Distance-vector_routing_protocol"><code>Distance-Vector (DV) Routing Algorithm</code></a>. Sobrando ainda mais prefixos a escolha de roteamento é feita pelo <code>hot potato</code> e por fim BGP identifiers.</p>
 <h1 id="verificando-rotas-de-bgp">Verificando rotas de BGP</h1>
-<pre><code>$ telnet route-views.saopaulo.routeviews.org
+<pre tabindex="0"><code>$ telnet route-views.saopaulo.routeviews.org
 Trying 2001:12ff:0:6192::217...
 Connected to route-views.saopaulo.routeviews.org.
-Escape character is '^]'.
+Escape character is &#39;^]&#39;.
 
 Hello, this is Quagga (version 0.99.24.1).
 Copyright 1996-2005 Kunihiro Ishiguro, et al.
@@ -233,10 +237,10 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
-		Pessoa que resolve problemas com o uso de software
+		Pessoa que resolve problemas com o uso de softwares
 	</div>
 </div>
 
@@ -244,7 +248,7 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -272,8 +276,8 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2021 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.joaovrmaia.com/categories/http/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>O básico do HTTP em Go</title>
       <link>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</link>
-      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</guid>
       <description>Olá,

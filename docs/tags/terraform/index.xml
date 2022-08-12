@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>terraform on João Maia</title>
+    <link>http://blog.joaovrmaia.com/tags/terraform/</link>
+    <description>Recent content in terraform on João Maia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>João Maia</copyright>
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Conhecendo o Terraform</title>
+      <link>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</guid>
+      <description>Olá,
+venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do Terraform que fecha esse ciclo de ferramentas que venho apresentando.</description>
+    </item>
+    
+  </channel>
+</rss>

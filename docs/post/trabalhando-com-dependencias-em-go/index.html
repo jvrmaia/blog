@@ -11,32 +11,36 @@
 <meta property="og:description" content="Olá,
 Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-01-22T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-01-22T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Trabalhando com dependências em Go"/>
 <meta name="twitter:description" content="Olá,
 Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
+
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -111,9 +115,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/trabalhando-com-dependencias-em-go/modules.png" alt="Trabalhando com dependências em Go">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/trabalhando-com-dependencias-em-go/modules.png" alt="Trabalhando com dependências em Go">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho.</p>
 <p>Quando comecei com Go não tinha nenhuma ferramenta de gestão de dependências em Go, então, a solução era manter ou um <code>make dep</code> que tinha todos os <code>go get</code> necessários para rodar o projeto ou algum script em bash que fazia o mesmo trabalho. Sofrido, não? Para quem vinha de de C/C++ era até melhor a experiência mas para quem já vinha de Ruby, Python e Java, por exemplo, era horrível a experiência. Não demorou muito com a aderência da comunidade pela linguagem isso ser uma reclamação constante e emergir da comunidade algumas soluções até a solução oficial da linguagem hoje, segue a minha jornada que vou abordar em mais detalhes a seguir: Godeps, govendor, Glide, go dep e go modules.</p>
@@ -153,29 +160,28 @@ The commands are:
 Use &quot;go help mod &lt;command&gt;&quot; for more information about a command.
 </code></pre>
 <p>Alterando o projeto <code>hello</code> para ver como funciona o <code>go modules</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">package</span> <span class="nx">morestrings</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&#34;testing&#34;</span>
-    <span class="s">&#34;github.com/stretchr/testify/assert&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">TestReverseRunes</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">cases</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
-        <span class="nx">in</span><span class="p">,</span> <span class="nx">want</span> <span class="kt">string</span>
-    <span class="p">}{</span>
-        <span class="p">{</span><span class="s">&#34;Hello, world&#34;</span><span class="p">,</span> <span class="s">&#34;dlrow ,olleH&#34;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s">&#34;Hello, 世界&#34;</span><span class="p">,</span> <span class="s">&#34;界世 ,olleH&#34;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">},</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">c</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">cases</span> <span class="p">{</span>
-        <span class="nx">got</span> <span class="o">:=</span> <span class="nf">ReverseRunes</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">in</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">want</span> <span class="p">{</span>
-            <span class="nx">assert</span><span class="p">.</span><span class="nf">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">morestrings</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;testing&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/stretchr/testify/assert&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestReverseRunes</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cases</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">in</span><span class="p">,</span> <span class="nx">want</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s">&#34;Hello, world&#34;</span><span class="p">,</span> <span class="s">&#34;dlrow ,olleH&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s">&#34;Hello, 世界&#34;</span><span class="p">,</span> <span class="s">&#34;界世 ,olleH&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">c</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">cases</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">got</span> <span class="o">:=</span> <span class="nf">ReverseRunes</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">in</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">want</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">assert</span><span class="p">.</span><span class="nf">Equal</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">c</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
 <p>Executando agora vamos ter o seguinte resultado:</p>
 <pre><code>$ go test ./...
 go: finding github.com/stretchr/testify v1.4.0
@@ -264,7 +270,7 @@ gopkg.in/yaml.v2
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
 		Pessoa que resolve problemas com o uso de softwares
@@ -275,7 +281,7 @@ gopkg.in/yaml.v2
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -303,8 +309,8 @@ gopkg.in/yaml.v2
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

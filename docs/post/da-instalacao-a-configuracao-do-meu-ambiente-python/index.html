@@ -12,9 +12,10 @@
 Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.
 Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-04-28T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-04-28T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Da instalação a configuração do meu ambiente Python"/>
@@ -22,23 +23,26 @@ Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois d
 Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.
 Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
+
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -113,9 +117,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/da-instalacao-a-configuracao-do-meu-ambiente-python/python.png" alt="Da instalação a configuração do meu ambiente Python">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/da-instalacao-a-configuracao-do-meu-ambiente-python/python.png" alt="Da instalação a configuração do meu ambiente Python">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.</p>
 <p>Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações. Acredito que essa nova solução que surgiu recentemente na parte de gestão de dependências veio a resolver uma parte que sempre tive dificuldades achar sanidade na configuração. Ainda preciso explorar mais a solução mas já tenho gostado dela.</p>
@@ -123,7 +130,7 @@ if (!doNotTrack) {
 <p>Na maioria das versões mais modernas de sistema operacional Linux e OS X acredito que o Python padrão já seja o Python 3+ dado que o Python 2 já foi descontinuado. Quem chega no Python agora e não é um desenvolvedor que use Python nos seus sistemas é bem comum você usar o Python do sistema operacional e ser feliz com isso. Eventualmente, você vai correr o risco de alguma coisa que você instale quebre com outra instalada mas é bem difícil de ver isso acontecer dentro do que já observei até hoje. Já se você for um desenvolvedor Python isso pode se tornar rotineiro.</p>
 <p>Então, como resolver esse problema? Um solução que já uso tem uns anos e não vejo motivos para mudar é o <a href="https://github.com/pyenv/pyenv">pyenv</a>. O <code>pyenv</code> é um gestor e instalador de versões de Python no seu sistema. O <code>README</code> do projeto é bem claro sobre a instalação dele e acredito que você não vai ter dificuldades nessa parte, um adicional que faço é nesse ponto do <a href="https://github.com/pyenv/pyenv#homebrew-on-macos">Homebrew</a>, o Homebrew também funciona no Linux e recomendo o uso, mais detalhes a respeito podem ser vistos <a href="https://docs.brew.sh/Homebrew-on-Linux">aqui</a>.</p>
 <p>Vamos seguir agora assumindo que o <code>pyenv</code> já está 100% configurado na sua máquina, a primeira coisa que precisamos fazer é lista quais versões de Python estão disponíveis:</p>
-<pre><code>$ pyenv install -l
+<pre tabindex="0"><code>$ pyenv install -l
 Available versions:
   2.1.3
   2.2.3
@@ -204,9 +211,8 @@ Available versions:
   stackless-3.2.2
   ...
   stackless-3.5.4
-
 </code></pre><p>Para instalar agora é simples: <code>pyenv install &lt;versão&gt;</code>. Aqui no meu caso tenho instalado algumas versões apenas:</p>
-<pre><code>$ pyenv versions
+<pre tabindex="0"><code>$ pyenv versions
   system
   3.6.9
   * 3.7.5 (set by /home/jvrmaia/.pyenv/version)
@@ -214,7 +220,7 @@ Available versions:
   3.8.0/envs/flask-docker-example
   flask-docker-example
 </code></pre><p>Como pode perceber a versão 3.7.5 tem um <code>*</code> na frente pois é a versão atual. Para listar a versão atual apenas:</p>
-<pre><code>$ pyenv version
+<pre tabindex="0"><code>$ pyenv version
 3.7.5 (set by /home/jvrmaia/.pyenv/version)
 </code></pre><p>Outro fato curioso é o <code>system</code> na lista de versões de Python, é assim que o <code>pyenv</code> se refere a versão instalada pelo sistema operacional e não ele. Agora, com os Python&rsquo;s que você precisa instalado você precisa escolher qual vai usar, tem duas formas de selecionar e inspecionar isso: <code>global</code> e <code>local</code>. O <code>global</code> como o próprio nome já sugere é para a configuração global do Python, no meu caso como visto anteriormente é o 3.7.5. Isso pode ser conferido rodando o comando <code>pyenv global</code>, no caso de você passar algum argumento extra e se esse argumento for outra versão instalada, essa versão vai assumir o papel de versão global. O <code>local</code> segue o mesmo comportamento da <code>global</code> só que no escopo de onde você executa o comando, supondo que o seu diretório atual seja <code>/tmp/app_py</code> e você execute <code>pyenv local 3.8.0</code>, a versão local vai ser alterada para a 3.8.0 e para persistir essa informação será criado um arquivo <code>.python-version</code> com o valor 3.8.0 para que caso você entre dentro dessa árvore dos seus diretórios o <code>pyenv</code> troque o Python do <code>$PATH</code> automaticamente.</p>
 <h1 id="ambientes-virtuais-do-python">Ambientes virtuais do Python</h1>
@@ -226,16 +232,15 @@ Available versions:
 <p>&ldquo;I built Poetry because I wanted a single tool to manage my Python projects from start to finish. I wanted something reliable and intuitive that the community could use and enjoy.&rdquo; Sébastien Eustace</p>
 </blockquote>
 <p>Como podemos ver na declaração do criador o Poetry vai além de gerenciar suas dependências mas aqui vou ficar apenas até essa parte que é o que faço uso hoje. No meu Github tenho um projeto chamado <a href="https://github.com/jvrmaia/flask-docker-example/tree/master/app">flask-docker-example</a> que é um exemplo de como colocar uma aplicação <a href="https://flask.palletsprojects.com/en/1.1.x/">Flask</a> em Docker:</p>
-<pre><code>(flask-docker-example) =&gt; ~/Workspace/jvrmaia/flask-docker-example/app
+<pre tabindex="0"><code>(flask-docker-example) =&gt; ~/Workspace/jvrmaia/flask-docker-example/app
 $ tree .
 .
 ├── __init__.py
 ├── poetry.lock
 ├── pyproject.toml
 └── whoami.py
-
 </code></pre><p>Essa é a estrutura do projeto na parte de código, a estrutura inicial  que criei com o <code>poetry init</code> mas antes de entrar nisso vamos instalar o Poetry, nesse caso recomendo instalar o Poetry fora do seu ambiente virtual de forma que o acesso fique global com o <code>pip</code>: <code>pip install poetry</code>. A &ldquo;interface&rdquo; do Poetry:</p>
-<pre><code>$ poetry
+<pre tabindex="0"><code>$ poetry
 Poetry version 1.0.5
 
 USAGE
@@ -248,7 +253,7 @@ ARGUMENTS
 GLOBAL OPTIONS
   -h (--help)            Display this help message
   -q (--quiet)           Do not output any message
-  -v (--verbose)         Increase the verbosity of messages: &quot;-v&quot; for normal output, &quot;-vv&quot; for more verbose output and &quot;-vvv&quot; for debug
+  -v (--verbose)         Increase the verbosity of messages: &#34;-v&#34; for normal output, &#34;-vv&#34; for more verbose output and &#34;-vvv&#34; for debug
   -V (--version)         Display this application version
   --ansi                 Force ANSI output
   --no-ansi              Disable ANSI output
@@ -258,11 +263,11 @@ AVAILABLE COMMANDS
   about                  Shows information about Poetry.
   add                    Adds a new dependency to pyproject.toml.
   build                  Builds a package, as a tarball and a wheel by default.
-  cache                  Interact with Poetry's cache
+  cache                  Interact with Poetry&#39;s cache
   check                  Checks the validity of the pyproject.toml file.
   config                 Manages configuration settings.
   debug                  Debug various elements of Poetry.
-  env                    Interact with Poetry's project environments.
+  env                    Interact with Poetry&#39;s project environments.
   export                 Exports the lock file to alternative formats.
   help                   Display the manual of a command
   init                   Creates a basic pyproject.toml file in the current directory.
@@ -279,7 +284,7 @@ AVAILABLE COMMANDS
   update                 Update the dependencies as according to the pyproject.toml file.
   version                Shows the version of the project or bumps it when a valid bump rule is provided.
 </code></pre><p>Para adicionar dependências no seu projeto basta fazer como é mostrado no exemplo do site:</p>
-<pre><code>$ poetry add pendulum
+<pre tabindex="0"><code>$ poetry add pendulum
 Using version ^2.0.5 for pendulum
 
 Updating dependencies
@@ -295,330 +300,330 @@ Package operations: 4 installs, 0 updates, 0 removals
   - Installing pendulum (2.0.5)
 </code></pre><p>Caso você tenha feito apenas um clone de um projeto e queira instalar elas é só executar o comando <code>install</code>. Agora, vamos entender os dois arquivos gerandos que cuidam da gestão desse ambiente: 1) <code>pyproject.toml</code>: esse guarda as informações do seu projeto; e 2) <code>poetry.lock</code> que em detalhes versiona as suas depências e as dependências de suas dependências. Isso é muito importante para evitar que uma pessoa que fez a configuração do projeto após um certo tempo de existência não instale uma subdependência com versão superior a do momento da criação com quebras de API quebrando o projeto.</p>
 <p><code>pyproject.toml</code></p>
-<pre><code> [tool.poetry]
- name = &quot;flask-docker-example&quot;
- version = &quot;0.1.0&quot;
- description = &quot;Flask dockerize example&quot;
- license = &quot;MIT&quot;
+<pre tabindex="0"><code> [tool.poetry]
+ name = &#34;flask-docker-example&#34;
+ version = &#34;0.1.0&#34;
+ description = &#34;Flask dockerize example&#34;
+ license = &#34;MIT&#34;
  authors = [
-     &quot;João Maia &lt;joao@joaovrmaia.com&gt;&quot;
+     &#34;João Maia &lt;joao@joaovrmaia.com&gt;&#34;
  ]
- readme = &quot;README.md&quot;
- repository = &quot;https://github.com/jvrmaia/flask-docker-example&quot;
- homepage = &quot;https://github.com/jvrmaia/flask-docker-example&quot;
+ readme = &#34;README.md&#34;
+ repository = &#34;https://github.com/jvrmaia/flask-docker-example&#34;
+ homepage = &#34;https://github.com/jvrmaia/flask-docker-example&#34;
 
 
 [tool.poetry.dependencies]
-python = &quot;3.8.2&quot;
-click = &quot;==7.0&quot;
-flask = &quot;==1.1.1&quot;
-itsdangerous = &quot;==1.1.0&quot;
-jinja2 = &quot;==2.11.1&quot;
-markupsafe = &quot;==1.1.1&quot;
-python-decouple = &quot;==3.3&quot;
-werkzeug = &quot;==1.0.0&quot;
-gunicorn = &quot;^20.0.4&quot;
+python = &#34;3.8.2&#34;
+click = &#34;==7.0&#34;
+flask = &#34;==1.1.1&#34;
+itsdangerous = &#34;==1.1.0&#34;
+jinja2 = &#34;==2.11.1&#34;
+markupsafe = &#34;==1.1.1&#34;
+python-decouple = &#34;==3.3&#34;
+werkzeug = &#34;==1.0.0&#34;
+gunicorn = &#34;^20.0.4&#34;
 
 
 
 [tool.poetry.dev-dependencies]
-pylint = &quot;^2.4.4&quot;
+pylint = &#34;^2.4.4&#34;
 [build-system]
-requires = [&quot;poetry&gt;=0.12&quot;]
-build-backend = &quot;poetry.masonry.api&quot;
+requires = [&#34;poetry&gt;=0.12&#34;]
+build-backend = &#34;poetry.masonry.api&#34;
 </code></pre><p><code>poetry.lock</code></p>
-<pre><code>[[package]]
-category = &quot;dev&quot;
-description = &quot;An abstract syntax tree for Python with inference support.&quot;
-name = &quot;astroid&quot;
+<pre tabindex="0"><code>[[package]]
+category = &#34;dev&#34;
+description = &#34;An abstract syntax tree for Python with inference support.&#34;
+name = &#34;astroid&#34;
 optional = false
-python-versions = &quot;&gt;=3.5.*&quot;
-version = &quot;2.3.3&quot;
+python-versions = &#34;&gt;=3.5.*&#34;
+version = &#34;2.3.3&#34;
 
 [package.dependencies]
-lazy-object-proxy = &quot;&gt;=1.4.0,&lt;1.5.0&quot;
-six = &quot;&gt;=1.12,&lt;2.0&quot;
-wrapt = &quot;&gt;=1.11.0,&lt;1.12.0&quot;
+lazy-object-proxy = &#34;&gt;=1.4.0,&lt;1.5.0&#34;
+six = &#34;&gt;=1.12,&lt;2.0&#34;
+wrapt = &#34;&gt;=1.11.0,&lt;1.12.0&#34;
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;Composable command line interface toolkit&quot;
-name = &quot;click&quot;
+category = &#34;main&#34;
+description = &#34;Composable command line interface toolkit&#34;
+name = &#34;click&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&quot;
-version = &quot;7.0&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&#34;
+version = &#34;7.0&#34;
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;Cross-platform colored terminal text.&quot;
-marker = &quot;sys_platform == \&quot;win32\&quot;&quot;
-name = &quot;colorama&quot;
+category = &#34;dev&#34;
+description = &#34;Cross-platform colored terminal text.&#34;
+marker = &#34;sys_platform == \&#34;win32\&#34;&#34;
+name = &#34;colorama&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&quot;
-version = &quot;0.4.3&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&#34;
+version = &#34;0.4.3&#34;
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;A simple framework for building complex web applications.&quot;
-name = &quot;flask&quot;
+category = &#34;main&#34;
+description = &#34;A simple framework for building complex web applications.&#34;
+name = &#34;flask&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&quot;
-version = &quot;1.1.1&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&#34;
+version = &#34;1.1.1&#34;
 
 [package.dependencies]
-Jinja2 = &quot;&gt;=2.10.1&quot;
-Werkzeug = &quot;&gt;=0.15&quot;
-click = &quot;&gt;=5.1&quot;
-itsdangerous = &quot;&gt;=0.24&quot;
+Jinja2 = &#34;&gt;=2.10.1&#34;
+Werkzeug = &#34;&gt;=0.15&#34;
+click = &#34;&gt;=5.1&#34;
+itsdangerous = &#34;&gt;=0.24&#34;
 
 [package.extras]
-dev = [&quot;pytest&quot;, &quot;coverage&quot;, &quot;tox&quot;, &quot;sphinx&quot;, &quot;pallets-sphinx-themes&quot;, &quot;sphinxcontrib-log-cabinet&quot;, &quot;sphinx-issues&quot;]
-docs = [&quot;sphinx&quot;, &quot;pallets-sphinx-themes&quot;, &quot;sphinxcontrib-log-cabinet&quot;, &quot;sphinx-issues&quot;]
-dotenv = [&quot;python-dotenv&quot;]
+dev = [&#34;pytest&#34;, &#34;coverage&#34;, &#34;tox&#34;, &#34;sphinx&#34;, &#34;pallets-sphinx-themes&#34;, &#34;sphinxcontrib-log-cabinet&#34;, &#34;sphinx-issues&#34;]
+docs = [&#34;sphinx&#34;, &#34;pallets-sphinx-themes&#34;, &#34;sphinxcontrib-log-cabinet&#34;, &#34;sphinx-issues&#34;]
+dotenv = [&#34;python-dotenv&#34;]
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;WSGI HTTP Server for UNIX&quot;
-name = &quot;gunicorn&quot;
+category = &#34;main&#34;
+description = &#34;WSGI HTTP Server for UNIX&#34;
+name = &#34;gunicorn&#34;
 optional = false
-python-versions = &quot;&gt;=3.4&quot;
-version = &quot;20.0.4&quot;
+python-versions = &#34;&gt;=3.4&#34;
+version = &#34;20.0.4&#34;
 
 [package.dependencies]
-setuptools = &quot;&gt;=3.0&quot;
+setuptools = &#34;&gt;=3.0&#34;
 
 [package.extras]
-eventlet = [&quot;eventlet (&gt;=0.9.7)&quot;]
-gevent = [&quot;gevent (&gt;=0.13)&quot;]
-setproctitle = [&quot;setproctitle&quot;]
-tornado = [&quot;tornado (&gt;=0.2)&quot;]
+eventlet = [&#34;eventlet (&gt;=0.9.7)&#34;]
+gevent = [&#34;gevent (&gt;=0.13)&#34;]
+setproctitle = [&#34;setproctitle&#34;]
+tornado = [&#34;tornado (&gt;=0.2)&#34;]
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;A Python utility / library to sort Python imports.&quot;
-name = &quot;isort&quot;
+category = &#34;dev&#34;
+description = &#34;A Python utility / library to sort Python imports.&#34;
+name = &#34;isort&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&quot;
-version = &quot;4.3.21&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&#34;
+version = &#34;4.3.21&#34;
 
 [package.extras]
-pipfile = [&quot;pipreqs&quot;, &quot;requirementslib&quot;]
-pyproject = [&quot;toml&quot;]
-requirements = [&quot;pipreqs&quot;, &quot;pip-api&quot;]
-xdg_home = [&quot;appdirs (&gt;=1.4.0)&quot;]
+pipfile = [&#34;pipreqs&#34;, &#34;requirementslib&#34;]
+pyproject = [&#34;toml&#34;]
+requirements = [&#34;pipreqs&#34;, &#34;pip-api&#34;]
+xdg_home = [&#34;appdirs (&gt;=1.4.0)&#34;]
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;Various helpers to pass data to untrusted environments and back.&quot;
-name = &quot;itsdangerous&quot;
+category = &#34;main&#34;
+description = &#34;Various helpers to pass data to untrusted environments and back.&#34;
+name = &#34;itsdangerous&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&quot;
-version = &quot;1.1.0&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&#34;
+version = &#34;1.1.0&#34;
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;A very fast and expressive template engine.&quot;
-name = &quot;jinja2&quot;
+category = &#34;main&#34;
+description = &#34;A very fast and expressive template engine.&#34;
+name = &#34;jinja2&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&quot;
-version = &quot;2.11.1&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&#34;
+version = &#34;2.11.1&#34;
 
 [package.dependencies]
-MarkupSafe = &quot;&gt;=0.23&quot;
+MarkupSafe = &#34;&gt;=0.23&#34;
 
 [package.extras]
-i18n = [&quot;Babel (&gt;=0.8)&quot;]
+i18n = [&#34;Babel (&gt;=0.8)&#34;]
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;A fast and thorough lazy object proxy.&quot;
-name = &quot;lazy-object-proxy&quot;
+category = &#34;dev&#34;
+description = &#34;A fast and thorough lazy object proxy.&#34;
+name = &#34;lazy-object-proxy&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&quot;
-version = &quot;1.4.3&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*&#34;
+version = &#34;1.4.3&#34;
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;Safely add untrusted strings to HTML/XML markup.&quot;
-name = &quot;markupsafe&quot;
+category = &#34;main&#34;
+description = &#34;Safely add untrusted strings to HTML/XML markup.&#34;
+name = &#34;markupsafe&#34;
 optional = false
-python-versions = &quot;&gt;=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*&quot;
-version = &quot;1.1.1&quot;
+python-versions = &#34;&gt;=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*&#34;
+version = &#34;1.1.1&#34;
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;McCabe checker, plugin for flake8&quot;
-name = &quot;mccabe&quot;
+category = &#34;dev&#34;
+description = &#34;McCabe checker, plugin for flake8&#34;
+name = &#34;mccabe&#34;
 optional = false
-python-versions = &quot;*&quot;
-version = &quot;0.6.1&quot;
+python-versions = &#34;*&#34;
+version = &#34;0.6.1&#34;
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;python code static checker&quot;
-name = &quot;pylint&quot;
+category = &#34;dev&#34;
+description = &#34;python code static checker&#34;
+name = &#34;pylint&#34;
 optional = false
-python-versions = &quot;&gt;=3.5.*&quot;
-version = &quot;2.4.4&quot;
+python-versions = &#34;&gt;=3.5.*&#34;
+version = &#34;2.4.4&#34;
 
 [package.dependencies]
-astroid = &quot;&gt;=2.3.0,&lt;2.4&quot;
-colorama = &quot;*&quot;
-isort = &quot;&gt;=4.2.5,&lt;5&quot;
-mccabe = &quot;&gt;=0.6,&lt;0.7&quot;
+astroid = &#34;&gt;=2.3.0,&lt;2.4&#34;
+colorama = &#34;*&#34;
+isort = &#34;&gt;=4.2.5,&lt;5&#34;
+mccabe = &#34;&gt;=0.6,&lt;0.7&#34;
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;Strict separation of settings from code.&quot;
-name = &quot;python-decouple&quot;
+category = &#34;main&#34;
+description = &#34;Strict separation of settings from code.&#34;
+name = &#34;python-decouple&#34;
 optional = false
-python-versions = &quot;*&quot;
-version = &quot;3.3&quot;
+python-versions = &#34;*&#34;
+version = &#34;3.3&#34;
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;Python 2 and 3 compatibility utilities&quot;
-name = &quot;six&quot;
+category = &#34;dev&#34;
+description = &#34;Python 2 and 3 compatibility utilities&#34;
+name = &#34;six&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*&quot;
-version = &quot;1.14.0&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*&#34;
+version = &#34;1.14.0&#34;
 
 [[package]]
-category = &quot;main&quot;
-description = &quot;The comprehensive WSGI web application library.&quot;
-name = &quot;werkzeug&quot;
+category = &#34;main&#34;
+description = &#34;The comprehensive WSGI web application library.&#34;
+name = &#34;werkzeug&#34;
 optional = false
-python-versions = &quot;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&quot;
-version = &quot;1.0.0&quot;
+python-versions = &#34;&gt;=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*&#34;
+version = &#34;1.0.0&#34;
 
 [package.extras]
-dev = [&quot;pytest&quot;, &quot;coverage&quot;, &quot;tox&quot;, &quot;sphinx&quot;, &quot;pallets-sphinx-themes&quot;, &quot;sphinx-issues&quot;]
-watchdog = [&quot;watchdog&quot;]
+dev = [&#34;pytest&#34;, &#34;coverage&#34;, &#34;tox&#34;, &#34;sphinx&#34;, &#34;pallets-sphinx-themes&#34;, &#34;sphinx-issues&#34;]
+watchdog = [&#34;watchdog&#34;]
 
 [[package]]
-category = &quot;dev&quot;
-description = &quot;Module for decorators, wrappers and monkey patching.&quot;
-name = &quot;wrapt&quot;
+category = &#34;dev&#34;
+description = &#34;Module for decorators, wrappers and monkey patching.&#34;
+name = &#34;wrapt&#34;
 optional = false
-python-versions = &quot;*&quot;
-version = &quot;1.11.2&quot;
+python-versions = &#34;*&#34;
+version = &#34;1.11.2&#34;
 
 [metadata]
-content-hash = &quot;6dffc365a6d8b9d1ba2ce40d09661212452c759d2102e38efa6b0bcb997f07db&quot;
-python-versions = &quot;3.8.2&quot;
+content-hash = &#34;6dffc365a6d8b9d1ba2ce40d09661212452c759d2102e38efa6b0bcb997f07db&#34;
+python-versions = &#34;3.8.2&#34;
 
 [metadata.files]
 astroid = [
-    {file = &quot;astroid-2.3.3-py3-none-any.whl&quot;, hash = &quot;sha256:840947ebfa8b58f318d42301cf8c0a20fd794a33b61cc4638e28e9e61ba32f42&quot;},
-    {file = &quot;astroid-2.3.3.tar.gz&quot;, hash = &quot;sha256:71ea07f44df9568a75d0f354c49143a4575d90645e9fead6dfb52c26a85ed13a&quot;},
+    {file = &#34;astroid-2.3.3-py3-none-any.whl&#34;, hash = &#34;sha256:840947ebfa8b58f318d42301cf8c0a20fd794a33b61cc4638e28e9e61ba32f42&#34;},
+    {file = &#34;astroid-2.3.3.tar.gz&#34;, hash = &#34;sha256:71ea07f44df9568a75d0f354c49143a4575d90645e9fead6dfb52c26a85ed13a&#34;},
 ]
 click = [
-    {file = &quot;Click-7.0-py2.py3-none-any.whl&quot;, hash = &quot;sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13&quot;},
-    {file = &quot;Click-7.0.tar.gz&quot;, hash = &quot;sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7&quot;},
+    {file = &#34;Click-7.0-py2.py3-none-any.whl&#34;, hash = &#34;sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13&#34;},
+    {file = &#34;Click-7.0.tar.gz&#34;, hash = &#34;sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7&#34;},
 ]
 colorama = [
-    {file = &quot;colorama-0.4.3-py2.py3-none-any.whl&quot;, hash = &quot;sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff&quot;},
-    {file = &quot;colorama-0.4.3.tar.gz&quot;, hash = &quot;sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1&quot;},
+    {file = &#34;colorama-0.4.3-py2.py3-none-any.whl&#34;, hash = &#34;sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff&#34;},
+    {file = &#34;colorama-0.4.3.tar.gz&#34;, hash = &#34;sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1&#34;},
 ]
 flask = [
-    {file = &quot;Flask-1.1.1-py2.py3-none-any.whl&quot;, hash = &quot;sha256:45eb5a6fd193d6cf7e0cf5d8a5b31f83d5faae0293695626f539a823e93b13f6&quot;},
-    {file = &quot;Flask-1.1.1.tar.gz&quot;, hash = &quot;sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52&quot;},
+    {file = &#34;Flask-1.1.1-py2.py3-none-any.whl&#34;, hash = &#34;sha256:45eb5a6fd193d6cf7e0cf5d8a5b31f83d5faae0293695626f539a823e93b13f6&#34;},
+    {file = &#34;Flask-1.1.1.tar.gz&#34;, hash = &#34;sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52&#34;},
 ]
 gunicorn = [
-    {file = &quot;gunicorn-20.0.4-py2.py3-none-any.whl&quot;, hash = &quot;sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c&quot;},
-    {file = &quot;gunicorn-20.0.4.tar.gz&quot;, hash = &quot;sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626&quot;},
+    {file = &#34;gunicorn-20.0.4-py2.py3-none-any.whl&#34;, hash = &#34;sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c&#34;},
+    {file = &#34;gunicorn-20.0.4.tar.gz&#34;, hash = &#34;sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626&#34;},
 ]
 isort = [
-    {file = &quot;isort-4.3.21-py2.py3-none-any.whl&quot;, hash = &quot;sha256:6e811fcb295968434526407adb8796944f1988c5b65e8139058f2014cbe100fd&quot;},
-    {file = &quot;isort-4.3.21.tar.gz&quot;, hash = &quot;sha256:54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1&quot;},
+    {file = &#34;isort-4.3.21-py2.py3-none-any.whl&#34;, hash = &#34;sha256:6e811fcb295968434526407adb8796944f1988c5b65e8139058f2014cbe100fd&#34;},
+    {file = &#34;isort-4.3.21.tar.gz&#34;, hash = &#34;sha256:54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1&#34;},
 ]
 itsdangerous = [
-    {file = &quot;itsdangerous-1.1.0-py2.py3-none-any.whl&quot;, hash = &quot;sha256:b12271b2047cb23eeb98c8b5622e2e5c5e9abd9784a153e9d8ef9cb4dd09d749&quot;},
-    {file = &quot;itsdangerous-1.1.0.tar.gz&quot;, hash = &quot;sha256:321b033d07f2a4136d3ec762eac9f16a10ccd60f53c0c91af90217ace7ba1f19&quot;},
+    {file = &#34;itsdangerous-1.1.0-py2.py3-none-any.whl&#34;, hash = &#34;sha256:b12271b2047cb23eeb98c8b5622e2e5c5e9abd9784a153e9d8ef9cb4dd09d749&#34;},
+    {file = &#34;itsdangerous-1.1.0.tar.gz&#34;, hash = &#34;sha256:321b033d07f2a4136d3ec762eac9f16a10ccd60f53c0c91af90217ace7ba1f19&#34;},
 ]
 jinja2 = [
-    {file = &quot;Jinja2-2.11.1-py2.py3-none-any.whl&quot;, hash = &quot;sha256:b0eaf100007721b5c16c1fc1eecb87409464edc10469ddc9a22a27a99123be49&quot;},
-    {file = &quot;Jinja2-2.11.1.tar.gz&quot;, hash = &quot;sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250&quot;},
+    {file = &#34;Jinja2-2.11.1-py2.py3-none-any.whl&#34;, hash = &#34;sha256:b0eaf100007721b5c16c1fc1eecb87409464edc10469ddc9a22a27a99123be49&#34;},
+    {file = &#34;Jinja2-2.11.1.tar.gz&#34;, hash = &#34;sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250&#34;},
 ]
 lazy-object-proxy = [
-    {file = &quot;lazy-object-proxy-1.4.3.tar.gz&quot;, hash = &quot;sha256:f3900e8a5de27447acbf900b4750b0ddfd7ec1ea7fbaf11dfa911141bc522af0&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp27-cp27m-macosx_10_13_x86_64.whl&quot;, hash = &quot;sha256:a2238e9d1bb71a56cd710611a1614d1194dc10a175c1e08d75e1a7bcc250d442&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp27-cp27m-win32.whl&quot;, hash = &quot;sha256:efa1909120ce98bbb3777e8b6f92237f5d5c8ea6758efea36a473e1d38f7d3e4&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp27-cp27m-win_amd64.whl&quot;, hash = &quot;sha256:4677f594e474c91da97f489fea5b7daa17b5517190899cf213697e48d3902f5a&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp27-cp27mu-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:0c4b206227a8097f05c4dbdd323c50edf81f15db3b8dc064d08c62d37e1a504d&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp34-cp34m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:d945239a5639b3ff35b70a88c5f2f491913eb94871780ebfabb2568bd58afc5a&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp34-cp34m-win32.whl&quot;, hash = &quot;sha256:9651375199045a358eb6741df3e02a651e0330be090b3bc79f6d0de31a80ec3e&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp34-cp34m-win_amd64.whl&quot;, hash = &quot;sha256:eba7011090323c1dadf18b3b689845fd96a61ba0a1dfbd7f24b921398affc357&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp35-cp35m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:48dab84ebd4831077b150572aec802f303117c8cc5c871e182447281ebf3ac50&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp35-cp35m-win32.whl&quot;, hash = &quot;sha256:ca0a928a3ddbc5725be2dd1cf895ec0a254798915fb3a36af0964a0a4149e3db&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp35-cp35m-win_amd64.whl&quot;, hash = &quot;sha256:194d092e6f246b906e8f70884e620e459fc54db3259e60cf69a4d66c3fda3449&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp36-cp36m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:97bb5884f6f1cdce0099f86b907aa41c970c3c672ac8b9c8352789e103cf3156&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp36-cp36m-win32.whl&quot;, hash = &quot;sha256:cb2c7c57005a6804ab66f106ceb8482da55f5314b7fcb06551db1edae4ad1531&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp36-cp36m-win_amd64.whl&quot;, hash = &quot;sha256:8d859b89baf8ef7f8bc6b00aa20316483d67f0b1cbf422f5b4dc56701c8f2ffb&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp37-cp37m-macosx_10_13_x86_64.whl&quot;, hash = &quot;sha256:1be7e4c9f96948003609aa6c974ae59830a6baecc5376c25c92d7d697e684c08&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp37-cp37m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:d74bb8693bf9cf75ac3b47a54d716bbb1a92648d5f781fc799347cfc95952383&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp37-cp37m-win32.whl&quot;, hash = &quot;sha256:9b15f3f4c0f35727d3a0fba4b770b3c4ebbb1fa907dbcc046a1d2799f3edd142&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp37-cp37m-win_amd64.whl&quot;, hash = &quot;sha256:9254f4358b9b541e3441b007a0ea0764b9d056afdeafc1a5569eee1cc6c1b9ea&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp38-cp38-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:a6ae12d08c0bf9909ce12385803a543bfe99b95fe01e752536a60af2b7797c62&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp38-cp38-win32.whl&quot;, hash = &quot;sha256:5541cada25cd173702dbd99f8e22434105456314462326f06dba3e180f203dfd&quot;},
-    {file = &quot;lazy_object_proxy-1.4.3-cp38-cp38-win_amd64.whl&quot;, hash = &quot;sha256:59f79fef100b09564bc2df42ea2d8d21a64fdcda64979c0fa3db7bdaabaf6239&quot;},
+    {file = &#34;lazy-object-proxy-1.4.3.tar.gz&#34;, hash = &#34;sha256:f3900e8a5de27447acbf900b4750b0ddfd7ec1ea7fbaf11dfa911141bc522af0&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp27-cp27m-macosx_10_13_x86_64.whl&#34;, hash = &#34;sha256:a2238e9d1bb71a56cd710611a1614d1194dc10a175c1e08d75e1a7bcc250d442&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp27-cp27m-win32.whl&#34;, hash = &#34;sha256:efa1909120ce98bbb3777e8b6f92237f5d5c8ea6758efea36a473e1d38f7d3e4&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp27-cp27m-win_amd64.whl&#34;, hash = &#34;sha256:4677f594e474c91da97f489fea5b7daa17b5517190899cf213697e48d3902f5a&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp27-cp27mu-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:0c4b206227a8097f05c4dbdd323c50edf81f15db3b8dc064d08c62d37e1a504d&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp34-cp34m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:d945239a5639b3ff35b70a88c5f2f491913eb94871780ebfabb2568bd58afc5a&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp34-cp34m-win32.whl&#34;, hash = &#34;sha256:9651375199045a358eb6741df3e02a651e0330be090b3bc79f6d0de31a80ec3e&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp34-cp34m-win_amd64.whl&#34;, hash = &#34;sha256:eba7011090323c1dadf18b3b689845fd96a61ba0a1dfbd7f24b921398affc357&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp35-cp35m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:48dab84ebd4831077b150572aec802f303117c8cc5c871e182447281ebf3ac50&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp35-cp35m-win32.whl&#34;, hash = &#34;sha256:ca0a928a3ddbc5725be2dd1cf895ec0a254798915fb3a36af0964a0a4149e3db&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp35-cp35m-win_amd64.whl&#34;, hash = &#34;sha256:194d092e6f246b906e8f70884e620e459fc54db3259e60cf69a4d66c3fda3449&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp36-cp36m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:97bb5884f6f1cdce0099f86b907aa41c970c3c672ac8b9c8352789e103cf3156&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp36-cp36m-win32.whl&#34;, hash = &#34;sha256:cb2c7c57005a6804ab66f106ceb8482da55f5314b7fcb06551db1edae4ad1531&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp36-cp36m-win_amd64.whl&#34;, hash = &#34;sha256:8d859b89baf8ef7f8bc6b00aa20316483d67f0b1cbf422f5b4dc56701c8f2ffb&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp37-cp37m-macosx_10_13_x86_64.whl&#34;, hash = &#34;sha256:1be7e4c9f96948003609aa6c974ae59830a6baecc5376c25c92d7d697e684c08&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp37-cp37m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:d74bb8693bf9cf75ac3b47a54d716bbb1a92648d5f781fc799347cfc95952383&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp37-cp37m-win32.whl&#34;, hash = &#34;sha256:9b15f3f4c0f35727d3a0fba4b770b3c4ebbb1fa907dbcc046a1d2799f3edd142&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp37-cp37m-win_amd64.whl&#34;, hash = &#34;sha256:9254f4358b9b541e3441b007a0ea0764b9d056afdeafc1a5569eee1cc6c1b9ea&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp38-cp38-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:a6ae12d08c0bf9909ce12385803a543bfe99b95fe01e752536a60af2b7797c62&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp38-cp38-win32.whl&#34;, hash = &#34;sha256:5541cada25cd173702dbd99f8e22434105456314462326f06dba3e180f203dfd&#34;},
+    {file = &#34;lazy_object_proxy-1.4.3-cp38-cp38-win_amd64.whl&#34;, hash = &#34;sha256:59f79fef100b09564bc2df42ea2d8d21a64fdcda64979c0fa3db7bdaabaf6239&#34;},
 ]
 markupsafe = [
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl&quot;, hash = &quot;sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27m-manylinux1_i686.whl&quot;, hash = &quot;sha256:e249096428b3ae81b08327a63a485ad0878de3fb939049038579ac0ef61e17e7&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:500d4957e52ddc3351cabf489e79c91c17f6e0899158447047588650b5e69183&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27m-win32.whl&quot;, hash = &quot;sha256:b2051432115498d3562c084a49bba65d97cf251f5a331c64a12ee7e04dacc51b&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27m-win_amd64.whl&quot;, hash = &quot;sha256:98c7086708b163d425c67c7a91bad6e466bb99d797aa64f965e9d25c12111a5e&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27mu-manylinux1_i686.whl&quot;, hash = &quot;sha256:cd5df75523866410809ca100dc9681e301e3c27567cf498077e8551b6d20e42f&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp27-cp27mu-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:43a55c2930bbc139570ac2452adf3d70cdbb3cfe5912c71cdce1c2c6bbd9c5d1&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp34-cp34m-macosx_10_6_intel.whl&quot;, hash = &quot;sha256:1027c282dad077d0bae18be6794e6b6b8c91d58ed8a8d89a89d59693b9131db5&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp34-cp34m-manylinux1_i686.whl&quot;, hash = &quot;sha256:62fe6c95e3ec8a7fad637b7f3d372c15ec1caa01ab47926cfdf7a75b40e0eac1&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp34-cp34m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:88e5fcfb52ee7b911e8bb6d6aa2fd21fbecc674eadd44118a9cc3863f938e735&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp34-cp34m-win32.whl&quot;, hash = &quot;sha256:ade5e387d2ad0d7ebf59146cc00c8044acbd863725f887353a10df825fc8ae21&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp34-cp34m-win_amd64.whl&quot;, hash = &quot;sha256:09c4b7f37d6c648cb13f9230d847adf22f8171b1ccc4d5682398e77f40309235&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp35-cp35m-macosx_10_6_intel.whl&quot;, hash = &quot;sha256:79855e1c5b8da654cf486b830bd42c06e8780cea587384cf6545b7d9ac013a0b&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp35-cp35m-manylinux1_i686.whl&quot;, hash = &quot;sha256:c8716a48d94b06bb3b2524c2b77e055fb313aeb4ea620c8dd03a105574ba704f&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp35-cp35m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:7c1699dfe0cf8ff607dbdcc1e9b9af1755371f92a68f706051cc8c37d447c905&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp35-cp35m-win32.whl&quot;, hash = &quot;sha256:6dd73240d2af64df90aa7c4e7481e23825ea70af4b4922f8ede5b9e35f78a3b1&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp35-cp35m-win_amd64.whl&quot;, hash = &quot;sha256:9add70b36c5666a2ed02b43b335fe19002ee5235efd4b8a89bfcf9005bebac0d&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp36-cp36m-macosx_10_6_intel.whl&quot;, hash = &quot;sha256:24982cc2533820871eba85ba648cd53d8623687ff11cbb805be4ff7b4c971aff&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp36-cp36m-manylinux1_i686.whl&quot;, hash = &quot;sha256:00bc623926325b26bb9605ae9eae8a215691f33cae5df11ca5424f06f2d1f473&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp36-cp36m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:717ba8fe3ae9cc0006d7c451f0bb265ee07739daf76355d06366154ee68d221e&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp36-cp36m-win32.whl&quot;, hash = &quot;sha256:535f6fc4d397c1563d08b88e485c3496cf5784e927af890fb3c3aac7f933ec66&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp36-cp36m-win_amd64.whl&quot;, hash = &quot;sha256:b1282f8c00509d99fef04d8ba936b156d419be841854fe901d8ae224c59f0be5&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp37-cp37m-macosx_10_6_intel.whl&quot;, hash = &quot;sha256:8defac2f2ccd6805ebf65f5eeb132adcf2ab57aa11fdf4c0dd5169a004710e7d&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp37-cp37m-manylinux1_i686.whl&quot;, hash = &quot;sha256:46c99d2de99945ec5cb54f23c8cd5689f6d7177305ebff350a58ce5f8de1669e&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:ba59edeaa2fc6114428f1637ffff42da1e311e29382d81b339c1817d37ec93c6&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp37-cp37m-win32.whl&quot;, hash = &quot;sha256:b00c1de48212e4cc9603895652c5c410df699856a2853135b3967591e4beebc2&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp37-cp37m-win_amd64.whl&quot;, hash = &quot;sha256:9bf40443012702a1d2070043cb6291650a0841ece432556f784f004937f0f32c&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp38-cp38-macosx_10_9_x86_64.whl&quot;, hash = &quot;sha256:6788b695d50a51edb699cb55e35487e430fa21f1ed838122d722e0ff0ac5ba15&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp38-cp38-manylinux1_i686.whl&quot;, hash = &quot;sha256:cdb132fc825c38e1aeec2c8aa9338310d29d337bebbd7baa06889d09a60a1fa2&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp38-cp38-manylinux1_x86_64.whl&quot;, hash = &quot;sha256:13d3144e1e340870b25e7b10b98d779608c02016d5184cfb9927a9f10c689f42&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp38-cp38-win32.whl&quot;, hash = &quot;sha256:596510de112c685489095da617b5bcbbac7dd6384aeebeda4df6025d0256a81b&quot;},
-    {file = &quot;MarkupSafe-1.1.1-cp38-cp38-win_amd64.whl&quot;, hash = &quot;sha256:e8313f01ba26fbbe36c7be1966a7b7424942f670f38e666995b88d012765b9be&quot;},
-    {file = &quot;MarkupSafe-1.1.1.tar.gz&quot;, hash = &quot;sha256:29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b&quot;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl&#34;, hash = &#34;sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27m-manylinux1_i686.whl&#34;, hash = &#34;sha256:e249096428b3ae81b08327a63a485ad0878de3fb939049038579ac0ef61e17e7&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:500d4957e52ddc3351cabf489e79c91c17f6e0899158447047588650b5e69183&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27m-win32.whl&#34;, hash = &#34;sha256:b2051432115498d3562c084a49bba65d97cf251f5a331c64a12ee7e04dacc51b&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27m-win_amd64.whl&#34;, hash = &#34;sha256:98c7086708b163d425c67c7a91bad6e466bb99d797aa64f965e9d25c12111a5e&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27mu-manylinux1_i686.whl&#34;, hash = &#34;sha256:cd5df75523866410809ca100dc9681e301e3c27567cf498077e8551b6d20e42f&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp27-cp27mu-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:43a55c2930bbc139570ac2452adf3d70cdbb3cfe5912c71cdce1c2c6bbd9c5d1&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp34-cp34m-macosx_10_6_intel.whl&#34;, hash = &#34;sha256:1027c282dad077d0bae18be6794e6b6b8c91d58ed8a8d89a89d59693b9131db5&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp34-cp34m-manylinux1_i686.whl&#34;, hash = &#34;sha256:62fe6c95e3ec8a7fad637b7f3d372c15ec1caa01ab47926cfdf7a75b40e0eac1&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp34-cp34m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:88e5fcfb52ee7b911e8bb6d6aa2fd21fbecc674eadd44118a9cc3863f938e735&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp34-cp34m-win32.whl&#34;, hash = &#34;sha256:ade5e387d2ad0d7ebf59146cc00c8044acbd863725f887353a10df825fc8ae21&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp34-cp34m-win_amd64.whl&#34;, hash = &#34;sha256:09c4b7f37d6c648cb13f9230d847adf22f8171b1ccc4d5682398e77f40309235&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp35-cp35m-macosx_10_6_intel.whl&#34;, hash = &#34;sha256:79855e1c5b8da654cf486b830bd42c06e8780cea587384cf6545b7d9ac013a0b&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp35-cp35m-manylinux1_i686.whl&#34;, hash = &#34;sha256:c8716a48d94b06bb3b2524c2b77e055fb313aeb4ea620c8dd03a105574ba704f&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp35-cp35m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:7c1699dfe0cf8ff607dbdcc1e9b9af1755371f92a68f706051cc8c37d447c905&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp35-cp35m-win32.whl&#34;, hash = &#34;sha256:6dd73240d2af64df90aa7c4e7481e23825ea70af4b4922f8ede5b9e35f78a3b1&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp35-cp35m-win_amd64.whl&#34;, hash = &#34;sha256:9add70b36c5666a2ed02b43b335fe19002ee5235efd4b8a89bfcf9005bebac0d&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp36-cp36m-macosx_10_6_intel.whl&#34;, hash = &#34;sha256:24982cc2533820871eba85ba648cd53d8623687ff11cbb805be4ff7b4c971aff&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp36-cp36m-manylinux1_i686.whl&#34;, hash = &#34;sha256:00bc623926325b26bb9605ae9eae8a215691f33cae5df11ca5424f06f2d1f473&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp36-cp36m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:717ba8fe3ae9cc0006d7c451f0bb265ee07739daf76355d06366154ee68d221e&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp36-cp36m-win32.whl&#34;, hash = &#34;sha256:535f6fc4d397c1563d08b88e485c3496cf5784e927af890fb3c3aac7f933ec66&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp36-cp36m-win_amd64.whl&#34;, hash = &#34;sha256:b1282f8c00509d99fef04d8ba936b156d419be841854fe901d8ae224c59f0be5&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp37-cp37m-macosx_10_6_intel.whl&#34;, hash = &#34;sha256:8defac2f2ccd6805ebf65f5eeb132adcf2ab57aa11fdf4c0dd5169a004710e7d&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp37-cp37m-manylinux1_i686.whl&#34;, hash = &#34;sha256:46c99d2de99945ec5cb54f23c8cd5689f6d7177305ebff350a58ce5f8de1669e&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:ba59edeaa2fc6114428f1637ffff42da1e311e29382d81b339c1817d37ec93c6&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp37-cp37m-win32.whl&#34;, hash = &#34;sha256:b00c1de48212e4cc9603895652c5c410df699856a2853135b3967591e4beebc2&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp37-cp37m-win_amd64.whl&#34;, hash = &#34;sha256:9bf40443012702a1d2070043cb6291650a0841ece432556f784f004937f0f32c&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp38-cp38-macosx_10_9_x86_64.whl&#34;, hash = &#34;sha256:6788b695d50a51edb699cb55e35487e430fa21f1ed838122d722e0ff0ac5ba15&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp38-cp38-manylinux1_i686.whl&#34;, hash = &#34;sha256:cdb132fc825c38e1aeec2c8aa9338310d29d337bebbd7baa06889d09a60a1fa2&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp38-cp38-manylinux1_x86_64.whl&#34;, hash = &#34;sha256:13d3144e1e340870b25e7b10b98d779608c02016d5184cfb9927a9f10c689f42&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp38-cp38-win32.whl&#34;, hash = &#34;sha256:596510de112c685489095da617b5bcbbac7dd6384aeebeda4df6025d0256a81b&#34;},
+    {file = &#34;MarkupSafe-1.1.1-cp38-cp38-win_amd64.whl&#34;, hash = &#34;sha256:e8313f01ba26fbbe36c7be1966a7b7424942f670f38e666995b88d012765b9be&#34;},
+    {file = &#34;MarkupSafe-1.1.1.tar.gz&#34;, hash = &#34;sha256:29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b&#34;},
 ]
 mccabe = [
-    {file = &quot;mccabe-0.6.1-py2.py3-none-any.whl&quot;, hash = &quot;sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42&quot;},
-    {file = &quot;mccabe-0.6.1.tar.gz&quot;, hash = &quot;sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f&quot;},
+    {file = &#34;mccabe-0.6.1-py2.py3-none-any.whl&#34;, hash = &#34;sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42&#34;},
+    {file = &#34;mccabe-0.6.1.tar.gz&#34;, hash = &#34;sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f&#34;},
 ]
 pylint = [
-    {file = &quot;pylint-2.4.4-py3-none-any.whl&quot;, hash = &quot;sha256:886e6afc935ea2590b462664b161ca9a5e40168ea99e5300935f6591ad467df4&quot;},
-    {file = &quot;pylint-2.4.4.tar.gz&quot;, hash = &quot;sha256:3db5468ad013380e987410a8d6956226963aed94ecb5f9d3a28acca6d9ac36cd&quot;},
+    {file = &#34;pylint-2.4.4-py3-none-any.whl&#34;, hash = &#34;sha256:886e6afc935ea2590b462664b161ca9a5e40168ea99e5300935f6591ad467df4&#34;},
+    {file = &#34;pylint-2.4.4.tar.gz&#34;, hash = &#34;sha256:3db5468ad013380e987410a8d6956226963aed94ecb5f9d3a28acca6d9ac36cd&#34;},
 ]
 python-decouple = [
-    {file = &quot;python-decouple-3.3.tar.gz&quot;, hash = &quot;sha256:55c546b85b0c47a15a47a4312d451a437f7344a9be3e001660bccd93b637de95&quot;},
+    {file = &#34;python-decouple-3.3.tar.gz&#34;, hash = &#34;sha256:55c546b85b0c47a15a47a4312d451a437f7344a9be3e001660bccd93b637de95&#34;},
 ]
 six = [
-    {file = &quot;six-1.14.0-py2.py3-none-any.whl&quot;, hash = &quot;sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c&quot;},
-    {file = &quot;six-1.14.0.tar.gz&quot;, hash = &quot;sha256:236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a&quot;},
+    {file = &#34;six-1.14.0-py2.py3-none-any.whl&#34;, hash = &#34;sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c&#34;},
+    {file = &#34;six-1.14.0.tar.gz&#34;, hash = &#34;sha256:236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a&#34;},
 ]
 werkzeug = [
-    {file = &quot;Werkzeug-1.0.0-py2.py3-none-any.whl&quot;, hash = &quot;sha256:6dc65cf9091cf750012f56f2cad759fa9e879f511b5ff8685e456b4e3bf90d16&quot;},
-    {file = &quot;Werkzeug-1.0.0.tar.gz&quot;, hash = &quot;sha256:169ba8a33788476292d04186ab33b01d6add475033dfc07215e6d219cc077096&quot;},
+    {file = &#34;Werkzeug-1.0.0-py2.py3-none-any.whl&#34;, hash = &#34;sha256:6dc65cf9091cf750012f56f2cad759fa9e879f511b5ff8685e456b4e3bf90d16&#34;},
+    {file = &#34;Werkzeug-1.0.0.tar.gz&#34;, hash = &#34;sha256:169ba8a33788476292d04186ab33b01d6add475033dfc07215e6d219cc077096&#34;},
 ]
 wrapt = [
-    {file = &quot;wrapt-1.11.2.tar.gz&quot;, hash = &quot;sha256:565a021fd19419476b9362b05eeaa094178de64f8361e44468f9e9d7843901e1&quot;},
+    {file = &#34;wrapt-1.11.2.tar.gz&#34;, hash = &#34;sha256:565a021fd19419476b9362b05eeaa094178de64f8361e44468f9e9d7843901e1&#34;},
 ]
 </code></pre><p>Não vou me extender mais nesse assunto mas como viram não tem grandes complicações na configuração do ambiente e do projeto. Fico aberto a susgestões de mudanças no que tenho feito e aberto a tirar dúvidas caso tenha alguma. Ainda preciso usar mais essa configuração de ambiente para ver todos os seus pontos fortes e fracos mas já me agradou a primeira vista.</p>
 <p>Até!</p>
@@ -643,7 +648,7 @@ wrapt = [
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
 		Pessoa que resolve problemas com o uso de softwares
@@ -654,7 +659,7 @@ wrapt = [
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -682,8 +687,8 @@ wrapt = [
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

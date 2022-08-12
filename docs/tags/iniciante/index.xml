@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/iniciante/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/iniciante/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>O básico do HTTP em Go</title>
       <link>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</link>
-      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</guid>
       <description>Olá,
@@ -68,7 +68,7 @@ esse artigo faz parte da sequência que pretendo escrever sobre Go para que sua 
       <description>Olá,
 esse primeiro post sobre Go é para mostrar a quem não sabe nada sobre a linguagem algumas características e minhas opiniões a respeito dela. Caso discorde de algo e/ou tenha alguma correção a ser feita no texto pode me apontar nos comentários ou no meu e-mail que darei toda atenção desde que faça de forma educada.
 Senta que lá vem a História Do Wikipedia:
- Go é uma linguagem de programação criada pela Google e lançada em código livre em novembro de 2009.</description>
+Go é uma linguagem de programação criada pela Google e lançada em código livre em novembro de 2009.</description>
     </item>
     
   </channel>

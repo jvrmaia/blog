@@ -11,32 +11,36 @@
 <meta property="og:description" content="Olá,
 Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/organizacao-de-projetos-e-gopath/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-01-17T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-01-17T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Organização de projetos e GOPATH"/>
 <meta name="twitter:description" content="Olá,
 Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
+
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -111,9 +115,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/organizacao-de-projetos-e-gopath/gophers.jpg" alt="Organização de projetos e GOPATH">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/organizacao-de-projetos-e-gopath/gophers.jpg" alt="Organização de projetos e GOPATH">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>Esse é um tópico que acaba sendo polêmico onde cada um acaba tendo uma opinião sobre e fazendo uma busca rápida no Google você pode confirmar isso. Como sempre, tem uma recomendação oficial da linguagem e diversas outras alternativas que emergem da comunidade ou formas que empresas acharam para lidar com a sua complexidade de controlar o projeto. Nesse artigo vamos navegar por essas abordagens e ver o que elas trazem de interessante ou não.</p>
 <h1 id="recomendação-oficial">Recomendação oficial</h1>
@@ -130,14 +137,14 @@ module github.com/jvrmaia/hello
 go 1.13
 </code></pre>
 <p>Nosso primeiro código vai ser esse, <code>hello.go</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world.&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div><p>Feito isso, podes agora testar rodar nosso código, podemos fazer de 3 formas:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello, world.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Feito isso, podes agora testar rodar nosso código, podemos fazer de 3 formas:</p>
 <h2 id="go-run">go run</h2>
 <pre><code>$ go run hello.go
 </code></pre>
@@ -172,40 +179,40 @@ func ReverseRunes(s string) string {
 EOF
 </code></pre>
 <p>Feito isso, vamos adicionar ela no nosso projeto inicial do <code>hello</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-
-	<span class="s">&#34;github.com/user/hello/morestrings&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">morestrings</span><span class="p">.</span><span class="nf">ReverseRunes</span><span class="p">(</span><span class="s">&#34;!oG ,olleH&#34;</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></div><p>Executando como visto antes vamos ter a reposta: <code>Hello, Go!</code>. Agora, vamos adicionar uma biblioteca externa no nosso projeto:</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-
-	<span class="s">&#34;github.com/jvrmaia/hello/morestrings&#34;</span>
-	<span class="s">&#34;github.com/google/go-cmp/cmp&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">morestrings</span><span class="p">.</span><span class="nf">ReverseRunes</span><span class="p">(</span><span class="s">&#34;!oG ,olleH&#34;</span><span class="p">))</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">cmp</span><span class="p">.</span><span class="nf">Diff</span><span class="p">(</span><span class="s">&#34;Hello World&#34;</span><span class="p">,</span> <span class="s">&#34;Hello Go&#34;</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></div><p>Executando vamos ter o seguinte resultado:</p>
-<pre><code>$ go run hello.go
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/user/hello/morestrings&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">morestrings</span><span class="p">.</span><span class="nf">ReverseRunes</span><span class="p">(</span><span class="s">&#34;!oG ,olleH&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Executando como visto antes vamos ter a reposta: <code>Hello, Go!</code>. Agora, vamos adicionar uma biblioteca externa no nosso projeto:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/jvrmaia/hello/morestrings&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/google/go-cmp/cmp&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">morestrings</span><span class="p">.</span><span class="nf">ReverseRunes</span><span class="p">(</span><span class="s">&#34;!oG ,olleH&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">cmp</span><span class="p">.</span><span class="nf">Diff</span><span class="p">(</span><span class="s">&#34;Hello World&#34;</span><span class="p">,</span> <span class="s">&#34;Hello Go&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Executando vamos ter o seguinte resultado:</p>
+<pre tabindex="0"><code>$ go run hello.go
 go: downloading github.com/google/go-cmp v0.4.0
 go: extracting github.com/google/go-cmp v0.4.0
 go: finding github.com/google/go-cmp v0.4.0
 Hello, Go!
   string(
-- 	&quot;Hello World&quot;,
-+ 	&quot;Hello Go&quot;,
+- 	&#34;Hello World&#34;,
++ 	&#34;Hello Go&#34;,
   )
 </code></pre><p>E consequentemente algumas mudanças no seu <code>go.mod</code> e <code>go.sum</code> utilizado pelo Go Modules:</p>
 <pre><code>$ cat go.mod
@@ -382,7 +389,7 @@ hello: /home/jvrmaia/.gvm/pkgsets/system/hello/bin/hello /home/jvrmaia/.gvm/pkgs
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
 		Pessoa que resolve problemas com o uso de softwares
@@ -393,7 +400,7 @@ hello: /home/jvrmaia/.gvm/pkgsets/system/hello/bin/hello /home/jvrmaia/.gvm/pkgs
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -421,8 +428,8 @@ hello: /home/jvrmaia/.gvm/pkgsets/system/hello/bin/hello /home/jvrmaia/.gvm/pkgs
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

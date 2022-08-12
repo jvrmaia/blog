@@ -11,32 +11,36 @@
 <meta property="og:description" content="Olá,
 sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/" />
+<meta property="og:url" content="http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-06-15T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-06-15T00:00:00+00:00" />
+
 
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AWS IAM direto ao ponto"/>
 <meta name="twitter:description" content="Olá,
 sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo."/>
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
+
 	<link rel="shortcut icon" href="/favicon.ico">
 		
-<script type="application/javascript">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-61280444-1', 'auto');
-	
-	ga('send', 'pageview');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
 }
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 <body class="body">
@@ -111,9 +115,12 @@ if (!doNotTrack) {
 	</span>
 </div></div>
 		</header>
-		<figure class="post__thumbnail">
-			<img src="/img/aws-iam-direto-ao-ponto/aws-iam.png" alt="AWS IAM direto ao ponto">
-		</figure><div class="content post__content clearfix">
+		
+	<figure class="post__thumbnail thumbnail">
+		
+		<img class="thumbnail__image" src="/img/aws-iam-direto-ao-ponto/aws-iam.png" alt="AWS IAM direto ao ponto">
+		
+	</figure><div class="content post__content clearfix">
 			<p>Olá,</p>
 <p>sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo.</p>
 <h1 id="modelo-de-segurança-da-aws">Modelo de segurança da AWS</h1>
@@ -141,44 +148,44 @@ if (!doNotTrack) {
 <p><code>Policy</code> é a forma mais granular de criar permissões na AWS, basicamente você vai dizer se algo pode ou não, o que é essa ação e ao que dentro da AWS ela será aplicada. Vamos exemplificar, uma <code>Policy</code> poder ser a permissão de fazer um <code>GetObject</code> em um <code>bucket</code> específico do <code>s3</code>, se essa <code>Policy</code> for dada a um usuário ele terá o poder de pegar qualquer arquivo desse <code>bucket</code> e fazer um cópia local em sua máquina dado que ele saiba da existência do mesmo pois a permissão dada não permite ele listar os itens do <code>bucket</code>.</p>
 <h3 id="exemplo">Exemplo</h3>
 <p>A <code>Policy</code> é descrita em formato <code>JSON</code>, segue um exemplo:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;s3:*&#34;</span>
-            <span class="p">],</span>
-            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;*&#34;</span>
-            <span class="p">]</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;s3:*&#34;</span>
-            <span class="p">],</span>
-            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Deny&#34;</span><span class="p">,</span>
-            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&#34;arn:aws:s3:::db-backups&#34;</span>
-            <span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div><p>No exemplo acima estou permitindo tudo no <code>s3</code> no primeiro momento mas depois me certifico que no <code>bucket</code> de backups de um banco de dados nada é permitido.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;s3:*&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;*&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;s3:*&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Deny&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;arn:aws:s3:::db-backups&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>No exemplo acima estou permitindo tudo no <code>s3</code> no primeiro momento mas depois me certifico que no <code>bucket</code> de backups de um banco de dados nada é permitido.</p>
 <p>Políticas dinâmicas:</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-   <span class="nt">&#34;Statement&#34;</span><span class="p">:[{</span>
-      <span class="nt">&#34;Effect&#34;</span><span class="p">:</span><span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
-      <span class="nt">&#34;Action&#34;</span><span class="p">:</span><span class="s2">&#34;s3:*&#34;</span><span class="p">,</span>
-      <span class="nt">&#34;Resource&#34;</span><span class="p">:</span><span class="s2">&#34;arn:aws:s3:::db-backups&#34;</span><span class="p">,</span>
-      <span class="nt">&#34;Condition&#34;</span><span class="p">:{</span>
-         <span class="nt">&#34;Bool&#34;</span><span class="p">:{</span>
-            <span class="nt">&#34;aws:SecureTransport&#34;</span><span class="p">:</span><span class="s2">&#34;true&#34;</span>
-            <span class="p">}</span>
-         <span class="p">}</span>
-      <span class="p">}</span>
-   <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div><p>Você pode aprender mais sobre isso <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html">aqui</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nt">&#34;Statement&#34;</span><span class="p">:[{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Effect&#34;</span><span class="p">:</span><span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Action&#34;</span><span class="p">:</span><span class="s2">&#34;s3:*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Resource&#34;</span><span class="p">:</span><span class="s2">&#34;arn:aws:s3:::db-backups&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Condition&#34;</span><span class="p">:{</span>
+</span></span><span class="line"><span class="cl">         <span class="nt">&#34;Bool&#34;</span><span class="p">:{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;aws:SecureTransport&#34;</span><span class="p">:</span><span class="s2">&#34;true&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">         <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">   <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Você pode aprender mais sobre isso <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_variables.html">aqui</a>.</p>
 <h3 id="como-funciona">Como funciona</h3>
 <p>Como o IAM executa a <code>Policy</code>:</p>
 <ul>
@@ -241,7 +248,7 @@ if (!doNotTrack) {
 		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">Sobre João Maia</span>
+		<span class="authorbox__name">About João Maia</span>
 	</div>
 	<div class="authorbox__description">
 		Pessoa que resolve problemas com o uso de softwares
@@ -252,7 +259,7 @@ if (!doNotTrack) {
 <section class="comments">
 	<div id="disqus_thread"></div>
 <script type="application/javascript">
-    var disqus_config = function () {
+    window.disqus_config = function () {
     
     
     
@@ -280,8 +287,8 @@ if (!doNotTrack) {
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 João Maia.
-			<span class="footer__copyright-credits">Gerado com <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> com o tema <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>.</span>
+			&copy; 2022 João Maia.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>
 </footer>

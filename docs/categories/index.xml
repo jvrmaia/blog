@@ -7,44 +7,98 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://blog.joaovrmaia.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>http</title>
-      <link>http://blog.joaovrmaia.com/categories/http/</link>
-      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      <title>arquitetura de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/http/</guid>
+      <guid>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>engenharia de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/engenharia-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/engenharia-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>estratégia de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/estrat%C3%A9gia-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/estrat%C3%A9gia-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>governança de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/governan%C3%A7a-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/governan%C3%A7a-de-dados/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plataforma de dados</title>
+      <link>http://blog.joaovrmaia.com/categories/plataforma-de-dados/</link>
+      <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/plataforma-de-dados/</guid>
       <description></description>
     </item>
     
     <item>
       <title>desenvolvimento</title>
       <link>http://blog.joaovrmaia.com/categories/desenvolvimento/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/categories/desenvolvimento/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>rede de computadores</title>
-      <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      <title>infraestrutura</title>
+      <link>http://blog.joaovrmaia.com/categories/infraestrutura/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/rede-de-computadores/</guid>
+      <guid>http://blog.joaovrmaia.com/categories/infraestrutura/</guid>
       <description></description>
     </item>
     
     <item>
       <title>devops</title>
       <link>http://blog.joaovrmaia.com/categories/devops/</link>
-      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>http://blog.joaovrmaia.com/categories/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>http://blog.joaovrmaia.com/categories/http/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rede de computadores</title>
+      <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.joaovrmaia.com/categories/rede-de-computadores/</guid>
       <description></description>
     </item>
     
