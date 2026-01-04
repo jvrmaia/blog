@@ -2,7 +2,6 @@ baseURL = "http://blog.joaovrmaia.com"
 title = "João Maia"
 enableRobotsTXT = true
 enableEmoji = true
-theme = "mainroad"
 publishDir = "docs"
 languageCode = "pt-br"
 
