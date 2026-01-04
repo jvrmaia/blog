@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ .Site.Title }}</title>
+</head>
+<body>
+  <header>
+    <h1>{{ .Site.Title }}</h1>
+    {{ with .Site.Params.subtitle }}<p>{{ . }}</p>{{ end }}
+  </header>
+  <main>
+    {{ if .Pages }}
+      <ul>
+        {{ range .Pages }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p>Nenhuma página encontrada.</p>
+    {{ end }}
+  </main>
+  <footer>
+    <p>© {{ now.Format "2006" }} {{ .Site.Params.copyright }}</p>
+  </footer>
+</body>
+</html>
