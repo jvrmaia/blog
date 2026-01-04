@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>rede de computadores on João Maia</title>
-    <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
-    <description>Recent content in rede de computadores on João Maia</description>
+    <title>Rede De Computadores on João Maia</title>
+    <link>http://localhost:1313/categories/rede-de-computadores/</link>
+    <description>Recent content in Rede De Computadores on João Maia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
     <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.joaovrmaia.com/categories/rede-de-computadores/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/rede-de-computadores/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>E esse tal de BGP?</title>
-      <link>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</link>
+      <link>http://localhost:1313/post/e-esse-tal-de-bgp/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</guid>
-      <description>Olá,
-nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
-Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.</description>
+      <guid>http://localhost:1313/post/e-esse-tal-de-bgp/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;
+&lt;p&gt;nesse artigo pretendo explicar um pouco sobre o que é o &lt;a href=&#34;https://tools.ietf.org/html/rfc4271&#34;&gt;Border Gateway Protocol (BGP)&lt;/a&gt; mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.&lt;/p&gt;
+&lt;h1 id=&#34;contextualizando&#34;&gt;Contextualizando&lt;/h1&gt;
+&lt;p&gt;O primeiro passo é entender em qual nível estamos falando dentro do &lt;a href=&#34;https://pt.wikipedia.org/wiki/Modelo_OSI&#34;&gt;Modelo OSI&lt;/a&gt;, no caso, a camada de aplicação onde também temos o &lt;a href=&#34;https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio&#34;&gt;DNS&lt;/a&gt; que é amplamente conhecido, o &lt;a href=&#34;https://pt.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&#34;&gt;DHCP&lt;/a&gt; que é o responsável por distribuir &lt;a href=&#34;https://pt.wikipedia.org/wiki/Endere%C3%A7o_IP&#34;&gt;IP&lt;/a&gt;. Entrando mais detalhes, o BGP vai trabalhar no plano de controle.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Vamos falar de DNS?</title>
-      <link>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</link>
+      <link>http://localhost:1313/post/vamos-falar-de-dns/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</guid>
-      <description>Olá,
-você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
-Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</description>
+      <guid>http://localhost:1313/post/vamos-falar-de-dns/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;
+&lt;p&gt;você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na &lt;a href=&#34;https://www.ietf.org/rfc/rfc1034.txt&#34;&gt;rfc1034&lt;/a&gt;, sobre a implementação &lt;a href=&#34;https://www.ietf.org/rfc/rfc1035.txt&#34;&gt;rfc1035&lt;/a&gt; e para quem tiver mais curiosidade a &lt;a href=&#34;https://en.wikipedia.org/wiki/Domain_Name_System#RFC_documents&#34;&gt;lista completa&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.&lt;/p&gt;</description>
     </item>
     
   </channel>

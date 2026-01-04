@@ -1,220 +1,153 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>João Maia</title>
-    <link>http://blog.joaovrmaia.com/</link>
-    <description>Recent content on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Bem-vindo on João Maia</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Bem-vindo on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sobre</title>
-      <link>http://blog.joaovrmaia.com/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Fri, 25 Jan 2019 16:38:52 -0300</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/about/</guid>
-      <description>Onde estou&amp;hellip;
-Twitter
-Instagram
-GitLab
-Github
-Tchau!</description>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;Onde estou&amp;hellip;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://twitter.com/jvrmaia&#34;&gt;Twitter&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.instagram.com/jvrmaia/&#34;&gt;Instagram&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://gitlab.com/jvrmaia&#34;&gt;GitLab&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/jvrmaia&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Tchau!&lt;/p&gt;</description>
     </item>
-    
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/post/hello-world/</link>
+      <pubDate>Sun, 04 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/hello-world/</guid>
+      <description>&lt;p&gt;Conteúdo de exemplo.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Os desafios de criar uma arquitetura moderna de dados</title>
-      <link>http://blog.joaovrmaia.com/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</link>
+      <link>http://localhost:1313/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</guid>
-      <description>Olá,
-é quase certo que você escute de qualquer empresa no mercado hoje que possuem um cultura orientada a dados ou que estão em busca disso, a expressão em inglês Data-Driven. Porém, não são todas que conseguem de fato assim como é com a tal transformação digital que ainda escutamos por ai. Talvez, não estamos sabendo diferenciar a fome da vontade de comer. A fome é uma necessidade do nosso corpo em busca de nutrição para nos dar poder de realizar nossas atividades.</description>
+      <guid>http://localhost:1313/post/os-desafios-de-criar-uma-arquitetura-moderna-de-dados/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;é quase certo que você escute de qualquer empresa no mercado hoje que possuem um cultura orientada a dados ou que estão em busca disso, a expressão em inglês &lt;a href=&#34;https://www.cio.com/article/3449117/what-exactly-is-a-data-driven-organization.html&#34;&gt;&lt;em&gt;Data-Driven&lt;/em&gt;&lt;/a&gt;. Porém, não são todas que conseguem de fato assim como é com a tal transformação digital que ainda escutamos por ai. Talvez, não estamos sabendo diferenciar a fome da vontade de comer. A fome é uma necessidade do nosso corpo em busca de nutrição para nos dar poder de realizar nossas atividades. A vontade de comer é um mecanimos mais cerebral, por exemplo, você não precisa comer um chocolate mas o fato de comer vai lhe causar uma recompensa cerebral relacionada ao prazer.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Dica de ferramenta: SDKMAN!</title>
-      <link>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</link>
+      <link>http://localhost:1313/post/dica-de-ferramenta-sdkman/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</guid>
-      <description>Olá,
-se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Java, Kotlin e Scala e tem ferramentas de gestão de projeto como Maven, Gradle e sbt o SDKMAN! pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o Kico, ele escreveu um guia da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.</description>
+      <guid>http://localhost:1313/post/dica-de-ferramenta-sdkman/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;se você trabalha com projetos que usam &lt;a href=&#34;https://en.wikipedia.org/wiki/Java_virtual_machine&#34;&gt;Java Virtual Machine (JVM)&lt;/a&gt;, ou seja, &lt;a href=&#34;https://www.java.com/en/&#34;&gt;Java&lt;/a&gt;, &lt;a href=&#34;https://kotlinlang.org/&#34;&gt;Kotlin&lt;/a&gt; e &lt;a href=&#34;https://scala-lang.org/&#34;&gt;Scala&lt;/a&gt; e tem ferramentas de gestão de projeto como &lt;a href=&#34;https://maven.apache.org/&#34;&gt;Maven&lt;/a&gt;, &lt;a href=&#34;https://gradle.org/&#34;&gt;Gradle&lt;/a&gt; e &lt;a href=&#34;https://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; o &lt;a href=&#34;https://sdkman.io/&#34;&gt;SDKMAN!&lt;/a&gt; pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o &lt;a href=&#34;https://twitter.com/loboweissmann&#34;&gt;Kico&lt;/a&gt;, ele escreveu um &lt;a href=&#34;https://itexto.com.br/configurando-seu-ambiente-de-desenvolvimento-java-com-sdkman/&#34;&gt;guia&lt;/a&gt; da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>OpenResty na prática</title>
-      <link>http://blog.joaovrmaia.com/post/openresty-na-pratica/</link>
+      <link>http://localhost:1313/post/openresty-na-pratica/</link>
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/openresty-na-pratica/</guid>
-      <description>Olá,
-OpenResty é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de Proxy ou Load Balancer. O projeto é um fork do NGINX e evoluido com o uso do LuaJIT para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma empresa por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.</description>
+      <guid>http://localhost:1313/post/openresty-na-pratica/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://openresty.org/en/&#34;&gt;OpenResty&lt;/a&gt; é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de &lt;a href=&#34;https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/&#34;&gt;Proxy ou Load Balancer&lt;/a&gt;. O projeto é um fork do &lt;a href=&#34;https://nginx.org/en/&#34;&gt;NGINX&lt;/a&gt; e evoluido com o uso do &lt;a href=&#34;https://luajit.org/&#34;&gt;LuaJIT&lt;/a&gt; para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma &lt;a href=&#34;https://openresty.com/en/&#34;&gt;empresa&lt;/a&gt; por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Conhecendo o Terraform</title>
-      <link>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</link>
+      <link>http://localhost:1313/post/conhecendo-o-terraform/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</guid>
-      <description>Olá,
-venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do Terraform que fecha esse ciclo de ferramentas que venho apresentando.</description>
+      <guid>http://localhost:1313/post/conhecendo-o-terraform/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do &lt;a href=&#34;https://www.terraform.io/&#34;&gt;Terraform&lt;/a&gt; que fecha esse ciclo de ferramentas que venho apresentando. Olhando de maneira breve e superficial ou vendo pessoas comentar a respeito dele temos um primeiro entendimento que o Terraform é uma ferramenta apenas de provisionar infraestrutura em lugares como &lt;a href=&#34;https://aws.amazon.com/&#34;&gt;AWS&lt;/a&gt;, &lt;a href=&#34;https://cloud.google.com/&#34;&gt;Google Cloud&lt;/a&gt; e &lt;a href=&#34;https://azure.microsoft.com/en-us/&#34;&gt;Azure&lt;/a&gt;. Isso não é uma verdade pois o objetivo dele é provisionar &lt;em&gt;qualquer&lt;/em&gt; serviço de Cloud desde que ele forneça uma API para tal, dentro da terminologia do Terraform chamamos esse serviço de Cloud de &lt;code&gt;provider&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>O básico do HTTP em Go</title>
-      <link>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</link>
+      <link>http://localhost:1313/post/o-basico-do-http-em-go/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</guid>
-      <description>Olá,
-nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts.</description>
+      <guid>http://localhost:1313/post/o-basico-do-http-em-go/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for &lt;a href=&#34;https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol&#34;&gt;HTTP&lt;/a&gt;, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: &lt;a href=&#34;https://blog.cloudflare.com/exposing-go-on-the-internet/&#34;&gt;So you want to expose Go on the Internet&lt;/a&gt; e &lt;a href=&#34;https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/&#34;&gt;The complete guide to Go net/http timeouts&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>E esse tal de BGP?</title>
-      <link>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</link>
+      <link>http://localhost:1313/post/e-esse-tal-de-bgp/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/e-esse-tal-de-bgp/</guid>
-      <description>Olá,
-nesse artigo pretendo explicar um pouco sobre o que é o Border Gateway Protocol (BGP) mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.
-Contextualizando O primeiro passo é entender em qual nível estamos falando dentro do Modelo OSI, no caso, a camada de aplicação onde também temos o DNS que é amplamente conhecido, o DHCP que é o responsável por distribuir IP.</description>
+      <guid>http://localhost:1313/post/e-esse-tal-de-bgp/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;nesse artigo pretendo explicar um pouco sobre o que é o &lt;a href=&#34;https://tools.ietf.org/html/rfc4271&#34;&gt;Border Gateway Protocol (BGP)&lt;/a&gt; mas antes disso é preciso passar por alguns outros conceitos para no fim entender porque muitas das grandes falhas da internet mundial tem essa sigla envolvida e como isso também é usado na rede da sua empresa.&lt;/p&gt;&#xA;&lt;h1 id=&#34;contextualizando&#34;&gt;Contextualizando&lt;/h1&gt;&#xA;&lt;p&gt;O primeiro passo é entender em qual nível estamos falando dentro do &lt;a href=&#34;https://pt.wikipedia.org/wiki/Modelo_OSI&#34;&gt;Modelo OSI&lt;/a&gt;, no caso, a camada de aplicação onde também temos o &lt;a href=&#34;https://pt.wikipedia.org/wiki/Sistema_de_Nomes_de_Dom%C3%ADnio&#34;&gt;DNS&lt;/a&gt; que é amplamente conhecido, o &lt;a href=&#34;https://pt.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol&#34;&gt;DHCP&lt;/a&gt; que é o responsável por distribuir &lt;a href=&#34;https://pt.wikipedia.org/wiki/Endere%C3%A7o_IP&#34;&gt;IP&lt;/a&gt;. Entrando mais detalhes, o BGP vai trabalhar no plano de controle.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git e afins para iniciantes - parte 2</title>
-      <link>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</link>
+      <link>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-2/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</guid>
-      <description>Olá,
-no último artigo encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.</description>
+      <guid>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-2/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;no &lt;a href=&#34;https://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/&#34;&gt;último artigo&lt;/a&gt; encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Vamos falar de DNS?</title>
-      <link>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</link>
+      <link>http://localhost:1313/post/vamos-falar-de-dns/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/vamos-falar-de-dns/</guid>
-      <description>Olá,
-você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
-Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</description>
+      <guid>http://localhost:1313/post/vamos-falar-de-dns/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na &lt;a href=&#34;https://www.ietf.org/rfc/rfc1034.txt&#34;&gt;rfc1034&lt;/a&gt;, sobre a implementação &lt;a href=&#34;https://www.ietf.org/rfc/rfc1035.txt&#34;&gt;rfc1035&lt;/a&gt; e para quem tiver mais curiosidade a &lt;a href=&#34;https://en.wikipedia.org/wiki/Domain_Name_System#RFC_documents&#34;&gt;lista completa&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Git e afins para iniciantes - parte 1</title>
-      <link>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</link>
+      <link>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-1/</link>
       <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</guid>
-      <description>Olá,
-acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu trabalho-história-mediaval.</description>
+      <guid>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-1/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu &lt;code&gt;trabalho-história-mediaval.doc&lt;/code&gt; e tudo virou um caos depois da primeira vez que você começou ele, né? Vamos tentar narrar a possível história desse &lt;code&gt;trabalho-história-mediaval.doc&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Conhecendo o Ansible</title>
-      <link>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</link>
+      <link>http://localhost:1313/post/conhecendo-o-ansible/</link>
       <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-ansible/</guid>
-      <description>Olá,
-dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o Ansible. Um pouco de história, o Ansible veio como solução semelhante ao Puppet e Chef pela empresa de mesmo nome com o produto sendo o Ansible Tower que depois foi comprada pela Red Hat e agora a Red Hat foi comprada pela IBM. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet.</description>
+      <guid>http://localhost:1313/post/conhecendo-o-ansible/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;dando continuidade nos artigos de infraestrutura como código chegou a hora de escrever sobre o &lt;a href=&#34;https://www.ansible.com/&#34;&gt;Ansible&lt;/a&gt;. Um pouco de história, o Ansible veio como solução semelhante ao &lt;a href=&#34;https://puppet.com/&#34;&gt;Puppet&lt;/a&gt; e &lt;a href=&#34;https://www.chef.io/&#34;&gt;Chef&lt;/a&gt; pela empresa de mesmo nome com o produto sendo o &lt;a href=&#34;https://www.ansible.com/products/tower&#34;&gt;Ansible Tower&lt;/a&gt; que depois foi comprada pela &lt;a href=&#34;https://www.redhat.com/pt-br&#34;&gt;Red Hat&lt;/a&gt; e agora a Red Hat foi comprada pela &lt;a href=&#34;https://www.ibm.com/br-pt&#34;&gt;IBM&lt;/a&gt;. Meu primeiro contato foi em 2017 depois de uma experiência bem simples com o Puppet. Achei o Ansible muito mais intuitivo ao processo que tinha sempre feito na vida de dar ssh no servidor e rodar scripts em Bash ou fazer manualmente vários processos, vi no Ansible uma forma simples e direta de fazer isso.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>AWS IAM direto ao ponto</title>
-      <link>http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/</link>
+      <link>http://localhost:1313/post/aws-iam-direto-ao-ponto/</link>
       <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/aws-iam-direto-ao-ponto/</guid>
-      <description>Olá,
-sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo.</description>
+      <guid>http://localhost:1313/post/aws-iam-direto-ao-ponto/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;sou usuário de AWS tanto da forma pessoal quanto profissional tem alguns anos e uma das coisas que deveriam ser suas preocupações ao criar uma conta na AWS é o Identity and Access Management (IAM). Tenho um sentimento que esse recurso da AWS é sempre usado de forma muito rasa e errada na maioria dos lugares pois as permissões configuradas são sempre brandas demais. Vou tentar nesse artigo passar uma visão geral sobre o recurso e minha opinião a respeito de como fazer um bom uso do mesmo.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Conhecendo o Packer</title>
-      <link>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</link>
+      <link>http://localhost:1313/post/conhecendo-o-packer/</link>
       <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</guid>
-      <description>Olá,
-eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud.</description>
+      <guid>http://localhost:1313/post/conhecendo-o-packer/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: &lt;a href=&#34;https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AMIs.html&#34;&gt;AWS&lt;/a&gt;, &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/virtual-machines/&#34;&gt;Azure&lt;/a&gt; e &lt;a href=&#34;https://cloud.google.com/compute/docs/images&#34;&gt;Google Cloud&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Analisando dados no terminal</title>
-      <link>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</link>
+      <link>http://localhost:1313/post/analisando-dados-no-terminal/</link>
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</guid>
-      <description>Olá,
-recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no Twitter surgiram comentários interessantes.</description>
+      <guid>http://localhost:1313/post/analisando-dados-no-terminal/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no &lt;a href=&#34;https://twitter.com/jvrmaia/status/1255963940804313088&#34;&gt;Twitter&lt;/a&gt; surgiram comentários interessantes. O primeiro foi esse &lt;a href=&#34;https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html&#34;&gt;artigo&lt;/a&gt; e o segundo foi a ferramenta &lt;a href=&#34;https://www.gnu.org/software/datamash/&#34;&gt;datamash&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Da instalação a configuração do meu ambiente Python</title>
-      <link>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</link>
+      <link>http://localhost:1313/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</link>
       <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</guid>
-      <description>Olá,
-Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.
-Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações.</description>
+      <guid>http://localhost:1313/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.&lt;/p&gt;&#xA;&lt;p&gt;Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações. Acredito que essa nova solução que surgiu recentemente na parte de gestão de dependências veio a resolver uma parte que sempre tive dificuldades achar sanidade na configuração. Ainda preciso explorar mais a solução mas já tenho gostado dela.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Desenhando infraestrutura com código</title>
-      <link>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</link>
+      <link>http://localhost:1313/post/desenhando-infraestrutura-com-codigo/</link>
       <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</guid>
-      <description>Olá,
-Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw.</description>
+      <guid>http://localhost:1313/post/desenhando-infraestrutura-com-codigo/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o &lt;a href=&#34;https://www.lucidchart.com/&#34;&gt;Lucidchart&lt;/a&gt;, &lt;a href=&#34;https://cloudcraft.co/&#34;&gt;Cloudcraft&lt;/a&gt; e &lt;a href=&#34;https://app.diagrams.net/&#34;&gt;draw.io&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Testando o NGINX com SuperTest e Mocha</title>
-      <link>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</link>
+      <link>http://localhost:1313/post/testando-o-nginx-com-supertest-e-mocha/</link>
       <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/testando-o-nginx-com-supertest-e-mocha/</guid>
-      <description>Olá,
-testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda não faz nada a respeito saiba que já está atrasado. Com a transformação da infraestrutura em código acabando com os processos manuais e nem sempre documentados é preciso também trazer as boas práticas do mundo de desenvolvimento de software para a infraestrutura. Graças ao Docker subir uma representação da sua infraestrutura ficou mais fácil realizar esse processo apesar de ainda não ser 100% fiel ao ambiente de produção.</description>
+      <guid>http://localhost:1313/post/testando-o-nginx-com-supertest-e-mocha/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;testar a infraestrutura não é um sonho mas sim uma realidade, se você ainda não faz nada a respeito saiba que já está atrasado. Com a transformação da infraestrutura em código acabando com os processos manuais e nem sempre documentados é preciso também trazer as boas práticas do mundo de desenvolvimento de software para a infraestrutura. Graças ao Docker subir uma representação da sua infraestrutura ficou mais fácil realizar esse processo apesar de ainda não ser 100% fiel ao ambiente de produção.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Verificando vulnerabilidades com Clair e Circle CI</title>
-      <link>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</link>
+      <link>http://localhost:1313/post/verificando-vulnerabilidades-com-clair-e-circleci/</link>
       <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/verificando-vulnerabilidades-com-clair-e-circleci/</guid>
-      <description>Olá,
-nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando Clair e Circle CI. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps.</description>
+      <guid>http://localhost:1313/post/verificando-vulnerabilidades-com-clair-e-circleci/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;nesse artigo vou compartilhar de forma breve a minha experiência de configurar uma ferramenta de análise estática de vulnerabilidades em um projeto usando &lt;a href=&#34;https://github.com/quay/clair&#34;&gt;Clair&lt;/a&gt; e &lt;a href=&#34;http://circleci.com/&#34;&gt;Circle CI&lt;/a&gt;. Na jornada de adicionar mais segurança no processo de entregas de nossas aplicações assim como fazemos análises estáticas em nosso código podemos e devemos também fazer na nossa infraestrutura. Com essa necessidade acabou até surgindo um novo termo na área que é o DevSecOps, ou seja, adicionando segurança (Sec de sercurity) no DevOps.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hashing e criptografia</title>
-      <link>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</link>
+      <link>http://localhost:1313/post/hashing-e-criptografia/</link>
       <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/hashing-e-criptografia/</guid>
-      <description>Olá,
-A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?
-Visitando a matemática Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos.</description>
+      <guid>http://localhost:1313/post/hashing-e-criptografia/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;A ideia desse artigo é mostrar a diferenção entre as duas técnicas para quem ainda tem dúvidas sem se aprofundar muito no assunto, isso podemos explorar em artigos mais a frente aqui no blog. A motivação é que tive uma percepção no último ano de algumas pessoas misturando o conceitos e aplicações de ambos. Que tal começar com uma revisão de matemática?&lt;/p&gt;&#xA;&lt;h1 id=&#34;visitando-a-matemática&#34;&gt;Visitando a matemática&lt;/h1&gt;&#xA;&lt;p&gt;Acredito que a maioria das pessoas que estão lendo esse artigo tenho completado os estudos até o ensino médio pelo menos. Então, vou assumir que todos tenham estudado teoria de conjuntos e funções. Se tem dúvidas sobre os dois assuntos segue uma &lt;a href=&#34;https://www.youtube.com/watch?v=2g0o0lzQin8&amp;amp;list=PL83s8LGM84J6Ew0fa1Ue2YZlNEqRXCBQo&#34;&gt;playlist&lt;/a&gt; do canal &lt;a href=&#34;https://www.youtube.com/channel/UCjIPRjJZtGhzWD2LrEKOHMA&#34;&gt;Matemática Rio com Prof. Rafael Procopio&lt;/a&gt; que mostra tudo sobre o assunto.&lt;/p&gt;</description>
     </item>
-    
-    <item>
-      <title>Trabalhando com dependências em Go</title>
-      <link>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</link>
-      <pubDate>Wed, 22 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/trabalhando-com-dependencias-em-go/</guid>
-      <description>Olá,
-Esse é o último artigo da minha sequência proposta para introduzir novas pessoas ao Go. Espero que tenha sido útil até aqui e hoje esse material se complete para você ter a liberdade de começar a praticar e usar o Go. Ao invés de explicar como as coisas devem ser feitas hoje vou mostrar um pouco do histórico desse contexto no Go no meu ponto de vista como usuário mostrando o que encontrei nesse caminho.</description>
-    </item>
-    
   </channel>
 </rss>

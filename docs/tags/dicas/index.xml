@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dicas on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/dicas/</link>
-    <description>Recent content in dicas on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Dicas on João Maia</title>
+    <link>http://localhost:1313/tags/dicas/</link>
+    <description>Recent content in Dicas on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/dicas/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/dicas/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Analisando dados no terminal</title>
-      <link>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</link>
+      <link>http://localhost:1313/post/analisando-dados-no-terminal/</link>
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/analisando-dados-no-terminal/</guid>
-      <description>Olá,
-recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no Twitter surgiram comentários interessantes.</description>
+      <guid>http://localhost:1313/post/analisando-dados-no-terminal/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;recentemente fazendo uma inspeção na aplicação precisei ver seu logs para entender com mais detalhes o que estava acontecendo em termos de comportamento e com isso para ser produtivo na atividade fiz uso de recursos presentes no meu terminal para realizar a atividade. Neste artigo vou compartilhar as ferramentas que usei e como elas podem ser úteis para você também. O interessante que depois de falar a respeito disso no &lt;a href=&#34;https://twitter.com/jvrmaia/status/1255963940804313088&#34;&gt;Twitter&lt;/a&gt; surgiram comentários interessantes. O primeiro foi esse &lt;a href=&#34;https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html&#34;&gt;artigo&lt;/a&gt; e o segundo foi a ferramenta &lt;a href=&#34;https://www.gnu.org/software/datamash/&#34;&gt;datamash&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

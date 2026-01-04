@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>packer on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/packer/</link>
-    <description>Recent content in packer on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Packer on João Maia</title>
+    <link>http://localhost:1313/tags/packer/</link>
+    <description>Recent content in Packer on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 23 May 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/packer/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 May 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/packer/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Conhecendo o Packer</title>
-      <link>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</link>
+      <link>http://localhost:1313/post/conhecendo-o-packer/</link>
       <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-packer/</guid>
-      <description>Olá,
-eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: AWS, Azure e Google Cloud.</description>
+      <guid>http://localhost:1313/post/conhecendo-o-packer/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;eventualmente no seu trabalho ou projeto pessoal será preciso subir uma instância de sistema operacional para realizar alguma tarefa ou hospedar algum tipo de serviço, por exemplo, seu computador pessoal não tem um hardware muito robusto e você precisa fazer um processamento pesado nele e opta por criar uma máquina robusta na AWS para executar a tarefa. Hoje, as três principais provedoras de serviços de nuvem oferecem isso com diversos tipos de imagens e suporte para você criar as suas: &lt;a href=&#34;https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/AMIs.html&#34;&gt;AWS&lt;/a&gt;, &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/virtual-machines/&#34;&gt;Azure&lt;/a&gt; e &lt;a href=&#34;https://cloud.google.com/compute/docs/images&#34;&gt;Google Cloud&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

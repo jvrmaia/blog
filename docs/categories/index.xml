@@ -2,175 +2,175 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on João Maia</title>
-    <link>http://blog.joaovrmaia.com/categories/</link>
+    <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on João Maia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
     <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.joaovrmaia.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>arquitetura de dados</title>
-      <link>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</link>
+      <title>Arquitetura De Dados</title>
+      <link>http://localhost:1313/categories/arquitetura-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/arquitetura-de-dados/</guid>
+      <guid>http://localhost:1313/categories/arquitetura-de-dados/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>engenharia de dados</title>
-      <link>http://blog.joaovrmaia.com/categories/engenharia-de-dados/</link>
+      <title>Engenharia De Dados</title>
+      <link>http://localhost:1313/categories/engenharia-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/engenharia-de-dados/</guid>
+      <guid>http://localhost:1313/categories/engenharia-de-dados/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>estratégia de dados</title>
-      <link>http://blog.joaovrmaia.com/categories/estrat%C3%A9gia-de-dados/</link>
+      <title>Estratégia De Dados</title>
+      <link>http://localhost:1313/categories/estrat%C3%A9gia-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/estrat%C3%A9gia-de-dados/</guid>
+      <guid>http://localhost:1313/categories/estrat%C3%A9gia-de-dados/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>governança de dados</title>
-      <link>http://blog.joaovrmaia.com/categories/governan%C3%A7a-de-dados/</link>
+      <title>Governança De Dados</title>
+      <link>http://localhost:1313/categories/governan%C3%A7a-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/governan%C3%A7a-de-dados/</guid>
+      <guid>http://localhost:1313/categories/governan%C3%A7a-de-dados/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>plataforma de dados</title>
-      <link>http://blog.joaovrmaia.com/categories/plataforma-de-dados/</link>
+      <title>Plataforma De Dados</title>
+      <link>http://localhost:1313/categories/plataforma-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/plataforma-de-dados/</guid>
+      <guid>http://localhost:1313/categories/plataforma-de-dados/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>desenvolvimento</title>
-      <link>http://blog.joaovrmaia.com/categories/desenvolvimento/</link>
+      <title>Desenvolvimento</title>
+      <link>http://localhost:1313/categories/desenvolvimento/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/desenvolvimento/</guid>
+      <guid>http://localhost:1313/categories/desenvolvimento/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>infraestrutura</title>
-      <link>http://blog.joaovrmaia.com/categories/infraestrutura/</link>
+      <title>Infraestrutura</title>
+      <link>http://localhost:1313/categories/infraestrutura/</link>
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/infraestrutura/</guid>
+      <guid>http://localhost:1313/categories/infraestrutura/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>devops</title>
-      <link>http://blog.joaovrmaia.com/categories/devops/</link>
+      <title>Devops</title>
+      <link>http://localhost:1313/categories/devops/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/devops/</guid>
+      <guid>http://localhost:1313/categories/devops/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>http</title>
-      <link>http://blog.joaovrmaia.com/categories/http/</link>
+      <title>Http</title>
+      <link>http://localhost:1313/categories/http/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/http/</guid>
+      <guid>http://localhost:1313/categories/http/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>rede de computadores</title>
-      <link>http://blog.joaovrmaia.com/categories/rede-de-computadores/</link>
+      <title>Rede De Computadores</title>
+      <link>http://localhost:1313/categories/rede-de-computadores/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/rede-de-computadores/</guid>
+      <guid>http://localhost:1313/categories/rede-de-computadores/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>aws</title>
-      <link>http://blog.joaovrmaia.com/categories/aws/</link>
+      <title>Aws</title>
+      <link>http://localhost:1313/categories/aws/</link>
       <pubDate>Mon, 15 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/aws/</guid>
+      <guid>http://localhost:1313/categories/aws/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>produtividade</title>
-      <link>http://blog.joaovrmaia.com/categories/produtividade/</link>
+      <title>Produtividade</title>
+      <link>http://localhost:1313/categories/produtividade/</link>
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/produtividade/</guid>
+      <guid>http://localhost:1313/categories/produtividade/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>linguagens de programação</title>
-      <link>http://blog.joaovrmaia.com/categories/linguagens-de-programa%C3%A7%C3%A3o/</link>
+      <title>Linguagens De Programação</title>
+      <link>http://localhost:1313/categories/linguagens-de-programa%C3%A7%C3%A3o/</link>
       <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/linguagens-de-programa%C3%A7%C3%A3o/</guid>
+      <guid>http://localhost:1313/categories/linguagens-de-programa%C3%A7%C3%A3o/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>documentação</title>
-      <link>http://blog.joaovrmaia.com/categories/documenta%C3%A7%C3%A3o/</link>
+      <title>Documentação</title>
+      <link>http://localhost:1313/categories/documenta%C3%A7%C3%A3o/</link>
       <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/documenta%C3%A7%C3%A3o/</guid>
+      <guid>http://localhost:1313/categories/documenta%C3%A7%C3%A3o/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>testes</title>
-      <link>http://blog.joaovrmaia.com/categories/testes/</link>
+      <title>Testes</title>
+      <link>http://localhost:1313/categories/testes/</link>
       <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/testes/</guid>
+      <guid>http://localhost:1313/categories/testes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>devsecops</title>
-      <link>http://blog.joaovrmaia.com/categories/devsecops/</link>
+      <title>Devsecops</title>
+      <link>http://localhost:1313/categories/devsecops/</link>
       <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/devsecops/</guid>
+      <guid>http://localhost:1313/categories/devsecops/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>segurança</title>
-      <link>http://blog.joaovrmaia.com/categories/seguran%C3%A7a/</link>
+      <title>Segurança</title>
+      <link>http://localhost:1313/categories/seguran%C3%A7a/</link>
       <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/seguran%C3%A7a/</guid>
+      <guid>http://localhost:1313/categories/seguran%C3%A7a/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>algoritmos</title>
-      <link>http://blog.joaovrmaia.com/categories/algoritmos/</link>
+      <title>Algoritmos</title>
+      <link>http://localhost:1313/categories/algoritmos/</link>
       <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/categories/algoritmos/</guid>
+      <guid>http://localhost:1313/categories/algoritmos/</guid>
       <description></description>
     </item>
     

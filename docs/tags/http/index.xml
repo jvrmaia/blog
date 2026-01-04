@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>http on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/http/</link>
-    <description>Recent content in http on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Http on João Maia</title>
+    <link>http://localhost:1313/tags/http/</link>
+    <description>Recent content in Http on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>O básico do HTTP em Go</title>
-      <link>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</link>
+      <link>http://localhost:1313/post/o-basico-do-http-em-go/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/</guid>
-      <description>Olá,
-nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts.</description>
+      <guid>http://localhost:1313/post/o-basico-do-http-em-go/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for &lt;a href=&#34;https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol&#34;&gt;HTTP&lt;/a&gt;, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: &lt;a href=&#34;https://blog.cloudflare.com/exposing-go-on-the-internet/&#34;&gt;So you want to expose Go on the Internet&lt;/a&gt; e &lt;a href=&#34;https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/&#34;&gt;The complete guide to Go net/http timeouts&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

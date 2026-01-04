@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gradle on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/gradle/</link>
-    <description>Recent content in gradle on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Gradle on João Maia</title>
+    <link>http://localhost:1313/tags/gradle/</link>
+    <description>Recent content in Gradle on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dica de ferramenta: SDKMAN!</title>
-      <link>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</link>
+      <link>http://localhost:1313/post/dica-de-ferramenta-sdkman/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</guid>
-      <description>Olá,
-se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Java, Kotlin e Scala e tem ferramentas de gestão de projeto como Maven, Gradle e sbt o SDKMAN! pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o Kico, ele escreveu um guia da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.</description>
+      <guid>http://localhost:1313/post/dica-de-ferramenta-sdkman/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;se você trabalha com projetos que usam &lt;a href=&#34;https://en.wikipedia.org/wiki/Java_virtual_machine&#34;&gt;Java Virtual Machine (JVM)&lt;/a&gt;, ou seja, &lt;a href=&#34;https://www.java.com/en/&#34;&gt;Java&lt;/a&gt;, &lt;a href=&#34;https://kotlinlang.org/&#34;&gt;Kotlin&lt;/a&gt; e &lt;a href=&#34;https://scala-lang.org/&#34;&gt;Scala&lt;/a&gt; e tem ferramentas de gestão de projeto como &lt;a href=&#34;https://maven.apache.org/&#34;&gt;Maven&lt;/a&gt;, &lt;a href=&#34;https://gradle.org/&#34;&gt;Gradle&lt;/a&gt; e &lt;a href=&#34;https://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; o &lt;a href=&#34;https://sdkman.io/&#34;&gt;SDKMAN!&lt;/a&gt; pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o &lt;a href=&#34;https://twitter.com/loboweissmann&#34;&gt;Kico&lt;/a&gt;, ele escreveu um &lt;a href=&#34;https://itexto.com.br/configurando-seu-ambiente-de-desenvolvimento-java-com-sdkman/&#34;&gt;guia&lt;/a&gt; da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

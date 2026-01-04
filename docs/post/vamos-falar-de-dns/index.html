@@ -1,129 +1,15 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vamos falar de DNS? - João Maia</title>
-	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="">
-		<meta property="og:title" content="Vamos falar de DNS?" />
-<meta property="og:description" content="Olá,
-você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
-Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/vamos-falar-de-dns/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-08-28T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-28T00:00:00+00:00" />
-
-
-		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Vamos falar de DNS?"/>
-<meta name="twitter:description" content="Olá,
-você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na rfc1034, sobre a implementação rfc1035 e para quem tiver mais curiosidade a lista completa.
-Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog."/>
-
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/custom.css">
-
-	<link rel="shortcut icon" href="/favicon.ico">
-		
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
-}
-</script>
-
+<html>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vamos falar de DNS? - João Maia</title>
 </head>
-<body class="body">
-	<div class="container container--outer">
-		<header class="header">
-	<div class="container header__container">
-		
-	<div class="logo">
-		<a class="logo__link" href="/" title="João Maia" rel="home">
-			<div class="logo__item logo__text">
-					<div class="logo__title">João Maia</div>
-					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
-				</div>
-		</a>
-	</div>
-		
-<nav class="menu">
-	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">Menu</span>
-	</button>
-	<ul class="menu__list">
-		<li class="menu__item">
-			<a class="menu__link" href="/about/">
-				
-				<span class="menu__text">Sobre</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/post/">
-				
-				<span class="menu__text">Posts</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/tags/">
-				
-				<span class="menu__text">Tags</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/categories/">
-				
-				<span class="menu__text">Categoria</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="http://www.joaovrmaia.com">
-				
-				<span class="menu__text">Site pessoal</span>
-				
-			</a>
-		</li>
-	</ul>
-</nav>
-
-	</div>
-</header>
-		<div class="wrapper flex">
-			<div class="primary">
-			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">Vamos falar de DNS?</h1>
-			<div class="post__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-28T00:00:00Z">2020-08-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rede-de-computadores/" rel="category">rede de computadores</a>
-	</span>
-</div></div>
-		</header>
-		
-	<figure class="post__thumbnail thumbnail">
-		
-		<img class="thumbnail__image" src="/img/vamos-falar-de-dns/dns.png" alt="Vamos falar de DNS?">
-		
-	</figure><div class="content post__content clearfix">
-			<p>Olá,</p>
+<body>
+  <a href="http://localhost:1313/">← Voltar</a>
+  <article>
+    <h1>Vamos falar de DNS?</h1>
+    <div><p>Olá,</p>
 <p>você já deve ter visto essa sigla alguma vez na sua vida. Talvez já tenha até configurado isso na sua máquina sem bem entender direito para que serve, né? Nesse texto pretendo fazer um resumão de DNS para ajudar qualquer pessoa que queira entender mais sobre o assunto. A definição formal tá aqui na <a href="https://www.ietf.org/rfc/rfc1034.txt">rfc1034</a>, sobre a implementação <a href="https://www.ietf.org/rfc/rfc1035.txt">rfc1035</a> e para quem tiver mais curiosidade a <a href="https://en.wikipedia.org/wiki/Domain_Name_System#RFC_documents">lista completa</a>.</p>
 <p>Se ficarem dúvidas ou tiverem sugestões de continuidade no assunto é só comentar no fim do artigo ou entrar em contato comigo por algum meio dos informados na página inicial do blog.</p>
 <h1 id="o-que-é-dns">O que é DNS?</h1>
@@ -341,65 +227,65 @@ ff02::2 ip6-allrouters
 <p>Agora que já sabemos muito mais a respeito da estrutura e propagação da requisição da resolução de domínio vamos entender as resposas que recebemos que nada mais é que um tupla com quatro valores: <code>Name</code>, <code>Value</code>, <code>Type</code> e <code>TTL</code>. O Type vai definir que resposta vamos obter em Name e Value, por exemplo, se você apenas consultou qual é o IP de blog.joaovrmaia.com o Name vai conter <code>blog.joaovrmaia.com</code> e o Value um IP, se o Type for A o valor vai ser IPv4 e se for AAA vai ser IPv6. Se o Type for NS ele vai responder quem é o Authoritative DNS server daquele domínio, para o caso de CNAME o apelido daquele domínio e por fim MX vai dizer quem é servidor de email daquele domínio.</p>
 <p>Lista completa de tipos:</p>
 <table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Significado</th>
-<th>Valor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SOA</td>
-<td>Authority</td>
-<td>Parâmetros da zona</td>
-</tr>
-<tr>
-<td>A</td>
-<td>IPv4</td>
-<td>32 bits</td>
-</tr>
-<tr>
-<td>AAAA</td>
-<td>IPv6</td>
-<td>128 bits</td>
-</tr>
-<tr>
-<td>MX</td>
-<td>Mail exchange</td>
-<td>Domínio a ser aceito o email</td>
-</tr>
-<tr>
-<td>NS</td>
-<td>Name server</td>
-<td>Servidor DNS do domínio</td>
-</tr>
-<tr>
-<td>CNAME</td>
-<td>Canonical Name</td>
-<td>Apelido</td>
-</tr>
-<tr>
-<td>PTR</td>
-<td>Pointer</td>
-<td>Apelido para IP</td>
-</tr>
-<tr>
-<td>SPF</td>
-<td>Sender policy framework</td>
-<td>Regra de antispam do MX</td>
-</tr>
-<tr>
-<td>SRV</td>
-<td>Service</td>
-<td>Controlador de domínio</td>
-</tr>
-<tr>
-<td>TXT</td>
-<td>Text</td>
-<td>Texto ASCII</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>Type</th>
+          <th>Significado</th>
+          <th>Valor</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SOA</td>
+          <td>Authority</td>
+          <td>Parâmetros da zona</td>
+      </tr>
+      <tr>
+          <td>A</td>
+          <td>IPv4</td>
+          <td>32 bits</td>
+      </tr>
+      <tr>
+          <td>AAAA</td>
+          <td>IPv6</td>
+          <td>128 bits</td>
+      </tr>
+      <tr>
+          <td>MX</td>
+          <td>Mail exchange</td>
+          <td>Domínio a ser aceito o email</td>
+      </tr>
+      <tr>
+          <td>NS</td>
+          <td>Name server</td>
+          <td>Servidor DNS do domínio</td>
+      </tr>
+      <tr>
+          <td>CNAME</td>
+          <td>Canonical Name</td>
+          <td>Apelido</td>
+      </tr>
+      <tr>
+          <td>PTR</td>
+          <td>Pointer</td>
+          <td>Apelido para IP</td>
+      </tr>
+      <tr>
+          <td>SPF</td>
+          <td>Sender policy framework</td>
+          <td>Regra de antispam do MX</td>
+      </tr>
+      <tr>
+          <td>SRV</td>
+          <td>Service</td>
+          <td>Controlador de domínio</td>
+      </tr>
+      <tr>
+          <td>TXT</td>
+          <td>Text</td>
+          <td>Texto ASCII</td>
+      </tr>
+  </tbody>
 </table>
 <p>Existem muitas outras coisas que podemos ainda falar sobre o funcionamento do DNS mas acredito que nesse texto podemos encerrar por aqui a conversa técnica. Espero que tenha conseguido passar uma visão geral sobre algo tão importante em nossa vida digital hoje.</p>
 <h1 id="obtendo-um-domínio">Obtendo um domínio</h1>
@@ -466,77 +352,10 @@ ff02::2 ip6-allrouters
 <li>Cloudflare: <a href="https://www.cloudflare.com/pt-br/dns/">https://www.cloudflare.com/pt-br/dns/</a></li>
 <li>ns1: <a href="https://ns1.com/">https://ns1.com/</a></li>
 </ul>
-
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/dns/" rel="tag">dns</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/infraestrutura/" rel="tag">infraestrutura</a>
-		</li>
-	</ul>
 </div>
-		</footer>
-	</article>
-</main>
-
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">About João Maia</span>
-	</div>
-	<div class="authorbox__description">
-		Pessoa que resolve problemas com o uso de softwares
-	</div>
-</div>
-
-
-<section class="comments">
-	<div id="disqus_thread"></div>
-<script type="application/javascript">
-    window.disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-
-
-			</div>
-			
-		</div>
-		<footer class="footer">
-	<div class="container footer__container flex">
-		
-		<div class="footer__copyright">
-			&copy; 2022 João Maia.
-			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
-		</div>
-	</div>
-</footer>
-	</div>
-<script async defer src="/js/menu.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+  </article>
+  <footer>
+    <p>© 2026 João Maia</p>
+  </footer>
 </body>
 </html>

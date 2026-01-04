@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>desenvolvimento on João Maia</title>
-    <link>http://blog.joaovrmaia.com/categories/desenvolvimento/</link>
-    <description>Recent content in desenvolvimento on João Maia</description>
+    <title>Desenvolvimento on João Maia</title>
+    <link>http://localhost:1313/categories/desenvolvimento/</link>
+    <description>Recent content in Desenvolvimento on João Maia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
     <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.joaovrmaia.com/categories/desenvolvimento/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://localhost:1313/categories/desenvolvimento/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Dica de ferramenta: SDKMAN!</title>
-      <link>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</link>
+      <link>http://localhost:1313/post/dica-de-ferramenta-sdkman/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/post/dica-de-ferramenta-sdkman/</guid>
-      <description>Olá,
-se você trabalha com projetos que usam Java Virtual Machine (JVM), ou seja, Java, Kotlin e Scala e tem ferramentas de gestão de projeto como Maven, Gradle e sbt o SDKMAN! pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o Kico, ele escreveu um guia da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.</description>
+      <guid>http://localhost:1313/post/dica-de-ferramenta-sdkman/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;
+&lt;p&gt;se você trabalha com projetos que usam &lt;a href=&#34;https://en.wikipedia.org/wiki/Java_virtual_machine&#34;&gt;Java Virtual Machine (JVM)&lt;/a&gt;, ou seja, &lt;a href=&#34;https://www.java.com/en/&#34;&gt;Java&lt;/a&gt;, &lt;a href=&#34;https://kotlinlang.org/&#34;&gt;Kotlin&lt;/a&gt; e &lt;a href=&#34;https://scala-lang.org/&#34;&gt;Scala&lt;/a&gt; e tem ferramentas de gestão de projeto como &lt;a href=&#34;https://maven.apache.org/&#34;&gt;Maven&lt;/a&gt;, &lt;a href=&#34;https://gradle.org/&#34;&gt;Gradle&lt;/a&gt; e &lt;a href=&#34;https://www.scala-sbt.org/&#34;&gt;sbt&lt;/a&gt; o &lt;a href=&#34;https://sdkman.io/&#34;&gt;SDKMAN!&lt;/a&gt; pode ser a ferramenta que você precisa para ajudar na gestão de diversos projetos com versões diferentes dessas ferramentas. Eu conheci a ferramenta a um tempo atrás pelo Twitter com o &lt;a href=&#34;https://twitter.com/loboweissmann&#34;&gt;Kico&lt;/a&gt;, ele escreveu um &lt;a href=&#34;https://itexto.com.br/configurando-seu-ambiente-de-desenvolvimento-java-com-sdkman/&#34;&gt;guia&lt;/a&gt; da ferramenta, e desde então tenho usado ela para organizar os projetos aqui.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>OpenResty na prática</title>
-      <link>http://blog.joaovrmaia.com/post/openresty-na-pratica/</link>
+      <link>http://localhost:1313/post/openresty-na-pratica/</link>
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/post/openresty-na-pratica/</guid>
-      <description>Olá,
-OpenResty é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de Proxy ou Load Balancer. O projeto é um fork do NGINX e evoluido com o uso do LuaJIT para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma empresa por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.</description>
+      <guid>http://localhost:1313/post/openresty-na-pratica/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://openresty.org/en/&#34;&gt;OpenResty&lt;/a&gt; é uma plataforma completa para trabalhar como uma primeira camada na sua infraestrutura de aplicações fazendo um papel de &lt;a href=&#34;https://www.nginx.com/resources/glossary/reverse-proxy-vs-load-balancer/&#34;&gt;Proxy ou Load Balancer&lt;/a&gt;. O projeto é um fork do &lt;a href=&#34;https://nginx.org/en/&#34;&gt;NGINX&lt;/a&gt; e evoluido com o uso do &lt;a href=&#34;https://luajit.org/&#34;&gt;LuaJIT&lt;/a&gt; para enriquecer a plataforma de entregar uma solução completa. Caso venha a se interessar no projeto e tenha interesse em recursos mais avançados existe uma &lt;a href=&#34;https://openresty.com/en/&#34;&gt;empresa&lt;/a&gt; por trás do projeto que vende soluções pagas da ferramenta com mais funcionalidades.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Git e afins para iniciantes - parte 2</title>
-      <link>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</link>
+      <link>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-2/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-2/</guid>
-      <description>Olá,
-no último artigo encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.</description>
+      <guid>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-2/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;
+&lt;p&gt;no &lt;a href=&#34;https://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/&#34;&gt;último artigo&lt;/a&gt; encerramos na parte do Git como serviço que é onde começamos a explorar o melhor recurso dele que é o poder pessoas contribuirem umas com as outras. Neste novo artigo vou comentar sobre as opções mais conhecidas hoje serviços de Git, mostrar alguns padrões e formas de uso e dar minha opinião a respeito disso e a polêmica questão se o Github é ou não o seu curriculo.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Git e afins para iniciantes - parte 1</title>
-      <link>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</link>
+      <link>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-1/</link>
       <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.joaovrmaia.com/post/git-e-afins-para-iniciantes-parte-1/</guid>
-      <description>Olá,
-acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu trabalho-história-mediaval.</description>
+      <guid>http://localhost:1313/post/git-e-afins-para-iniciantes-parte-1/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;
+&lt;p&gt;acredito que você que está chegando no mercado de tecnologia independente de ter ou estar fazendo alguma formação superior ou técnica em tecnologia já desenvolveu algum trabalho que demorou certo tempo e você precisou salvar versões dele. Esse processo é muito comum no mundo de tecnologia e o termo mais comum é versionar o projeto. Exemplificando, vamos supor aquele trabalho no ensino médio sobre história medieval que você precisou fazer, provavelmente, você usou o Word e tinha o seu &lt;code&gt;trabalho-história-mediaval.doc&lt;/code&gt; e tudo virou um caos depois da primeira vez que você começou ele, né? Vamos tentar narrar a possível história desse &lt;code&gt;trabalho-história-mediaval.doc&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

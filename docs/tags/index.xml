@@ -2,191 +2,152 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>arquitetura de dados</title>
-      <link>http://blog.joaovrmaia.com/tags/arquitetura-de-dados/</link>
+      <title>Arquitetura De Dados</title>
+      <link>http://localhost:1313/tags/arquitetura-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/arquitetura-de-dados/</guid>
+      <guid>http://localhost:1313/tags/arquitetura-de-dados/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>engenharia de dados</title>
-      <link>http://blog.joaovrmaia.com/tags/engenharia-de-dados/</link>
+      <title>Engenharia De Dados</title>
+      <link>http://localhost:1313/tags/engenharia-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/engenharia-de-dados/</guid>
+      <guid>http://localhost:1313/tags/engenharia-de-dados/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>estratégia de dados</title>
-      <link>http://blog.joaovrmaia.com/tags/estrat%C3%A9gia-de-dados/</link>
+      <title>Estratégia De Dados</title>
+      <link>http://localhost:1313/tags/estrat%C3%A9gia-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/estrat%C3%A9gia-de-dados/</guid>
+      <guid>http://localhost:1313/tags/estrat%C3%A9gia-de-dados/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>governança de dados</title>
-      <link>http://blog.joaovrmaia.com/tags/governan%C3%A7a-de-dados/</link>
+      <title>Governança De Dados</title>
+      <link>http://localhost:1313/tags/governan%C3%A7a-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/governan%C3%A7a-de-dados/</guid>
+      <guid>http://localhost:1313/tags/governan%C3%A7a-de-dados/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>plataforma de dados</title>
-      <link>http://blog.joaovrmaia.com/tags/plataforma-de-dados/</link>
+      <title>Plataforma De Dados</title>
+      <link>http://localhost:1313/tags/plataforma-de-dados/</link>
       <pubDate>Tue, 01 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/plataforma-de-dados/</guid>
+      <guid>http://localhost:1313/tags/plataforma-de-dados/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>gradle</title>
-      <link>http://blog.joaovrmaia.com/tags/gradle/</link>
+      <title>Gradle</title>
+      <link>http://localhost:1313/tags/gradle/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/gradle/</guid>
+      <guid>http://localhost:1313/tags/gradle/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>java</title>
-      <link>http://blog.joaovrmaia.com/tags/java/</link>
+      <title>Java</title>
+      <link>http://localhost:1313/tags/java/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/java/</guid>
+      <guid>http://localhost:1313/tags/java/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>JVM</title>
-      <link>http://blog.joaovrmaia.com/tags/jvm/</link>
+      <link>http://localhost:1313/tags/jvm/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/jvm/</guid>
+      <guid>http://localhost:1313/tags/jvm/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>scala</title>
-      <link>http://blog.joaovrmaia.com/tags/scala/</link>
+      <title>Scala</title>
+      <link>http://localhost:1313/tags/scala/</link>
       <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/scala/</guid>
+      <guid>http://localhost:1313/tags/scala/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>lua</title>
-      <link>http://blog.joaovrmaia.com/tags/lua/</link>
+      <title>Lua</title>
+      <link>http://localhost:1313/tags/lua/</link>
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/lua/</guid>
+      <guid>http://localhost:1313/tags/lua/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nginx</title>
-      <link>http://blog.joaovrmaia.com/tags/nginx/</link>
+      <title>Nginx</title>
+      <link>http://localhost:1313/tags/nginx/</link>
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/nginx/</guid>
+      <guid>http://localhost:1313/tags/nginx/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>openresty</title>
-      <link>http://blog.joaovrmaia.com/tags/openresty/</link>
+      <title>Openresty</title>
+      <link>http://localhost:1313/tags/openresty/</link>
       <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/openresty/</guid>
+      <guid>http://localhost:1313/tags/openresty/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>golang</title>
-      <link>http://blog.joaovrmaia.com/tags/golang/</link>
+      <title>Golang</title>
+      <link>http://localhost:1313/tags/golang/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/golang/</guid>
+      <guid>http://localhost:1313/tags/golang/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>http</title>
-      <link>http://blog.joaovrmaia.com/tags/http/</link>
+      <title>Http</title>
+      <link>http://localhost:1313/tags/http/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/http/</guid>
+      <guid>http://localhost:1313/tags/http/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>iniciante</title>
-      <link>http://blog.joaovrmaia.com/tags/iniciante/</link>
+      <title>Iniciante</title>
+      <link>http://localhost:1313/tags/iniciante/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/iniciante/</guid>
+      <guid>http://localhost:1313/tags/iniciante/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>terraform</title>
-      <link>http://blog.joaovrmaia.com/tags/terraform/</link>
+      <title>Terraform</title>
+      <link>http://localhost:1313/tags/terraform/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/terraform/</guid>
+      <guid>http://localhost:1313/tags/terraform/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>bgp</title>
-      <link>http://blog.joaovrmaia.com/tags/bgp/</link>
+      <title>Bgp</title>
+      <link>http://localhost:1313/tags/bgp/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/bgp/</guid>
+      <guid>http://localhost:1313/tags/bgp/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>infraestrutura</title>
-      <link>http://blog.joaovrmaia.com/tags/infraestrutura/</link>
+      <title>Infraestrutura</title>
+      <link>http://localhost:1313/tags/infraestrutura/</link>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/infraestrutura/</guid>
+      <guid>http://localhost:1313/tags/infraestrutura/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>bitbucket</title>
-      <link>http://blog.joaovrmaia.com/tags/bitbucket/</link>
+      <title>Bitbucket</title>
+      <link>http://localhost:1313/tags/bitbucket/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/bitbucket/</guid>
+      <guid>http://localhost:1313/tags/bitbucket/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>dns</title>
-      <link>http://blog.joaovrmaia.com/tags/dns/</link>
+      <title>Dns</title>
+      <link>http://localhost:1313/tags/dns/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/tags/dns/</guid>
+      <guid>http://localhost:1313/tags/dns/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/python/</link>
-    <description>Recent content in python on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Python on João Maia</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Da instalação a configuração do meu ambiente Python</title>
-      <link>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</link>
+      <link>http://localhost:1313/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</link>
       <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</guid>
-      <description>Olá,
-Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.
-Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações.</description>
+      <guid>http://localhost:1313/post/da-instalacao-a-configuracao-do-meu-ambiente-python/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;Apesar de não estar mais usando Python nas aplicações de produção que trabalho hoje, eventualmente uso Python para outras atividades pela comodidade que encontro nele. Uma coisa que é importante nisso é sempre ter seu ambientes bem segregados para evitar surpresas de projetos que precisam versões específicas de bibliotecas e Python.&lt;/p&gt;&#xA;&lt;p&gt;Nesse artigo vou mostrar de forma clara e direta como uso o Python hoje depois de várias idas e vindas de configurações. Acredito que essa nova solução que surgiu recentemente na parte de gestão de dependências veio a resolver uma parte que sempre tive dificuldades achar sanidade na configuração. Ainda preciso explorar mais a solução mas já tenho gostado dela.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Desenhando infraestrutura com código</title>
-      <link>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</link>
+      <link>http://localhost:1313/post/desenhando-infraestrutura-com-codigo/</link>
       <pubDate>Thu, 23 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/desenhando-infraestrutura-com-codigo/</guid>
-      <description>Olá,
-Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o Lucidchart, Cloudcraft e draw.</description>
+      <guid>http://localhost:1313/post/desenhando-infraestrutura-com-codigo/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;Documentar é um processo importante no processo de criação da sua infraestrutura pois ajuda a todos da empresa terem visibilidade da arquitetura atual e pensar em possibilidades de melhorias e ajudar nos momentos de incidentes. Criar documentação é um processo chato para a maioria das pessoas da área de tecnologia e nem todos gostam de ferramentas visuais que muito fácil pode virar uma confusão total. Várias soluções para diagramas existem por ai sendo algumas delas o &lt;a href=&#34;https://www.lucidchart.com/&#34;&gt;Lucidchart&lt;/a&gt;, &lt;a href=&#34;https://cloudcraft.co/&#34;&gt;Cloudcraft&lt;/a&gt; e &lt;a href=&#34;https://app.diagrams.net/&#34;&gt;draw.io&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

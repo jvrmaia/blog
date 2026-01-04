@@ -1,214 +1,102 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>O básico do HTTP em Go - João Maia</title>
-	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="">
-		<meta property="og:title" content="O básico do HTTP em Go" />
-<meta property="og:description" content="Olá,
-nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://blog.joaovrmaia.com/post/o-basico-do-http-em-go/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-03-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-03-07T00:00:00+00:00" />
-
-
-		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="O básico do HTTP em Go"/>
-<meta name="twitter:description" content="Olá,
-nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for HTTP, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: So you want to expose Go on the Internet e The complete guide to Go net/http timeouts."/>
-
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/custom.css">
-
-	<link rel="shortcut icon" href="/favicon.ico">
-		
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GLJ7ZMHBL3"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-GLJ7ZMHBL3', { 'anonymize_ip': false });
-}
-</script>
-
+<html>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>O básico do HTTP em Go - João Maia</title>
 </head>
-<body class="body">
-	<div class="container container--outer">
-		<header class="header">
-	<div class="container header__container">
-		
-	<div class="logo">
-		<a class="logo__link" href="/" title="João Maia" rel="home">
-			<div class="logo__item logo__text">
-					<div class="logo__title">João Maia</div>
-					<div class="logo__tagline">Compartilhando conhecimento sobre tecnologia e outras coisas mais</div>
-				</div>
-		</a>
-	</div>
-		
-<nav class="menu">
-	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">Menu</span>
-	</button>
-	<ul class="menu__list">
-		<li class="menu__item">
-			<a class="menu__link" href="/about/">
-				
-				<span class="menu__text">Sobre</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/post/">
-				
-				<span class="menu__text">Posts</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/tags/">
-				
-				<span class="menu__text">Tags</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/categories/">
-				
-				<span class="menu__text">Categoria</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="http://www.joaovrmaia.com">
-				
-				<span class="menu__text">Site pessoal</span>
-				
-			</a>
-		</li>
-	</ul>
-</nav>
-
-	</div>
-</header>
-		<div class="wrapper flex">
-			<div class="primary">
-			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">O básico do HTTP em Go</h1>
-			<div class="post__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-07T00:00:00Z">2021-03-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/http/" rel="category">http</a>
-	</span>
-</div></div>
-		</header>
-		
-	<figure class="post__thumbnail thumbnail">
-		
-		<img class="thumbnail__image" src="/img/o-basico-do-http-em-go/golang-http.png" alt="O básico do HTTP em Go">
-		
-	</figure><div class="content post__content clearfix">
-			<p>Olá,</p>
+<body>
+  <a href="http://localhost:1313/">← Voltar</a>
+  <article>
+    <h1>O básico do HTTP em Go</h1>
+    <div><p>Olá,</p>
 <p>nesse novo artigo venho mostra o básico do que você precisa saber de Go quando for trabalhar com Go quando o assunto for <a href="https://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>, seja do lado do servidor ou cliente. São dicas simples que podem te fazer evitar dores de cabeça no futuro caso não tenha cuidado com isso. Estou escrevendo esse artigo para ter uma referência alternativa em português a dois artigos da Cloudflare muito bons: <a href="https://blog.cloudflare.com/exposing-go-on-the-internet/">So you want to expose Go on the Internet</a> e <a href="https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/">The complete guide to Go net/http timeouts</a>.</p>
 <h1 id="http">HTTP</h1>
 <p>Se você já trabalha com desenvolvimento Web acredito que já tenha domínio no assunto mas de forma bem simplificada podemos dizer que é uma padronização no formato da comunicação na Web que podemos dividir em dois contextos, quando você emite uma comunicação e quando você responde. Simplificando, quando você emite uma comunicação você define um verbo no qual vai se comunicar e o mais comum que vemos são GET, POST, PUT e DELETE, um cabeçalho mais conhecido pelo termo em inglês, Header, e por fim, o corpo da mensagem mais conhecido pelo termo em inglês, Body. Na parte da resposta temos basicamente os mesmos campos só trocando o verbo pelo código de retorno nas conhecido pelo termo em inglês, Status Code, que é um valor numérico que para um conjunto de valores tem um significado associado.</p>
 <h1 id="go">Go</h1>
 <p>Já escrevi alguns outros artigos sobre Go no blog, para listar todos veja <a href="https://blog.joaovrmaia.com/tags/golang/">aqui</a>. Aqui só quero contextualizar algumas curiosidades sobre Go que são importantes para não só para trabalhar com HTTP mas vão te ajudar em outros momentos mais quando usar Go.</p>
 <p>Vamos testar o seguinte código que você conferir online <a href="https://play.golang.org/p/F3st816reYz">aqui</a>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">exemplo</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">a</span> <span class="kt">int</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">b</span> <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">c</span> <span class="kt">bool</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">d</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">e</span> <span class="kd">interface</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">f</span> <span class="kt">float32</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">g</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">h</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">i</span> <span class="o">*</span><span class="kt">int</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">j</span> <span class="o">*</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">k</span> <span class="o">*</span><span class="kt">bool</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">l</span> <span class="o">*</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">m</span> <span class="o">*</span><span class="kd">interface</span><span class="p">{}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">n</span> <span class="o">*</span><span class="kt">float32</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">o</span> <span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">p</span> <span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">exemplo</span><span class="p">{})</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Tente imaginar o que é esperado de retorno dessa função e compare com a resposta abaixo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="s">&#34;time&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">exemplo</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">b</span><span class="w"> </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">c</span><span class="w"> </span><span class="kt">bool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">d</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">e</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">f</span><span class="w"> </span><span class="kt">float32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">g</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">h</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">j</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">k</span><span class="w"> </span><span class="o">*</span><span class="kt">bool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">l</span><span class="w"> </span><span class="o">*</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="kd">interface</span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="kt">float32</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">o</span><span class="w"> </span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">exemplo</span><span class="p">{})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Tente imaginar o que é esperado de retorno dessa função e compare com a resposta abaixo:</p>
 <pre tabindex="0"><code>{0  false map[] &lt;nil&gt; 0 0 {0 0 &lt;nil&gt;} &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt; &lt;nil&gt;}
 </code></pre><p>Repare que para todos os tipos ele retornou o valor padrão, no caso nulo, do tipo e no caso quando era um ponteiro do valor retornou <code>nil</code> e detalhes entre um espaço maior no começo entre <code>0</code> e <code>false</code> que é por conta da <code>string</code> vazia. <a href="https://golang.org/ref/spec#The_zero_value">Aqui</a> tem mais sobre como é isso em Go.</p>
 <p>Vamos fazer mais um teste que é na parte de lidar com a informação das requisições no seu formato mais comum hoje na Web que é o <a href="https://www.json.org/json-pt.html">JSON</a>. No caso para simplificar vou escrever o JSON direto na string ao invés de emular a requisição (<a href="https://play.golang.org/p/LrWFLeDBWUY">código</a>):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;encoding/json&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Usuario</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">UUID</span>    <span class="kt">string</span> <span class="s">`json:&#34;uuid&#34;`</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Name</span>    <span class="kt">string</span> <span class="s">`json:&#34;name&#34;`</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Email</span>   <span class="kt">string</span> <span class="s">`json:&#34;email&#34;`</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">Twitter</span> <span class="kt">string</span> <span class="s">`json:&#34;twitter,omitempty&#34;`</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">rawPayload</span> <span class="o">:=</span> <span class="s">&#34;{}&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">u</span> <span class="nx">Usuario</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">rawPayload</span> <span class="p">=</span> <span class="s">&#34;{\&#34;uuid\&#34;:\&#34;3954567d-67c2-4a1c-85b9-764a73bf3d5c\&#34;}&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nx">u</span> <span class="p">=</span> <span class="nx">Usuario</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">UUID</span><span class="p">:</span> <span class="s">&#34;3954567d-67c2-4a1c-85b9-764a73bf3d5c&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;João&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">body</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">body</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Resultado:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="s">&#34;fmt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="s">&#34;encoding/json&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">UUID</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&#34;uuid&#34;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&#34;name&#34;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Email</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&#34;email&#34;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">Twitter</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&#34;twitter,omitempty&#34;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">func</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">rawPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#34;{}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">var</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="nx">Usuario</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">rawPayload</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#34;{\&#34;uuid\&#34;:\&#34;3954567d-67c2-4a1c-85b9-764a73bf3d5c\&#34;}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">u</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">rawPayload</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">u</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Usuario</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">UUID</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;3954567d-67c2-4a1c-85b9-764a73bf3d5c&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&#34;João&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">body</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">u</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">body</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Resultado:</p>
 <pre tabindex="0"><code>{}
 {   }
 
@@ -221,57 +109,57 @@ if (!doNotTrack) {
 <h1 id="go-e-http">Go e HTTP</h1>
 <p>Agora que já tivemos essa pré-conversa sobre HTTP e Go podemos juntar as duas coisas para conversar sobre como Go implementa o <code>package net/http</code> onde a documentação se encontra <a href="https://golang.org/pkg/net/http/">aqui</a>. Como já adiantamos a conversa vai ser em torno do lado <a href="https://golang.org/pkg/net/http/#Client">Client</a> e do <a href="https://golang.org/pkg/net/http/#Server">Server</a>.</p>
 <h2 id="client">Client</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Client</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Transport specifies the mechanism by which individual
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// HTTP requests are made.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If nil, DefaultTransport is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Transport</span> <span class="nx">RoundTripper</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// CheckRedirect specifies the policy for handling redirects.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If CheckRedirect is not nil, the client calls it before
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// following an HTTP redirect. The arguments req and via are
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the upcoming request and the requests made already, oldest
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// first. If CheckRedirect returns an error, the Client&#39;s Get
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// method returns both the previous Response (with its Body
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// closed) and CheckRedirect&#39;s error (wrapped in a url.Error)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// instead of issuing the Request req.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// As a special case, if CheckRedirect returns ErrUseLastResponse,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// then the most recent response is returned with its body
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// unclosed, along with a nil error.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If CheckRedirect is nil, the Client uses its default policy,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// which is to stop after 10 consecutive requests.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">CheckRedirect</span> <span class="kd">func</span><span class="p">(</span><span class="nx">req</span> <span class="o">*</span><span class="nx">Request</span><span class="p">,</span> <span class="nx">via</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Request</span><span class="p">)</span> <span class="kt">error</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Jar specifies the cookie jar.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// The Jar is used to insert relevant cookies into every
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// outbound Request and is updated with the cookie values
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// of every inbound Response. The Jar is consulted for every
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// redirect that the Client follows.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If Jar is nil, cookies are only sent if they are explicitly
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// set on the Request.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Jar</span> <span class="nx">CookieJar</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Timeout specifies a time limit for requests made by this
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Client. The timeout includes connection time, any
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// redirects, and reading the response body. The timer remains
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// running after Get, Head, Post, or Do return and will
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// interrupt reading of the Response.Body.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// A Timeout of zero means no timeout.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// The Client cancels requests to the underlying Transport
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// as if the Request&#39;s Context ended.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// For compatibility, the Client will also use the deprecated
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// CancelRequest method on Transport if found. New
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// RoundTripper implementations should use the Request&#39;s Context
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// for cancellation instead of implementing CancelRequest.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Timeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></div><p>Podemos ver que temos algumas configurações interessantes na estrutura do <code>Client</code>, vamos falar do <code>Timeout</code> que é onde um erro pode custar caro.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Client</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Transport specifies the mechanism by which individual</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// HTTP requests are made.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If nil, DefaultTransport is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Transport</span><span class="w"> </span><span class="nx">RoundTripper</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// CheckRedirect specifies the policy for handling redirects.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If CheckRedirect is not nil, the client calls it before</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// following an HTTP redirect. The arguments req and via are</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// the upcoming request and the requests made already, oldest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// first. If CheckRedirect returns an error, the Client&#39;s Get</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// method returns both the previous Response (with its Body</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// closed) and CheckRedirect&#39;s error (wrapped in a url.Error)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// instead of issuing the Request req.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// As a special case, if CheckRedirect returns ErrUseLastResponse,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// then the most recent response is returned with its body</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// unclosed, along with a nil error.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // If CheckRedirect is nil, the Client uses its default policy,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// which is to stop after 10 consecutive requests.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">CheckRedirect</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">req</span><span class="w"> </span><span class="o">*</span><span class="nx">Request</span><span class="p">,</span><span class="w"> </span><span class="nx">via</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Jar specifies the cookie jar.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // The Jar is used to insert relevant cookies into every</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// outbound Request and is updated with the cookie values</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// of every inbound Response. The Jar is consulted for every</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// redirect that the Client follows.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // If Jar is nil, cookies are only sent if they are explicitly</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// set on the Request.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Jar</span><span class="w"> </span><span class="nx">CookieJar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Timeout specifies a time limit for requests made by this</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Client. The timeout includes connection time, any</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// redirects, and reading the response body. The timer remains</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// running after Get, Head, Post, or Do return and will</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// interrupt reading of the Response.Body.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // A Timeout of zero means no timeout.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // The Client cancels requests to the underlying Transport</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// as if the Request&#39;s Context ended.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // For compatibility, the Client will also use the deprecated</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// CancelRequest method on Transport if found. New</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// RoundTripper implementations should use the Request&#39;s Context</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// for cancellation instead of implementing CancelRequest.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Timeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Podemos ver que temos algumas configurações interessantes na estrutura do <code>Client</code>, vamos falar do <code>Timeout</code> que é onde um erro pode custar caro.</p>
 <blockquote>
 <p>A Timeout of zero means no timeout.</p>
 </blockquote>
@@ -280,177 +168,177 @@ if (!doNotTrack) {
 <p>Se ainda não ficou claro o conceito de tempo de expiração vamos aproveitar o nosso momento atual de pandemia que estamos fazendo reuniões de forma virtual e eventos online, é bem provável que você já tenha participado de alguma que não tinha membros suficientes ainda para começar e alguém dito: &ldquo;Vamos esperar 5 minutos e então começamos&rdquo;, esse é o tempo de expiração.</p>
 <p>Lembra que na parte de HTTP falamos que a resposta do servidor de forma simples é o estado de retorno, cabeçalho e corpo da mensagem? Então, esse configuração de expiração é para até o momento que o corpo da mensagem tenha sido completamente lido senão temos esse erro igual na imagem do Google Chrome acima.</p>
 <p>Outra parte importante do <code>Client</code> é essa parte de <code>Transport</code> que vai ter várias configurações importantes:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Transport</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Proxy specifies a function to return a proxy for a given
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Request. If the function returns a non-nil error, the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// request is aborted with the provided error.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// The proxy type is determined by the URL scheme. &#34;http&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// &#34;https&#34;, and &#34;socks5&#34; are supported. If the scheme is empty,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// &#34;http&#34; is assumed.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If Proxy is nil or returns a nil *URL, no proxy is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Proxy</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">url</span><span class="p">.</span><span class="nx">URL</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// DialContext specifies the dial function for creating unencrypted TCP connections.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If DialContext is nil (and the deprecated Dial below is also nil),
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// then the transport dials using package net.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// DialContext runs concurrently with calls to RoundTrip.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// A RoundTrip call that initiates a dial may end up using
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// a connection dialed previously when the earlier connection
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// becomes idle before the later DialContext completes.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DialContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="c1">// Go 1.7
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Dial specifies the dial function for creating unencrypted TCP connections.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Dial runs concurrently with calls to RoundTrip.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// A RoundTrip call that initiates a dial may end up using
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// a connection dialed previously when the earlier connection
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// becomes idle before the later Dial completes.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Deprecated: Use DialContext instead, which allows the transport
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// to cancel dials as soon as they are no longer needed.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If both are set, DialContext takes priority.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Dial</span> <span class="kd">func</span><span class="p">(</span><span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// DialTLSContext specifies an optional dial function for creating
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// TLS connections for non-proxied HTTPS requests.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If DialTLSContext is nil (and the deprecated DialTLS below is also nil),
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// DialContext and TLSClientConfig are used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If DialTLSContext is set, the Dial and DialContext hooks are not used for HTTPS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// requests and the TLSClientConfig and TLSHandshakeTimeout
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// are ignored. The returned net.Conn is assumed to already be
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// past the TLS handshake.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DialTLSContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="c1">// Go 1.14
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// DialTLS specifies an optional dial function for creating
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// TLS connections for non-proxied HTTPS requests.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Deprecated: Use DialTLSContext instead, which allows the transport
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// to cancel dials as soon as they are no longer needed.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If both are set, DialTLSContext takes priority.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DialTLS</span> <span class="kd">func</span><span class="p">(</span><span class="nx">network</span><span class="p">,</span> <span class="nx">addr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="c1">// Go 1.4
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// TLSClientConfig specifies the TLS configuration to use with
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// tls.Client.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If nil, the default configuration is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If non-nil, HTTP/2 support may not be enabled by default.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">TLSClientConfig</span> <span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// TLSHandshakeTimeout specifies the maximum amount of time waiting to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// wait for a TLS handshake. Zero means no timeout.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">TLSHandshakeTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// DisableKeepAlives, if true, disables HTTP keep-alives and
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// will only use the connection to the server for a single
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// HTTP request.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// This is unrelated to the similarly named TCP keep-alives.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DisableKeepAlives</span> <span class="kt">bool</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// DisableCompression, if true, prevents the Transport from
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// requesting compression with an &#34;Accept-Encoding: gzip&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// request header when the Request contains no existing
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Accept-Encoding value. If the Transport requests gzip on
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// its own and gets a gzipped response, it&#39;s transparently
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// decoded in the Response.Body. However, if the user
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// explicitly requested gzip it is not automatically
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// uncompressed.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">DisableCompression</span> <span class="kt">bool</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// MaxIdleConns controls the maximum number of idle (keep-alive)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// connections across all hosts. Zero means no limit.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">MaxIdleConns</span> <span class="kt">int</span> <span class="c1">// Go 1.7
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// MaxIdleConnsPerHost, if non-zero, controls the maximum idle
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// (keep-alive) connections to keep per-host. If zero,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// DefaultMaxIdleConnsPerHost is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">MaxIdleConnsPerHost</span> <span class="kt">int</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// MaxConnsPerHost optionally limits the total number of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// connections per host, including connections in the dialing,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// active, and idle states. On limit violation, dials will block.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Zero means no limit.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">MaxConnsPerHost</span> <span class="kt">int</span> <span class="c1">// Go 1.11
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// IdleConnTimeout is the maximum amount of time an idle
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// (keep-alive) connection will remain idle before closing
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// itself.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Zero means no limit.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">IdleConnTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.7
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ResponseHeaderTimeout, if non-zero, specifies the amount of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// time to wait for a server&#39;s response headers after fully
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// writing the request (including its body, if any). This
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// time does not include the time to read the response body.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ResponseHeaderTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ExpectContinueTimeout, if non-zero, specifies the amount of
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// time to wait for a server&#39;s first response headers after fully
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// writing the request headers if the request has an
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// &#34;Expect: 100-continue&#34; header. Zero means no timeout and
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// causes the body to be sent immediately, without
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// waiting for the server to approve.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// This time does not include the time to send the request header.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ExpectContinueTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.6
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// TLSNextProto specifies how the Transport switches to an
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// alternate protocol (such as HTTP/2) after a TLS ALPN
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// protocol negotiation. If Transport dials an TLS connection
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// with a non-empty protocol name and TLSNextProto contains a
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// map entry for that key (such as &#34;h2&#34;), then the func is
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// called with the request&#39;s authority (such as &#34;example.com&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// or &#34;example.com:1234&#34;) and the TLS connection. The function
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// must return a RoundTripper that then handles the request.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If TLSNextProto is not nil, HTTP/2 support is not enabled
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// automatically.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">TLSNextProto</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">(</span><span class="nx">authority</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">c</span> <span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="nx">RoundTripper</span> <span class="c1">// Go 1.6
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ProxyConnectHeader optionally specifies headers to send to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// proxies during CONNECT requests.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// To set the header dynamically, see GetProxyConnectHeader.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ProxyConnectHeader</span> <span class="nx">Header</span> <span class="c1">// Go 1.8
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// GetProxyConnectHeader optionally specifies a func to return
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// headers to send to proxyURL during a CONNECT request to the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ip:port target.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If it returns an error, the Transport&#39;s RoundTrip fails with
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// that error. It can return (nil, nil) to not add headers.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If GetProxyConnectHeader is non-nil, ProxyConnectHeader is
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ignored.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">GetProxyConnectHeader</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">proxyURL</span> <span class="o">*</span><span class="nx">url</span><span class="p">.</span><span class="nx">URL</span><span class="p">,</span> <span class="nx">target</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">Header</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="c1">// Go 1.16
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// MaxResponseHeaderBytes specifies a limit on how many
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// response bytes are allowed in the server&#39;s response
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// header.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Zero means to use a default limit.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">MaxResponseHeaderBytes</span> <span class="kt">int64</span> <span class="c1">// Go 1.7
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// WriteBufferSize specifies the size of the write buffer used
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// when writing to the transport.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If zero, a default (currently 4KB) is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">WriteBufferSize</span> <span class="kt">int</span> <span class="c1">// Go 1.13
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ReadBufferSize specifies the size of the read buffer used
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// when reading from the transport.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If zero, a default (currently 4KB) is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ReadBufferSize</span> <span class="kt">int</span> <span class="c1">// Go 1.13
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ForceAttemptHTTP2 controls whether HTTP/2 is enabled when a non-zero
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Dial, DialTLS, or DialContext func or TLSClientConfig is provided.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// By default, use of any those fields conservatively disables HTTP/2.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// To use a custom dialer or TLS config and still attempt HTTP/2
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// upgrades, set this to true.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ForceAttemptHTTP2</span> <span class="kt">bool</span> <span class="c1">// Go 1.13
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// contains filtered or unexported fields
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></div><p>Nele é interessante notar que podemos fazer o uso de <code>Proxy</code> caso seja um requisito seu, você também pode criar conexões customizadas com as funções <code>Dial</code> e configurar o <code>TLS Client</code>. Esses recursos são legais mas acabam sendo casos bem pontuais no nosso projeto e não comuns. O que vale mais a pena ficar atento aqui são outros atributos que vão estar fortemente ligados a resiliência do nosso <code>HTTP Client</code>, são eles:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Transport</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Proxy specifies a function to return a proxy for a given</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Request. If the function returns a non-nil error, the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// request is aborted with the provided error.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // The proxy type is determined by the URL scheme. &#34;http&#34;,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// &#34;https&#34;, and &#34;socks5&#34; are supported. If the scheme is empty,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// &#34;http&#34; is assumed.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // If Proxy is nil or returns a nil *URL, no proxy is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Proxy</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">url</span><span class="p">.</span><span class="nx">URL</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DialContext specifies the dial function for creating unencrypted TCP connections.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If DialContext is nil (and the deprecated Dial below is also nil),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// then the transport dials using package net.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // DialContext runs concurrently with calls to RoundTrip.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// A RoundTrip call that initiates a dial may end up using</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// a connection dialed previously when the earlier connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// becomes idle before the later DialContext completes.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">DialContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="c1">// Go 1.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Dial specifies the dial function for creating unencrypted TCP connections.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // Dial runs concurrently with calls to RoundTrip.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// A RoundTrip call that initiates a dial may end up using</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// a connection dialed previously when the earlier connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// becomes idle before the later Dial completes.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // Deprecated: Use DialContext instead, which allows the transport</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// to cancel dials as soon as they are no longer needed.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If both are set, DialContext takes priority.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Dial</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DialTLSContext specifies an optional dial function for creating</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLS connections for non-proxied HTTPS requests.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // If DialTLSContext is nil (and the deprecated DialTLS below is also nil),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DialContext and TLSClientConfig are used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // If DialTLSContext is set, the Dial and DialContext hooks are not used for HTTPS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// requests and the TLSClientConfig and TLSHandshakeTimeout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// are ignored. The returned net.Conn is assumed to already be</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// past the TLS handshake.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">DialTLSContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="c1">// Go 1.14</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DialTLS specifies an optional dial function for creating</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLS connections for non-proxied HTTPS requests.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // Deprecated: Use DialTLSContext instead, which allows the transport</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// to cancel dials as soon as they are no longer needed.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If both are set, DialTLSContext takes priority.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">DialTLS</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">network</span><span class="p">,</span><span class="w"> </span><span class="nx">addr</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="c1">// Go 1.4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLSClientConfig specifies the TLS configuration to use with</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// tls.Client.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If nil, the default configuration is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If non-nil, HTTP/2 support may not be enabled by default.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">TLSClientConfig</span><span class="w"> </span><span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLSHandshakeTimeout specifies the maximum amount of time waiting to</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// wait for a TLS handshake. Zero means no timeout.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">TLSHandshakeTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DisableKeepAlives, if true, disables HTTP keep-alives and</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// will only use the connection to the server for a single</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// HTTP request.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // This is unrelated to the similarly named TCP keep-alives.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">DisableKeepAlives</span><span class="w"> </span><span class="kt">bool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DisableCompression, if true, prevents the Transport from</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// requesting compression with an &#34;Accept-Encoding: gzip&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// request header when the Request contains no existing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Accept-Encoding value. If the Transport requests gzip on</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// its own and gets a gzipped response, it&#39;s transparently</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// decoded in the Response.Body. However, if the user</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// explicitly requested gzip it is not automatically</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// uncompressed.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">DisableCompression</span><span class="w"> </span><span class="kt">bool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// MaxIdleConns controls the maximum number of idle (keep-alive)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// connections across all hosts. Zero means no limit.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">MaxIdleConns</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// Go 1.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// MaxIdleConnsPerHost, if non-zero, controls the maximum idle</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// (keep-alive) connections to keep per-host. If zero,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// DefaultMaxIdleConnsPerHost is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">MaxIdleConnsPerHost</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// MaxConnsPerHost optionally limits the total number of</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// connections per host, including connections in the dialing,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// active, and idle states. On limit violation, dials will block.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // Zero means no limit.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">MaxConnsPerHost</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// Go 1.11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// IdleConnTimeout is the maximum amount of time an idle</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// (keep-alive) connection will remain idle before closing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// itself.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Zero means no limit.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">IdleConnTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ResponseHeaderTimeout, if non-zero, specifies the amount of</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// time to wait for a server&#39;s response headers after fully</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// writing the request (including its body, if any). This</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// time does not include the time to read the response body.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ResponseHeaderTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ExpectContinueTimeout, if non-zero, specifies the amount of</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// time to wait for a server&#39;s first response headers after fully</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// writing the request headers if the request has an</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// &#34;Expect: 100-continue&#34; header. Zero means no timeout and</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// causes the body to be sent immediately, without</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// waiting for the server to approve.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// This time does not include the time to send the request header.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ExpectContinueTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLSNextProto specifies how the Transport switches to an</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// alternate protocol (such as HTTP/2) after a TLS ALPN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// protocol negotiation. If Transport dials an TLS connection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// with a non-empty protocol name and TLSNextProto contains a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// map entry for that key (such as &#34;h2&#34;), then the func is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// called with the request&#39;s authority (such as &#34;example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// or &#34;example.com:1234&#34;) and the TLS connection. The function</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// must return a RoundTripper that then handles the request.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If TLSNextProto is not nil, HTTP/2 support is not enabled</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// automatically.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">TLSNextProto</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">(</span><span class="nx">authority</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="nx">RoundTripper</span><span class="w"> </span><span class="c1">// Go 1.6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ProxyConnectHeader optionally specifies headers to send to</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// proxies during CONNECT requests.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// To set the header dynamically, see GetProxyConnectHeader.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ProxyConnectHeader</span><span class="w"> </span><span class="nx">Header</span><span class="w"> </span><span class="c1">// Go 1.8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// GetProxyConnectHeader optionally specifies a func to return</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// headers to send to proxyURL during a CONNECT request to the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ip:port target.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If it returns an error, the Transport&#39;s RoundTrip fails with</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// that error. It can return (nil, nil) to not add headers.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If GetProxyConnectHeader is non-nil, ProxyConnectHeader is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ignored.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">GetProxyConnectHeader</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">proxyURL</span><span class="w"> </span><span class="o">*</span><span class="nx">url</span><span class="p">.</span><span class="nx">URL</span><span class="p">,</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Header</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="c1">// Go 1.16</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// MaxResponseHeaderBytes specifies a limit on how many</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// response bytes are allowed in the server&#39;s response</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// header.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // Zero means to use a default limit.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">MaxResponseHeaderBytes</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="c1">// Go 1.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// WriteBufferSize specifies the size of the write buffer used</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// when writing to the transport.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If zero, a default (currently 4KB) is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">WriteBufferSize</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// Go 1.13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ReadBufferSize specifies the size of the read buffer used</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// when reading from the transport.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If zero, a default (currently 4KB) is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ReadBufferSize</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// Go 1.13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ForceAttemptHTTP2 controls whether HTTP/2 is enabled when a non-zero</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Dial, DialTLS, or DialContext func or TLSClientConfig is provided.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// By default, use of any those fields conservatively disables HTTP/2.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// To use a custom dialer or TLS config and still attempt HTTP/2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// upgrades, set this to true.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ForceAttemptHTTP2</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="c1">// Go 1.13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// contains filtered or unexported fields</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Nele é interessante notar que podemos fazer o uso de <code>Proxy</code> caso seja um requisito seu, você também pode criar conexões customizadas com as funções <code>Dial</code> e configurar o <code>TLS Client</code>. Esses recursos são legais mas acabam sendo casos bem pontuais no nosso projeto e não comuns. O que vale mais a pena ficar atento aqui são outros atributos que vão estar fortemente ligados a resiliência do nosso <code>HTTP Client</code>, são eles:</p>
 <ul>
 <li><code>DisableKeepAlives</code>: é uma configuração que existe nos dois contextos e é bem interessante quando habilitada pois permite você saber ser a comunicação entre cliente e servidor não foi quebrada;</li>
 <li><code>MaxIdleConns</code> e <code>MaxIdleConnsPerHost</code>: essa é uma configuração casada com a anterior, pois para ter essa monitoria é preciso manter uma conexão aberta entre cliente e servidor para saber da saúde desse canal, essa configuração limita a quantidade de conexões desse tipo que podem existir, isso é bem importante para você não lotar sua aplicação de conexões que não estão transferindo dados e apenas validando a contectividade;</li>
@@ -458,98 +346,98 @@ if (!doNotTrack) {
 <li><code>ForceAttemptHTTP2</code>: se você pode, eu recomendo. =)</li>
 </ul>
 <h2 id="server">Server</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Server</span> <span class="kd">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Addr optionally specifies the TCP address for the server to listen on,
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// in the form &#34;host:port&#34;. If empty, &#34;:http&#34; (port 80) is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// The service names are defined in RFC 6335 and assigned by IANA.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// See net.Dial for details of the address format.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Addr</span> <span class="kt">string</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">Handler</span> <span class="nx">Handler</span> <span class="c1">// handler to invoke, http.DefaultServeMux if nil
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// TLSConfig optionally provides a TLS configuration for use
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// by ServeTLS and ListenAndServeTLS. Note that this value is
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// cloned by ServeTLS and ListenAndServeTLS, so it&#39;s not
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// possible to modify the configuration with methods like
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// tls.Config.SetSessionTicketKeys. To use
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// SetSessionTicketKeys, use Server.Serve with a TLS Listener
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// instead.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">TLSConfig</span> <span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// ReadTimeout is the maximum duration for reading the entire
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// request, including the body.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Because ReadTimeout does not let Handlers make per-request
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// decisions on each request body&#39;s acceptable deadline or
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// upload rate, most users will prefer to use
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ReadHeaderTimeout. It is valid to use them both.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ReadTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// ReadHeaderTimeout is the amount of time allowed to read
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// request headers. The connection&#39;s read deadline is reset
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// after reading the headers and the Handler can decide what
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// is considered too slow for the body. If ReadHeaderTimeout
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// is zero, the value of ReadTimeout is used. If both are
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// zero, there is no timeout.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ReadHeaderTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.8
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// WriteTimeout is the maximum duration before timing out
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// writes of the response. It is reset whenever a new
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// request&#39;s header is read. Like ReadTimeout, it does not
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// let Handlers make decisions on a per-request basis.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">WriteTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// IdleTimeout is the maximum amount of time to wait for the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// next request when keep-alives are enabled. If IdleTimeout
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// is zero, the value of ReadTimeout is used. If both are
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// zero, there is no timeout.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">IdleTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="c1">// Go 1.8
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// MaxHeaderBytes controls the maximum number of bytes the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// server will read parsing the request header&#39;s keys and
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// values, including the request line. It does not limit the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// size of the request body.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If zero, DefaultMaxHeaderBytes is used.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">MaxHeaderBytes</span> <span class="kt">int</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// TLSNextProto optionally specifies a function to take over
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ownership of the provided TLS connection when an ALPN
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// protocol upgrade has occurred. The map key is the protocol
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// name negotiated. The Handler argument should be used to
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// handle HTTP requests and will initialize the Request&#39;s TLS
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// and RemoteAddr if not already set. The connection is
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// automatically closed when the function returns.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If TLSNextProto is not nil, HTTP/2 support is not enabled
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// automatically.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">TLSNextProto</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Server</span><span class="p">,</span> <span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="nx">Handler</span><span class="p">)</span> <span class="c1">// Go 1.1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ConnState specifies an optional callback function that is
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// called when a client connection changes state. See the
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ConnState type and associated constants for details.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ConnState</span> <span class="kd">func</span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span> <span class="nx">ConnState</span><span class="p">)</span> <span class="c1">// Go 1.3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ErrorLog specifies an optional logger for errors accepting
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// connections, unexpected behavior from handlers, and
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// underlying FileSystem errors.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If nil, logging is done via the log package&#39;s standard logger.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ErrorLog</span> <span class="o">*</span><span class="nx">log</span><span class="p">.</span><span class="nx">Logger</span> <span class="c1">// Go 1.3
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// BaseContext optionally specifies a function that returns
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the base context for incoming requests on this server.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// The provided Listener is the specific Listener that&#39;s
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// about to start accepting requests.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If BaseContext is nil, the default is context.Background().
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// If non-nil, it must return a non-nil context.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">BaseContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="p">)</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span> <span class="c1">// Go 1.13
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ConnContext optionally specifies a function that modifies
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// the context used for a new connection c. The provided ctx
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// is derived from the base context and has a ServerContextKey
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// value.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">ConnContext</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">c</span> <span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span> <span class="c1">// Go 1.13
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// contains filtered or unexported fields
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></div><p>Assim como o <code>Client</code> o <code>Server</code> tem várias configurações importantes e precisamos tomar bastante cuidado com elas, aqui também vamos ter questões a serem configuradas sobre <code>Timeout</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Addr optionally specifies the TCP address for the server to listen on,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// in the form &#34;host:port&#34;. If empty, &#34;:http&#34; (port 80) is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// The service names are defined in RFC 6335 and assigned by IANA.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// See net.Dial for details of the address format.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Addr</span><span class="w"> </span><span class="kt">string</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">Handler</span><span class="w"> </span><span class="nx">Handler</span><span class="w"> </span><span class="c1">// handler to invoke, http.DefaultServeMux if nil</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLSConfig optionally provides a TLS configuration for use</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// by ServeTLS and ListenAndServeTLS. Note that this value is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// cloned by ServeTLS and ListenAndServeTLS, so it&#39;s not</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// possible to modify the configuration with methods like</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// tls.Config.SetSessionTicketKeys. To use</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// SetSessionTicketKeys, use Server.Serve with a TLS Listener</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// instead.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">TLSConfig</span><span class="w"> </span><span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ReadTimeout is the maximum duration for reading the entire</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// request, including the body.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">    // Because ReadTimeout does not let Handlers make per-request</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// decisions on each request body&#39;s acceptable deadline or</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// upload rate, most users will prefer to use</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ReadHeaderTimeout. It is valid to use them both.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ReadTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ReadHeaderTimeout is the amount of time allowed to read</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// request headers. The connection&#39;s read deadline is reset</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// after reading the headers and the Handler can decide what</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// is considered too slow for the body. If ReadHeaderTimeout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// is zero, the value of ReadTimeout is used. If both are</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// zero, there is no timeout.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ReadHeaderTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// WriteTimeout is the maximum duration before timing out</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// writes of the response. It is reset whenever a new</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// request&#39;s header is read. Like ReadTimeout, it does not</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// let Handlers make decisions on a per-request basis.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">WriteTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// IdleTimeout is the maximum amount of time to wait for the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// next request when keep-alives are enabled. If IdleTimeout</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// is zero, the value of ReadTimeout is used. If both are</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// zero, there is no timeout.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">IdleTimeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="w"> </span><span class="c1">// Go 1.8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// MaxHeaderBytes controls the maximum number of bytes the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// server will read parsing the request header&#39;s keys and</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// values, including the request line. It does not limit the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// size of the request body.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If zero, DefaultMaxHeaderBytes is used.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">MaxHeaderBytes</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// TLSNextProto optionally specifies a function to take over</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ownership of the provided TLS connection when an ALPN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// protocol upgrade has occurred. The map key is the protocol</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// name negotiated. The Handler argument should be used to</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// handle HTTP requests and will initialize the Request&#39;s TLS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// and RemoteAddr if not already set. The connection is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// automatically closed when the function returns.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If TLSNextProto is not nil, HTTP/2 support is not enabled</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// automatically.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">TLSNextProto</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Server</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="nx">Handler</span><span class="p">)</span><span class="w"> </span><span class="c1">// Go 1.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ConnState specifies an optional callback function that is</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// called when a client connection changes state. See the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ConnState type and associated constants for details.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ConnState</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">,</span><span class="w"> </span><span class="nx">ConnState</span><span class="p">)</span><span class="w"> </span><span class="c1">// Go 1.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ErrorLog specifies an optional logger for errors accepting</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// connections, unexpected behavior from handlers, and</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// underlying FileSystem errors.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If nil, logging is done via the log package&#39;s standard logger.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ErrorLog</span><span class="w"> </span><span class="o">*</span><span class="nx">log</span><span class="p">.</span><span class="nx">Logger</span><span class="w"> </span><span class="c1">// Go 1.3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// BaseContext optionally specifies a function that returns</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// the base context for incoming requests on this server.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// The provided Listener is the specific Listener that&#39;s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// about to start accepting requests.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If BaseContext is nil, the default is context.Background().</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// If non-nil, it must return a non-nil context.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">BaseContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">net</span><span class="p">.</span><span class="nx">Listener</span><span class="p">)</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="w"> </span><span class="c1">// Go 1.13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ConnContext optionally specifies a function that modifies</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// the context used for a new connection c. The provided ctx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// is derived from the base context and has a ServerContextKey</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// value.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nx">ConnContext</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">)</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="w"> </span><span class="c1">// Go 1.13</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// contains filtered or unexported fields</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Assim como o <code>Client</code> o <code>Server</code> tem várias configurações importantes e precisamos tomar bastante cuidado com elas, aqui também vamos ter questões a serem configuradas sobre <code>Timeout</code>:</p>
 <ul>
 <li><code>ReadTimeout</code>: esse é o tempo que seu servidor vai esperar para ler todas as informações da requisição que está recebendo e caso nulo não terá limite de tempo;</li>
 <li><code>ReadHeaderTimeout</code>:  parecido com o anterior mas apenas para o Header, caso ele não seja definido usará o <code>ReadTimeout</code> caso tenha sido definido;</li>
@@ -579,80 +467,10 @@ if (!doNotTrack) {
 <li>Go <code>net/http</code> Server: <a href="https://golang.org/pkg/net/http/#Server">https://golang.org/pkg/net/http/#Server</a></li>
 <li>Go HTTP playground: <a href="https://gitlab.com/jvrmaia/golang-http-playground">https://gitlab.com/jvrmaia/golang-http-playground</a></li>
 </ul>
-
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/golang/" rel="tag">golang</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/iniciante/" rel="tag">iniciante</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/http/" rel="tag">http</a>
-		</li>
-	</ul>
 </div>
-		</footer>
-	</article>
-</main>
-
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="João Maia avatar" src="/img/avatar.jpg" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">About João Maia</span>
-	</div>
-	<div class="authorbox__description">
-		Pessoa que resolve problemas com o uso de softwares
-	</div>
-</div>
-
-
-<section class="comments">
-	<div id="disqus_thread"></div>
-<script type="application/javascript">
-    window.disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "blog-hugo" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-
-
-			</div>
-			
-		</div>
-		<footer class="footer">
-	<div class="container footer__container flex">
-		
-		<div class="footer__copyright">
-			&copy; 2022 João Maia.
-			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
-		</div>
-	</div>
-</footer>
-	</div>
-<script async defer src="/js/menu.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+  </article>
+  <footer>
+    <p>© 2026 João Maia</p>
+  </footer>
 </body>
 </html>

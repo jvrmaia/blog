@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>terraform on João Maia</title>
-    <link>http://blog.joaovrmaia.com/tags/terraform/</link>
-    <description>Recent content in terraform on João Maia</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Terraform on João Maia</title>
+    <link>http://localhost:1313/tags/terraform/</link>
+    <description>Recent content in Terraform on João Maia</description>
+    <generator>Hugo</generator>
     <language>pt-br</language>
     <copyright>João Maia</copyright>
-    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://blog.joaovrmaia.com/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Conhecendo o Terraform</title>
-      <link>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</link>
+      <link>http://localhost:1313/post/conhecendo-o-terraform/</link>
       <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://blog.joaovrmaia.com/post/conhecendo-o-terraform/</guid>
-      <description>Olá,
-venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do Terraform que fecha esse ciclo de ferramentas que venho apresentando.</description>
+      <guid>http://localhost:1313/post/conhecendo-o-terraform/</guid>
+      <description>&lt;p&gt;Olá,&lt;/p&gt;&#xA;&lt;p&gt;venho aqui no blog compartilhando tem um certo tempo uma apresentação básica de tecnologias mdoernas voltadas a área de infraestrutura que tem ganhado muito força e atração no mercado. Sei que não são realidade também mas na minha bolha social e profissional de pessoas que já estão lidando com infraestrutura como código elas já são realidades e hoje venho falar do &lt;a href=&#34;https://www.terraform.io/&#34;&gt;Terraform&lt;/a&gt; que fecha esse ciclo de ferramentas que venho apresentando. Olhando de maneira breve e superficial ou vendo pessoas comentar a respeito dele temos um primeiro entendimento que o Terraform é uma ferramenta apenas de provisionar infraestrutura em lugares como &lt;a href=&#34;https://aws.amazon.com/&#34;&gt;AWS&lt;/a&gt;, &lt;a href=&#34;https://cloud.google.com/&#34;&gt;Google Cloud&lt;/a&gt; e &lt;a href=&#34;https://azure.microsoft.com/en-us/&#34;&gt;Azure&lt;/a&gt;. Isso não é uma verdade pois o objetivo dele é provisionar &lt;em&gt;qualquer&lt;/em&gt; serviço de Cloud desde que ele forneça uma API para tal, dentro da terminologia do Terraform chamamos esse serviço de Cloud de &lt;code&gt;provider&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
