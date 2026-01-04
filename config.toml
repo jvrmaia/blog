@@ -1,4 +1,4 @@
-baseURL = "http://blog.joaovrmaia.com"
+baseURL = "https://blog.joaovrmaia.com"
 title = "João Maia"
 enableRobotsTXT = true
 enableEmoji = true
@@ -12,7 +12,6 @@ disqusShortname = "blog-hugo"
 googleAnalytics = "G-GLJ7ZMHBL3"
 copyright = "João Maia"
 
-pygmentsUseClasses=true
 [markup]
   [markup.highlight]
     codeFences = true
@@ -53,10 +52,9 @@ pygmentsUseClasses=true
 [[menu.main]]
   name = "Site pessoal"
   weight = 50
-  url = "http://www.joaovrmaia.com"
+  url = "https://www.joaovrmaia.com"
 
 [Params]
-  subtitle = "Compartilhando conhecimento sobre tecnologia e outras coisas mais"
   description = "Blog pessoal de João Maia, opiniões apenas minha aqui"
   copyright = "João Maia"
   opengraph = true # Enable OpenGraph if true
@@ -69,12 +67,17 @@ pygmentsUseClasses=true
   mainSections = ["post", "blog", "news"] # Specify section pages to show on home page and the "Recent articles" widget
   dateformat = "2006-01-02" # Change the format of dates
   mathjax = true # Enable MathJax
-  mathjaxPath = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js" # Specify MathJax path
+  mathjaxPath = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" # Specify MathJax path (updated to v3)
   mathjaxConfig = "TeX-AMS-MML_HTMLorMML" # Specify MathJax config
-  highlightColor = "#e22d30" # Override highlight color
   customCSS = ["css/custom.css"] # Include custom CSS files
   #customJS = ["js/custom.js"] # Include custom JS files
   languageCode = "pt-br"
+
+[Params.logo]
+  subtitle = "Compartilhando conhecimento sobre tecnologia e outras coisas mais"
+
+[Params.style.vars]
+  highlightColor = "#e22d30" # Override highlight color
 
 [Params.sidebar]
   home = "right" # Configure layout for home page
@@ -98,4 +101,4 @@ pygmentsUseClasses=true
 
 [[Params.widgets.social.custom]]
   title = "Site pessoal"
-  url = "http://www.joaovrmaia.com"
+  url = "https://www.joaovrmaia.com"
